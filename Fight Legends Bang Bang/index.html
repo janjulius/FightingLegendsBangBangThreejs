@@ -23,7 +23,9 @@
 	<body>
 	
 		<script src="threejs/three.min.js"></script>
-		<script src="scripts/THREE.GamepadControls.js"></script>		
+		<script src="scripts/THREE.GamepadControls.js"></script>	
+		<script src="scripts/Characters/Character.js"></script>
+		<script src="scripts/Characters/Willem.js"></script>
 
 		<script>
 			var container;
@@ -33,6 +35,10 @@
 			init();
 			animate();
 			function init() {
+				var t = new Willem();
+				t.specialAtk();
+				t.getMoveSpeed();
+				console.log(t.name);
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 2000 );
