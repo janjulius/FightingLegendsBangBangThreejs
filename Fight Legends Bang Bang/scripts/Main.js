@@ -4,16 +4,51 @@ var camera, scene, renderer;
 
 'use strict';
 
-Physijs.scripts.worker = '../physijs_worker.js';
-Physijs.scripts.ammo = 'physi/ammo.js';
+Physijs.scripts.worker = 'physi/physijs_worker.js';
+Physijs.scripts.ammo = 'ammo.js';
 
 
 init();
-animate();
 
 function init() {
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+	renderer.setSize( window.innerWidth, window.innerHeight );
+    container = document.createElement( 'div' );
+    document.body.appendChild( container );
+	container.appendChild( renderer.domElement );
+		
+	scene = new Physijs.Scene;
+	
+	camera = new THREE.PerspectiveCamera(
+		35,
+		window.innerWidth / window.innerHeight,
+		1,
+		1000
+	);
+	camera.position.set( 60, 50, 60 );
+	camera.lookAt( scene.position );
+	scene.add( camera );
+
+    var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+    scene.add( directionalLight );
 
 
+    box = new Physijs.BoxMesh(
+			new THREE.CubeGeometry( 5, 5, 5 ),
+			new THREE.MeshBasicMaterial({ color: 0x888888 })
+	);
+    box.position.set(0,5,0);
+	scene.add( box );
+
+    floor = new Physijs.BoxMesh(
+			new THREE.CubeGeometry( 20, 2, 20 ),
+			new THREE.MeshBasicMaterial({ color: 0x48ff00 }),
+            0
+	);
+    floor.position.set(0,-5,0);
+    scene.add(floor);
+
+    requestAnimationFrame( animate );
 
     /*
 	var t = new Willem("willem");
@@ -51,8 +86,9 @@ function onWindowResize() {
 }
 
 function animate() {
-    requestAnimationFrame(animate);
+    scene.simulate(); // run physics
     render();
+    requestAnimationFrame(animate);
 }
 
 function render() {
