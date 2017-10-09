@@ -1,6 +1,6 @@
 var container;
 var controls;
-var camera, scene, renderer;
+var camera, scene, renderer, interfaceCamera, interfaceScene;
 
 'use strict';
 
@@ -12,7 +12,11 @@ init();
 animate();
 
 function init() {
-
+	var width = window.innerWidth;
+	var height = windows.innerHeight;
+	interfaceCamera = new THREE.OrthographicCamera(- width / 2, width /2, height /2, -height /2, 1, 10);
+	interfaceCamera.position.z = 10;
+	interfaceScene = new THREE.Scene();
 
 
     /*
