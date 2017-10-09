@@ -1,6 +1,6 @@
 var container;
 var controls;
-var camera, scene, renderer;
+var camera, scene, renderer, interfaceCamera, interfaceScene;
 
 'use strict';
 
@@ -11,6 +11,11 @@ Physijs.scripts.ammo = 'ammo.js';
 init();
 
 function init() {
+	var width = window.innerWidth;
+	var height = window.innerHeight;
+	interfaceCamera = new THREE.OrthographicCamera(- width / 2, width /2, height /2, -height /2, 1, 10);
+	interfaceCamera.position.z = 10;
+	interfaceScene = new THREE.Scene();
     renderer = new THREE.WebGLRenderer({ antialias: true });
 	renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.shadowMap.enabled = true;
