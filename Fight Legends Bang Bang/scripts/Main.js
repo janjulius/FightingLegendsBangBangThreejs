@@ -1,6 +1,6 @@
 var container;
 var controls;
-var camera, scene, renderer, interfaceCamera, interfaceScene;
+var camera, scene, renderer;
 
 'use strict';
 
@@ -11,17 +11,14 @@ Physijs.scripts.ammo = 'ammo.js';
 init();
 
 function init() {
-	var width = window.innerWidth;
-	var height = window.innerHeight;
-	interfaceCamera = new THREE.OrthographicCamera(- width / 2, width /2, height /2, -height /2, 1, 10);
-	interfaceCamera.position.z = 10;
-	interfaceScene = new THREE.Scene();
+	var gameHUD = new Interface();
+	gameHUD.LoadCursors();
     renderer = new THREE.WebGLRenderer({ antialias: true });
 	renderer.setSize( window.innerWidth, window.innerHeight );
     container = document.createElement( 'div' );
     document.body.appendChild( container );
 	container.appendChild( renderer.domElement );
-		
+	
 	scene = new Physijs.Scene;
 	
 	camera = new THREE.PerspectiveCamera(
@@ -81,6 +78,7 @@ function init() {
     */
 }
 
+
 function onWindowResize() {
     windowHalfX = window.innerWidth / 2;
     windowHalfY = window.innerHeight / 2;
@@ -97,6 +95,7 @@ function animate() {
 }
 
 function render() {
-    renderer.render(scene, camera)
-
+	renderer.clear();
+    renderer.render(scene, camera);
+	renderer.clearDepth();
 }
