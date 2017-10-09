@@ -13,6 +13,8 @@ init();
 function init() {
     renderer = new THREE.WebGLRenderer({ antialias: true });
 	renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.shadowMap.enabled = true;
+	renderer.shadowMapSoft = true;
     container = document.createElement( 'div' );
     document.body.appendChild( container );
 	container.appendChild( renderer.domElement );
@@ -25,18 +27,31 @@ function init() {
 		1,
 		1000
 	);
-	camera.position.set( 60, 50, 60 );
+	camera.position.set( 60, 50, 0 );
 	camera.lookAt( scene.position );
 	scene.add( camera );
 
-    var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-    scene.add( directionalLight );
+    light = new THREE.DirectionalLight( 0xFFFFFF );
+		light.position.set( 20, 40, -15 );
+		light.target.position.copy( scene.position );
+		light.castShadow = true;
+		light.shadowCameraLeft = -60;
+		light.shadowCameraTop = -60;
+		light.shadowCameraRight = 60;
+		light.shadowCameraBottom = 60;
+		light.shadowCameraNear = 20;
+		light.shadowCameraFar = 200;
+		light.shadowBias = -.0001
+		light.shadowMapWidth = light.shadowMapHeight = 2048;
+		light.shadowDarkness = .7;
+		scene.add( light );
 
 
     box = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
 			new THREE.MeshBasicMaterial({ color: 0x888888 })
 	);
+    box.castShadow = true;
     box.position.set(0,5,0);
 	scene.add( box );
 
@@ -45,6 +60,7 @@ function init() {
 			new THREE.MeshBasicMaterial({ color: 0x48ff00 }),
             0
 	);
+    floor.receiveShadow = true;
     floor.position.set(0,-5,0);
     scene.add(floor);
 
