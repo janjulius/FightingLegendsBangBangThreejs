@@ -15,7 +15,8 @@ init();
 
 function init() {
 	var gameHUD = new Interface();
-	gameHUD.LoadCursors();
+	scene.add(gameHUD.getCursor(0));
+	
     renderer = new THREE.WebGLRenderer({ antialias: true });
 	renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.shadowMap.enabled = true;
