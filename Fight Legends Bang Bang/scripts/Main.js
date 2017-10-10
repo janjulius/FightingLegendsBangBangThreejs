@@ -1,9 +1,8 @@
 var container;
 var controls;
 var camera, scene, renderer;
-var direction = 0;
-var speed = 8;
 var clock = new THREE.Clock(true);
+var players = [];
 'use strict';
 
 Physijs.scripts.worker = 'physi/physijs_worker.js';
@@ -52,24 +51,8 @@ function init() {
 		light.shadowDarkness = .7;
 		scene.add( light );
 
-
-    box = new Physijs.BoxMesh(
-			new THREE.CubeGeometry( 5, 5, 5 ),
-			new THREE.MeshBasicMaterial({ color: 0x888888 },
-            1)
-	);
-    box.castShadow = true;
-    box.position.set(0,15,0);
-	scene.add( box );
-
-    testbox = new Physijs.BoxMesh(
-			new THREE.CubeGeometry( 5, 5, 5 ),
-			new THREE.MeshBasicMaterial({ color: 0x888888 })
-	);
-    testbox.castShadow = true;
-    testbox.position.set(0,5,-10);
-	scene.add( testbox );
-
+	players[0] = new Willem(15, 10);
+	players[1] = new Willem(15, 0);
     //console.log(box.getvelocity());
 
     floor = new Physijs.BoxMesh(
@@ -112,9 +95,9 @@ function init() {
 
  window.addEventListener('keydown', function(event) {
     if (event.keyCode == 65) { //a
-        direction = 1;
+        players[0].direction = 1;
     } else if (event.keyCode == 68) { //d
-        direction = -1;
+        players[0].direction = -1;
     } else if (event.keyCode == 87) { //w
     } else if (event.keyCode == 83) { //s
     }
@@ -122,9 +105,9 @@ function init() {
 
  window.addEventListener('keyup', function(event) {
     if (event.keyCode == 65) { //a
-        direction = 0;
+        players[0].direction = 0;
     } else if (event.keyCode == 68) { //d
-        direction = 0;
+        players[0].direction = 0;
     } else if (event.keyCode == 87) { //w
     } else if (event.keyCode == 83) { //s
     }
@@ -134,9 +117,9 @@ function init() {
 scene.addEventListener( 'update', function() {
     var timeElapsed = clock.getDelta();
     // the scene's physics have finished updating
-    box.position.z += (direction *speed)*timeElapsed;
-    box.setAngularFactor( new THREE.Vector3(0,0,0));
-    box.__dirtyPosition = true;
+    players[0].geometry.position.z += (players[0].direction * players[0].speed)*timeElapsed;
+    players[0].geometry.setAngularFactor( new THREE.Vector3(0,0,0));
+    players[0].geometry.__dirtyPosition = true;
     scene.simulate(); // run physics
 });
 
