@@ -7,6 +7,8 @@ class Character{
         this.damage = 0;
         this.direction = 0;
         this.speed = 8;
+        this.id = 0;
+        this.stock = GAME_SETTINGS_STOCK_START;
         console.log("created character");
     }
 
@@ -41,6 +43,26 @@ class Character{
 
     getMoveSpeed(){
         console.log("my movementspeed is :" + this.moveSpeed );
+    }
+
+    setId(id){
+        this.id = id;
+    }
+
+    setStock(s){
+        this.stock = s;
+    }
+
+    getStock(){
+        return this.stock;
+    }
+
+    getDamage(){
+        return this.damage;
+    }
+
+    setDamage(d){
+        this.damage = d;
     }
     
 }

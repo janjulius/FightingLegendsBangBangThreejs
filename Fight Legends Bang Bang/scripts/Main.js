@@ -27,14 +27,13 @@ function init() {
     document.body.appendChild( container );
 	container.appendChild( renderer.domElement );
 	
-
 	render_stats = new Stats();
 		render_stats.domElement.style.position = 'absolute';
 		render_stats.domElement.style.top = '0px';
 		render_stats.domElement.style.zIndex = 100;
 		container.appendChild( render_stats.domElement );
 		
-		physics_stats = new Stats();
+	physics_stats = new Stats();
 		physics_stats.domElement.style.position = 'absolute';
 		physics_stats.domElement.style.top = '50px';
 		physics_stats.domElement.style.zIndex = 100;
@@ -69,7 +68,13 @@ function init() {
 		scene.add( light );
 
 	players[0] = new Willem(15, 10);
-	players[1] = new Willem(15, 0);
+	players[0].setId(0);
+	players[1] = new Paardman(15, 0);
+	players[1].setId(1);
+	players[2] = new Rocky(15, -10);
+	players[2].setId(2);
+	players[3] = new Fred(15, 15);
+	players[3].setId(3);
     //console.log(box.getvelocity());
 
     floor = new Physijs.BoxMesh(
