@@ -15,7 +15,6 @@ loader.load(
     // Function when resource is loaded
     function ( texture ) {
         // do something with the texture
-        console.log(texture); 
         var material = new THREE.SpriteMaterial( {
             map: texture
          } );
@@ -29,11 +28,8 @@ loader.load(
         console.log(xhr);
     }
 );
-        console.log(img); 
         //material = new THREE.SpriteMaterial({map:img});
-        console.log("mat" + material);
         this.cursorSprite[i] = new THREE.Sprite(material);
-        console.log(this.cursorSprite[i]);
     }
 }
 
