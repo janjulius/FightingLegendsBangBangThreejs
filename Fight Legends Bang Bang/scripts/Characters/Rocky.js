@@ -3,7 +3,8 @@ class Rocky extends Character{
     constructor(y, z){
         super();
         this.name = "Rocky";
-        this.extraname = "the Raccoon"
+        this.extraname = "the Raccoon";
+        this.specialAtkString = "Shivering Leap";
         this.Speed = 12;
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
@@ -15,8 +16,10 @@ class Rocky extends Character{
 	scene.add( this.geometry );
     console.log("created Rocky");
     }
+
     specialAtk(){
-        console.log(this.name + this. extraname + " special attack");
+        console.log(this.name + this.extraname + this.specialAtkString);
+        //Perform Shivering Leap
     }
 
 }

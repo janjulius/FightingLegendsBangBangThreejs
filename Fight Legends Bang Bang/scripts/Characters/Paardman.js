@@ -2,7 +2,8 @@ class Paardman extends Character{
     
     constructor(y, z){
         super();
-        this.name = "Paardman",
+        this.name = "Paardman";
+        this.specialAtkString = "Stone, paper, scissors";
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
 			new THREE.MeshBasicMaterial({ color: 0x888888 },
@@ -17,8 +18,11 @@ class Paardman extends Character{
 	scene.add( this.geometry );
     console.log("created Paardman");
     }
+    
     specialAtk(){
         console.log(this.name + " special attack");
+
+        // battle cry animation 
 
         horseChoice = Math.floor((Math.random() * 3) + 1);
         switch (horseChoice) {
@@ -35,7 +39,7 @@ class Paardman extends Character{
                 //play animation scissors
                 break;
 
-                console.log(this.name + " used " + this.horseChoiceString )
+                console.log(this.name + " used " + this.specialAtkString + " and rolled " + this.horseChoiceString )
         }
     }
 
