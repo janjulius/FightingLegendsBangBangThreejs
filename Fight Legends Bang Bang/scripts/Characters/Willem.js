@@ -4,10 +4,16 @@ class Willem extends Character{
         super();
         this.name = "Willem";
         this.moveSpeed = 300;
+
+        var material = Physijs.createMaterial(
+        new THREE.MeshBasicMaterial({ color: 0x888888 }),
+        1,
+        1
+    );
+
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
-			new THREE.MeshBasicMaterial({ color: 0x888888 },
-            1)
+			material,
 	);
     this.geometry.castShadow = true;
     this.geometry.position.set(0,y,z);

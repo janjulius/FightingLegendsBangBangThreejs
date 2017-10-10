@@ -126,6 +126,9 @@ function init() {
     } else if (event.keyCode == 87) { //w
     } else if (event.keyCode == 83) { //s
     }
+	if (event.keyCode == 32) { //a
+        console.log("pressed space bar");
+    }
  });
 
 
@@ -134,10 +137,11 @@ scene.addEventListener( 'update', function() {
 
     var timeElapsed = clock.getDelta();
     // the scene's physics have finished updating
-    players[0].geometry.position.z += (players[0].direction * players[0].speed)*timeElapsed;
+	var vel = players[0].geometry.getLinearVelocity();
+
+    players[0].geometry.applyCentralImpulse(new THREE.Vector3(0,vel.y,(players[0].direction*players[0].speed)*timeElapsed));
     players[0].geometry.setAngularFactor( new THREE.Vector3(0,0,0));
-    players[0].geometry.__dirtyPosition = true;
-    scene.simulate(); // run physics
+    scene.simulate(undefined, 1 ); // run physics
 });
 
 function onWindowResize() {
