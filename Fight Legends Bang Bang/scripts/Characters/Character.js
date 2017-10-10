@@ -2,8 +2,8 @@ class Character{
     
     constructor(){
         this.name = "base";
+        this.title = "";
         this.damage = 0;
-        this.moveSpeed = 200;
         this.direction = 0;
         this.speed = 8;
         console.log("created character");

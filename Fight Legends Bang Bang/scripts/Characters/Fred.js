@@ -1,9 +1,8 @@
-class Willem extends Character{
+class Fred extends Character{
     
     constructor(y, z){
         super();
-        this.name = "Willem";
-        this.Speed = 6;
+        this.name = "Fred";
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
 			new THREE.MeshBasicMaterial({ color: 0x888888 },
@@ -12,11 +11,10 @@ class Willem extends Character{
     this.geometry.castShadow = true;
     this.geometry.position.set(0,y,z);
 	scene.add( this.geometry );
-    console.log("created Willem");
+    console.log("created Fred");
     }
     specialAtk(){
         console.log(this.name + " special attack");
-        // throw a snowball
     }
 
 }
