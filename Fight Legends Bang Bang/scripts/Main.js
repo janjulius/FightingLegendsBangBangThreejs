@@ -28,6 +28,20 @@ function init() {
     document.body.appendChild( container );
 	container.appendChild( renderer.domElement );
 	
+
+	render_stats = new Stats();
+		render_stats.domElement.style.position = 'absolute';
+		render_stats.domElement.style.top = '0px';
+		render_stats.domElement.style.zIndex = 100;
+		container.appendChild( render_stats.domElement );
+		
+		physics_stats = new Stats();
+		physics_stats.domElement.style.position = 'absolute';
+		physics_stats.domElement.style.top = '50px';
+		physics_stats.domElement.style.zIndex = 100;
+		container.appendChild( physics_stats.domElement );
+
+
 	scene = new Physijs.Scene;
 	
 	camera = new THREE.PerspectiveCamera(
@@ -69,6 +83,7 @@ function init() {
     scene.add(floor);
 
     scene.simulate();
+	physics_stats.update();
     requestAnimationFrame( animate );
 
 
@@ -120,6 +135,8 @@ function init() {
 
 
 scene.addEventListener( 'update', function() {
+	physics_stats.update();
+
     var timeElapsed = clock.getDelta();
     // the scene's physics have finished updating
     players[0].geometry.position.z += (players[0].direction * players[0].speed)*timeElapsed;
@@ -139,6 +156,7 @@ function onWindowResize() {
 
 function animate() {
     render();
+	render_stats.update();
     requestAnimationFrame(animate);
 }
 
