@@ -4,13 +4,14 @@ class Willem extends Character{
         super();
         this.name = "Willem";
         this.moveSpeed = 300;
-
+        this.Speed = 6;
         var material = Physijs.createMaterial(
         new THREE.MeshBasicMaterial({ color: 0x888888 }),
         1,
         1
     );
 
+        this.specialAtkString = "Throw Snowball";
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
 			material,
@@ -18,10 +19,17 @@ class Willem extends Character{
     this.geometry.castShadow = true;
     this.geometry.position.set(0,y,z);
 	scene.add( this.geometry );
-    console.log("created willem");
+    console.log("created Willem");
     }
+
+    idle(){
+        //idle image
+        
+    }
+
     specialAtk(){
-        console.log(this.name + " special attack");
+        console.log(this.name + " Used " + this.specialAtkString);
+        // throw a snowball
     }
 
 }

@@ -2,6 +2,7 @@ var container;
 var controls;
 var camera, scene, renderer;
 var clock = new THREE.Clock(true);
+var gameInterface;
 var players = [];
 'use strict';
 
@@ -10,11 +11,13 @@ Physijs.scripts.ammo = 'ammo.js';
 
 scene = new Physijs.Scene;
 scene.setGravity(new THREE.Vector3( 0,-30,0));
+
+
+gameInterface = new Interface();
+
 init();
 
 function init() {
-	var gameHUD = new Interface();
-	scene.add(gameHUD.getCursor(0));
 	
     renderer = new THREE.WebGLRenderer({ antialias: true });
 	renderer.setSize( window.innerWidth, window.innerHeight );
@@ -81,6 +84,8 @@ function init() {
     scene.simulate();
 	physics_stats.update();
     requestAnimationFrame( animate );
+
+	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]);
 
     /*
 	var t = new Willem("willem");
