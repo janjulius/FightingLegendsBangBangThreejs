@@ -14,7 +14,6 @@ scene.setGravity(new THREE.Vector3( 0,-30,0));
 
 
 gameInterface = new Interface();
-	gameInterface.LoadGameInterface();
 
 init();
 
@@ -86,6 +85,7 @@ function init() {
 	physics_stats.update();
     requestAnimationFrame( animate );
 
+	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]);
 
     /*
 	var t = new Willem("willem");
