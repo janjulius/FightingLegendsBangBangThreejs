@@ -1,4 +1,3 @@
-// stats.js - http://github.com/mrdoob/stats.js
 var Stats = function() {
     function h(a) {
         c.appendChild(a.dom);
