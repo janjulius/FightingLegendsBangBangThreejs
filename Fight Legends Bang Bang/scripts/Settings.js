@@ -1,2 +1,3 @@
 //editable by player
 GAME_SETTINGS_STOCK_START = 3;
+GAME_SETTINGS_HANDICAP = 0;

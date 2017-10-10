@@ -4,7 +4,7 @@ class Character{
         this.name = "base";
         this.extraname = "";
         this.specialAtkString = "base";
-        this.damage = 0;
+        this.damage = GAME_SETTINGS_HANDICAP;
         this.direction = 0;
         this.id = 0;
         this.stock = GAME_SETTINGS_STOCK_START;
