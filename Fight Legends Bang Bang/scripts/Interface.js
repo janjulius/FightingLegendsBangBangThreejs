@@ -46,7 +46,8 @@ class Interface{
             //this.playerInterface[i].style.opacity = "0.9";
             this.playerInterface[i].style.color = "white";
             this.playerInterface[i].style.textShadow = "2px 2px 4px black";
-            this.playerInterface[i].style.backgroundImage = "url('sprites/Characters/MenuSprites/Willem.png')";
+            this.playerInterface[i].style.backgroundImage = "url("+players[i].portrait+")";
+            this.playerInterface[i].style.backgroundSize = "200px 200px"; 
             this.playerInterface[i].style.backgroundPosition = "bottom left"; 
             this.playerInterface[i].style.backgroundRepeat = "no-repeat";
             this.playerInterface[i].style.borderRadius = "15px 50px 30px 5px"

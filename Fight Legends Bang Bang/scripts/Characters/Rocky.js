@@ -5,6 +5,7 @@ class Rocky extends Character{
         this.name = "Rocky";
         this.extraname = "the Raccoon";
         this.specialAtkString = "Shivering Leap";
+        this.portrait = 'sprites/Characters/MenuSprites/rocky.png';
         this.Speed = 12;
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
