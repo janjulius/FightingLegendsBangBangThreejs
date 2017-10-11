@@ -71,7 +71,9 @@ function init() {
 	
 	
 	
-   
+   if(charSelect){
+	   runCharSelect();
+   }
 
 	
     /*
@@ -164,11 +166,11 @@ function render() {
 if(!charSelect){
 	players[0] = new Willem(15, 10);
 	players[0].setId(0);
-	players[1] = new Berend(15, 0);
+	players[1] = new Rocky(15, 0);
 	players[1].setId(1);
 	players[2] = new BoomStronk(15, -10);
 	players[2].setId(2);
-	players[3] = new Jens(15, 15);
+	players[3] = new Paardman(15, 15);
 	players[3].setId(3);
     //console.log(box.getvelocity());
 
@@ -176,6 +178,7 @@ if(!charSelect){
 	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]); scene.simulate();
 	physics_stats.update();
     requestAnimationFrame( animate );
+	if(DEBUG_MODE){
 	window.addEventListener('keydown', function(event){
     if (event.keyCode == 65) { //a
         players[0].direction = 1;
@@ -187,5 +190,6 @@ if(!charSelect){
 		players[0].setStock(players[0].getStock() - 1);
     }
 	});
+	}
 }
 }

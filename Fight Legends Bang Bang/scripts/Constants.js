@@ -1,9 +1,14 @@
 var MAX_PLAYERS = 4;
 var GAME_NAME = "Fighting Legends: bang bang";
 
+var DEBUG_MODE = true;
+
 var INTERFACE_DAMAGE_TEXT_SIZE = "75px";
 var INTERFACE_STOCK_TEXT_SIZE = "40px";
 
+if(DEBUG_MODE){
+    console.log("DEBUG MODE IS ON, TO TURN OFF GO TO CONSTANTS FILE");
+}
 
 var percentColors = [
     { pct: 0.0, color: { r: 255, g: 255, b: 255 } },
