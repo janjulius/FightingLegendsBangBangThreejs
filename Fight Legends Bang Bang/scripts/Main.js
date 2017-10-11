@@ -19,7 +19,7 @@ init();
 
 function init() {
 	
-    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer = new THREE.WebGLRenderer({ antialias: false });
 	renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.shadowMap.enabled = true;
 	renderer.shadowMapSoft = true;
@@ -125,8 +125,8 @@ function init() {
         players[0].direction = -1;
 	} else if (event.keyCode == 87) { //w
 		players[0].setDamage(players[0].getDamage() + 1); //test code for color coding and spacing
-		gameInterface.UpdateGameInterface();
     } else if (event.keyCode == 83) { //s
+		players[0].setStock(players[0].getStock() - 1);
     }
  });
 
