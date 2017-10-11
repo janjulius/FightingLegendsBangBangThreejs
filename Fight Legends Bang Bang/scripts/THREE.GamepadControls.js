@@ -73,7 +73,6 @@ THREE.GamepadControls = function ( ) {
             (navigator.getGamepads && navigator.getGamepads()) ||
             (navigator.webkitGetGamepads && navigator.webkitGetGamepads());
             
-            console.log("length: " + rawGamepads.length);
     
             if( rawGamepads ) {
                 
@@ -81,7 +80,6 @@ THREE.GamepadControls = function ( ) {
                     var p = players[i];
                     if(rawGamepads[i]){
                         var g = rawGamepads[ i ];
-                        console.log(i);
                         var dir = g.axes[0];
                         if(dir < 0.2 && dir > -0.2)
                             dir = 0;

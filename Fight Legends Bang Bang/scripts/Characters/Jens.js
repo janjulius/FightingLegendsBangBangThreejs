@@ -1,17 +1,16 @@
-class Willem extends Character{
+class Jens extends Character{
     
     constructor(y, z){
         super();
-        this.name = "Willem";
-        this.moveSpeed = 300;
-        this.portrait = 'sprites/Characters/MenuSprites/willem.png';
+        this.name = "Jens";
+        this.portrait = 'sprites/Characters/MenuSprites/jens.png'
         var material = Physijs.createMaterial(
         new THREE.MeshBasicMaterial({ color: 0x888888 }),
         1,
-        0
+        1
     );
 
-        this.specialAtkString = "Throw Snowball";
+        this.specialAtkString = "Cannon Barrage";
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
 			material,
@@ -19,18 +18,16 @@ class Willem extends Character{
     this.geometry.castShadow = true;
     this.geometry.position.set(0,y,z);
 	scene.add( this.geometry );
-    //this.geometry.setDamping(1,1);
-    console.log("created Willem");
+    console.log("created " + this.name);
     }
 
-    idle(){
-        //idle image
-        
+    block(){
+        //no block
     }
 
     specialAtk(){
         console.log(this.name + " Used " + this.specialAtkString);
-        // throw a snowball
+        // Cannon ball!
     }
 
 }

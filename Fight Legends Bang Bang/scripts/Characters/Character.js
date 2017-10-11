@@ -4,12 +4,13 @@ class Character{
         this.name = "base";
         this.extraname = "";
         this.specialAtkString = "base";
-        this.damage = 0;
+        this.damage = GAME_SETTINGS_HANDICAP;
         this.direction = 0;
         this.id = 0;
         this.stock = GAME_SETTINGS_STOCK_START;
         this.speed = 2000;
         this.velocity = new THREE.Vector3(0,0,0);
+        this.portrait;
         console.log("created character");
     }
 
@@ -52,6 +53,7 @@ class Character{
 
     setStock(s){
         this.stock = s;
+        gameInterface.UpdateGameInterface(this.id);
     }
 
     getStock(){
@@ -64,6 +66,7 @@ class Character{
 
     setDamage(d){
         this.damage = d;
+        gameInterface.UpdateGameInterface(this.id);
     }
 
     Update(t){

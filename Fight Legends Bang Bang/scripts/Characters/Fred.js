@@ -5,6 +5,7 @@ class Fred extends Character{
         this.name = "Fred";
         this.extraname = "der goblin";
         this.specialAtkString = "Hammer smash!";
+        this.portrait = 'sprites/Characters/MenuSprites/fred.png';
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
 			new THREE.MeshBasicMaterial({ color: 0x888888 },

@@ -5,6 +5,8 @@ var clock = new THREE.Clock(true);
 var gameInterface;
 var players = [];
 var controls = new THREE.GamepadControls();
+var playerPlaying = 4;
+var charSelect = true;
 'use strict';
 
 Physijs.scripts.worker = 'physi/physijs_worker.js';
@@ -67,40 +69,16 @@ function init() {
 		light.shadowMapWidth = light.shadowMapHeight = 2048;
 		light.shadowDarkness = .7;
 		scene.add( light );
-
-	players[0] = new Willem(15, 10);
-	players[0].setId(0);
-	players[1] = new Willem(15, 0);
-	players[1].setId(1);
-	players[2] = new Willem(15, -10);
-	players[2].setId(2);
-	players[3] = new Willem(15, 15);
-	players[3].setId(3);
-    //console.log(box.getvelocity());
-
-	var material = Physijs.createMaterial(
-        new THREE.MeshBasicMaterial({ color: 0x48ff00 }),
-        1,
-        0
-    );
-
-    floor = new Physijs.BoxMesh(
-			new THREE.CubeGeometry( 15, 2, 50 ),
-			material,
-            0
-	);
-    floor.receiveShadow = true;
-    floor.position.set(0,-5,0);
-    scene.add(floor);
-
-    scene.simulate();
-	physics_stats.update();
-    requestAnimationFrame( animate );
-
-	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]);
 }
 
- window.addEventListener('keydown', function(event) {
+  window.addEventListener('keydown', function(event) {
+	 if(charSelect){
+		if(event.keyCode == 65){
+			 console.log("test");
+			 charSelect = false;
+			 runGame();
+		}
+	 }
  });
 
  window.addEventListener('keyup', function(event) {
@@ -108,6 +86,7 @@ function init() {
 
 
 scene.addEventListener( 'update', function() {
+	if(!charSelect){
 	physics_stats.update();
     var timeElapsed = clock.getDelta();
 	for (var i = 0; i < players.length; i++) {
@@ -116,6 +95,7 @@ scene.addEventListener( 'update', function() {
 	}
 
     scene.simulate(undefined, 1 ); // run physics
+	}
 });
 
 function onWindowResize() {
@@ -137,4 +117,33 @@ function render() {
 	renderer.clear();
     renderer.render(scene, camera);
 	renderer.clearDepth();
+}
+	function runGame(){
+if(!charSelect){
+	players[0] = new Willem(15, 10);
+	players[0].setId(0);
+	players[1] = new Berend(15, 0);
+	players[1].setId(1);
+	players[2] = new BoomStronk(15, -10);
+	players[2].setId(2);
+	players[3] = new Jens(15, 15);
+	players[3].setId(3);
+    //console.log(box.getvelocity());
+
+    newLevel(1);
+	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]); scene.simulate();
+	physics_stats.update();
+    requestAnimationFrame( animate );
+	window.addEventListener('keydown', function(event){
+    if (event.keyCode == 65) { //a
+        players[0].direction = 1;
+    } else if (event.keyCode == 68) { //d
+        players[0].direction = -1;
+	} else if (event.keyCode == 87) { //w
+		players[0].setDamage(players[0].getDamage() + 1); //test code for color coding and spacing
+    } else if (event.keyCode == 83) { //s
+		players[0].setStock(players[0].getStock() - 1);
+    }
+	});
+}
 }
