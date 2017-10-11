@@ -7,7 +7,7 @@ class Paardman extends Character{
         this.portrait = 'sprites/Characters/MenuSprites/paardman2.png';
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
-			new THREE.MeshBasicMaterial({ color: 0x888888 },
+			new THREE.MeshBasicMaterial({ color: 0xffad60},
             1)
     );
     

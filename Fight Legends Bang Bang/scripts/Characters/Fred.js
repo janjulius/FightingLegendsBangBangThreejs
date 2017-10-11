@@ -8,7 +8,7 @@ class Fred extends Character{
         this.portrait = 'sprites/Characters/MenuSprites/fred.png';
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
-			new THREE.MeshBasicMaterial({ color: 0x888888 },
+			new THREE.MeshBasicMaterial({ color: 0x598D1B            },
             1)
 	);
     this.geometry.castShadow = true;

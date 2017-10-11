@@ -9,7 +9,7 @@ class Rocky extends Character{
         this.Speed = 12;
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
-			new THREE.MeshBasicMaterial({ color: 0x888888 },
+			new THREE.MeshBasicMaterial({ color: 0xec00fb },
             1)
 	);
     this.geometry.castShadow = true;

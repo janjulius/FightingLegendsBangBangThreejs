@@ -5,7 +5,7 @@ class Jens extends Character{
         this.name = "Jens";
         this.portrait = 'sprites/Characters/MenuSprites/jens.png'
         var material = Physijs.createMaterial(
-        new THREE.MeshBasicMaterial({ color: 0x888888 }),
+        new THREE.MeshBasicMaterial({ color: 0x000000}),
         1,
         1
     );
