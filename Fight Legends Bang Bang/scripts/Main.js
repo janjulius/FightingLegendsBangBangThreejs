@@ -198,14 +198,16 @@ var amount = 8;
 		playerFiches[i] = fische;
 		scene.add(fische);
 	}
-	ray0 = new THREE.Raycaster(playerFiches[0].position, new THREE.Vector3(-1,0,0));
-	var intersects = ray0.intersectObjects(scene.children);
-	for(var i = 0 ; i < intersects.length; i++){
-		intersects[i].object.material.color.set(0xff0000);
-	}
+
 	window.addEventListener('keydown', function(event){
-		if (event.keyCode == 68) { //a
-			console.log("test" + playerFiches[0].position.y);
+		if (event.keyCode == 68) { //a	
+			ray0 = new THREE.Raycaster(playerFiches[0].position, new THREE.Vector3(-1,0,0));
+			console.log("created ray");
+			var intersects = ray0.intersectObjects(scene.children);
+			for(var i = 0 ; i < intersects.length; i++){
+				intersects[i].object.material.color.set(0xff0000);
+			}
+			console.log("test" + intersects.length);
 			playerFiches[0].position.z = playerFiches[0].position.z + 1;
 			ray0.set(playerFiches[0].position, new THREE.Vector3(1,0,0));
 			console.log(playerFiches[0].position);
