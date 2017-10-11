@@ -4,6 +4,7 @@ class Rocky extends Character{
         super();
         this.name = "Rocky";
         this.extraname = "the Raccoon";
+        this.cid = 2;
         this.specialAtkString = "Shivering Leap";
         this.portrait = 'sprites/Characters/MenuSprites/rocky.png';
         this.Speed = 12;

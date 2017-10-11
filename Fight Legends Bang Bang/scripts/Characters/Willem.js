@@ -4,6 +4,7 @@ class Willem extends Character{
         super();
         this.name = "Willem";
         this.moveSpeed = 300;
+        this.cid = 0;
         this.portrait = 'sprites/Characters/MenuSprites/willem.png';
         var material = Physijs.createMaterial(
         new THREE.MeshBasicMaterial({ color: 0xffffff }),

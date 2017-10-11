@@ -3,7 +3,8 @@ class Kees extends Character{
     constructor(y, z){
         super();
         this.name = "Kees";
-        this.portrait = 'sprites/Characters/MenuSprites/kees.png'
+        this.cid = 4;
+        this.portrait = 'sprites/Characters/MenuSprites/kees.png';
         var material = Physijs.createMaterial(
         new THREE.MeshBasicMaterial({ color: 0x786e6e }),
         1,

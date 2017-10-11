@@ -4,6 +4,7 @@ class BoomStronk extends Character{
         super();
         this.name = "Boom Stronk";
         this.Speed = 12;
+        this.cid = 5;
         this.portrait = 'sprites/Characters/MenuSprites/boom_stronk.png'
         var material = Physijs.createMaterial(
         new THREE.MeshBasicMaterial({ color: 0x4b0909 }),

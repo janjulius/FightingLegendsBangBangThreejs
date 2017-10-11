@@ -4,6 +4,7 @@ class Fred extends Character{
         super();
         this.name = "Fred";
         this.extraname = "der goblin";
+        this.cid = 3;
         this.specialAtkString = "Hammer smash!";
         this.portrait = 'sprites/Characters/MenuSprites/fred.png';
             this.geometry = new Physijs.BoxMesh(

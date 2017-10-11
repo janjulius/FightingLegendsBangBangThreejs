@@ -5,9 +5,11 @@ var clock = new THREE.Clock(true);
 var gameInterface;
 var players = [];
 var controls = new THREE.GamepadControls();
-var playerPlaying = 4;
+var playersPlaying = 4;
 var charSelect = true;
 'use strict';
+var charScreens = [];
+var playerFiches = [];
 
 Physijs.scripts.worker = 'physi/physijs_worker.js';
 Physijs.scripts.ammo = 'ammo.js';
@@ -52,7 +54,7 @@ function init() {
 		1000
 	);
 	camera.position.set( 60, 50, 0 );
-	camera.lookAt( scene.position );
+	camera.lookAt(scene.position);
 	scene.add( camera );
 
     light = new THREE.DirectionalLight( 0xFFFFFF );
@@ -154,17 +156,76 @@ function render() {
 }
 
 function runCharSelect(){
-	for(var i = 0; i < 8; i++){
-		var geometry = new THREE.PlaneGeometry( 5, 20, 32 );
-var material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-var plane = new THREE.Mesh( geometry, material );
-scene.add( plane );
-console.log(plane.position.x);
+	if(charSelect){
+	var material;
+var baseZ = 0;
+var baseY = -5;
+var constZ = 0;
+var constY = -5;
+var amount = 8;
+	for(var i = 0; i < amount; i++){
+		material = Physijs.createMaterial(
+		new THREE.MeshBasicMaterial({ color: 0xffffff, map:THREE.ImageUtils.loadTexture( getCharImgByNameOrId(i) )}),
+		0,
+		1
+	);
+		if(i % 4 == 0){
+		baseY += 5;
+		baseZ = constZ;
+				}
+				baseZ += 5;
+		charScreen = new Physijs.BoxMesh(new THREE.BoxGeometry(5, 5 ,5), material, 0);
+		charScreen.position.set(-3, baseY, baseZ);
+		charScreens[i] = charScreen;
+		charScreens.castShadow = true;
+		scene.add(charScreen);
+		
 	}
+	console.log();
+	camera.lookAt(charScreens[0].position);
+	camera.position.set(60, 0, 0);
+	camera.lookAt(new THREE.Vector3(0,0,0));
+
+	for(var i = 0; i < playersPlaying; i++){
+		var c = 0xff0000;
+		switch(i){ case 0: c = 0xff0000; break; case 1: c = 0x0000ff; break; case 2: c = 0xffff00; break; case 3: c = 0x33cc33; break;}
+		material = Physijs.createMaterial(
+			new THREE.MeshBasicMaterial({ color: c}),
+			0,
+			1
+		);
+		fische = new Physijs.BoxMesh(new THREE.BoxGeometry(0, 1, 1), material, 0);
+		playerFiches[i] = fische;
+		scene.add(fische);
+	}
+	ray0 = new THREE.Raycaster(playerFiches[0].position, new THREE.Vector3(-1,0,0));
+	var intersects = ray0.intersectObjects(scene.children);
+	for(var i = 0 ; i < intersects.length; i++){
+		intersects[i].object.material.color.set(0xff0000);
+	}
+	window.addEventListener('keydown', function(event){
+		if (event.keyCode == 68) { //a
+			console.log("test" + playerFiches[0].position.y);
+			playerFiches[0].position.z = playerFiches[0].position.z + 1;
+			ray0.set(playerFiches[0].position, new THREE.Vector3(1,0,0));
+			console.log(playerFiches[0].position);
+			console.log(charScreens[0].position);
+		} else if (event.keyCode == 68) { //d
+			//players[0].direction = -1;
+		} else if (event.keyCode == 87) { //w
+			playerFiches[1].position.y = playerFiches[1].position.y + 1; //test code for color coding and spacing
+		} else if (event.keyCode == 83) { //s
+			playerFiches[2].position.y = playerFiches[2].position.y + 1;
+		}
+		});
+}
 }
 
 	function runGame(){
 if(!charSelect){
+	for(var i = 0; i < 8; i++){
+		charScreens[i].position.set(100,100,100);
+	}
 	players[0] = new Willem(15, 10);
 	players[0].setId(0);
 	players[1] = new Rocky(15, 0);
@@ -174,7 +235,7 @@ if(!charSelect){
 	players[3] = new Paardman(15, 15);
 	players[3].setId(3);
     //console.log(box.getvelocity());
-
+	camera.lookAt(scene.position);
     newLevel(1);
 	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]); scene.simulate();
 	physics_stats.update();
