@@ -101,6 +101,8 @@ function init() {
 	container.appendChild( renderer.domElement );
 	window.addEventListener( 'resize', onWindowResize, false );
     */
+	
+    requestAnimationFrame( animate );
 }
 
   window.addEventListener('keydown', function(event) {
@@ -150,6 +152,17 @@ function render() {
     renderer.render(scene, camera);
 	renderer.clearDepth();
 }
+
+function runCharSelect(){
+	for(var i = 0; i < 8; i++){
+		var geometry = new THREE.PlaneGeometry( 5, 20, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+var plane = new THREE.Mesh( geometry, material );
+scene.add( plane );
+console.log(plane.position.x);
+	}
+}
+
 	function runGame(){
 if(!charSelect){
 	players[0] = new Willem(15, 10);
