@@ -1,9 +1,14 @@
 function newLevel(lid){
     switch(lid){
         case 1:
+        	var material = Physijs.createMaterial(
+        new THREE.MeshBasicMaterial({ color: 0x48ff00 }),
+        1,
+        0
+    );
     floor = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 15, 2, 50 ),
-			new THREE.MeshBasicMaterial({ color: 0x48ff00 }),
+			material,
             0
 	);
     floor.receiveShadow = true;

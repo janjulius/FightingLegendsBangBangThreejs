@@ -4,6 +4,7 @@ var camera, scene, renderer;
 var clock = new THREE.Clock(true);
 var gameInterface;
 var players = [];
+var controls = new THREE.GamepadControls();
 var playerPlaying = 4;
 var charSelect = true;
 'use strict';
@@ -21,7 +22,7 @@ init();
 
 function init() {
 	
-    renderer = new THREE.WebGLRenderer({ antialias: false });
+    renderer = new THREE.WebGLRenderer({});
 	renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.shadowMap.enabled = true;
 	renderer.shadowMapSoft = true;
@@ -102,7 +103,7 @@ function init() {
     */
 }
 
- window.addEventListener('keydown', function(event) {
+  window.addEventListener('keydown', function(event) {
 	 if(charSelect){
 		if(event.keyCode == 65){
 			 console.log("test");
@@ -113,31 +114,18 @@ function init() {
  });
 
  window.addEventListener('keyup', function(event) {
-	 if(!charSelect){
-    if (event.keyCode == 65) { //a
-       players[0].direction = 0;
-    } else if (event.keyCode == 68) { //d
-        players[0].direction = 0;
-    } else if (event.keyCode == 87) { //w
-    } else if (event.keyCode == 83) { //s
-    }
-	if (event.keyCode == 32) { //a
-        console.log("pressed space bar");
-    }
-	 }
  });
 
 
 scene.addEventListener( 'update', function() {
 	if(!charSelect){
 	physics_stats.update();
-
     var timeElapsed = clock.getDelta();
-    // the scene's physics have finished updating
-	var vel = players[0].geometry.getLinearVelocity();
+	for (var i = 0; i < players.length; i++) {
+		var element = players[i];
+		element.Update(timeElapsed);
+	}
 
-    players[0].geometry.applyCentralImpulse(new THREE.Vector3(0,vel.y,(players[0].direction*players[0].speed)*timeElapsed));
-    players[0].geometry.setAngularFactor( new THREE.Vector3(0,0,0));
     scene.simulate(undefined, 1 ); // run physics
 	}
 });

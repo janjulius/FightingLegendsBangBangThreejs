@@ -68,5 +68,15 @@ class Character{
         this.damage = d;
         gameInterface.UpdateGameInterface(this.id);
     }
+
+    Update(t){
+    // the scene's physics have finished updating
+	var vel = this.geometry.getLinearVelocity();
+
+    this.velocity = new THREE.Vector3(0,vel.y,(this.direction*this.speed)*t);
+
+    this.geometry.setLinearVelocity(this.velocity);
+    this.geometry.setAngularFactor( new THREE.Vector3(0,0,0));
+    }
     
 }
