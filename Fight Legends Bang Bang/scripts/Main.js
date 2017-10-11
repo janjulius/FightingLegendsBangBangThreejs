@@ -4,6 +4,7 @@ var camera, scene, renderer;
 var clock = new THREE.Clock(true);
 var gameInterface;
 var players = [];
+var controls = new THREE.GamepadControls();
 'use strict';
 
 Physijs.scripts.worker = 'physi/physijs_worker.js';
@@ -19,7 +20,7 @@ init();
 
 function init() {
 	
-    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer = new THREE.WebGLRenderer({});
 	renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.shadowMap.enabled = true;
 	renderer.shadowMapSoft = true;
@@ -69,17 +70,23 @@ function init() {
 
 	players[0] = new Willem(15, 10);
 	players[0].setId(0);
-	players[1] = new Paardman(15, 0);
+	players[1] = new Willem(15, 0);
 	players[1].setId(1);
-	players[2] = new Rocky(15, -10);
+	players[2] = new Willem(15, -10);
 	players[2].setId(2);
-	players[3] = new Fred(15, 15);
+	players[3] = new Willem(15, 15);
 	players[3].setId(3);
     //console.log(box.getvelocity());
 
+	var material = Physijs.createMaterial(
+        new THREE.MeshBasicMaterial({ color: 0x48ff00 }),
+        1,
+        0
+    );
+
     floor = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 15, 2, 50 ),
-			new THREE.MeshBasicMaterial({ color: 0x48ff00 }),
+			material,
             0
 	);
     floor.receiveShadow = true;
@@ -91,66 +98,23 @@ function init() {
     requestAnimationFrame( animate );
 
 	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]);
-
-    /*
-	var t = new Willem("willem");
-	var b = new Willem("brede willem");
-	t.specialAtk();
-	t.getMoveSpeed();
-	b.getMoveSpeed();
-	console.log(t.name);
-	container = document.createElement( 'div' );
-	document.body.appendChild( container );
-	camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 2000 );
-	camera.position.set( 0, 0, 40 );
-	controls = new THREE.GamepadControls( camera );
-	scene = new THREE.Scene();
-	scene.add( new THREE.AmbientLight( 0x808080 ) );
-	mesh = new THREE.Mesh( new THREE.BoxGeometry( 10, 10, 10 ), new THREE.MeshNormalMaterial() );
-	scene.add( mesh );
-	camera.lookAt( mesh.position );
-	renderer = new THREE.WebGLRenderer( { antialias: true } );
-	renderer.setClearColor( 0 );
-	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( window.innerWidth, window.innerHeight );
-	container.appendChild( renderer.domElement );
-	window.addEventListener( 'resize', onWindowResize, false );
-    */
 }
 
  window.addEventListener('keydown', function(event) {
-    if (event.keyCode == 65) { //a
-        players[0].direction = 1;
-    } else if (event.keyCode == 68) { //d
-        players[0].direction = -1;
-    } else if (event.keyCode == 87) { //w
-    } else if (event.keyCode == 83) { //s
-    }
  });
 
  window.addEventListener('keyup', function(event) {
-    if (event.keyCode == 65) { //a
-        players[0].direction = 0;
-    } else if (event.keyCode == 68) { //d
-        players[0].direction = 0;
-    } else if (event.keyCode == 87) { //w
-    } else if (event.keyCode == 83) { //s
-    }
-	if (event.keyCode == 32) { //a
-        console.log("pressed space bar");
-    }
  });
 
 
 scene.addEventListener( 'update', function() {
 	physics_stats.update();
-
     var timeElapsed = clock.getDelta();
-    // the scene's physics have finished updating
-	var vel = players[0].geometry.getLinearVelocity();
+	for (var i = 0; i < players.length; i++) {
+		var element = players[i];
+		element.Update(timeElapsed);
+	}
 
-    players[0].geometry.applyCentralImpulse(new THREE.Vector3(0,vel.y,(players[0].direction*players[0].speed)*timeElapsed));
-    players[0].geometry.setAngularFactor( new THREE.Vector3(0,0,0));
     scene.simulate(undefined, 1 ); // run physics
 });
 
