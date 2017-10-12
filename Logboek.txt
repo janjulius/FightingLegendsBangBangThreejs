@@ -1,0 +1,9 @@
+Logboek Fighting Legends: Bang Bang
+Maandag 9 oktober
+Vandaag zijn we bezig geweest met physics en hebben we een begin gemaakt met de user interface. Ook hebben we ons verdiept in het inladen en maken van animaties.
+Dinsdag 10 oktober
+Characters bedacht en ontworpen. Sprites van de characters gemaakt voor de interface. De interface is nu een werkend onderdeel. Character classes toegevoegd in de code.
+Woensdag 11 oktober
+Interface af maar kan nog uitgebreider gemaakt worden. Extra characters gemaakt. Er kan nu met xbox-controllers gespeeld worden. Er is een begin gemaakt aan het character selection scherm. Begonnen aan levels en leveldesign.
+Donderdag 12 oktober
+4 werkende levels met spawnpoints gemaakt. 4 spelers kunnen nu elk hun gewenste karakter kiezen voor het begin van het spel met een controller of toetsenbord.De characters kunnen nu ook springen en double jumpen. Begonnen met het coderen van hit damage.
