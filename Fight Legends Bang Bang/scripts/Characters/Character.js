@@ -12,21 +12,11 @@ class Character{
     this.speed = 2000;
     this.velocity = new THREE.Vector3(0, 0, 0);
     this.portrait;
+    this.velt = 0;
     this.blocking = false;
     this.jumped = false;
     this.totalJump = 1;
-    this.jumpsLeft = 1;
-    var material = Physijs.createMaterial(
-        new THREE.MeshBasicMaterial({
-            color: 0xffffff
-        }),
-        1,
-        0
-    );
-    this.geometry = new Physijs.BoxMesh(
-        new THREE.CubeGeometry(5, 5, 5),
-        material
-    );
+    this.jumpsLeft = this.totalJump;
     console.log("created character");
 }
 
@@ -35,7 +25,9 @@ class Character{
     }
 
     normalAtk() {
-        //play normal attack
+        ray = new THREE.Raycaster(this.geometry.position, new THREE.Vector3(0,0,this.direction));
+        var intersects = ray.intersectObjects(scene.children);
+        
 
     }
 
@@ -109,18 +101,20 @@ class Character{
 
     // the scene's physics have finished updating
 	var vel = this.geometry.getLinearVelocity();
-
     
+    if(this.velt > -30)
+     this.velt -= 40*t;
+
     if(this.jumped){
         if(this.jumpsLeft > 0){
-            vel.y = 20;
+            this.velt = 40;
             console.log("jumped");
             this.jumpsLeft--;
         }
         this.jumped = false;
     }
 
-    this.velocity = new THREE.Vector3(0,vel.y,(this.direction*this.speed)*t);
+    this.velocity = new THREE.Vector3(0,this.velt,(this.direction*this.speed)*t);
 
     this.geometry.setLinearVelocity(this.velocity);
     this.geometry.setAngularFactor( new THREE.Vector3(0,0,0));
