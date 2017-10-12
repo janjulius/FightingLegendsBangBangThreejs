@@ -1,48 +1,38 @@
 class Thundergart extends Level{
+    constructor(){
+        super();
         
-        constructor(){
-            super();
+        this.spawn1 = {y: 5, z : 30};
+        this.spawn2 = {y: 5, z : 15};
+        this.spawn3 = {y: 5, z : -25};
+        this.spawn4 = {y: 5, z : -40};
 
-            var floor;
-            var iceblue = iceblue;
-            var burlywoodbrown = burlywoodbrown;
-            var grassgreen = grassgreen;
-            var mudbrown = mudbrown;
-               
-        floor = new Physijs.BoxMesh(
-                new THREE.CubeGeometry(15, 2, 50),
-                new THREE.MeshBasicMaterial({ color: burlywoodbrown }),
-                0
-            );
-            floor.receiveShadow = true;
-            floor.position.set(0, -10, 0);
-            scene.add(floor);
-    
-            floor = new Physijs.BoxMesh(
-                new THREE.CubeGeometry(15, 2, 10),
-                new THREE.MeshBasicMaterial({ color: burlywoodbrown }),
-                0
-            );
-            floor.receiveShadow = true;
-            floor.position.set(0, 0 , -30);
-            scene.add(floor);
-    
-            floor = new Physijs.BoxMesh(
-                new THREE.CubeGeometry(15, 2, 10),
-                new THREE.MeshBasicMaterial({ color: burlywoodbrown }),
-                0
-            );
-            floor.receiveShadow = true;
-            floor.position.set(0, 0 , 30);
-            scene.add(floor);
-    
-            floor = new Physijs.BoxMesh(
-                new THREE.CubeGeometry(15, 2, 30),
-                new THREE.MeshBasicMaterial({ color: burlywoodbrown }),
-                0
-            );
-            floor.receiveShadow = true;
-            floor.position.set(0, 8 , 0);
-            scene.add(floor);
-        }
+        var leftbase = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(15, 10, 30),
+            new THREE.MeshBasicMaterial({ color: this.iceblue }),
+            0
+        );
+        leftbase.receiveShadow = true;
+        leftbase.position.set(0, -5 , 20);
+        scene.add(leftbase);
+
+        var rightbase = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(15, 10, 30),
+            new THREE.MeshBasicMaterial({ color: this.iceblue }),
+            0
+        );
+        rightbase.receiveShadow = true;
+        rightbase.position.set(0, -5 , -30)  ;
+        scene.add(rightbase);
+
+        var platform = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(15, 1, 30),
+            new THREE.MeshBasicMaterial({ color: this.iceblue }),
+            0
+        );
+        platform.receiveShadow = true;
+        platform.position.set(0, -0.5 , -10);
+        scene.add(platform);
+        
+    }
 }

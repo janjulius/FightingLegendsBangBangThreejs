@@ -244,7 +244,7 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        var level = new Thundergart();
+        var level = new StandardMap();
 
         console.log(playersPlaying);
         var tempStart = -10;
