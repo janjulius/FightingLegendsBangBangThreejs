@@ -53,13 +53,8 @@ function init() {
 		1,
 		1000
 	);
-<<<<<<< HEAD
-	camera.position.set( 60, 25, 0 );
-	camera.lookAt( scene.position );
-=======
 	camera.position.set( 60, 50, 0 );
 	camera.lookAt(scene.position);
->>>>>>> 5745e6b1c14218fd3cf01f2a45121a8ff944081e
 	scene.add( camera );
 
     light = new THREE.DirectionalLight( 0xFFFFFF );
