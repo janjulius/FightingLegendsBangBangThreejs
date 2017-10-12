@@ -183,6 +183,7 @@ var amount = 8;
 		charScreen.position.set(-3, baseY, baseZ);
 		charScreens[i] = charScreen;
 		charScreens.castShadow = true;
+		charScreens[i].myCharId = i;
 		scene.add(charScreen);
 		
 	}
@@ -210,17 +211,14 @@ var amount = 8;
 			console.log("created ray");
 			var intersects = ray0.intersectObjects(scene.children);
 			for(var i = 0 ; i < intersects.length; i++){
-				intersects[i].object.material.color.set(0xff0000);
+				players[0] = intersects[i].object.myCharId;
 			}
-			console.log("test" + intersects.length);
 			playerFiches[0].position.z = playerFiches[0].position.z + 1;
-			ray0.set(playerFiches[0].position, new THREE.Vector3(1,0,0));
-			console.log(playerFiches[0].position);
-			console.log(charScreens[0].position);
+			//ray0.set(playerFiches[0].position, new THREE.Vector3(1,0,0));
 		} else if (event.keyCode == 68) { //d
 			//players[0].direction = -1;
 		} else if (event.keyCode == 87) { //w
-			playerFiches[1].position.y = playerFiches[1].position.y + 1; //test code for color coding and spacing
+			
 		} else if (event.keyCode == 83) { //s
 			playerFiches[2].position.y = playerFiches[2].position.y + 1;
 		}
@@ -236,7 +234,8 @@ if(!charSelect){
 	for(var i = 0; i < 8; i++){
 		charScreens[i].position.set(100,100,100);
 	}
-	players[0] = new Willem(15, 10);
+	var p1Choice = getClassByCharId(players[0]);
+	players[0] = new p1Choice(15, 10);
 	players[0].setId(0);
 	players[1] = new Rocky(15, 0);
 	players[1].setId(1);
