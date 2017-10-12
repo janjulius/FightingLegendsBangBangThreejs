@@ -244,7 +244,7 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        newLevel(3);
+        var level = new Thundergart();
 
         var p0Choice = getClassByCharId(players[0]);
         var p1Choice = getClassByCharId(players[1]);
@@ -261,7 +261,7 @@ function runGame() {
         players[3].setId(3);
         //console.log(box.getvelocity());
 
-        newLevel(3);
+        
         gameInterface.ClearCharSelectInterface();
         gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]);
         scene.simulate();

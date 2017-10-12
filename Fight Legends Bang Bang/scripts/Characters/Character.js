@@ -25,7 +25,9 @@ class Character{
     }
 
     normalAtk() {
-        //play normal attack
+        ray = new THREE.Raycaster(this.geometry.position, new THREE.Vector3(0,0,this.direction));
+        var intersects = ray.intersectObjects(scene.children);
+        
 
     }
 
