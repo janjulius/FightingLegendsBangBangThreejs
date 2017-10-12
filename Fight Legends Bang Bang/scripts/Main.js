@@ -198,24 +198,41 @@ var amount = 8;
 		fische = new Physijs.BoxMesh(new THREE.BoxGeometry(0, 1, 1), material, 0);
 		playerFiches[i] = fische;
 		scene.add(fische);
+		if(DEBUG_MODE){
+		players[i] = 0;
+		}
 	}
 
 	window.addEventListener('keydown', function(event){
-		if (event.keyCode == 68) { //a	
+		if (event.keyCode == 68) { //d
 			ray0 = new THREE.Raycaster(playerFiches[0].position, new THREE.Vector3(-1,0,0));
-			console.log("created ray");
 			var intersects = ray0.intersectObjects(scene.children);
 			for(var i = 0 ; i < intersects.length; i++){
 				players[0] = intersects[i].object.myCharId;
 			}
 			playerFiches[0].position.z = playerFiches[0].position.z + 1;
 			//ray0.set(playerFiches[0].position, new THREE.Vector3(1,0,0));
-		} else if (event.keyCode == 68) { //d
-			//players[0].direction = -1;
+		} else if (event.keyCode == 70) { //f
+			ray0 = new THREE.Raycaster(playerFiches[1].position, new THREE.Vector3(-1,0,0));
+			var intersects = ray0.intersectObjects(scene.children);
+			for(var i = 0 ; i < intersects.length; i++){
+				players[1] = intersects[i].object.myCharId;
+			}
+			playerFiches[1].position.z = playerFiches[1].position.z + 1;
 		} else if (event.keyCode == 87) { //w
-			
+			ray0 = new THREE.Raycaster(playerFiches[2].position, new THREE.Vector3(-1,0,0));
+			var intersects = ray0.intersectObjects(scene.children);
+			for(var i = 0 ; i < intersects.length; i++){
+				players[2] = intersects[i].object.myCharId;
+			}
+			playerFiches[2].position.z = playerFiches[2].position.z + 1;
 		} else if (event.keyCode == 83) { //s
-			playerFiches[2].position.y = playerFiches[2].position.y + 1;
+			ray0 = new THREE.Raycaster(playerFiches[3].position, new THREE.Vector3(-1,0,0));
+			var intersects = ray0.intersectObjects(scene.children);
+			for(var i = 0 ; i < intersects.length; i++){
+				players[3] = intersects[i].object.myCharId;
+			}
+			playerFiches[3].position.z = playerFiches[3].position.z + 1;
 		}
 		});
 }
@@ -229,14 +246,19 @@ if(!charSelect){
 	for(var i = 0; i < 8; i++){
 		charScreens[i].position.set(100,100,100);
 	}
-	var p1Choice = getClassByCharId(players[0]);
-	players[0] = new p1Choice(15, 10);
+
+	var p0Choice = getClassByCharId(players[0]);
+	var p1Choice = getClassByCharId(players[1]);
+	var p2Choice = getClassByCharId(players[2]);
+	var p3Choice = getClassByCharId(players[3]);
+
+	players[0] = new p0Choice(15, 10);
 	players[0].setId(0);
-	players[1] = new Rocky(15, 0);
+	players[1] = new p1Choice(15, 0);
 	players[1].setId(1);
-	players[2] = new BoomStronk(15, -10);
+	players[2] = new p2Choice(15, -10);
 	players[2].setId(2);
-	players[3] = new Paardman(15, 15);
+	players[3] = new p3Choice(15, 15);
 	players[3].setId(3);
     //console.log(box.getvelocity());
 

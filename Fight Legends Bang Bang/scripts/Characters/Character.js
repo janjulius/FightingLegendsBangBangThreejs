@@ -12,6 +12,7 @@ class Character{
         this.speed = 2000;
         this.velocity = new THREE.Vector3(0,0,0);
         this.portrait;
+        this.blocking = false;
         console.log("created character");
     }
 
@@ -35,7 +36,7 @@ class Character{
     }
 
     block() {
-        //block!
+        this.blocking = true;
 
     }
 
@@ -66,6 +67,9 @@ class Character{
     }
 
     setDamage(d){
+        if(this.blocking){
+            return;
+        }
         this.damage = d;
         gameInterface.UpdateGameInterface(this.id);
     }
