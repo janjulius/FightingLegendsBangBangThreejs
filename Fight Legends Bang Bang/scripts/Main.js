@@ -157,6 +157,7 @@ function render() {
 
 function runCharSelect(){
 	if(charSelect){
+	gameInterface.LoadCharSelectInterface();
 	var material;
 var baseZ = 0;
 var baseY = -5;
@@ -209,6 +210,7 @@ var amount = 8;
 			var intersects = ray0.intersectObjects(scene.children);
 			for(var i = 0 ; i < intersects.length; i++){
 				players[0] = intersects[i].object.myCharId;
+				gameInterface.UpdateCharSelectInterface(0, players[0]);
 			}
 			playerFiches[0].position.z = playerFiches[0].position.z + 1;
 			//ray0.set(playerFiches[0].position, new THREE.Vector3(1,0,0));
@@ -217,13 +219,16 @@ var amount = 8;
 			var intersects = ray0.intersectObjects(scene.children);
 			for(var i = 0 ; i < intersects.length; i++){
 				players[1] = intersects[i].object.myCharId;
+				gameInterface.UpdateCharSelectInterface(1, players[1]);
 			}
 			playerFiches[1].position.z = playerFiches[1].position.z + 1;
+			playerFiches[0].position.y = playerFiches[0].position.y + 1;
 		} else if (event.keyCode == 87) { //w
 			ray0 = new THREE.Raycaster(playerFiches[2].position, new THREE.Vector3(-1,0,0));
 			var intersects = ray0.intersectObjects(scene.children);
 			for(var i = 0 ; i < intersects.length; i++){
 				players[2] = intersects[i].object.myCharId;
+				gameInterface.UpdateCharSelectInterface(2, players[2]);
 			}
 			playerFiches[2].position.z = playerFiches[2].position.z + 1;
 		} else if (event.keyCode == 83) { //s
@@ -231,6 +236,7 @@ var amount = 8;
 			var intersects = ray0.intersectObjects(scene.children);
 			for(var i = 0 ; i < intersects.length; i++){
 				players[3] = intersects[i].object.myCharId;
+				gameInterface.UpdateCharSelectInterface(3, players[3]);
 			}
 			playerFiches[3].position.z = playerFiches[3].position.z + 1;
 		}
@@ -264,7 +270,8 @@ if(!charSelect){
 	players[3].setId(3);
     //console.log(box.getvelocity());
 
-    
+    newLevel(3);
+	gameInterface.ClearCharSelectInterface();
 	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]); scene.simulate();
 	physics_stats.update();
     requestAnimationFrame( animate );

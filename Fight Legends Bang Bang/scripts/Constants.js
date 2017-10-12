@@ -105,3 +105,17 @@ function getCharImgByNameOrId(p){
     return 'sprites/Characters/MenuSprites/berend.png';
 }
 }
+
+function getPlayerColors(id, opacity){
+    switch(id){
+        case 0:
+        return "rgba(255, 0, 0,"+ opacity +" )";
+        case 1:
+            return "rgba(0, 0, 255, " + opacity + ")";
+        case 2:
+            return "rgba(255, 165, 0,"+ opacity + ")";
+        case 3:
+            return "rgba(0, 255, 0,"+ opacity +")";
+
+    }
+}
