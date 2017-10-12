@@ -10,7 +10,6 @@ var charSelect = true;
 'use strict';
 var charScreens = [];
 var playerFiches = [];
-var spawnpoints = [];
 
 Physijs.scripts.worker = 'physi/physijs_worker.js';
 Physijs.scripts.ammo = 'ammo.js';
@@ -248,12 +247,14 @@ if(!charSelect){
 		charScreens[i].position.set(100,100,100);
 	}
 
+	newLevel(3);
+
 	var p0Choice = getClassByCharId(players[0]);
 	var p1Choice = getClassByCharId(players[1]);
 	var p2Choice = getClassByCharId(players[2]);
 	var p3Choice = getClassByCharId(players[3]);
 
-	players[0] = new p0Choice(15, 10);
+	players[0] = new p0Choice(15,10);
 	players[0].setId(0);
 	players[1] = new p1Choice(15, 0);
 	players[1].setId(1);
@@ -263,7 +264,7 @@ if(!charSelect){
 	players[3].setId(3);
     //console.log(box.getvelocity());
 
-    newLevel(3);
+    
 	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]); scene.simulate();
 	physics_stats.update();
     requestAnimationFrame( animate );
