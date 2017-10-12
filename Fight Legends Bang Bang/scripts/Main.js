@@ -15,7 +15,7 @@ Physijs.scripts.worker = 'physi/physijs_worker.js';
 Physijs.scripts.ammo = 'ammo.js';
 
 scene = new Physijs.Scene;
-scene.setGravity(new THREE.Vector3( 0,-30,0));
+
 
 
 gameInterface = new Interface();
@@ -23,7 +23,7 @@ gameInterface = new Interface();
 init();
 
 function init() {
-	
+	scene.setGravity(new THREE.Vector3( 0,-10,0));
     renderer = new THREE.WebGLRenderer({});
 	renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.shadowMap.enabled = true;
