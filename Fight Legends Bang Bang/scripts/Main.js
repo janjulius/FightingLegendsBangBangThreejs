@@ -247,14 +247,14 @@ if(!charSelect){
 		charScreens[i].position.set(100,100,100);
 	}
 
-	newLevel(3);
-
+	var level = new Thundergart();
+	
 	var p0Choice = getClassByCharId(players[0]);
 	var p1Choice = getClassByCharId(players[1]);
 	var p2Choice = getClassByCharId(players[2]);
 	var p3Choice = getClassByCharId(players[3]);
 
-	players[0] = new p0Choice(15,10);
+	players[0] = new p0Choice(15, 10);
 	players[0].setId(0);
 	players[1] = new p1Choice(15, 0);
 	players[1].setId(1);
