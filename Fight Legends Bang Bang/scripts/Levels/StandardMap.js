@@ -7,40 +7,40 @@ class StandardMap extends Level{
         this.spawn3 = {y: 10, z : 8};
         this.spawn4 = {y: 5, z : -30};
         
-        floor = new Physijs.BoxMesh(
+        var bottom = new Physijs.BoxMesh(
                 new THREE.CubeGeometry(15, 2, 50),
                 new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
                 0
             );
-            floor.receiveShadow = true;
-            floor.position.set(0, -10, 0);
-            scene.add(floor);
+            bottom.receiveShadow = true;
+            bottom.position.set(0, -10, 0);
+            scene.add(bottom);
     
-            floor = new Physijs.BoxMesh(
+            var leftplatform = new Physijs.BoxMesh(
                 new THREE.CubeGeometry(15, 2, 10),
                 new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
                 0
             );
-            floor.receiveShadow = true;
-            floor.position.set(0, 0 , -30);
-            scene.add(floor);
+            leftplatform.receiveShadow = true;
+            leftplatform.position.set(0, 0 , -30);
+            scene.add(leftplatform);
     
-            floor = new Physijs.BoxMesh(
+            var rightplatform = new Physijs.BoxMesh(
                 new THREE.CubeGeometry(15, 2, 10),
                 new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
                 0
             );
-            floor.receiveShadow = true;
-            floor.position.set(0, 0 , 30);
-            scene.add(floor);
+            rightplatform.receiveShadow = true;
+            rightplatform.position.set(0, 0 , 30);
+            scene.add(rightplatform);
     
-            floor = new Physijs.BoxMesh(
+            var upper = new Physijs.BoxMesh(
                 new THREE.CubeGeometry(15, 2, 30),
                 new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
                 0
             );
-            floor.receiveShadow = true;
-            floor.position.set(0, 8 , 0);
-            scene.add(floor);
+            upper.receiveShadow = true;
+            upper.position.set(0, 8 , 0);
+            scene.add(upper);
         }
     }

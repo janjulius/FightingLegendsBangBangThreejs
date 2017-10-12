@@ -7,32 +7,32 @@ class Thundergart extends Level{
         this.spawn3 = {y: 5, z : -25};
         this.spawn4 = {y: 5, z : -40};
 
-        var floor = new Physijs.BoxMesh(
+        var leftbase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 30),
             new THREE.MeshBasicMaterial({ color: this.iceblue }),
             0
         );
-        floor.receiveShadow = true;
-        floor.position.set(0, -5 , 20);
-        scene.add(floor);
+        leftbase.receiveShadow = true;
+        leftbase.position.set(0, -5 , 20);
+        scene.add(leftbase);
 
-        var door = new Physijs.BoxMesh(
+        var rightbase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 30),
             new THREE.MeshBasicMaterial({ color: this.iceblue }),
             0
         );
-        door.receiveShadow = true;
-        door.position.set(0, -5 , -30)  ;
-        scene.add(door);
+        rightbase.receiveShadow = true;
+        rightbase.position.set(0, -5 , -30)  ;
+        scene.add(rightbase);
 
-        var gloor = new Physijs.BoxMesh(
+        var platform = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 30),
             new THREE.MeshBasicMaterial({ color: this.iceblue }),
             0
         );
-        gloor.receiveShadow = true;
-        gloor.position.set(0, -0.5 , -10);
-        scene.add(gloor);
+        platform.receiveShadow = true;
+        platform.position.set(0, -0.5 , -10);
+        scene.add(platform);
         
     }
 }

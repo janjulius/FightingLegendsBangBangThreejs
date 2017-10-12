@@ -244,7 +244,7 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        var level = new Brawlhaven();
+        var level = new StandardMap();
 
         var p0Choice = getClassByCharId(players[0]);
         var p1Choice = getClassByCharId(players[1]);
