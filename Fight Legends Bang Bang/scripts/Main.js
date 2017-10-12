@@ -10,13 +10,12 @@ var charSelect = true;
 'use strict';
 var charScreens = [];
 var playerFiches = [];
-var spawnpoints = [];
 
 Physijs.scripts.worker = 'physi/physijs_worker.js';
 Physijs.scripts.ammo = 'ammo.js';
 
 scene = new Physijs.Scene;
-
+scene.setGravity(new THREE.Vector3( 0,0,0));
 
 
 gameInterface = new Interface();
@@ -24,7 +23,6 @@ gameInterface = new Interface();
 init();
 
 function init() {
-	scene.setGravity(new THREE.Vector3( 0,-10,0));
     renderer = new THREE.WebGLRenderer({});
 	renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.shadowMap.enabled = true;
@@ -47,6 +45,7 @@ function init() {
 
 
 	scene = new Physijs.Scene;
+	scene.setGravity(new THREE.Vector3( 0,-30,0));
 	
 	camera = new THREE.PerspectiveCamera(
 		35,
@@ -254,12 +253,14 @@ if(!charSelect){
 		charScreens[i].position.set(100,100,100);
 	}
 
+	newLevel(3);
+
 	var p0Choice = getClassByCharId(players[0]);
 	var p1Choice = getClassByCharId(players[1]);
 	var p2Choice = getClassByCharId(players[2]);
 	var p3Choice = getClassByCharId(players[3]);
 
-	players[0] = new p0Choice(15, 10);
+	players[0] = new p0Choice(15,10);
 	players[0].setId(0);
 	players[1] = new p1Choice(15, 0);
 	players[1].setId(1);
@@ -269,8 +270,12 @@ if(!charSelect){
 	players[3].setId(3);
     //console.log(box.getvelocity());
 
+<<<<<<< HEAD
     newLevel(3);
 	gameInterface.ClearCharSelectInterface();
+=======
+    
+>>>>>>> be7c521a5a8c25e947a8784be0a6b20b11b518e5
 	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]); scene.simulate();
 	physics_stats.update();
     requestAnimationFrame( animate );
