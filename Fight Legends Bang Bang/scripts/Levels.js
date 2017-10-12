@@ -4,9 +4,9 @@ function newLevel(lid) {
     var mudbrown = 0x794c13;
     var grassgreen = 0x4DBD33;
 
+
     switch (lid) {
         case 1:
-            spawnpoints [0] = (0, 0);
             var levelHight = 0;
 
             floor = new Physijs.BoxMesh(
@@ -95,41 +95,105 @@ function newLevel(lid) {
                     scene.add(lowergrass);
 
                 upperbaseleft = new Physijs.BoxMesh(
-                    new THREE.CubeGeometry(15, 4, 25),
+                    new THREE.CubeGeometry(15, 4, 20),
                     new THREE.MeshBasicMaterial({ color: mudbrown }),
                     0
                     );
                     upperbaseleft.receiveShadow = true;
-                    upperbaseleft.position.set(0, 0 + levelHight, 17.5);
+                    upperbaseleft.position.set(0, 0 + levelHight, 15);
                     scene.add(upperbaseleft);
     
                 uppergrassleft = new Physijs.BoxMesh(
-                    new THREE.CubeGeometry(15, 1, 25),
+                    new THREE.CubeGeometry(15, 1, 20),
                     new THREE.MeshBasicMaterial({ color: grassgreen }),
                     0
                     );
                     uppergrassleft.receiveShadow = true;
-                    uppergrassleft.position.set(0, 2 + levelHight, 17.5);
+                    uppergrassleft.position.set(0, 2 + levelHight, 15);
                     scene.add(uppergrassleft);
 
                 upperbaseright = new Physijs.BoxMesh(
-                    new THREE.CubeGeometry(15, 4, 25),
+                    new THREE.CubeGeometry(15, 4, 20),
                     new THREE.MeshBasicMaterial({ color: mudbrown }),
                     0
                     );
                     upperbaseright.receiveShadow = true;
-                    upperbaseright.position.set(0, 0 + levelHight, -17.5);
+                    upperbaseright.position.set(0, 0 + levelHight, -15);
                     scene.add(upperbaseright);
         
                 uppergrassright = new Physijs.BoxMesh(
-                    new THREE.CubeGeometry(15, 1, 25),
+                    new THREE.CubeGeometry(15, 1, 20),
                     new THREE.MeshBasicMaterial({ color: grassgreen }),
                     0
                     );
                     uppergrassright.receiveShadow = true;
-                    uppergrassright.position.set(0, 2 + levelHight, -17.5);
+                    uppergrassright.position.set(0, 2 + levelHight, -15);
                     scene.add(uppergrassright);
 
+            grassplatform = new Physijs.BoxMesh(
+                new THREE.CubeGeometry(15, 1, 9 ),
+                new THREE.MeshBasicMaterial({ color: grassgreen }),
+                0
+                );
+                grassplatform.receiveShadow = true;
+                grassplatform.position.set(0, 2 + levelHight, 0);
+                scene.add(grassplatform);        
+
+                leftislandbase = new Physijs.BoxMesh(
+                    new THREE.CubeGeometry(15, 20, 15),
+                    new THREE.MeshBasicMaterial({ color: mudbrown }),
+                    0
+                    );
+                    leftislandbase.receiveShadow = true;
+                    leftislandbase.position.set(0, 3 + levelHight, 50);
+                    scene.add(leftislandbase);
+
+                leftislandgrass = new Physijs.BoxMesh(
+                    new THREE.CubeGeometry(15, 1, 15),
+                    new THREE.MeshBasicMaterial({ color: grassgreen }),
+                    0
+                    );
+                    leftislandgrass.receiveShadow = true;
+                    leftislandgrass.position.set(0, 13 + levelHight, 50);
+                    scene.add(leftislandgrass);
+                
+                leftislandtriangle = new Physijs.SphereMesh(
+                    new THREE.SphereGeometry(10, 0 , 1),
+                    new THREE.MeshBasicMaterial({color: mudbrown}),
+                    0
+                    );
+                    leftislandtriangle.receiveShadow = true;
+                    leftislandtriangle.position.set(0, -6.5, 50);
+                    scene.add(leftislandtriangle);
+                
+                    leftislandsquare = new Physijs.BoxMesh(
+                        new THREE.CubeGeometry(15.5, 10, 7.5),
+                        new THREE.MeshBasicMaterial({ color: mudbrown }),
+                        0
+                        );
+                        leftislandsquare.receiveShadow = true;
+                        leftislandsquare.position.set(0, -11 + levelHight, 53.5);
+                        scene.add(leftislandsquare);   
+
+                        rightislandbase = new Physijs.BoxMesh(
+                            new THREE.CubeGeometry(15, 15, 15),
+                            new THREE.MeshBasicMaterial({ color: mudbrown }),
+                            0
+                            );
+                            rightislandbase.receiveShadow = true;
+                            rightislandbase.position.set(0, 16 + levelHight, -50);
+                            scene.add(rightislandbase);
+        
+                        rightislandgrass = new Physijs.BoxMesh(
+                            new THREE.CubeGeometry(15, 1, 15),
+                            new THREE.MeshBasicMaterial({ color: grassgreen }),
+                            0
+                            );
+                            rightislandgrass.receiveShadow = true;
+                            rightislandgrass.position.set(0, 23 + levelHight, -50);
+                            scene.add(rightislandgrass);
+                        
+                    
             break;
     }
 }
