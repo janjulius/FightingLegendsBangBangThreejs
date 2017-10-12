@@ -4,9 +4,12 @@ var camera, scene, renderer;
 var clock = new THREE.Clock(true);
 var gameInterface;
 var players = [];
-var playerPlaying = 4;
+var controls = new THREE.GamepadControls();
+var playersPlaying = 4;
 var charSelect = true;
 'use strict';
+var charScreens = [];
+var playerFiches = [];
 
 Physijs.scripts.worker = 'physi/physijs_worker.js';
 Physijs.scripts.ammo = 'ammo.js';
@@ -21,7 +24,7 @@ init();
 
 function init() {
 	
-    renderer = new THREE.WebGLRenderer({ antialias: false });
+    renderer = new THREE.WebGLRenderer({});
 	renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.shadowMap.enabled = true;
 	renderer.shadowMapSoft = true;
@@ -50,8 +53,13 @@ function init() {
 		1,
 		1000
 	);
+<<<<<<< HEAD
 	camera.position.set( 60, 25, 0 );
 	camera.lookAt( scene.position );
+=======
+	camera.position.set( 60, 50, 0 );
+	camera.lookAt(scene.position);
+>>>>>>> 5745e6b1c14218fd3cf01f2a45121a8ff944081e
 	scene.add( camera );
 
     light = new THREE.DirectionalLight( 0xFFFFFF );
@@ -71,7 +79,9 @@ function init() {
 	
 	
 	
-   
+   if(charSelect){
+	   runCharSelect();
+   }
 
 	
     /*
@@ -98,9 +108,11 @@ function init() {
 	container.appendChild( renderer.domElement );
 	window.addEventListener( 'resize', onWindowResize, false );
     */
+	
+    requestAnimationFrame( animate );
 }
 
- window.addEventListener('keydown', function(event) {
+  window.addEventListener('keydown', function(event) {
 	 if(charSelect){
 		if(event.keyCode == 65){
 			 console.log("test");
@@ -111,31 +123,18 @@ function init() {
  });
 
  window.addEventListener('keyup', function(event) {
-	 if(!charSelect){
-    if (event.keyCode == 65) { //a
-       players[0].direction = 0;
-    } else if (event.keyCode == 68) { //d
-        players[0].direction = 0;
-    } else if (event.keyCode == 87) { //w
-    } else if (event.keyCode == 83) { //s
-    }
-	if (event.keyCode == 32) { //a
-        console.log("pressed space bar");
-    }
-	 }
  });
 
 
 scene.addEventListener( 'update', function() {
 	if(!charSelect){
 	physics_stats.update();
-
     var timeElapsed = clock.getDelta();
-    // the scene's physics have finished updating
-	var vel = players[0].geometry.getLinearVelocity();
+	for (var i = 0; i < players.length; i++) {
+		var element = players[i];
+		element.Update(timeElapsed);
+	}
 
-    players[0].geometry.applyCentralImpulse(new THREE.Vector3(0,vel.y,(players[0].direction*players[0].speed)*timeElapsed));
-    players[0].geometry.setAngularFactor( new THREE.Vector3(0,0,0));
     scene.simulate(undefined, 1 ); // run physics
 	}
 });
@@ -160,15 +159,87 @@ function render() {
     renderer.render(scene, camera);
 	renderer.clearDepth();
 }
+
+function runCharSelect(){
+	if(charSelect){
+	var material;
+var baseZ = 0;
+var baseY = -5;
+var constZ = 0;
+var constY = -5;
+var amount = 8;
+	for(var i = 0; i < amount; i++){
+		material = Physijs.createMaterial(
+		new THREE.MeshBasicMaterial({ color: 0xffffff, map:THREE.ImageUtils.loadTexture( getCharImgByNameOrId(i) )}),
+		0,
+		1
+	);
+		if(i % 4 == 0){
+		baseY += 5;
+		baseZ = constZ;
+				}
+				baseZ += 5;
+		charScreen = new Physijs.BoxMesh(new THREE.BoxGeometry(5, 5 ,5), material, 0);
+		charScreen.position.set(-3, baseY, baseZ);
+		charScreens[i] = charScreen;
+		charScreens.castShadow = true;
+		scene.add(charScreen);
+		
+	}
+	console.log();
+	camera.lookAt(charScreens[0].position);
+	camera.position.set(60, 0, 0);
+	camera.lookAt(new THREE.Vector3(0,0,0));
+
+	for(var i = 0; i < playersPlaying; i++){
+		var c = 0xff0000;
+		switch(i){ case 0: c = 0xff0000; break; case 1: c = 0x0000ff; break; case 2: c = 0xffff00; break; case 3: c = 0x33cc33; break;}
+		material = Physijs.createMaterial(
+			new THREE.MeshBasicMaterial({ color: c}),
+			0,
+			1
+		);
+		fische = new Physijs.BoxMesh(new THREE.BoxGeometry(0, 1, 1), material, 0);
+		playerFiches[i] = fische;
+		scene.add(fische);
+	}
+
+	window.addEventListener('keydown', function(event){
+		if (event.keyCode == 68) { //a	
+			ray0 = new THREE.Raycaster(playerFiches[0].position, new THREE.Vector3(-1,0,0));
+			console.log("created ray");
+			var intersects = ray0.intersectObjects(scene.children);
+			for(var i = 0 ; i < intersects.length; i++){
+				intersects[i].object.material.color.set(0xff0000);
+			}
+			console.log("test" + intersects.length);
+			playerFiches[0].position.z = playerFiches[0].position.z + 1;
+			ray0.set(playerFiches[0].position, new THREE.Vector3(1,0,0));
+			console.log(playerFiches[0].position);
+			console.log(charScreens[0].position);
+		} else if (event.keyCode == 68) { //d
+			//players[0].direction = -1;
+		} else if (event.keyCode == 87) { //w
+			playerFiches[1].position.y = playerFiches[1].position.y + 1; //test code for color coding and spacing
+		} else if (event.keyCode == 83) { //s
+			playerFiches[2].position.y = playerFiches[2].position.y + 1;
+		}
+		});
+}
+}
+
 	function runGame(){
 if(!charSelect){
+	for(var i = 0; i < 8; i++){
+		charScreens[i].position.set(100,100,100);
+	}
 	players[0] = new Willem(15, 10);
 	players[0].setId(0);
-	players[1] = new Berend(15, 0);
+	players[1] = new Rocky(15, 0);
 	players[1].setId(1);
 	players[2] = new BoomStronk(15, -10);
 	players[2].setId(2);
-	players[3] = new Jens(15, 15);
+	players[3] = new Paardman(15, 15);
 	players[3].setId(3);
     //console.log(box.getvelocity());
 
@@ -176,6 +247,7 @@ if(!charSelect){
 	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]); scene.simulate();
 	physics_stats.update();
     requestAnimationFrame( animate );
+	if(DEBUG_MODE){
 	window.addEventListener('keydown', function(event){
     if (event.keyCode == 65) { //a
         players[0].direction = 1;
@@ -187,5 +259,6 @@ if(!charSelect){
 		players[0].setStock(players[0].getStock() - 1);
     }
 	});
+	}
 }
 }

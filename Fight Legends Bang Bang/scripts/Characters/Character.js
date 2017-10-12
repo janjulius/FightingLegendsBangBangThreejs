@@ -7,6 +7,7 @@ class Character{
         this.damage = GAME_SETTINGS_HANDICAP;
         this.direction = 0;
         this.id = 0;
+        this.cid = -1;
         this.stock = GAME_SETTINGS_STOCK_START;
         this.speed = 2000;
         this.velocity = new THREE.Vector3(0,0,0);
@@ -67,6 +68,16 @@ class Character{
     setDamage(d){
         this.damage = d;
         gameInterface.UpdateGameInterface(this.id);
+    }
+
+    Update(t){
+    // the scene's physics have finished updating
+	var vel = this.geometry.getLinearVelocity();
+
+    this.velocity = new THREE.Vector3(0,vel.y,(this.direction*this.speed)*t);
+
+    this.geometry.setLinearVelocity(this.velocity);
+    this.geometry.setAngularFactor( new THREE.Vector3(0,0,0));
     }
     
 }

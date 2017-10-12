@@ -4,9 +4,10 @@ class Berend extends Character{
         super();
         this.name = "Berend";
         this.Speed = 4;
+        this.cid = 7;
         this.portrait = 'sprites/Characters/MenuSprites/berend.png'
         var material = Physijs.createMaterial(
-        new THREE.MeshBasicMaterial({ color: 0x888888 }),
+        new THREE.MeshBasicMaterial({ color: 0x8B4513 }),
         1,
         1
     );

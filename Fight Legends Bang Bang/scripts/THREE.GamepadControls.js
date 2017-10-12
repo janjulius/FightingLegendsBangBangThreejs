@@ -3,12 +3,11 @@
  */
 /*global THREE, console */
 
-THREE.GamepadControls = function ( object ) {
+THREE.GamepadControls = function ( ) {
     
         this.rotMatrix = new THREE.Matrix4();
         this.dir = new THREE.Vector3( 0, 0, 1 );
         this.tmpVector = new THREE.Vector3();
-        this.object = object;
         this.lon = -90;
         this.lat = 0;
         this.target = new THREE.Vector3();
@@ -73,34 +72,23 @@ THREE.GamepadControls = function ( object ) {
             var rawGamepads =
             (navigator.getGamepads && navigator.getGamepads()) ||
             (navigator.webkitGetGamepads && navigator.webkitGetGamepads());
+            
     
-    
-            if( rawGamepads && rawGamepads[ 0 ] ) {
-    
-                var g = rawGamepads[ 0 ];
+            if( rawGamepads ) {
                 
-                this.lon += this.filter( g.axes[ 0 ] );
-                this.lat -= this.filter( g.axes[ 1 ] );
-                this.lat = Math.max( - 85, Math.min( 85, this.lat ) );
-                var phi = ( 90 - this.lat ) * Math.PI / 180;
-                var theta = this.lon * Math.PI / 180;
-    
-                this.target.x = 10 * Math.sin( phi ) * Math.cos( theta );
-                this.target.y = 10 * Math.cos( phi );
-                this.target.z = 10 * Math.sin( phi ) * Math.sin( theta );
-    
-                this.target.add( this.object.position );
-                this.object.lookAt( this.target );
-    
-                this.rotMatrix.extractRotation( this.object.matrix );
-                this.dir.set( 
-                    this.filter( g.axes[ 2 ] ), 
-                    this.filter( g.buttons[ 6 ].value ) - this.filter( g.buttons[ 7 ].value ), 
-                    this.filter( g.axes[ 3 ] ) 
-                );
-                this.dir.multiplyScalar( .1 );
-                this.dir.applyMatrix4( this.rotMatrix );
-                this.object.position.add( this.dir );
+                for (var i = 0; i < players.length; i++) {
+                    var p = players[i];
+                    if(rawGamepads[i]){
+                        var g = rawGamepads[ i ];
+                        var dir = g.axes[0];
+                        if(dir < 0.2 && dir > -0.2)
+                            dir = 0;
+
+                        p.direction = -dir;
+
+                    }
+                }
+
                 
             }
     

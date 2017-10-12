@@ -4,12 +4,13 @@ class Rocky extends Character{
         super();
         this.name = "Rocky";
         this.extraname = "the Raccoon";
+        this.cid = 2;
         this.specialAtkString = "Shivering Leap";
         this.portrait = 'sprites/Characters/MenuSprites/rocky.png';
         this.Speed = 12;
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
-			new THREE.MeshBasicMaterial({ color: 0x888888 },
+			new THREE.MeshBasicMaterial({ color: 0xec00fb },
             1)
 	);
     this.geometry.castShadow = true;
