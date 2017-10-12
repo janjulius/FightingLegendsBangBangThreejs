@@ -225,6 +225,9 @@ var amount = 8;
 
 	function runGame(){
 if(!charSelect){
+
+	for( var i = scene.children.length - 1; i >= 0; i--) {scene.remove(scene.children[i]); }
+
 	for(var i = 0; i < 8; i++){
 		charScreens[i].position.set(100,100,100);
 	}
