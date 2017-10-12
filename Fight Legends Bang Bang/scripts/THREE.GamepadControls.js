@@ -12,6 +12,7 @@ THREE.GamepadControls = function() {
     this.target = new THREE.Vector3();
     this.threshold = .05;
     this.deadZone = 0.3;
+    this.pressedJump = [0,0,0,0];
 
     this.init = function() {
 
@@ -87,10 +88,10 @@ THREE.GamepadControls = function() {
 
                         p.direction = -dir;
 
-                        if (g.buttons[0].value == 1) {
+                        if (g.buttons[0].value == 1 && this.pressedJump[i] != g.buttons[0].value) {
                             p.jump();
                         }
-
+                        this.pressedJump[i] = g.buttons[0].value;
                     }
                 }
 
@@ -130,7 +131,6 @@ THREE.GamepadControls = function() {
                 }
             }
         }
-
     }
 
     this.init();

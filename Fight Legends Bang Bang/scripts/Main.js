@@ -254,7 +254,7 @@ function runGame() {
 			players[k].AddGrounded();
 
         }
-		for(var i = 0; i < 4; i++){
+		for(var i = 0; i < playersPlaying; i++){
 			players[i].geometry.name = i;
 		}
         //console.log(box.getvelocity());
