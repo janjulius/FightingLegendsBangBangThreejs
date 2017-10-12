@@ -53,8 +53,8 @@ function init() {
 		1,
 		1000
 	);
-	camera.position.set( 60, 50, 0 );
-	camera.lookAt(scene.position);
+	camera.position.set( 60, 25, 0 );
+	camera.lookAt( scene.position );
 	scene.add( camera );
 
     light = new THREE.DirectionalLight( 0xFFFFFF );
@@ -184,7 +184,7 @@ var amount = 8;
 	}
 	console.log();
 	camera.lookAt(charScreens[0].position);
-	camera.position.set(60, 0, 0);
+	camera.position.set(120, 0, 0);
 	camera.lookAt(new THREE.Vector3(0,0,0));
 
 	for(var i = 0; i < playersPlaying; i++){
@@ -262,7 +262,7 @@ if(!charSelect){
 	players[3].setId(3);
     //console.log(box.getvelocity());
 
-    newLevel(2);
+    newLevel(3);
 	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]); scene.simulate();
 	physics_stats.update();
     requestAnimationFrame( animate );
