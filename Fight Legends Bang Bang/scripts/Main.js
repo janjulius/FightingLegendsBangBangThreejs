@@ -53,8 +53,13 @@ function init() {
 		1,
 		1000
 	);
+<<<<<<< HEAD
+	camera.position.set( 60, 25, 0 );
+	camera.lookAt( scene.position );
+=======
 	camera.position.set( 60, 50, 0 );
 	camera.lookAt(scene.position);
+>>>>>>> 5745e6b1c14218fd3cf01f2a45121a8ff944081e
 	scene.add( camera );
 
     light = new THREE.DirectionalLight( 0xFFFFFF );
@@ -236,8 +241,8 @@ if(!charSelect){
 	players[3] = new Paardman(15, 15);
 	players[3].setId(3);
     //console.log(box.getvelocity());
-	camera.lookAt(scene.position);
-    newLevel(1);
+
+    newLevel(2);
 	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]); scene.simulate();
 	physics_stats.update();
     requestAnimationFrame( animate );
