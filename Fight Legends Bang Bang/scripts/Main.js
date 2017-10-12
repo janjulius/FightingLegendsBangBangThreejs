@@ -270,12 +270,8 @@ if(!charSelect){
 	players[3].setId(3);
     //console.log(box.getvelocity());
 
-<<<<<<< HEAD
     newLevel(3);
 	gameInterface.ClearCharSelectInterface();
-=======
-    
->>>>>>> be7c521a5a8c25e947a8784be0a6b20b11b518e5
 	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]); scene.simulate();
 	physics_stats.update();
     requestAnimationFrame( animate );
