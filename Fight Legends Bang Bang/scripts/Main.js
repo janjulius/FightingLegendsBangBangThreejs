@@ -45,7 +45,7 @@ function init() {
 
 
 	scene = new Physijs.Scene;
-	scene.setGravity(new THREE.Vector3( 0,-30,0));
+	scene.setGravity(new THREE.Vector3( 0,0,0));
 	
 	camera = new THREE.PerspectiveCamera(
 		35,
