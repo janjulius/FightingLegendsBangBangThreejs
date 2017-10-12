@@ -2,10 +2,8 @@ class Thundergart extends Level{
     constructor(){
         super();
         
-        this.spawn1 = {y: 5, z : 30};
-        this.spawn2 = {y: 5, z : 15};
-        this.spawn3 = {y: 5, z : -25};
-        this.spawn4 = {y: 5, z : -40};
+        
+        this.spawn = [{y: 5, z : 30}, {y: 5, z : 15}, {y: 5, z : -25}, {y: 5, z : -40}]
 
         var leftbase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 30),

@@ -244,15 +244,13 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        var level = new StandardMap();
+        var level = new Brawlhaven();
 
         console.log(playersPlaying);
-        var tempStart = -10;
         for (var k = 0; k < playersPlaying; k++) {
             var choice = getClassByCharId(players[k]);
-            players[k] = new choice(15, tempStart);
+            players[k] = new choice(level.spawn[k].y, level.spawn[k].z);
 			players[k].AddGrounded();
-            tempStart += 5;
 
         }
 

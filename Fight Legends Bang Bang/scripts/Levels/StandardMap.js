@@ -2,18 +2,15 @@ class StandardMap extends Level{
     constructor(){
         super();
         var floor;
-        this.spawn1 = {y: 5, z : 30};
-        this.spawn2 = {y: 10, z : -8};
-        this.spawn3 = {y: 10, z : 8};
-        this.spawn4 = {y: 5, z : -30};
+        this.spawn = [{y: 5, z : 30}, {y: 10, z : -8}, {y: 10, z : 8}, {y: 5, z : -30}]
         
         var bottom = new Physijs.BoxMesh(
-                new THREE.CubeGeometry(15, 2, 50),
+                new THREE.CubeGeometry(15, 10, 50),
                 new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
                 0
             );
             bottom.receiveShadow = true;
-            bottom.position.set(0, -10, 0);
+            bottom.position.set(0, -13, 0);
             scene.add(bottom);
     
             var leftplatform = new Physijs.BoxMesh(

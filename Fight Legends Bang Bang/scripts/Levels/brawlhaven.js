@@ -3,10 +3,7 @@ class Brawlhaven extends Level{
     constructor(){
         super();
 
-        this.spawn1 = {y: 15, z : 50};
-        this.spawn2 = {y: 5, z : 0};
-        this.spawn3 = {y: -10, z : 0};
-        this.spawn4 = {y: 25, z : -50};
+        this.spawn = [{y: 15, z : 50}, {y: 5, z : 0}, {y: -10, z : 0}, {y: 25, z : -50}]
 
         var lowerbase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 9, 60),

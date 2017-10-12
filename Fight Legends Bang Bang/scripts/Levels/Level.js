@@ -1,10 +1,7 @@
 class Level{
     constructor(){
         this.name = "";
-        this.spawn1 = {y: 0,z: 0};
-        this.spawn2 = {y: 0,z: 0};
-        this.spawn3 = {y: 0,z: 0};
-        this.spawn4 = {y: 0,z: 0};
+        this.spawn = [{y: 0,z: 0}, {y: 0,z: 0}, {y: 0,z: 0}, {y: 0,z: 0}]
 
         this.burlywoodbrown = 0xDEB887;
         this.iceblue = 0xdcf3ff;
