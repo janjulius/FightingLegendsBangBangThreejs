@@ -4,13 +4,12 @@ var camera, scene, renderer;
 var clock = new THREE.Clock(true);
 var gameInterface;
 var players = [];
-var controls = new THREE.GamepadControls();
 var playersPlaying = 4;
 var charSelect = true;
 'use strict';
 var charScreens = [];
 var playerFiches = [];
-
+var controls = new THREE.GamepadControls();
 Physijs.scripts.worker = 'physi/physijs_worker.js';
 Physijs.scripts.ammo = 'ammo.js';
 
@@ -97,7 +96,7 @@ scene.addEventListener('update', function() {
     if (!charSelect) {
         physics_stats.update();
         var timeElapsed = clock.getDelta();
-        for (var i = 0; i < players.length; i++) {
+        for (var i = 0; i < playersPlaying; i++) {
             var element = players[i];
             element.Update(timeElapsed);
         }
@@ -245,28 +244,19 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        newLevel(3);
+        var level = new Brawlhaven();
 
-        var p0Choice = getClassByCharId(players[0]);
-        var p1Choice = getClassByCharId(players[1]);
-        var p2Choice = getClassByCharId(players[2]);
-        var p3Choice = getClassByCharId(players[3]);
+        console.log(playersPlaying);
+        for (var k = 0; k < playersPlaying; k++) {
+            var choice = getClassByCharId(players[k]);
+            players[k] = new choice(level.spawn[k].y, level.spawn[k].z);
+			players[k].AddGrounded();
 
-        players[0] = new p0Choice(15, 10);
-        players[0].setId(0);
-        players[1] = new p1Choice(15, 0);
-        players[1].setId(1);
-        players[2] = new p2Choice(15, -10);
-        players[2].setId(2);
-        players[3] = new p3Choice(15, 15);
-        players[3].setId(3);
+        }
 
-		for(var i = 0; i < 4; i++){
-			players[i].geometry.name = i;
-		}
         //console.log(box.getvelocity());
 
-        newLevel(3);
+
         gameInterface.ClearCharSelectInterface();
         gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]);
         scene.simulate();

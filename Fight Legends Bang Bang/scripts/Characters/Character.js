@@ -132,4 +132,15 @@ class Character{
     this.geometry.setAngularFactor( new THREE.Vector3(0,0,0));
     }
     
+    AddGrounded(){
+        var _this = this;
+    this.geometry.addEventListener('collision', function(other_object, relative_velocity, relative_rotation, contact_normal) {
+        console.log("collision event");
+        if (contact_normal.y < -0.5) {
+            _this.jumpsLeft = _this.totalJump;
+        }
+    });
+    }
+
+
 }

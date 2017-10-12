@@ -20,15 +20,6 @@ class Willem extends Character{
     this.geometry.castShadow = true;
     this.geometry.position.set(0,y,z);
 	scene.add( this.geometry );
-    var _this = this;
-    this.geometry.addEventListener('collision', function(other_object, relative_velocity, relative_rotation, contact_normal) {
-        console.log("collision event");
-        if (contact_normal.y < -0.5) {
-            console.log("can jump again");
-            _this.jumpsLeft = _this.totalJump;
-            console.log("can jump again");
-        }
-    });
     //this.geometry.setDamping(1,1);
     console.log("created Willem");
 }
