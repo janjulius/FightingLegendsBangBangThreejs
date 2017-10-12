@@ -4,13 +4,12 @@ var camera, scene, renderer;
 var clock = new THREE.Clock(true);
 var gameInterface;
 var players = [];
-var controls = new THREE.GamepadControls();
 var playersPlaying = 4;
 var charSelect = true;
 'use strict';
 var charScreens = [];
 var playerFiches = [];
-
+var controls = new THREE.GamepadControls();
 Physijs.scripts.worker = 'physi/physijs_worker.js';
 Physijs.scripts.ammo = 'ammo.js';
 
