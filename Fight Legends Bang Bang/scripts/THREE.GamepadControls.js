@@ -86,6 +86,10 @@ THREE.GamepadControls = function ( ) {
 
                         p.direction = -dir;
 
+                        if(g.buttons[0].value == 1){
+                            p.jump();
+                        }
+
                     }
                 }
 

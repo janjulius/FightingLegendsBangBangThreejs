@@ -15,11 +15,19 @@ class Willem extends Character{
         this.specialAtkString = "Throw Snowball";
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
-			material,
+			material
 	);
     this.geometry.castShadow = true;
     this.geometry.position.set(0,y,z);
 	scene.add( this.geometry );
+    this.geometry.addEventListener('collision', function(other_object, relative_velocity, relative_rotation, contact_normal) {
+        console.log("collision event");
+        if (contact_normal.y < -0.5) {
+            console.log("can jump again");
+            this.jumpsLeft = this.totalJump;
+            console.log(this.jumpsLeft);
+        }
+    });
     //this.geometry.setDamping(1,1);
     console.log("created Willem");
     }
