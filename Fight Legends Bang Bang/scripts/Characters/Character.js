@@ -20,7 +20,7 @@ class Character{
         new THREE.MeshBasicMaterial({
             color: 0xffffff
         }),
-        1,
+        0,
         0
     );
     this.geometry = new Physijs.BoxMesh(
@@ -113,7 +113,7 @@ class Character{
     
     if(this.jumped){
         if(this.jumpsLeft > 0){
-            vel.y = 20;
+            vel.y = 40;
             console.log("jumped");
             this.jumpsLeft--;
         }
