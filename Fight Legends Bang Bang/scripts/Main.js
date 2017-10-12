@@ -10,6 +10,7 @@ var charSelect = true;
 'use strict';
 var charScreens = [];
 var playerFiches = [];
+var spawnpoints = [];
 
 Physijs.scripts.worker = 'physi/physijs_worker.js';
 Physijs.scripts.ammo = 'ammo.js';

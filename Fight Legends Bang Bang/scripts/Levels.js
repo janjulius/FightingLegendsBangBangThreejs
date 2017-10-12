@@ -6,6 +6,7 @@ function newLevel(lid) {
 
     switch (lid) {
         case 1:
+            spawnpoints [0] = (0, 0);
             var levelHight = 0;
 
             floor = new Physijs.BoxMesh(
