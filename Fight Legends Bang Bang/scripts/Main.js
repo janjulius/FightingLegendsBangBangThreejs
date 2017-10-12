@@ -50,7 +50,7 @@ function init() {
 		1,
 		1000
 	);
-	camera.position.set( 60, 50, 0 );
+	camera.position.set( 60, 25, 0 );
 	camera.lookAt( scene.position );
 	scene.add( camera );
 
@@ -172,7 +172,7 @@ if(!charSelect){
 	players[3].setId(3);
     //console.log(box.getvelocity());
 
-    newLevel(1);
+    newLevel(2);
 	gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]); scene.simulate();
 	physics_stats.update();
     requestAnimationFrame( animate );
