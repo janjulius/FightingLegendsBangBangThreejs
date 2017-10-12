@@ -56,6 +56,27 @@ function getCharNameById(id){
     }
 }
 
+function getClassByCharId(id){
+    switch(id){
+        case 0:
+        return Willem;
+        case 1:
+        return Paardman;
+        case 2:
+        return Rocky;
+        case 3:
+        return Fred;
+        case 4:
+        return Kees;
+        case 5:
+        return BoomStronk;
+        case 6:
+        return Jens;
+        case 7:
+        return Berend;
+    }
+}
+
 function getCharImgByNameOrId(p){
     switch(p){
     case "Willem":

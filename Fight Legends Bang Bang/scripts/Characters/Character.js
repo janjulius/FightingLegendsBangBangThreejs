@@ -70,6 +70,10 @@ class Character{
         gameInterface.UpdateGameInterface(this.id);
     }
 
+    getCid(){
+        return this.cid;
+    }
+
     Update(t){
     // the scene's physics have finished updating
 	var vel = this.geometry.getLinearVelocity();
