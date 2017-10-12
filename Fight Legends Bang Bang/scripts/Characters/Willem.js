@@ -31,7 +31,8 @@ class Willem extends Character{
     });
     //this.geometry.setDamping(1,1);
     console.log("created Willem");
-    }
+}
+
 
     idle(){
         //idle image

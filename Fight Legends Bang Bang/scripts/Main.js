@@ -260,6 +260,10 @@ function runGame() {
         players[2].setId(2);
         players[3] = new p3Choice(15, 15);
         players[3].setId(3);
+
+		for(var i = 0; i < 4; i++){
+			players[i].geometry.name = i;
+		}
         //console.log(box.getvelocity());
 
         newLevel(3);
@@ -276,7 +280,8 @@ function runGame() {
                     players[0].direction = -1;
                 } else if (event.keyCode == 87) { //w
                     players[0].setDamage(players[0].getDamage() + 1); //test code for color coding and spacing
-                } else if (event.keyCode == 83) { //s
+					players[0].normalAtk();
+				} else if (event.keyCode == 83) { //s
                     players[0].setStock(players[0].getStock() - 1);
                 }
             });

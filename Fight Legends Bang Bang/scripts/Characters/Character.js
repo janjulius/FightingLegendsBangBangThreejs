@@ -8,6 +8,7 @@ class Character{
     this.direction = 0;
     this.id = 0;
     this.cid = -1;
+    this.igid = -1;
     this.stock = GAME_SETTINGS_STOCK_START;
     this.speed = 2000;
     this.velocity = new THREE.Vector3(0, 0, 0);
@@ -25,9 +26,20 @@ class Character{
     }
 
     normalAtk() {
-        ray = new THREE.Raycaster(this.geometry.position, new THREE.Vector3(0,0,this.direction));
+        var ray = new THREE.Raycaster(this.geometry.position, new THREE.Vector3(0,0,this.direction));
         var intersects = ray.intersectObjects(scene.children);
-        
+        console.log(intersects.length);
+        for(var i = 0; i < intersects.length; i++){
+            for(var j = 0; j < playersPlaying; j++){
+                if(j == parseInt(intersects[i].object.name)){
+                    players[j].setDamage(players[j].getDamage() + 10);
+                }
+            }
+            switch(parseInt(intersects[i].object.name)){
+                
+            }
+            console.log(parseInt(intersects[i].object.name));
+        }
 
     }
 

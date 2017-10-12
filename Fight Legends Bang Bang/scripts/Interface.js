@@ -14,7 +14,6 @@ class Interface{
         this.players[1] = p1;
         this.players[2] = p2;
         this.players[3] = p3;
-        console.log(p0);console.log(p1);console.log(p2);console.log(p3);
 
         this.mainInterface = document.getElementById("GameInterface");
         this.playerInterface[0] = document.getElementById("pGameInterface0");
