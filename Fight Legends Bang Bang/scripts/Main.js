@@ -245,20 +245,20 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        var level = new Thundergart();
+        var level = new Brawlhaven();
 
         var p0Choice = getClassByCharId(players[0]);
         var p1Choice = getClassByCharId(players[1]);
         var p2Choice = getClassByCharId(players[2]);
         var p3Choice = getClassByCharId(players[3]);
 
-        players[0] = new p0Choice(15, 10);
+        players[0] = new p0Choice(level.spawn1.y, level.spawn1.z);
         players[0].setId(0);
-        players[1] = new p1Choice(15, 0);
+        players[1] = new p1Choice(level.spawn2.y, level.spawn2.z);
         players[1].setId(1);
-        players[2] = new p2Choice(15, -10);
+        players[2] = new p2Choice(level.spawn3.y, level.spawn3.z);
         players[2].setId(2);
-        players[3] = new p3Choice(15, 15);
+        players[3] = new p3Choice(level.spawn4.y, level.spawn4.z);
         players[3].setId(3);
         //console.log(box.getvelocity());
 
