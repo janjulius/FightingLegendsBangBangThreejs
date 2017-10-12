@@ -57,7 +57,7 @@ class Interface{
         }
 
 
-        if(p0 !== undefined){ //interface specific for player 0
+        if(p0 !== 0){ //interface specific for player 0
         this.pName0[0].innerHTML = p0.name;
         this.pName0[0].style.textAlign = "center";
 
@@ -76,7 +76,7 @@ class Interface{
         this.pStock0[0].style.textAlign = "center";
        
         }
-        if(p1 !== undefined){ //interface specific for player 1
+        if(p1 !== 0){ //interface specific for player 1
         this.pName1[0].innerHTML = p1.name;
         this.pName1[0].style.textAlign = "center";
 
@@ -92,7 +92,7 @@ class Interface{
         this.pStock1[0].innerHTML = "❤" + p1.getStock();
         this.pStock1[0].style.textAlign = "center";
         }
-        if(p2 !== undefined){ //interface specific for player 2
+        if(p2 !== 0){ //interface specific for player 2
         this.pName2[0].innerHTML = p2.name;
         this.pName2[0].style.textAlign = "center";
         this.playerInterface[2].style.backgroundColor = "rgba(255, 165, 0, 0.3)";
@@ -105,7 +105,7 @@ class Interface{
         this.pStock2[0].innerHTML = "❤" + p2.getStock();
         this.pStock2[0].style.textAlign = "center";
         }
-        if(p3 !== undefined){ //interface speicific for player 3
+        if(p3 !== 0){ //interface speicific for player 3
         this.pName3[0].innerHTML = p3.name;
         this.pName3[0].style.textAlign = "center";
         this.playerInterface[3].style.backgroundColor = "rgba(0, 255, 0, 0.3)";
@@ -119,10 +119,10 @@ class Interface{
         this.pStock3[0].style.textAlign = "center";
         }
         
-        if(p0 !== undefined){
+        if(p0 !== 0){
             console.log("p0 is not undefined");
         }
-        if(p3 === undefined){
+        if(p3 === 0){
             console.log("p3 is undefined");
         }
     }

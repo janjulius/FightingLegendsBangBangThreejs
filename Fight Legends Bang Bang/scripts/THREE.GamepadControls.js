@@ -120,6 +120,7 @@ THREE.GamepadControls = function() {
                         }
                         if(i == 0){
                             if (pad.buttons[9].value == 1) {
+                                playersPlaying = rawGamepads.length;
                                 charSelect = false;
                                 runGame();
                                 break;

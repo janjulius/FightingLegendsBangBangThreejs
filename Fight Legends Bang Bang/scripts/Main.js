@@ -96,7 +96,7 @@ scene.addEventListener('update', function() {
     if (!charSelect) {
         physics_stats.update();
         var timeElapsed = clock.getDelta();
-        for (var i = 0; i < players.length; i++) {
+        for (var i = 0; i < playersPlaying; i++) {
             var element = players[i];
             element.Update(timeElapsed);
         }
@@ -246,22 +246,19 @@ function runGame() {
 
         var level = new Thundergart();
 
-        var p0Choice = getClassByCharId(players[0]);
-        var p1Choice = getClassByCharId(players[1]);
-        var p2Choice = getClassByCharId(players[2]);
-        var p3Choice = getClassByCharId(players[3]);
+        console.log(playersPlaying);
+        var tempStart = -10;
+        for (var k = 0; k < playersPlaying; k++) {
+            var choice = getClassByCharId(players[k]);
+            players[k] = new choice(15, tempStart);
+			players[k].AddGrounded();
+            tempStart += 5;
 
-        players[0] = new p0Choice(15, 10);
-        players[0].setId(0);
-        players[1] = new p1Choice(15, 0);
-        players[1].setId(1);
-        players[2] = new p2Choice(15, -10);
-        players[2].setId(2);
-        players[3] = new p3Choice(15, 15);
-        players[3].setId(3);
+        }
+
         //console.log(box.getvelocity());
 
-        
+
         gameInterface.ClearCharSelectInterface();
         gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]);
         scene.simulate();
