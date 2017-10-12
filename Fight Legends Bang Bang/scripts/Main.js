@@ -250,10 +250,13 @@ function runGame() {
         for (var k = 0; k < playersPlaying; k++) {
             var choice = getClassByCharId(players[k]);
             players[k] = new choice(level.spawn[k].y, level.spawn[k].z);
+			players[k].setId(k);
 			players[k].AddGrounded();
 
         }
-
+		for(var i = 0; i < 4; i++){
+			players[i].geometry.name = i;
+		}
         //console.log(box.getvelocity());
 
 
