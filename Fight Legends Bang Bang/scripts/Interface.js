@@ -35,7 +35,7 @@ class Interface{
         this.pStock1 = this.playerInterface[1].getElementsByClassName("pStock");
         this.pStock2 = this.playerInterface[2].getElementsByClassName("pStock");
         this.pStock3 = this.playerInterface[3].getElementsByClassName("pStock");
-
+ 
         this.spaBar0 = document.getElementById("pHealth0");
         this.spaBar1 = document.getElementById("pHealth1");
         this.spaBar2 = document.getElementById("pHealth2");
@@ -78,6 +78,7 @@ class Interface{
         this.pStock0[0].style.textShadow = "2px 2px 4px black";
         this.pStock0[0].innerHTML = "❤" + p0.getStock();
         this.pStock0[0].style.textAlign = "center";
+        
        
         }
         if(p1 !== 0){ //interface specific for player 1
