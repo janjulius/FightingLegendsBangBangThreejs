@@ -29,7 +29,7 @@ class Character {
         this.specialIncrease = 10;
         this.swingTimer = 0;
         this.swingCooldown = 1;
-
+        this.knockBack = new THREE.Vector3(0,0,0);
         console.log("created character");
     }
 
@@ -64,7 +64,7 @@ class Character {
                         var j = parseInt(other_object.name);
                         if(_this.id !=j){
                             _this.setSpecialAttackCounter(_this.specialCounter + _this.specialIncrease);
-                            players[j].setDamage(players[j].getDamage() + _this.basicAttackDamage);
+                            players[j].setDamage(players[j].getDamage() + _this.basicAttackDamage,_this.attackDirection);
                         }
                     }
                 }
@@ -120,11 +120,12 @@ class Character {
         return this.damage;
     }
 
-    setDamage(d) {
+    setDamage(d,dir) {
         if (this.blocking) {
             return;
         }
         this.damage = d;
+        this.knockBack.z = d * dir;
         gameInterface.UpdateGameInterface(this.id);
     }
 
@@ -162,6 +163,15 @@ class Character {
 
     Update(t) {
         
+        if(this.knockBack.z > 0)
+            this.knockBack.z -= 50*t;
+        if(this.knockBack.z < 0)
+            this.knockBack.z += 50*t;
+
+        if(this.knockBack.z > -10 && this.knockBack.z < 10)
+            this.knockBack.z = 0;
+
+
         if(this.direction > 0)
             this.attackDirection = 1;
         else if(this.direction < 0)
@@ -191,7 +201,7 @@ class Character {
             this.jumped = false;
         }
 
-        this.velocity = new THREE.Vector3(0, this.velt, (this.direction * this.speed) * t);
+        this.velocity = new THREE.Vector3(0, this.velt, ((this.direction * this.speed) * t) + this.knockBack.z);
 
         this.geometry.setLinearVelocity(this.velocity);
         this.geometry.setAngularFactor(new THREE.Vector3(0, 0, 0));
