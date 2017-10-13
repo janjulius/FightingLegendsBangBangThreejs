@@ -22,6 +22,8 @@ class Character {
         this.specialCounter = 0;
         this.specialCounterThreshHold = 100;
         this.swingObject;
+        this.swingTimer = 0;
+        this.swingCooldown = 0.2;
         console.log("created character");
     }
 
@@ -29,7 +31,8 @@ class Character {
         console.log("special atk character");
     }
 
-    normalAtk() {        
+    normalAtk() {       
+               this.swingTimer = this.swingCooldown; 
         var swingMaterial = Physijs.createMaterial(
         new THREE.MeshBasicMaterial({ color: 0xffffff }),
         1,
@@ -46,26 +49,13 @@ class Character {
                                                     this.geometry.position.z + (this.direction * 5));
        var _this = this;
        this.swingObject.addEventListener( 'collision', function(other_object, relative_velocity, relative_rotation, contact_normal){ if(_this.swingObject._physijs.touches.length > 0){
-            console.log("hi");
+           if(other_object.isPlayer){
+               var j = parseInt(other_object.name);
+               players[j].setDamage(players[j].getDamage() + 10);
+           }
         }} );
     	scene.add( this.swingObject );
         
-      
-        scene.remove(this.swingObject);
-        var ray = new THREE.Raycaster(this.geometry.position, new THREE.Vector3(0, 0, this.direction));
-        var intersects = ray.intersectObjects(scene.children);
-        console.log(intersects.length);
-        for (var i = 0; i < intersects.length; i++) {
-            for (var j = 0; j < playersPlaying; j++) {
-                if (j == parseInt(intersects[i].object.name)) {
-                    players[j].setDamage(players[j].getDamage() + 10);
-                }
-            }
-            switch (parseInt(intersects[i].object.name)) {
-
-            }
-            console.log(parseInt(intersects[i].object.name));
-        }
 
     }
 
@@ -140,8 +130,8 @@ class Character {
         for (var i = 0; i < this.geometry._physijs.touches.length; i++) {
             var id = this.geometry._physijs.touches[i];
             var obj = scene._objects[id];
-            if(obj.isPlayer){
-            }
+           // if(obj.isPlayer){
+           // }
 
             if(obj.name == "ground"){
                 touchedGround = true;
@@ -153,7 +143,7 @@ class Character {
     }
 
     Update(t) {
-
+        console.log(this.swingTimer);
         this.CheckCollision();
         /*
         if (this.geometry._physijs.touches.length == 0) {
@@ -186,6 +176,12 @@ class Character {
         this.geometry.rotation.set(0, 0, 0);
         this.geometry.__dirtyRotation = true;
         */
+        if(this.swingTimer > 0){
+            this.swingTimer -= t;
+            if(this.swingTimer < this.swingCooldown /10){
+                scene.remove(this.swingObject);
+            }
+        }
     }
 
     AddGrounded() {

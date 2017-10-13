@@ -244,7 +244,7 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        var level = new StandardMap(); /*
+        var level = new Thundergart(); /*
         let randomLevel;
         randomLevel = Math.floor((Math.random() * 4) + 1);
 
