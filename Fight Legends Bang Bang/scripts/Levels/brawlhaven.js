@@ -3,7 +3,28 @@ class Brawlhaven extends Level{
     constructor(){
         super();
 
-        this.spawn = [{y: 15, z : 50}, {y: 5, z : 0}, {y: -10, z : 0}, {y: 25, z : -50}]
+        var possibleSpawns = [{y: 15, z : 50}, {y: 5, z : 0}, {y: -10, z : 0}, {y: 25, z : -50}]
+
+        function shuffle(array) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+          
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+          
+              // Pick a remaining element...
+              randomIndex = Math.floor(Math.random() * currentIndex);
+              currentIndex -= 1;
+          
+              // And swap it with the current element.
+              temporaryValue = array[currentIndex];
+              array[currentIndex] = array[randomIndex];
+              array[randomIndex] = temporaryValue;
+            }
+          
+            return array;
+          }
+          
+          this.spawn = shuffle(possibleSpawns)
 
         var lowerbase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 9, 60),
