@@ -22,9 +22,13 @@ class Character {
         this.specialCounter = 0;
         this.specialCounterThreshHold = 100;
         this.swingObject;
-        this.swingTimer = 0;
-        this.swingCooldown = 0.2;
+        this.attackRemoveTimer = 0;
+        this.attackRemoveCooldown = 0.2;
         this.attackDirection = 1;
+        this.basicAttackDamage = 10;
+        this.swingTimer = 0;
+        this.swingCooldown = 1;
+
         console.log("created character");
     }
 
@@ -33,7 +37,8 @@ class Character {
     }
 
     normalAtk() {
-        if (this.swingTimer == 0) {
+        if (this.attackRemoveTimer == 0 && this.swingTimer <= 0) {
+            this.attackRemoveTimer = this.attackRemoveCooldown;
             this.swingTimer = this.swingCooldown;
             var swingMaterial = Physijs.createMaterial(
                 new THREE.MeshBasicMaterial({
@@ -56,7 +61,10 @@ class Character {
                 if (_this.swingObject._physijs.touches.length > 0) {
                     if (other_object.isPlayer) {
                         var j = parseInt(other_object.name);
-                        players[j].setDamage(players[j].getDamage() + 10);
+                        if(_this.id !=j){
+                            _this.specialCounter += 10;
+                            players[j].setDamage(players[j].getDamage() + _this.basicAttackDamage);
+                        }
                     }
                 }
             });
@@ -190,12 +198,15 @@ class Character {
         this.geometry.rotation.set(0, 0, 0);
         this.geometry.__dirtyRotation = true;
         */
-        if (this.swingTimer > 0) {
-            this.swingTimer -= t;
-            if (this.swingTimer < this.swingCooldown / 10) {
-                this.swingTimer = 0;
+        if (this.attackRemoveTimer > 0) {
+            this.attackRemoveTimer -= t;
+            if (this.attackRemoveTimer < this.attackRemoveCooldown / 10) {
+                this.attackRemoveTimer = 0;
                 scene.remove(this.swingObject);
             }
+        }
+        if (this.swingTimer > 0) {
+            this.swingTimer -= t;
         }
     }
 
