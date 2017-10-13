@@ -7,3 +7,5 @@ Woensdag 11 oktober
 Interface af maar kan nog uitgebreider gemaakt worden. Extra characters gemaakt. Er kan nu met xbox-controllers gespeeld worden. Er is een begin gemaakt aan het character selection scherm. Begonnen aan levels en leveldesign.
 Donderdag 12 oktober
 4 werkende levels met spawnpoints gemaakt. 4 spelers kunnen nu elk hun gewenste karakter kiezen voor het begin van het spel met een controller of toetsenbord.De characters kunnen nu ook springen en double jumpen. Begonnen met het coderen van hit damage.
+Vrijdag 13 oktober
+Levelrandomizer toegevoegd en ervoor gezorgd dat elk level random spawnpoints heeft. Special ability bar toegevoegd. Er is nu knockback als je een andere speler raakt.
