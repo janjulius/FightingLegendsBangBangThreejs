@@ -245,8 +245,9 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        var level = new ZeldaMap();
-         /*
+        var level = new ZeldaMap(); //temp level changer
+        
+        /* var level;               //level randomizer
         let randomLevel;
         randomLevel = Math.floor((Math.random() * 4) + 1);
 
@@ -264,7 +265,7 @@ function runGame() {
                     level = new ZeldaMap();
             break;
         }
-         */
+        */
 
         console.log(playersPlaying);
         for (var k = 0; k < playersPlaying; k++) {
@@ -272,10 +273,11 @@ function runGame() {
             players[k] = new choice(level.spawn[k].y, level.spawn[k].z);
 			players[k].setId(k);
 			players[k].AddGrounded();
-
         }
+        
 		for(var i = 0; i < playersPlaying; i++){
 			players[i].geometry.name = i;
+            players[i].geometry.isPlayer = true;
 		}
         //console.log(box.getvelocity());
 

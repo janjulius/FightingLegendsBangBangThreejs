@@ -142,31 +142,33 @@ class Interface{
             this.pDamage1[0].innerHTML = this.players[1].getDamage() + "%";
             this.pDamage1[0].style.color = getDamagePercentageColor(this.players[1].getDamage());
             this.pStock1[0].innerHTML = "❤" + this.players[1].getStock();
-            var a = this.players[0].getDamage();
+            var a = this.players[1].getDamage();
             if(a >= 10 && a < 100){
-                this.pDamage1[1].style.fontSize = "75px";
+                this.pDamage1[0].style.fontSize = "75px";
             } else if(a >= 100){
-                this.pDamage1[1].style.fontSize = "50px";
+                this.pDamage1[0].style.fontSize = "50px";
             }
         }
         if(pid === 2){
             this.pDamage2[0].innerHTML = this.players[2].getDamage() + "%";
             this.pDamage2[0].style.color = getDamagePercentageColor(this.players[2].getDamage());
             this.pStock2[0].innerHTML = "❤" + this.players[2].getStock();var a = this.players[0].getDamage();
+            var a = this.players[2].getDamage();
             if(a >= 10 && a < 100){
-                this.pDamage3[3].style.fontSize = "75px";
+                this.pDamage2[0].style.fontSize = "75px";
             } else if(a >= 100){
-                this.pDamage3[3].style.fontSize = "50px";
+                this.pDamage2[0].style.fontSize = "50px";
             }
         }
         if(pid === 3){
             this.pDamage3[0].innerHTML = this.players[3].getDamage() + "%";
             this.pDamage3[0].style.color = getDamagePercentageColor(this.players[3].getDamage());
             this.pStock3[0].innerHTML = "❤" + this.players[3].getStock();var a = this.players[0].getDamage();
+            var a = this.players[3].getDamage();
             if(a >= 10 && a < 100){
-                this.pDamage3[3].style.fontSize = "75px";
+                this.pDamage3[0].style.fontSize = "75px";
             } else if(a >= 100){
-                this.pDamage3[3].style.fontSize = "50px";
+                this.pDamage3[0].style.fontSize = "50px";
             }
         }
 
