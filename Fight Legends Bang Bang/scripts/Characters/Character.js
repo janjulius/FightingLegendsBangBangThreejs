@@ -22,8 +22,13 @@ class Character {
         this.specialCounter = 0;
         this.specialCounterThreshHold = 100;
         this.swingObject;
+        this.attackRemoveTimer = 0;
+        this.attackRemoveCooldown = 0.2;
+        this.attackDirection = 1;
+        this.basicAttackDamage = 10;
         this.swingTimer = 0;
-        this.swingCooldown = 0.2;
+        this.swingCooldown = 1;
+
         console.log("created character");
     }
 
@@ -31,37 +36,46 @@ class Character {
         console.log("special atk character");
     }
 
-    normalAtk() {       
-               this.swingTimer = this.swingCooldown; 
-        var swingMaterial = Physijs.createMaterial(
-        new THREE.MeshBasicMaterial({ color: 0xffffff }),
-        1,
-        0
-    );
-        this.swingObject = new Physijs.BoxMesh(
-			new THREE.CubeGeometry( 5, 5, 5 ),
-			swingMaterial
-	);  
-        this.swingObject._dirtyPosition = true;
-        this.swingObject._dirtyRotation = true;
-        this.swingObject.position.set(this.geometry.position.x,
-                                                    this.geometry.position.y,
-                                                    this.geometry.position.z + (this.direction * 5));
-       var _this = this;
-       this.swingObject.addEventListener( 'collision', function(other_object, relative_velocity, relative_rotation, contact_normal){ if(_this.swingObject._physijs.touches.length > 0){
-           if(other_object.isPlayer){
-               var j = parseInt(other_object.name);
-               players[j].setDamage(players[j].getDamage() + 10);
-           }
-        }} );
-    	scene.add( this.swingObject );
-        
+    normalAtk() {
+        if (this.attackRemoveTimer == 0 && this.swingTimer <= 0) {
+            this.attackRemoveTimer = this.attackRemoveCooldown;
+            this.swingTimer = this.swingCooldown;
+            var swingMaterial = Physijs.createMaterial(
+                new THREE.MeshBasicMaterial({
+                    color: 0xffffff
+                }),
+                1,
+                0
+            );
+            this.swingObject = new Physijs.BoxMesh(
+                new THREE.CubeGeometry(5, 5, 5),
+                swingMaterial
+            );
+            this.swingObject._dirtyPosition = true;
+            this.swingObject._dirtyRotation = true;
+            this.swingObject.position.set(this.geometry.position.x,
+                this.geometry.position.y,
+                this.geometry.position.z + (this.attackDirection * 5));
+            var _this = this;
+            this.swingObject.addEventListener('collision', function(other_object, relative_velocity, relative_rotation, contact_normal) {
+                if (_this.swingObject._physijs.touches.length > 0) {
+                    if (other_object.isPlayer) {
+                        var j = parseInt(other_object.name);
+                        if(_this.id !=j){
+                            _this.specialCounter += 10;
+                            players[j].setDamage(players[j].getDamage() + _this.basicAttackDamage);
+                        }
+                    }
+                }
+            });
+            scene.add(this.swingObject);
 
+        }
     }
 
-    doNormalAttack(){
+    doNormalAttack() {
         var a = this.swingObject;
-       
+
     }
 
     jump() {
@@ -113,11 +127,11 @@ class Character {
         gameInterface.UpdateGameInterface(this.id);
     }
 
-    getSpecialAttackCounter(){
+    getSpecialAttackCounter() {
         return this.specialCounter;
     }
 
-    setSpecialAttackCounter(a){
+    setSpecialAttackCounter(a) {
         this.specialCounter = a;
     }
 
@@ -125,25 +139,32 @@ class Character {
         return this.cid;
     }
 
-    CheckCollision(){
+    CheckCollision() {
         var touchedGround = false;
         for (var i = 0; i < this.geometry._physijs.touches.length; i++) {
             var id = this.geometry._physijs.touches[i];
             var obj = scene._objects[id];
-           // if(obj.isPlayer){
-           // }
 
-            if(obj.name == "ground"){
-                touchedGround = true;
+            if (obj) {
+                if (obj.isPlayer) {}
+
+                if (obj.name == "ground") {
+                    touchedGround = true;
+                }
             }
 
         }
-        if(!touchedGround)
+        if (!touchedGround)
             this.grounded = false;
     }
 
     Update(t) {
-        console.log(this.swingTimer);
+        
+        if(this.direction > 0)
+            this.attackDirection = 1;
+        else if(this.direction < 0)
+            this.attackDirection = -1;
+
         this.CheckCollision();
         /*
         if (this.geometry._physijs.touches.length == 0) {
@@ -172,15 +193,20 @@ class Character {
 
         this.geometry.setLinearVelocity(this.velocity);
         this.geometry.setAngularFactor(new THREE.Vector3(0, 0, 0));
+        this.geometry.setLinearFactor(new THREE.Vector3(0, 1, 1));
         /*wtf rare bug
         this.geometry.rotation.set(0, 0, 0);
         this.geometry.__dirtyRotation = true;
         */
-        if(this.swingTimer > 0){
-            this.swingTimer -= t;
-            if(this.swingTimer < this.swingCooldown /10){
+        if (this.attackRemoveTimer > 0) {
+            this.attackRemoveTimer -= t;
+            if (this.attackRemoveTimer < this.attackRemoveCooldown / 10) {
+                this.attackRemoveTimer = 0;
                 scene.remove(this.swingObject);
             }
+        }
+        if (this.swingTimer > 0) {
+            this.swingTimer -= t;
         }
     }
 
