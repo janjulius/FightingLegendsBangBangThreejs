@@ -26,6 +26,7 @@ class Character {
         this.attackRemoveCooldown = 0.2;
         this.attackDirection = 1;
         this.basicAttackDamage = 10;
+        this.specialIncrease = 10;
         this.swingTimer = 0;
         this.swingCooldown = 1;
 
@@ -62,7 +63,7 @@ class Character {
                     if (other_object.isPlayer) {
                         var j = parseInt(other_object.name);
                         if(_this.id !=j){
-                            _this.specialCounter += 10;
+                            _this.setSpecialAttackCounter(_this.specialCounter + _this.specialIncrease);
                             players[j].setDamage(players[j].getDamage() + _this.basicAttackDamage);
                         }
                     }
@@ -133,6 +134,7 @@ class Character {
 
     setSpecialAttackCounter(a) {
         this.specialCounter = a;
+        gameInterface.UpdateGameInterface(this.id);
     }
 
     getCid() {
