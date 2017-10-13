@@ -19,6 +19,9 @@ class Character {
         this.grounded = false;
         this.totalJump = 2;
         this.jumpsLeft = this.totalJump;
+        this.specialCounter = 0;
+        this.specialCounterThreshHold = 100;
+        this.swingObject;
         console.log("created character");
     }
 
@@ -26,7 +29,29 @@ class Character {
         console.log("special atk character");
     }
 
-    normalAtk() {
+    normalAtk() {        
+        var swingMaterial = Physijs.createMaterial(
+        new THREE.MeshBasicMaterial({ color: 0xffffff }),
+        1,
+        0
+    );
+        this.swingObject = new Physijs.BoxMesh(
+			new THREE.CubeGeometry( 5, 5, 5 ),
+			swingMaterial
+	);  
+        this.swingObject._dirtyPosition = true;
+        this.swingObject._dirtyRotation = true;
+        this.swingObject.position.set(this.geometry.position.x,
+                                                    this.geometry.position.y,
+                                                    this.geometry.position.z + (this.direction * 5));
+       var _this = this;
+       this.swingObject.addEventListener( 'collision', function(other_object, relative_velocity, relative_rotation, contact_normal){ if(_this.swingObject._physijs.touches.length > 0){
+            console.log("hi");
+        }} );
+    	scene.add( this.swingObject );
+        
+      
+        scene.remove(this.swingObject);
         var ray = new THREE.Raycaster(this.geometry.position, new THREE.Vector3(0, 0, this.direction));
         var intersects = ray.intersectObjects(scene.children);
         console.log(intersects.length);
@@ -42,6 +67,11 @@ class Character {
             console.log(parseInt(intersects[i].object.name));
         }
 
+    }
+
+    doNormalAttack(){
+        var a = this.swingObject;
+       
     }
 
     jump() {
@@ -91,6 +121,14 @@ class Character {
         }
         this.damage = d;
         gameInterface.UpdateGameInterface(this.id);
+    }
+
+    getSpecialAttackCounter(){
+        return this.specialCounter;
+    }
+
+    setSpecialAttackCounter(a){
+        this.specialCounter = a;
     }
 
     getCid() {

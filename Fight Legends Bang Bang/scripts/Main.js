@@ -252,8 +252,8 @@ function runGame() {
             players[k] = new choice(level.spawn[k].y, level.spawn[k].z);
 			players[k].setId(k);
 			players[k].AddGrounded();
-
         }
+        
 		for(var i = 0; i < playersPlaying; i++){
 			players[i].geometry.name = i;
 		}
