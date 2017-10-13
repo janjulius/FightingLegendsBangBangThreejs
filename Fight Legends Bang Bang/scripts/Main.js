@@ -256,6 +256,7 @@ function runGame() {
         }
 		for(var i = 0; i < playersPlaying; i++){
 			players[i].geometry.name = i;
+            players[i].geometry.isPlayer = true;
 		}
         //console.log(box.getvelocity());
 

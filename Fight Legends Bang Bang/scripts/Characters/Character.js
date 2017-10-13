@@ -97,13 +97,31 @@ class Character {
         return this.cid;
     }
 
+    CheckCollision(){
+        var touchedGround = false;
+        for (var i = 0; i < this.geometry._physijs.touches.length; i++) {
+            var id = this.geometry._physijs.touches[i];
+            var obj = scene._objects[id];
+            if(obj.isPlayer){
+            }
+
+            if(obj.name == "ground"){
+                touchedGround = true;
+            }
+
+        }
+        if(!touchedGround)
+            this.grounded = false;
+    }
+
     Update(t) {
 
-
+        this.CheckCollision();
+        /*
         if (this.geometry._physijs.touches.length == 0) {
             this.grounded = false;
         }
-
+        */
         // the scene's physics have finished updating
         var vel = this.geometry.getLinearVelocity();
 
