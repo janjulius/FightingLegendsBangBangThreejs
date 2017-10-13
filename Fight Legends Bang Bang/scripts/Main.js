@@ -234,6 +234,7 @@ function runCharSelect() {
 }
 
 function runGame() {
+        camera.position.set(150, 0, 0);
     if (!charSelect) {
 
         for (var i = scene.children.length - 1; i >= 0; i--) {
@@ -244,7 +245,9 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        var level = new Thundergart(); /*
+        var level = new ZeldaMap(); //temp level changer
+        
+        /* var level;               //level randomizer
         let randomLevel;
         randomLevel = Math.floor((Math.random() * 4) + 1);
 
@@ -261,7 +264,8 @@ function runGame() {
             case 4 : 
                     level = new ZeldaMap();
             break;
-        } */
+        }
+        */
 
         console.log(playersPlaying);
         for (var k = 0; k < playersPlaying; k++) {

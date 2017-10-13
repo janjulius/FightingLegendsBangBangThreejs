@@ -7,6 +7,8 @@ class Level{
         this.iceblue = 0xdcf3ff;
         this.mudbrown = 0x794c13;
         this.grassgreen = 0x4DBD33;
+        this.mossgreen = 0xADDFAD;
+        this.tilegray = 0x747D7D;
     
     }
 }
