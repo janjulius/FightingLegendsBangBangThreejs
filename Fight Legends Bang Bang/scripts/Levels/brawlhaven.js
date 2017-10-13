@@ -13,7 +13,7 @@ class Brawlhaven extends Level{
         lowerbase.receiveShadow = true;
         lowerbase.position.set(0, -18, 0);
         scene.add(lowerbase);
-        lowerbase.name = ground
+        lowerbase.name ="ground";
 
         var lowergrass = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 60),
@@ -23,7 +23,7 @@ class Brawlhaven extends Level{
         lowergrass.receiveShadow = true;
         lowergrass.position.set(0, -13 , 0);
         scene.add(lowergrass);
-        lowergrass.name = ground
+        lowergrass.name = "ground";
 
         var upperbaseleft = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 4, 20),
@@ -33,7 +33,7 @@ class Brawlhaven extends Level{
         upperbaseleft.receiveShadow = true;
         upperbaseleft.position.set(0, 0 , 15);
         scene.add(upperbaseleft);
-        upperbaseleft.name = ground
+        upperbaseleft.name = "ground";
 
         var uppergrassleft = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 20),
@@ -43,7 +43,7 @@ class Brawlhaven extends Level{
         uppergrassleft.receiveShadow = true;
         uppergrassleft.position.set(0, 2 , 15);
         scene.add(uppergrassleft);
-        uppergrassleft.name = ground
+        uppergrassleft.name = "ground";
 
         var upperbaseright = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 4, 20),
@@ -53,7 +53,7 @@ class Brawlhaven extends Level{
         upperbaseright.receiveShadow = true;
         upperbaseright.position.set(0, 0 , -15);
         scene.add(upperbaseright);
-        upperbaseright.name = ground
+        upperbaseright.name = "ground";
 
         var uppergrassright = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 20),
@@ -63,7 +63,7 @@ class Brawlhaven extends Level{
         uppergrassright.receiveShadow = true;
         uppergrassright.position.set(0, 2 , -15);
         scene.add(uppergrassright);
-        uppergrassright.name = ground
+        uppergrassright.name ="ground";
 
         var grassplatform = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 9),
@@ -73,7 +73,7 @@ class Brawlhaven extends Level{
         grassplatform.receiveShadow = true;
         grassplatform.position.set(0, 2 , 0);
         scene.add(grassplatform);
-        grassplatform.name = ground
+        grassplatform.name = "ground";
 
         var leftislandbase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 20, 15),
@@ -83,7 +83,7 @@ class Brawlhaven extends Level{
         leftislandbase.receiveShadow = true;
         leftislandbase.position.set(0, 3 , 50);
         scene.add(leftislandbase);
-        leftislandbase.name = ground
+        leftislandbase.name = "ground";
 
         var leftislandgrass = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 15),
@@ -93,7 +93,7 @@ class Brawlhaven extends Level{
         leftislandgrass.receiveShadow = true;
         leftislandgrass.position.set(0, 13 , 50);
         scene.add(leftislandgrass);
-        leftislandgrass.name = ground
+        leftislandgrass.name = "ground";
 
         var leftislandtriangle = new Physijs.SphereMesh(
             new THREE.SphereGeometry(10, 0, 1),
@@ -103,7 +103,7 @@ class Brawlhaven extends Level{
         leftislandtriangle.receiveShadow = true;
         leftislandtriangle.position.set(0, -6.5, 50);
         scene.add(leftislandtriangle);
-        leftislandtriangle.name = ground
+        leftislandtriangle.name ="ground";
 
         var leftislandsquare = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15.5, 10, 7.5),
@@ -113,7 +113,7 @@ class Brawlhaven extends Level{
         leftislandsquare.receiveShadow = true;
         leftislandsquare.position.set(0, -11 , 53.5);
         scene.add(leftislandsquare);
-        leftislandsquare.name = ground
+        leftislandsquare.name = "ground";
 
         var rightislandbase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 15, 15),
@@ -123,7 +123,7 @@ class Brawlhaven extends Level{
         rightislandbase.receiveShadow = true;
         rightislandbase.position.set(0, 16 ,-50);
         scene.add(rightislandbase);
-        rightislandbase.name = ground
+        rightislandbase.name ="ground";
 
         var rightislandgrass = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 15),
@@ -133,7 +133,7 @@ class Brawlhaven extends Level{
         rightislandgrass.receiveShadow = true;
         rightislandgrass.position.set(0, 23 , -50);
         scene.add(rightislandgrass);
-        rightislandgrass.name = ground
+        rightislandgrass.name = "ground";
 
 
     }

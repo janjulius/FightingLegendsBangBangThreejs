@@ -13,7 +13,7 @@ class Thundergart extends Level{
         leftbase.receiveShadow = true;
         leftbase.position.set(0, -5 , 20);
         scene.add(leftbase);
-        leftbase.name = ground;
+        leftbase.name = "ground";
 
         var rightbase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 30),
@@ -23,7 +23,7 @@ class Thundergart extends Level{
         rightbase.receiveShadow = true;
         rightbase.position.set(0, -5 , -30)  ;
         scene.add(rightbase);
-        rightbase.name = ground;
+        rightbase.name = "ground";
 
 
         var platform = new Physijs.BoxMesh(
@@ -34,7 +34,7 @@ class Thundergart extends Level{
         platform.receiveShadow = true;
         platform.position.set(0, -0.5 , -10);
         scene.add(platform);
-        platform.name = ground
+        platform.name = "ground";
         
     }
 }

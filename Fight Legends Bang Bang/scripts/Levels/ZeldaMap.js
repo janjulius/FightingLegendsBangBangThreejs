@@ -13,7 +13,7 @@ class ZeldaMap extends Level{
         leftsmallisland.receiveShadow = true;
         leftsmallisland.position.set(0, -5 , 20);
         scene.add(leftsmallisland);
-        leftsmallisland.name = ground
+        leftsmallisland.name = "ground";
 
         var rightbase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 30),
@@ -23,7 +23,7 @@ class ZeldaMap extends Level{
         rightbase.receiveShadow = true;
         rightbase.position.set(0, -5 , -30)  ;
         scene.add(rightbase);
-        rightbase.name = ground
+        rightbase.name = "ground";
 
         var platform = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 30),
@@ -33,7 +33,7 @@ class ZeldaMap extends Level{
         platform.receiveShadow = true;
         platform.position.set(0, -0.5 , -10);
         scene.add(platform);
-        platform.name = ground
+        platform.name ="ground";
         
     }
 }
