@@ -91,6 +91,9 @@ THREE.GamepadControls = function() {
                         if (g.buttons[0].value == 1 && this.pressedJump[i] != g.buttons[0].value) {
                             p.jump();
                         }
+                        if(g.buttons[2].value == 1)
+                            p.normalAtk();
+
                         this.pressedJump[i] = g.buttons[0].value;
                     }
                 }
