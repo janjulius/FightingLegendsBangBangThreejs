@@ -79,7 +79,7 @@ class Interface{
         this.pStock0[0].innerHTML = "❤" + p0.getStock();
         this.pStock0[0].style.textAlign = "center";
         
-       
+       this.spaBar0.style.visibility = "visible";
         }
         if(p1 !== 0){ //interface specific for player 1
         this.pName1[0].innerHTML = p1.name;
@@ -96,6 +96,7 @@ class Interface{
         this.pStock1[0].style.textShadow = "2px 2px 4px black";
         this.pStock1[0].innerHTML = "❤" + p1.getStock();
         this.pStock1[0].style.textAlign = "center";
+       this.spaBar1.style.visibility = "visible";
         }
         if(p2 !== 0){ //interface specific for player 2
         this.pName2[0].innerHTML = p2.name;
@@ -109,6 +110,7 @@ class Interface{
         this.pStock2[0].style.textShadow = "2px 2px 4px black";
         this.pStock2[0].innerHTML = "❤" + p2.getStock();
         this.pStock2[0].style.textAlign = "center";
+       this.spaBar2.style.visibility = "visible";
         }
         if(p3 !== 0){ //interface speicific for player 3
         this.pName3[0].innerHTML = p3.name;
@@ -122,6 +124,7 @@ class Interface{
         this.pStock3[0].style.textShadow = "2px 2px 4px black";
         this.pStock3[0].innerHTML = "❤" + p3.getStock();
         this.pStock3[0].style.textAlign = "center";
+       this.spaBar3.style.visibility = "visible";
         }
         
         if(p0 !== 0){
