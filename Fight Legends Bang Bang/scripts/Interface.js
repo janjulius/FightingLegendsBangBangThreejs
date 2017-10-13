@@ -36,6 +36,11 @@ class Interface{
         this.pStock2 = this.playerInterface[2].getElementsByClassName("pStock");
         this.pStock3 = this.playerInterface[3].getElementsByClassName("pStock");
 
+        this.spaBar0 = document.getElementById("pHealth0");
+        this.spaBar1 = document.getElementById("pHealth1");
+        this.spaBar2 = document.getElementById("pHealth2");
+        this.spaBar3 = document.getElementById("pHealth3");
+
         var base = 25;
         //code that counts for all players
         for(var i = 0; i < this.playerInterface.length; i++){
@@ -131,6 +136,7 @@ class Interface{
             this.pDamage0[0].innerHTML = this.players[0].getDamage() + "%";
             this.pDamage0[0].style.color = getDamagePercentageColor(this.players[0].getDamage());
             this.pStock0[0].innerHTML = "❤" + this.players[0].getStock();
+            this.spaBar0.value = this.players[0].getSpecialAttackCounter();
             var a = this.players[0].getDamage();
             if(a >= 10 && a < 100){
                 this.pDamage0[0].style.fontSize = "75px";
@@ -142,6 +148,7 @@ class Interface{
             this.pDamage1[0].innerHTML = this.players[1].getDamage() + "%";
             this.pDamage1[0].style.color = getDamagePercentageColor(this.players[1].getDamage());
             this.pStock1[0].innerHTML = "❤" + this.players[1].getStock();
+            this.spaBar0.value = this.players[1].getSpecialAttackCounter();
             var a = this.players[1].getDamage();
             if(a >= 10 && a < 100){
                 this.pDamage1[0].style.fontSize = "75px";
@@ -153,6 +160,7 @@ class Interface{
             this.pDamage2[0].innerHTML = this.players[2].getDamage() + "%";
             this.pDamage2[0].style.color = getDamagePercentageColor(this.players[2].getDamage());
             this.pStock2[0].innerHTML = "❤" + this.players[2].getStock();var a = this.players[0].getDamage();
+            this.spaBar0.value = this.players[2].getSpecialAttackCounter();
             var a = this.players[2].getDamage();
             if(a >= 10 && a < 100){
                 this.pDamage2[0].style.fontSize = "75px";
@@ -164,6 +172,7 @@ class Interface{
             this.pDamage3[0].innerHTML = this.players[3].getDamage() + "%";
             this.pDamage3[0].style.color = getDamagePercentageColor(this.players[3].getDamage());
             this.pStock3[0].innerHTML = "❤" + this.players[3].getStock();var a = this.players[0].getDamage();
+            this.spaBar0.value = this.players[3].getSpecialAttackCounter();
             var a = this.players[3].getDamage();
             if(a >= 10 && a < 100){
                 this.pDamage3[0].style.fontSize = "75px";
