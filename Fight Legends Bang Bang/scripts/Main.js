@@ -244,7 +244,24 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        var level = new Brawlhaven();
+        var level = new StandardMap(); /*
+        let randomLevel;
+        randomLevel = Math.floor((Math.random() * 4) + 1);
+
+        switch(randomLevel){
+            case 1 :
+                    level = new Brawlhaven();
+            break;
+            case 2 :
+                    level = new Thundergart();
+            break;
+            case 3 : 
+                    level = new StandardMap();
+            break;
+            case 4 : 
+                    level = new ZeldaMap();
+            break;
+        } */
 
         console.log(playersPlaying);
         for (var k = 0; k < playersPlaying; k++) {
@@ -256,6 +273,7 @@ function runGame() {
         
 		for(var i = 0; i < playersPlaying; i++){
 			players[i].geometry.name = i;
+            players[i].geometry.isPlayer = true;
 		}
         //console.log(box.getvelocity());
 
