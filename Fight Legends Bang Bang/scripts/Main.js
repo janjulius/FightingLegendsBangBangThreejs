@@ -245,7 +245,7 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        var level = new StandardMap(); //temp level changer
+        var level = new ZeldaMap(); //temp level changer
         
         /* var level;               //level randomizer
         let randomLevel;
