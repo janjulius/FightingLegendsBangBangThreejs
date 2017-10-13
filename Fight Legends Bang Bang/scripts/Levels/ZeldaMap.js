@@ -1,34 +1,33 @@
-class Thundergart extends Level{
+class ZeldaMap extends Level{
     constructor(){
         super();
         
         
         this.spawn = [{y: 5, z : 30}, {y: 5, z : 15}, {y: 5, z : -25}, {y: 5, z : -40}]
 
-        var leftbase = new Physijs.BoxMesh(
+        var leftsmallisland = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 30),
-            new THREE.MeshBasicMaterial({ color: this.iceblue }),
+            new THREE.MeshBasicMaterial({ color: this.mudbrown }),
             0
         );
-        leftbase.receiveShadow = true;
-        leftbase.position.set(0, -5 , 20);
-        scene.add(leftbase);
-        leftbase.name = ground;
+        leftsmallisland.receiveShadow = true;
+        leftsmallisland.position.set(0, -5 , 20);
+        scene.add(leftsmallisland);
+        leftsmallisland.name = ground
 
         var rightbase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 30),
-            new THREE.MeshBasicMaterial({ color: this.iceblue }),
+            new THREE.MeshBasicMaterial({ color: this.mudbrown }),
             0
         );
         rightbase.receiveShadow = true;
         rightbase.position.set(0, -5 , -30)  ;
         scene.add(rightbase);
-        rightbase.name = ground;
-
+        rightbase.name = ground
 
         var platform = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 30),
-            new THREE.MeshBasicMaterial({ color: this.iceblue }),
+            new THREE.MeshBasicMaterial({ color: this.mudbrown }),
             0
         );
         platform.receiveShadow = true;
