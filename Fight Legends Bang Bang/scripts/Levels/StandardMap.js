@@ -12,6 +12,7 @@ class StandardMap extends Level{
             bottom.receiveShadow = true;
             bottom.position.set(0, -13, 0);
             scene.add(bottom);
+            bottom.name = "ground";
     
             var leftplatform = new Physijs.BoxMesh(
                 new THREE.CubeGeometry(15, 2, 10),
@@ -21,6 +22,7 @@ class StandardMap extends Level{
             leftplatform.receiveShadow = true;
             leftplatform.position.set(0, 0 , -30);
             scene.add(leftplatform);
+            leftplatform.name = "ground";
     
             var rightplatform = new Physijs.BoxMesh(
                 new THREE.CubeGeometry(15, 2, 10),
@@ -30,6 +32,7 @@ class StandardMap extends Level{
             rightplatform.receiveShadow = true;
             rightplatform.position.set(0, 0 , 30);
             scene.add(rightplatform);
+            rightplatform.name = "ground";
     
             var upper = new Physijs.BoxMesh(
                 new THREE.CubeGeometry(15, 2, 30),
@@ -39,5 +42,6 @@ class StandardMap extends Level{
             upper.receiveShadow = true;
             upper.position.set(0, 8 , 0);
             scene.add(upper);
+            upper.name = "ground";
         }
     }
