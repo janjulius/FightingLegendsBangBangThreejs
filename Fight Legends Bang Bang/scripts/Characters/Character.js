@@ -30,6 +30,7 @@ class Character {
         this.swingTimer = 0;
         this.swingCooldown = 1;
         this.knockBack = new THREE.Vector3(0,0,0);
+        this.damageMulti = 1;
         console.log("created character");
     }
 
@@ -125,7 +126,7 @@ class Character {
             return;
         }
         this.damage = d;
-        this.knockBack.z = d * dir;
+        this.knockBack.z = (d*this.damageMulti) * dir;
         gameInterface.UpdateGameInterface(this.id);
     }
 
