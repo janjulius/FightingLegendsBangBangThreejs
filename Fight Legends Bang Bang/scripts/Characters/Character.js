@@ -10,7 +10,7 @@ class Character {
         this.cid = -1;
         this.igid = -1;
         this.stock = GAME_SETTINGS_STOCK_START;
-        this.speed = 2000;
+        this.speed = 40;
         this.velocity = new THREE.Vector3(0, 0, 0);
         this.portrait;
         this.velt = 0;
@@ -22,14 +22,20 @@ class Character {
         this.specialCounter = 0;
         this.specialCounterThreshHold = 100;
         this.swingObject;
-        this.attackRemoveTimer = 0;
-        this.attackRemoveCooldown = 0.2;
+        
         this.attackDirection = 1;
         this.basicAttackDamage = 10;
         this.specialIncrease = 10;
+        
         this.swingTimer = 0;
+        this.attackRemoveTimer = 0;
+        
         this.swingCooldown = 1;
-        this.knockBack = new THREE.Vector3(0,0,0);
+        this.attackRemoveCooldown = 0.1;
+        this.attackDelay = 0.2;
+        
+        this.chargeAttack = false;
+        this.knockBack = new THREE.Vector3(0, 0, 0);
         this.damageMulti = 1;
         console.log("created character");
     }
@@ -39,40 +45,38 @@ class Character {
     }
 
     normalAtk() {
-        if (this.attackRemoveTimer == 0 && this.swingTimer <= 0) {
-            this.attackRemoveTimer = this.attackRemoveCooldown;
-            this.swingTimer = this.swingCooldown;
-            var swingMaterial = Physijs.createMaterial(
-                new THREE.MeshBasicMaterial({
-                    color: 0xffffff
-                }),
-                1,
-                0
-            );
-            this.swingObject = new Physijs.BoxMesh(
-                new THREE.CubeGeometry(5, 5, 5),
-                swingMaterial
-            );
-            this.swingObject._dirtyPosition = true;
-            this.swingObject._dirtyRotation = true;
-            this.swingObject.position.set(this.geometry.position.x,
-                this.geometry.position.y,
-                this.geometry.position.z + (this.attackDirection * 5));
-            var _this = this;
-            this.swingObject.addEventListener('collision', function(other_object, relative_velocity, relative_rotation, contact_normal) {
-                if (_this.swingObject._physijs.touches.length > 0) {
-                    if (other_object.isPlayer) {
-                        var j = parseInt(other_object.name);
-                        if(_this.id !=j){
-                            _this.setSpecialAttackCounter(_this.specialCounter + _this.specialIncrease);
-                            players[j].setDamage(players[j].getDamage() + _this.basicAttackDamage,_this.attackDirection);
-                        }
+        this.chargeAttack = false;
+        this.attackRemoveTimer = this.attackRemoveCooldown;
+        this.swingTimer = this.swingCooldown;
+        var swingMaterial = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff
+            }),
+            1,
+            0
+        );
+        this.swingObject = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 5),
+            swingMaterial
+        );
+        this.swingObject._dirtyPosition = true;
+        this.swingObject._dirtyRotation = true;
+        this.swingObject.position.set(this.geometry.position.x,
+            this.geometry.position.y,
+            this.geometry.position.z + (this.attackDirection * 5));
+        var _this = this;
+        this.swingObject.addEventListener('collision', function(other_object, relative_velocity, relative_rotation, contact_normal) {
+            if (_this.swingObject._physijs.touches.length > 0) {
+                if (other_object.isPlayer) {
+                    var j = parseInt(other_object.name);
+                    if (_this.id != j) {
+                        _this.setSpecialAttackCounter(_this.specialCounter + _this.specialIncrease);
+                        players[j].setDamage(players[j].getDamage() + _this.basicAttackDamage, _this.attackDirection);
                     }
                 }
-            });
-            scene.add(this.swingObject);
-
-        }
+            }
+        });
+        scene.add(this.swingObject);
     }
 
     doNormalAttack() {
@@ -121,12 +125,12 @@ class Character {
         return this.damage;
     }
 
-    setDamage(d,dir) {
+    setDamage(d, dir) {
         if (this.blocking) {
             return;
         }
         this.damage = d;
-        this.knockBack.z = (d*this.damageMulti) * dir;
+        this.knockBack.z = (d * this.damageMulti) * dir;
         gameInterface.UpdateGameInterface(this.id);
     }
 
@@ -163,28 +167,23 @@ class Character {
     }
 
     Update(t) {
-        
-        if(this.knockBack.z > 0)
-            this.knockBack.z -= 50*t;
-        if(this.knockBack.z < 0)
-            this.knockBack.z += 50*t;
 
-        if(this.knockBack.z > -10 && this.knockBack.z < 10)
+        if (this.knockBack.z > 0)
+            this.knockBack.z -= 50 * t;
+        if (this.knockBack.z < 0)
+            this.knockBack.z += 50 * t;
+
+        if (this.knockBack.z > -10 && this.knockBack.z < 10)
             this.knockBack.z = 0;
 
 
-        if(this.direction > 0)
+        if (this.direction > 0)
             this.attackDirection = 1;
-        else if(this.direction < 0)
+        else if (this.direction < 0)
             this.attackDirection = -1;
 
         this.CheckCollision();
-        /*
-        if (this.geometry._physijs.touches.length == 0) {
-            this.grounded = false;
-        }
-        */
-        // the scene's physics have finished updating
+
         var vel = this.geometry.getLinearVelocity();
 
         if (this.velt > -50)
@@ -202,7 +201,7 @@ class Character {
             this.jumped = false;
         }
 
-        this.velocity = new THREE.Vector3(0, this.velt, ((this.direction * this.speed) * t) + this.knockBack.z);
+        this.velocity = new THREE.Vector3(0, this.velt, ((this.direction * this.speed)) + this.knockBack.z);
 
         this.geometry.setLinearVelocity(this.velocity);
         this.geometry.setAngularFactor(new THREE.Vector3(0, 0, 0));
@@ -218,9 +217,12 @@ class Character {
                 scene.remove(this.swingObject);
             }
         }
-        if (this.swingTimer > 0) {
+        if (this.swingTimer > 0)
             this.swingTimer -= t;
-        }
+
+        if (this.chargeAttack)
+            if (this.swingTimer > 0 && this.swingTimer < this.swingCooldown - this.attackDelay)
+                this.normalAtk();
     }
 
     AddGrounded() {

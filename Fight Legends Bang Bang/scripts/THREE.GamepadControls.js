@@ -13,6 +13,7 @@ THREE.GamepadControls = function() {
     this.threshold = .05;
     this.deadZone = 0.3;
     this.pressedJump = [0,0,0,0];
+    this.oldGamepad;
 
     this.init = function() {
 
@@ -68,33 +69,47 @@ THREE.GamepadControls = function() {
 
     }
 
+    this.SetOldGamePadState = function(a){
+        this.oldGamepad = new Array(4);
+        for (var i = 0; i < a.length; i++) {
+            this.oldGamepad[i] = new Array(17);
+            for (var j = 0; j < a[i].buttons.length; j++) {
+                this.oldGamepad[i][j] = a[i].buttons[j].value;
+            }
+        }
+    }
+
     this.pollGamepads = function() {
 
         var rawGamepads =
             (navigator.getGamepads && navigator.getGamepads()) ||
             (navigator.webkitGetGamepads && navigator.webkitGetGamepads());
 
-
         if (rawGamepads) {
+
+            if(!this.oldGamepad){
+                this.SetOldGamePadState(rawGamepads);
+            }
 
             if (!charSelect) {
                 for (var i = 0; i < players.length; i++) {
                     var p = players[i];
                     if (rawGamepads[i]) {
                         var g = rawGamepads[i];
+                        var oldState = this.oldGamepad[i];
                         var dir = g.axes[0];
                         if (dir < this.deadZone && dir > -this.deadZone)
                             dir = 0;
 
                         p.direction = -dir;
 
-                        if (g.buttons[0].value == 1 && this.pressedJump[i] != g.buttons[0].value) {
+                        if (g.buttons[0].value == 1 && oldState[0] != g.buttons[0].value) {
                             p.jump();
                         }
-                        if(g.buttons[2].value == 1)
-                            p.normalAtk();
-
-                        this.pressedJump[i] = g.buttons[0].value;
+                        if(g.buttons[2].value == 1 && oldState[2] != g.buttons[2].value && p.swingTimer <= 0){
+                            p.swingTimer = p.swingCooldown;
+                            p.chargeAttack = true;
+                        }
                     }
                 }
 
@@ -133,6 +148,7 @@ THREE.GamepadControls = function() {
                     }
                 }
             }
+            this.SetOldGamePadState(rawGamepads);
         }
     }
 

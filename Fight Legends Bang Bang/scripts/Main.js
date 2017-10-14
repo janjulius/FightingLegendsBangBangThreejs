@@ -159,7 +159,7 @@ function runCharSelect() {
         }
         console.log();
         camera.lookAt(charScreens[0].position);
-        camera.position.set(120, 0, 0);
+        camera.position.set(40, 0, 0);
         camera.lookAt(new THREE.Vector3(0, 0, 0));
 
         for (var i = 0; i < playersPlaying; i++) {
@@ -234,8 +234,10 @@ function runCharSelect() {
 }
 
 function runGame() {
-        camera.position.set(150, 0, 0);
     if (!charSelect) {
+
+        camera.position.set(150, 50, 0);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
 
         for (var i = scene.children.length - 1; i >= 0; i--) {
             scene.remove(scene.children[i]);
@@ -273,12 +275,9 @@ function runGame() {
             players[k] = new choice(level.spawn[k].y, level.spawn[k].z);
 			players[k].setId(k);
 			players[k].AddGrounded();
+            players[k].geometry.name = k;
+            players[k].geometry.isPlayer = true;
         }
-        
-		for(var i = 0; i < playersPlaying; i++){
-			players[i].geometry.name = i;
-            players[i].geometry.isPlayer = true;
-		}
         //console.log(box.getvelocity());
 
 
