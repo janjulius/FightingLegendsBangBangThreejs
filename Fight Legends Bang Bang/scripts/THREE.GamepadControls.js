@@ -2,7 +2,7 @@
  * @author spite / https://github.com/spite
  */
 /*global THREE, console */
-THREE.GamepadControls = function() {
+THREE.GamepadControls = function () {
 
     this.rotMatrix = new THREE.Matrix4();
     this.dir = new THREE.Vector3(0, 0, 1);
@@ -10,12 +10,11 @@ THREE.GamepadControls = function() {
     this.lon = -90;
     this.lat = 0;
     this.target = new THREE.Vector3();
-    this.threshold = .05;
     this.deadZone = 0.3;
-    this.pressedJump = [0,0,0,0];
+    this.pressedJump = [0, 0, 0, 0];
     this.oldGamepad;
 
-    this.init = function() {
+    this.init = function () {
 
         var gamepadSupportAvailable = navigator.getGamepads ||
             !!navigator.webkitGetGamepads ||
@@ -33,7 +32,7 @@ THREE.GamepadControls = function() {
         }
     }
 
-    this.startPolling = function() {
+    this.startPolling = function () {
 
         if (!this.ticking) {
             this.ticking = true;
@@ -41,35 +40,35 @@ THREE.GamepadControls = function() {
         }
     }
 
-    this.stopPolling = function() {
+    this.stopPolling = function () {
         this.ticking = false;
     }
 
-    this.tick = function() {
+    this.tick = function () {
         this.pollStatus();
         this.scheduleNextTick();
     }
 
-    this.scheduleNextTick = function() {
+    this.scheduleNextTick = function () {
 
         if (this.ticking) {
             requestAnimationFrame(this.tick.bind(this));
         }
     }
 
-    this.pollStatus = function() {
+    this.pollStatus = function () {
 
         this.pollGamepads();
 
     }
 
-    this.filter = function(v) {
+    this.filter = function (v) {
 
-        return (Math.abs(v) > this.threshold) ? v : 0;
+        return (Math.abs(v) > this.deadZone) ? v : 0;
 
     }
 
-    this.SetOldGamePadState = function(a){
+    this.SetOldGamePadState = function (a) {
         this.oldGamepad = new Array(4);
         for (var i = 0; i < a.length; i++) {
             this.oldGamepad[i] = new Array(17);
@@ -79,7 +78,7 @@ THREE.GamepadControls = function() {
         }
     }
 
-    this.pollGamepads = function() {
+    this.pollGamepads = function () {
 
         var rawGamepads =
             (navigator.getGamepads && navigator.getGamepads()) ||
@@ -87,7 +86,7 @@ THREE.GamepadControls = function() {
 
         if (rawGamepads) {
 
-            if(!this.oldGamepad){
+            if (!this.oldGamepad) {
                 this.SetOldGamePadState(rawGamepads);
             }
 
@@ -97,16 +96,12 @@ THREE.GamepadControls = function() {
                     if (rawGamepads[i]) {
                         var g = rawGamepads[i];
                         var oldState = this.oldGamepad[i];
-                        var dir = g.axes[0];
-                        if (dir < this.deadZone && dir > -this.deadZone)
-                            dir = 0;
-
-                        p.direction = -dir;
+                        p.direction = this.filter(-g.axes[0]);
 
                         if (g.buttons[0].value == 1 && oldState[0] != g.buttons[0].value) {
                             p.jump();
                         }
-                        if(g.buttons[2].value == 1 && oldState[2] != g.buttons[2].value && p.swingTimer <= 0){
+                        if (g.buttons[2].value == 1 && oldState[2] != g.buttons[2].value && p.swingTimer <= 0) {
                             p.swingTimer = p.swingCooldown;
                             p.chargeAttack = true;
                         }
@@ -118,16 +113,9 @@ THREE.GamepadControls = function() {
                     var p = players[i];
                     var pad = rawGamepads[i];
                     if (pad) {
-                        var dirH = pad.axes[0];
-                        if (dirH < this.deadZone && dirH > -this.deadZone)
-                            dirH = 0;
-                        var dirV = pad.axes[1];
-                        if (dirV < this.deadZone && dirV > -this.deadZone)
-                            dirV = 0;
-                        var spd = 0.5;
-
-                        playerFiches[i].position.z -= dirH * spd;
-                        playerFiches[i].position.y -= dirV * spd;
+                        var spd = 0.2;
+                        playerFiches[i].position.z -= this.filter(pad.axes[0]) * spd;
+                        playerFiches[i].position.y -= this.filter(pad.axes[1]) * spd;
 
                         if (pad.buttons[0].value == 1) {
                             ray0 = new THREE.Raycaster(playerFiches[i].position, new THREE.Vector3(-1, 0, 0));
@@ -137,7 +125,7 @@ THREE.GamepadControls = function() {
                                 gameInterface.UpdateCharSelectInterface(i, players[i]);
                             }
                         }
-                        if(i == 0){
+                        if (i == 0) {
                             if (pad.buttons[9].value == 1) {
                                 playersPlaying = rawGamepads.length;
                                 charSelect = false;

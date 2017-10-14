@@ -22,18 +22,18 @@ class Character {
         this.specialCounter = 0;
         this.specialCounterThreshHold = 100;
         this.swingObject;
-        
+
         this.attackDirection = 1;
         this.basicAttackDamage = 10;
         this.specialIncrease = 10;
-        
+
         this.swingTimer = 0;
         this.attackRemoveTimer = 0;
-        
-        this.swingCooldown = 1;
+
+        this.swingCooldown = 0.7;
         this.attackRemoveCooldown = 0.1;
         this.attackDelay = 0.2;
-        
+
         this.chargeAttack = false;
         this.knockBack = new THREE.Vector3(0, 0, 0);
         this.damageMulti = 1;
@@ -65,7 +65,7 @@ class Character {
             this.geometry.position.y,
             this.geometry.position.z + (this.attackDirection * 5));
         var _this = this;
-        this.swingObject.addEventListener('collision', function(other_object, relative_velocity, relative_rotation, contact_normal) {
+        this.swingObject.addEventListener('collision', function (other_object, relative_velocity, relative_rotation, contact_normal) {
             if (_this.swingObject._physijs.touches.length > 0) {
                 if (other_object.isPlayer) {
                     var j = parseInt(other_object.name);
@@ -154,7 +154,7 @@ class Character {
             var obj = scene._objects[id];
 
             if (obj) {
-                if (obj.isPlayer) {}
+                if (obj.isPlayer) { }
 
                 if (obj.name == "ground") {
                     touchedGround = true;
@@ -227,7 +227,7 @@ class Character {
 
     AddGrounded() {
         var _this = this;
-        this.geometry.addEventListener('collision', function(other_object, relative_velocity, relative_rotation, contact_normal) {
+        this.geometry.addEventListener('collision', function (other_object, relative_velocity, relative_rotation, contact_normal) {
             if (contact_normal.y < -0.9) {
                 _this.grounded = true;
                 _this.jumpsLeft = _this.totalJump;

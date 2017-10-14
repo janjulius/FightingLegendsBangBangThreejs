@@ -6,22 +6,21 @@ var gameInterface;
 var players = [];
 var playersPlaying = 4;
 var charSelect = true;
-'use strict';
 var charScreens = [];
 var playerFiches = [];
 var controls = new THREE.GamepadControls();
+gameInterface = new Interface();
+
+'use strict';
 Physijs.scripts.worker = 'physi/physijs_worker.js';
 Physijs.scripts.ammo = 'ammo.js';
-
-scene = new Physijs.Scene;
-scene.setGravity(new THREE.Vector3(0, 0, 0));
-
-
-gameInterface = new Interface();
 
 init();
 
 function init() {
+    scene = new Physijs.Scene;
+    scene.setGravity(new THREE.Vector3(0, 0, 0));
+
     renderer = new THREE.WebGLRenderer({});
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
@@ -41,10 +40,6 @@ function init() {
     physics_stats.domElement.style.top = '50px';
     physics_stats.domElement.style.zIndex = 100;
     container.appendChild(physics_stats.domElement);
-
-
-    scene = new Physijs.Scene;
-    scene.setGravity(new THREE.Vector3(0, 0, 0));
 
     camera = new THREE.PerspectiveCamera(
         35,
@@ -79,7 +74,7 @@ function init() {
     requestAnimationFrame(animate);
 }
 
-window.addEventListener('keydown', function(event) {
+window.addEventListener('keydown', function (event) {
     if (charSelect) {
         if (event.keyCode == 65) {
             console.log("test");
@@ -89,10 +84,35 @@ window.addEventListener('keydown', function(event) {
     }
 });
 
-window.addEventListener('keyup', function(event) {});
+function CalculateTargetsBoundingBox() {
+    var padding = 0;
+    var minX = 9000;
+    var minY = 9000;
+    var maxX = -9000;
+    var maxY = -9000;
 
+    for (var i = 0; i < playersPlaying; i++) {
+        var pos = players[i].geometry.position;
 
-scene.addEventListener('update', function() {
+        minX = Math.min(minX, pos.z);
+        minY = Math.min(minY, pos.y - 15);
+        maxX = Math.max(maxX, pos.z);
+        maxY = Math.max(maxY, pos.y - 15);
+    }
+
+    var result = new Rect(minX - padding, minY - padding, (maxY - minY), (maxX - minX) + padding);
+
+    return result;
+}
+
+function CalculateCameraPosition(bb) {
+    var center = bb.GetCenter();
+    var newPos = 70 + (bb.GetMagnitude() / 100);
+
+    return new THREE.Vector3(newPos, center.y, center.x);
+}
+
+scene.addEventListener('update', function () {
     if (!charSelect) {
         physics_stats.update();
         var timeElapsed = clock.getDelta();
@@ -101,6 +121,9 @@ scene.addEventListener('update', function() {
             element.Update(timeElapsed);
         }
 
+        var boundingBox = CalculateTargetsBoundingBox();
+        var np = CalculateCameraPosition(boundingBox);
+        camera.position.set(np.x, np.y, np.z);
         scene.simulate(undefined, 1); // run physics
     }
 });
@@ -115,9 +138,9 @@ function onWindowResize() {
 }
 
 function animate() {
-    render();
     render_stats.update();
     requestAnimationFrame(animate);
+    render();
 }
 
 function render() {
@@ -193,7 +216,7 @@ function runCharSelect() {
             }
         }
 
-        window.addEventListener('keydown', function(event) {
+        window.addEventListener('keydown', function (event) {
             if (event.keyCode == 68) { //d
                 ray0 = new THREE.Raycaster(playerFiches[0].position, new THREE.Vector3(-1, 0, 0));
                 var intersects = ray0.intersectObjects(scene.children);
@@ -236,9 +259,6 @@ function runCharSelect() {
 function runGame() {
     if (!charSelect) {
 
-        camera.position.set(150, 50, 0);
-        camera.lookAt(new THREE.Vector3(0, 0, 0));
-
         for (var i = scene.children.length - 1; i >= 0; i--) {
             scene.remove(scene.children[i]);
         }
@@ -247,8 +267,8 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        var level = new ZeldaMap(); //temp level changer
-        
+        var level = new Brawlhaven(); //temp level changer
+
         /* var level;               //level randomizer
         let randomLevel;
         randomLevel = Math.floor((Math.random() * 4) + 1);
@@ -273,8 +293,8 @@ function runGame() {
         for (var k = 0; k < playersPlaying; k++) {
             var choice = getClassByCharId(players[k]);
             players[k] = new choice(level.spawn[k].y, level.spawn[k].z);
-			players[k].setId(k);
-			players[k].AddGrounded();
+            players[k].setId(k);
+            players[k].AddGrounded();
             players[k].geometry.name = k;
             players[k].geometry.isPlayer = true;
         }
@@ -287,15 +307,15 @@ function runGame() {
         physics_stats.update();
         requestAnimationFrame(animate);
         if (DEBUG_MODE) {
-            window.addEventListener('keydown', function(event) {
+            window.addEventListener('keydown', function (event) {
                 if (event.keyCode == 65) { //a
                     players[0].direction = 1;
                 } else if (event.keyCode == 68) { //d
                     players[0].direction = -1;
                 } else if (event.keyCode == 87) { //w
                     players[0].setDamage(players[0].getDamage() + 1); //test code for color coding and spacing
-					players[0].normalAtk();
-				} else if (event.keyCode == 83) { //s
+                    players[0].normalAtk();
+                } else if (event.keyCode == 83) { //s
                     players[0].setStock(players[0].getStock() - 1);
                 }
             });
