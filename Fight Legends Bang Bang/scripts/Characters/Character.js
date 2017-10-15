@@ -156,7 +156,7 @@ class Character {
     }
 
     setSpecialAttackCounter(a) {
-        if (this.specialCounter >= this.specialCounterThreshHold) {
+        if (this.specialCounter > this.specialCounterThreshHold) {
             this.specialCounter = this.specialCounterThreshHold;
             gameInterface.UpdateGameInterface(this.id);
         } else {
