@@ -10,6 +10,7 @@ var charScreens = [];
 var playerFiches = [];
 var controls = new THREE.GamepadControls();
 var level;
+var music = new Audio('Music/selectMusic.mp3');
 gameInterface = new Interface();
 
 'use strict';
@@ -168,6 +169,13 @@ function render() {
 }
 
 function runCharSelect() {
+    
+    music.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+    music.play();
+
     if (charSelect) {
         gameInterface.LoadCharSelectInterface();
         var material;
@@ -274,7 +282,13 @@ function runCharSelect() {
 }
 
 function runGame() {
+
+    this.music.pause();
+    this.music.currentTime = 0;
+
+
     if (!charSelect) {
+
 
         for (var i = scene.children.length - 1; i >= 0; i--) {
             scene.remove(scene.children[i]);
