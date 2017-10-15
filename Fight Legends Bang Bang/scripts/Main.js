@@ -174,7 +174,7 @@ function runCharSelect() {
         this.currentTime = 0;
         this.play();
     }, false);
-    music.volume = 0.3;
+    music.volume = 0.015;
     music.play();
 
     if (charSelect) {
@@ -298,8 +298,8 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        //level = new Thundergart(); //temp level changer
-
+        level = new ZeldaMap(); //temp level changer
+        /*
         //level randomizer
         let randomLevel;
         randomLevel = Math.floor((Math.random() * 4) + 1);
@@ -318,7 +318,7 @@ function runGame() {
                     level = new ZeldaMap();
             break;
         }
-        
+        */
         console.log(playersPlaying);
         for (var k = 0; k < playersPlaying; k++) {
             var choice = getClassByCharId(players[k]);
