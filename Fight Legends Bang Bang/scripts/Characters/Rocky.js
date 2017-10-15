@@ -8,14 +8,13 @@ class Rocky extends Character{
         this.specialAtkString = "Shivering Leap";
         this.portrait = 'sprites/Characters/MenuSprites/rocky.png';
         this.Speed = 12;
+        this.specialDamage = 50;
         this.specialExists = false;
             this.geometry = new Physijs.BoxMesh(
 			new THREE.CubeGeometry( 5, 5, 5 ),
 			new THREE.MeshBasicMaterial({ color: 0xec00fb },
             1)
 	);
-    this.geometry._dirtyPosition = true;
-    this.geometry._dirtyRotation = true;
     this.geometry.castShadow = true;
     this.geometry.position.set(0,y,z);
 	scene.add( this.geometry );
@@ -23,6 +22,7 @@ class Rocky extends Character{
     }
 
     specialAtk(){
+        if (DEBUG_MODE) { this.setSpecialAttackCounter(100); }
         if(this.specialReady()){
         this.target;
         for(var i = 0; i < players.length; i++){
@@ -39,7 +39,7 @@ class Rocky extends Character{
             }
         }
         this.specialExists = true;
-        this.specialTimer = 1;
+        this.specialTimer = 1.75;
         this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
         }
     }
@@ -49,13 +49,29 @@ class Rocky extends Character{
             if(this.specialTimer > 0){
                 console.log("test" + this.specialTimer);
                 this.specialTimer -= t;
+                if(this.specialTimer > 1.25 && this.specialTimer < 1.75){ //preparing
+
+                }
+                if(this.specialTimer > 1 && this.specialTimer < 1.25){ //jump
+
+                }
+                if(this.specialTimer > 0.5 && this.specialTimer < 1){ //dissapear
+
+                }
+                if(this.specialTimer < 0.5){
+                    
+                }
             }
             if(this.specialTimer <= 0){
                 console.log("ATTACK");
                 this.specialExists = false;
-                players[this.target].setDamage(players[this.target].getDamage() + 50);
-                this.geometry.position.set(players[this.target].geometry.position.x,players[this.target].geometry.position.y,players[this.target].geometry.position.z);
-                
+                this.geometry.position.set(players[this.target].geometry.position.x,players[this.target].geometry.position.y,
+                players[this.target].geometry.position.z + -players[this.target].attackDirection.z*5);
+                players[this.target].setDamage(players[this.target].getDamage() + this.specialDamage
+            , { y: 1, z: this.attackDirection.z });
+            this.geometry.__dirtyPosition = true;
+            this.geometry.__dirtyRotation = true;
+             
             }
         }
         
