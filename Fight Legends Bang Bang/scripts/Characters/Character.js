@@ -114,6 +114,10 @@ class Character {
         this.id = id;
     }
 
+    getId(){
+        return this.id;
+    }
+
     setStock(s) {
         this.stock = s;
         gameInterface.UpdateGameInterface(this.id);
@@ -147,6 +151,10 @@ class Character {
 
     getCid() {
         return this.cid;
+    }
+
+    specialReady(){
+        return this.specialCounter >= this.specialCounterThreshHold;
     }
 
     CheckCollision() {
