@@ -96,7 +96,8 @@ THREE.GamepadControls = function () {
                     if (rawGamepads[i]) {
                         var g = rawGamepads[i];
                         var oldState = this.oldGamepad[i];
-                        p.direction = this.filter(-g.axes[0]);
+                        p.direction.z = this.filter(-g.axes[0]);
+                        p.direction.y = this.filter(-g.axes[1]);
 
                         if (g.buttons[0].value == 1 && oldState[0] != g.buttons[0].value) {
                             p.jump();
@@ -104,7 +105,7 @@ THREE.GamepadControls = function () {
                         if (g.buttons[2].value == 1 && oldState[2] != g.buttons[2].value && p.swingTimer <= 0) {
                             p.swingTimer = p.swingCooldown;
                             p.chargeAttack = true;
-                        }                        
+                        }
                         if (g.buttons[3].value == 1 && oldState[3] != g.buttons[3].value) {
                             p.specialAtk();
                         }

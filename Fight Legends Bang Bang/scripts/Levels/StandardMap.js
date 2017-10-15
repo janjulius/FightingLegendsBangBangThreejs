@@ -6,6 +6,12 @@ class StandardMap extends Level {
         this.topLeft = {y: 100, z: 100 } ;
         this.bottomRight = {y: -50, z: -100};
 
+        this.myAudio.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        }, false);
+        this.myAudio.play();
+
         var possibleSpawns = [{ y: 5, z: 30 }, { y: 10, z: -8 }, { y: 10, z: 8 }, { y: 5, z: -30 }]
 
         function shuffle(array) {

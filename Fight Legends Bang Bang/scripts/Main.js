@@ -10,6 +10,7 @@ var charScreens = [];
 var playerFiches = [];
 var controls = new THREE.GamepadControls();
 var level;
+var music = new Audio('Music/selectMusic.mp3');
 gameInterface = new Interface();
 
 'use strict';
@@ -92,10 +93,14 @@ function CalculateTargetsBoundingBox() {
     var maxX = -Infinity;
     var maxY = -Infinity;
 
+    var pAlive = playersPlaying;
+
     for (var i = 0; i < playersPlaying; i++) {
 
-        if(!players[i].isAlive)
+        if(!players[i].isAlive){
+            pAlive--;
             continue;
+        }
 
         var pos = players[i].geometry.position;
 
@@ -103,6 +108,13 @@ function CalculateTargetsBoundingBox() {
         minY = Math.min(minY, pos.y);
         maxX = Math.max(maxX, pos.z);
         maxY = Math.max(maxY, pos.y);
+    }
+
+    if(pAlive == 0){
+        minX = 0;
+        minY = 0;
+        maxX = 0;
+        maxY = 0;
     }
 
     var result = new Rect(minX - padding, minY - padding, (maxY - minY) + padding, (maxX - minX) + padding);
@@ -157,6 +169,14 @@ function render() {
 }
 
 function runCharSelect() {
+
+    music.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+    music.volume = 0.015;
+    music.play();
+
     if (charSelect) {
         gameInterface.LoadCharSelectInterface();
         var material;
@@ -263,7 +283,12 @@ function runCharSelect() {
 }
 
 function runGame() {
+
+    this.music.pause();
+    this.music.currentTime = 0;
+
     if (!charSelect) {
+
 
         for (var i = scene.children.length - 1; i >= 0; i--) {
             scene.remove(scene.children[i]);
@@ -274,8 +299,8 @@ function runGame() {
         }
 
         level = new ZeldaMap(); //temp level changer
-
-        /* var level;               //level randomizer
+        /*
+        //level randomizer
         let randomLevel;
         randomLevel = Math.floor((Math.random() * 4) + 1);
 
@@ -294,7 +319,6 @@ function runGame() {
             break;
         }
         */
-
         console.log(playersPlaying);
         for (var k = 0; k < playersPlaying; k++) {
             var choice = getClassByCharId(players[k]);
