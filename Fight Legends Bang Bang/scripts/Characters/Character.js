@@ -144,8 +144,6 @@ class Character {
         if (this.grounded)
             dir.y = Math.abs(dir.y);
 
-        console.log(dir + "" + this.grounded)
-
         this.damage = d;
         this.knockBack.z = (d * this.damageMulti) * dir.z;
         this.knockBack.y = (d * this.damageMulti) * dir.y;
