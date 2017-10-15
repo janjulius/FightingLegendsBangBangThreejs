@@ -5,7 +5,10 @@ class Character {
         this.extraname = "";
         this.specialAtkString = "base";
         this.damage = GAME_SETTINGS_HANDICAP;
-        this.direction = 0;
+
+        this.direction = { y: 0, z: 0 };
+        this.attackDirection = { y: 0, z: 1 };
+
         this.id = 0;
         this.cid = -1;
         this.igid = -1;
@@ -24,7 +27,6 @@ class Character {
         this.specialCounterThreshHold = 100;
         this.swingObject;
 
-        this.attackDirection = 1;
         this.basicAttackDamage = 10;
         this.specialIncrease = 10;
 
@@ -66,8 +68,8 @@ class Character {
         this.swingObject._dirtyPosition = true;
         this.swingObject._dirtyRotation = true;
         this.swingObject.position.set(this.geometry.position.x,
-            this.geometry.position.y,
-            this.geometry.position.z + (this.attackDirection * 5));
+            this.geometry.position.y + (this.attackDirection.y * 5),
+            this.geometry.position.z + (this.attackDirection.z * 5));
         var _this = this;
         this.swingObject.addEventListener('collision', function (other_object, relative_velocity, relative_rotation, contact_normal) {
             if (_this.swingObject._physijs.touches.length > 0) {
@@ -138,8 +140,15 @@ class Character {
         if (this.blocking) {
             return;
         }
+
+        if (this.grounded)
+            dir.y = Math.abs(dir.y);
+
+        console.log(dir + "" + this.grounded)
+
         this.damage = d;
-        this.knockBack.z = (d * this.damageMulti) * dir;
+        this.knockBack.z = (d * this.damageMulti) * dir.z;
+        this.knockBack.y = (d * this.damageMulti) * dir.y;
         gameInterface.UpdateGameInterface(this.id);
     }
 
@@ -208,11 +217,23 @@ class Character {
         if (this.knockBack.z > -10 && this.knockBack.z < 10)
             this.knockBack.z = 0;
 
+        if (this.knockBack.y > 0)
+            this.knockBack.y -= 50 * t;
+        if (this.knockBack.y < 0)
+            this.knockBack.y += 50 * t;
 
-        if (this.direction > 0)
-            this.attackDirection = 1;
-        else if (this.direction < 0)
-            this.attackDirection = -1;
+        if (this.knockBack.y > -10 && this.knockBack.y < 10)
+            this.knockBack.y = 0;
+
+
+        if (this.direction.z > 0.6)
+            this.attackDirection = { y: 0, z: 1 };
+        else if (this.direction.z < -0.6)
+            this.attackDirection = { y: 0, z: -1 };
+        else if (this.direction.y > 0.6)
+            this.attackDirection = { y: 1, z: 0 };
+        else if (this.direction.y < -0.6)
+            this.attackDirection = { y: -1, z: 0 };
 
         this.CheckCollision();
 
@@ -233,15 +254,13 @@ class Character {
             this.jumped = false;
         }
 
-        this.velocity = new THREE.Vector3(0, this.velt, ((this.direction * this.speed)) + this.knockBack.z);
+        this.velocity = new THREE.Vector3(0, this.velt + this.knockBack.y, ((this.direction.z * this.speed)) + this.knockBack.z);
 
         this.geometry.setLinearVelocity(this.velocity);
+        this.geometry.setAngularVelocity(new THREE.Vector3(0, 0, 0));
         this.geometry.setAngularFactor(new THREE.Vector3(0, 0, 0));
         this.geometry.setLinearFactor(new THREE.Vector3(0, 1, 1));
-        /*wtf rare bug
-        this.geometry.rotation.set(0, 0, 0);
-        this.geometry.__dirtyRotation = true;
-        */
+
         if (this.attackRemoveTimer > 0) {
             this.attackRemoveTimer -= t;
             if (this.attackRemoveTimer < this.attackRemoveCooldown / 10) {
@@ -250,15 +269,14 @@ class Character {
             }
         }
 
-        if(!this.isAlive){
+        if (!this.isAlive) {
             this.respawnTimer -= t;
-            console.log("je bent dood");
-            if(this.respawnTimer < 0)
-            {   
-            this.geometry.position.set(0, level.spawn[this.id].y, level.spawn[this.id].z);
-            this.geometry.__dirtyPosition = true;
-            this.setStock(this.stock-1);
-            this.isAlive = true;
+            if (this.respawnTimer < 0) {
+                this.geometry.position.set(0, level.spawn[this.id].y, level.spawn[this.id].z);
+                this.geometry.__dirtyPosition = true;
+                this.setStock(this.stock - 1);
+                this.knockBack = new THREE.Vector3(0, 0, 0);
+                this.isAlive = true;
             }
         }
 
@@ -285,9 +303,16 @@ class Character {
 
             if (_this.knockBack.z != 0) {
                 if (contact_normal.z < -0.7 && !other_object.isPlayer) {
-                    _this.knockBack.z = -_this.knockBack.z * 0, 8;
+                    _this.knockBack.z = -_this.knockBack.z * 0.8;
                 } else if (contact_normal.z > 0.7 && !other_object.isPlayer) {
-                    _this.knockBack.z = -_this.knockBack.z * 0, 8;
+                    _this.knockBack.z = -_this.knockBack.z * 0.8;
+                }
+            }
+            if (_this.knockBack.y != 0) {
+                if (contact_normal.y < -0.7 && !other_object.isPlayer) {
+                    _this.knockBack.y = -_this.knockBack.y * 0.8;
+                } else if (contact_normal.y > 0.7 && !other_object.isPlayer) {
+                    _this.knockBack.y = -_this.knockBack.y * 0.8;
                 }
             }
         });

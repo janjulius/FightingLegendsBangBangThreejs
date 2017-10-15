@@ -96,7 +96,8 @@ THREE.GamepadControls = function () {
                     if (rawGamepads[i]) {
                         var g = rawGamepads[i];
                         var oldState = this.oldGamepad[i];
-                        p.direction = this.filter(-g.axes[0]);
+                        p.direction.z = this.filter(-g.axes[0]);
+                        p.direction.y = this.filter(-g.axes[1]);
 
                         if (g.buttons[0].value == 1 && oldState[0] != g.buttons[0].value) {
                             p.jump();
