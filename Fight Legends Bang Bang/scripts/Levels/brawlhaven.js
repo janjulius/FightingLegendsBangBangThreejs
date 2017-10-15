@@ -3,8 +3,8 @@ class Brawlhaven extends Level {
     constructor() {
         super();
         this.name = "Brawlhaven";
-        this.topLeft = {y: 100, z: 175 } ;
-        this.bottomRight = {y: -75, z: -175};
+        this.topLeft = {y: 100, z: 150 } ;
+        this.bottomRight = {y: -75, z: -150};
 
         var possibleSpawns = [{ y: 15, z: 50 }, { y: 5, z: 0 }, { y: -10, z: 0 }, { y: 25, z: -50 }]
 
