@@ -266,6 +266,14 @@ class Character {
                 _this.grounded = false;
                 _this.velt = 0;
             }
+
+            if (_this.knockBack.z != 0) {
+                if (contact_normal.z < -0.7 && !other_object.isPlayer) {
+                    _this.knockBack.z = -_this.knockBack.z * 0,8;
+                } else if (contact_normal.z > 0.7 && !other_object.isPlayer) {
+                    _this.knockBack.z = -_this.knockBack.z * 0,8;
+                }
+            }
         });
     }
 }
