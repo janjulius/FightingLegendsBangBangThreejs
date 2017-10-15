@@ -151,12 +151,11 @@ class Character {
     }
 
     CheckWithinArena() {
+        var arena = new Rect(level.topLeft.z, level.topLeft.y, level.bottomRight.y, level.bottomRight.z);
 
-        var arena = new Rect(level.topLeft.x, level.topLeft.y, level.bottomRight.y, level.bottomRight.x);
+        var playerPoint = { x: this.geometry.position.z, y: this.geometry.position.y };
 
-        var playerPoint = new THREE.Vector2(this.geometry.z, this.geometry.y);
-
-        if (!arena.Contains(playerPoint, true)) {
+        if (!arena.Contains(playerPoint)) {
             console.log("je bent er buiten");
         }
     }
@@ -181,6 +180,8 @@ class Character {
     }
 
     Update(t) {
+
+        this.CheckWithinArena();
 
         if (this.knockBack.z > 0)
             this.knockBack.z -= 50 * t;
