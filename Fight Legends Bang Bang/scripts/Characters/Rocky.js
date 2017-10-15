@@ -29,7 +29,7 @@ class Rocky extends Character {
         if (DEBUG_MODE) { this.setSpecialAttackCounter(100); }
         if (this.specialReady()) {
             this.target;
-            for (var i = 0; i < players.length; i++) {
+            for (var i = 0; i < playersPlaying; i++) {
                 if (this.id == i) {
                     continue;
                 }
@@ -87,11 +87,11 @@ class Rocky extends Character {
                         }
                     }
                 }
-                players[this.target].isStunned = false;
-                this.isStunned = false;
             }
             if (this.specialTimer <= 0) {
                 console.log("ATTACK");
+                players[this.target].isStunned = false;
+                this.isStunned = false;
                 this.specialExists = false;
 
                 players[this.target].setDamage(players[this.target].getDamage() + this.specialDamage
