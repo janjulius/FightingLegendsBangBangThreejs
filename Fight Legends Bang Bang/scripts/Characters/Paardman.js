@@ -13,7 +13,6 @@ class Paardman extends Character {
         this.stoneDamage = 60;
         this.scissorDamage = 80;
         this.paperDamage = 250;
-        if (DEBUG_MODE) { this.specialIncrease = 100; }
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
             new THREE.MeshBasicMaterial({ color: 0xffad60 },
