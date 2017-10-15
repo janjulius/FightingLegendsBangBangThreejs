@@ -6,12 +6,12 @@ class ZeldaMap extends Level {
         this.topLeft = {y: 125, z: 140 } ;
         this.bottomRight = {y: -75, z: -140};
 
-        var myAudio = new Audio('Music/zelda.mp3');
-        myAudio.addEventListener('ended', function() {
+        this.myAudio = new Audio('Music/zelda.mp3');
+        this.myAudio.addEventListener('ended', function() {
             this.currentTime = 0;
             this.play();
         }, false);
-        myAudio.play();
+        this.myAudio.play();
 
         var possibleSpawns = [{ y: 20, z: 50 }, { y: -12.50, z: 30 }, { y: 10, z: -30 }, { y: 32.5, z: -60 }];
 

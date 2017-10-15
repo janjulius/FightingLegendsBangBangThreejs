@@ -6,12 +6,11 @@ class Brawlhaven extends Level {
         this.topLeft = {y: 100, z: 150 } ;
         this.bottomRight = {y: -75, z: -150};
 
-        var myAudio = new Audio('Music/mortalKombat.mp3');
-        myAudio.addEventListener('ended', function() {
+        this.myAudio.addEventListener('ended', function() {
             this.currentTime = 0;
             this.play();
         }, false);
-        myAudio.play();
+        this.myAudio.play();
 
         var possibleSpawns = [{ y: 15, z: 50 }, { y: 5, z: 0 }, { y: -10, z: 0 }, { y: 25, z: -50 }]
 

@@ -169,7 +169,7 @@ function render() {
 }
 
 function runCharSelect() {
-    
+
     music.addEventListener('ended', function() {
         this.currentTime = 0;
         this.play();
@@ -286,7 +286,6 @@ function runGame() {
     this.music.pause();
     this.music.currentTime = 0;
 
-
     if (!charSelect) {
 
 
@@ -298,9 +297,9 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        level = new ZeldaMap(); //temp level changer
+        //level = new Thundergart(); //temp level changer
 
-        /* var level;               //level randomizer
+                       //level randomizer
         let randomLevel;
         randomLevel = Math.floor((Math.random() * 4) + 1);
 
@@ -318,7 +317,8 @@ function runGame() {
                     level = new ZeldaMap();
             break;
         }
-        */
+        
+        
 
         console.log(playersPlaying);
         for (var k = 0; k < playersPlaying; k++) {
