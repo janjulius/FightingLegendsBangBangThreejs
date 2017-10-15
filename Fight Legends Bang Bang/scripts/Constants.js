@@ -3,7 +3,7 @@ var GAME_NAME = "Fighting Legends: bang bang";
 
 var DEBUG_MODE = true;
 
-var INTERFACE_DAMAGE_TEXT_SIZE = "75px";
+var INTERFACE_DAMAGE_TEXT_SIZE = "50px";
 var INTERFACE_STOCK_TEXT_SIZE = "40px";
 
 if (DEBUG_MODE) {

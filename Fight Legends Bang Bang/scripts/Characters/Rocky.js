@@ -40,6 +40,7 @@ class Rocky extends Character{
         }
         this.specialExists = true;
         this.specialTimer = 1;
+        this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
         }
     }
 
