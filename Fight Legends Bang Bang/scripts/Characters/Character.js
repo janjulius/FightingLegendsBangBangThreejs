@@ -34,7 +34,8 @@ class Character {
         this.swingCooldown = 0.7;
         this.attackRemoveCooldown = 0.1;
         this.attackDelay = 0.2;
-
+        this.respawnDelay = 2;
+        this.respawnTimer = 0;
         this.specialTimer = 0;
 
         this.chargeAttack = false;
@@ -115,12 +116,13 @@ class Character {
         this.id = id;
     }
 
-    getId(){
+    getId() {
         return this.id;
     }
 
     setStock(s) {
         this.stock = s;
+        this.damage = 0;
         gameInterface.UpdateGameInterface(this.id);
     }
 
@@ -146,12 +148,12 @@ class Character {
     }
 
     setSpecialAttackCounter(a) {
-        if(this.specialCounter >= this.specialCounterThreshHold){
+        if (this.specialCounter >= this.specialCounterThreshHold) {
             this.specialCounter = this.specialCounterThreshHold;
             gameInterface.UpdateGameInterface(this.id);
         } else {
-        this.specialCounter = a;
-        gameInterface.UpdateGameInterface(this.id);
+            this.specialCounter = a;
+            gameInterface.UpdateGameInterface(this.id);
         }
         gameInterface.UpdateGameInterface(this.id);
     }
@@ -160,7 +162,7 @@ class Character {
         return this.cid;
     }
 
-    specialReady(){
+    specialReady() {
         return this.specialCounter >= this.specialCounterThreshHold;
     }
 
@@ -169,8 +171,9 @@ class Character {
 
         var playerPoint = { x: this.geometry.position.z, y: this.geometry.position.y };
 
-        if (!arena.Contains(playerPoint)) {
-            console.log("je bent er buiten");
+        if (!arena.Contains(playerPoint) && this.isAlive) {
+            this.respawnTimer = this.respawnDelay;
+            this.isAlive = false;
         }
     }
 
@@ -246,6 +249,19 @@ class Character {
                 scene.remove(this.swingObject);
             }
         }
+
+        if(!this.isAlive){
+            this.respawnTimer -= t;
+            console.log("je bent dood");
+            if(this.respawnTimer < 0)
+            {   
+            this.geometry.position.set(0, level.spawn[this.id].y, level.spawn[this.id].z);
+            this.geometry.__dirtyPosition = true;
+            this.setStock(this.stock-1);
+            this.isAlive = true;
+            }
+        }
+
         if (this.swingTimer > 0)
             this.swingTimer -= t;
 
@@ -269,9 +285,9 @@ class Character {
 
             if (_this.knockBack.z != 0) {
                 if (contact_normal.z < -0.7 && !other_object.isPlayer) {
-                    _this.knockBack.z = -_this.knockBack.z * 0,8;
+                    _this.knockBack.z = -_this.knockBack.z * 0, 8;
                 } else if (contact_normal.z > 0.7 && !other_object.isPlayer) {
-                    _this.knockBack.z = -_this.knockBack.z * 0,8;
+                    _this.knockBack.z = -_this.knockBack.z * 0, 8;
                 }
             }
         });

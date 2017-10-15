@@ -92,10 +92,14 @@ function CalculateTargetsBoundingBox() {
     var maxX = -Infinity;
     var maxY = -Infinity;
 
+    var pAlive = playersPlaying;
+
     for (var i = 0; i < playersPlaying; i++) {
 
-        if(!players[i].isAlive)
+        if(!players[i].isAlive){
+            pAlive--;
             continue;
+        }
 
         var pos = players[i].geometry.position;
 
@@ -103,6 +107,13 @@ function CalculateTargetsBoundingBox() {
         minY = Math.min(minY, pos.y);
         maxX = Math.max(maxX, pos.z);
         maxY = Math.max(maxY, pos.y);
+    }
+
+    if(pAlive == 0){
+        minX = 0;
+        minY = 0;
+        maxX = 0;
+        maxY = 0;
     }
 
     var result = new Rect(minX - padding, minY - padding, (maxY - minY) + padding, (maxX - minX) + padding);
