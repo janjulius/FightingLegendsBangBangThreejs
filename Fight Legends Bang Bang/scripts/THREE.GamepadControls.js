@@ -116,12 +116,13 @@ THREE.GamepadControls = function () {
                 for (var i = 0; i < rawGamepads.length; i++) {
                     var p = players[i];
                     var pad = rawGamepads[i];
+                    var oldState = this.oldGamepad[i];
                     if (pad) {
                         var spd = 0.2;
                         playerFiches[i].position.z -= this.filter(pad.axes[0]) * spd;
                         playerFiches[i].position.y -= this.filter(pad.axes[1]) * spd;
 
-                        if (g.buttons[0].value == 1 && oldState[0] != g.buttons[0].value) {
+                        if (pad.buttons[0].value == 1 && oldState[0] != pad.buttons[0].value) {
                             ray0 = new THREE.Raycaster(playerFiches[i].position, new THREE.Vector3(-1, 0, 0));
                             var intersects = ray0.intersectObjects(scene.children);
                             for (var j = 0; j < intersects.length; j++) {
