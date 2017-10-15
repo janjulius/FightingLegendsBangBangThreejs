@@ -270,11 +270,13 @@ class Character {
 
         if (!this.isAlive) {
             this.respawnTimer -= t;
-            if (this.respawnTimer < 0) {
+            if (this.respawnTimer < 0 && this.stock > 0) {
                 this.geometry.position.set(0, level.spawn[this.id].y, level.spawn[this.id].z);
                 this.geometry.__dirtyPosition = true;
                 this.setStock(this.stock - 1);
                 this.knockBack = new THREE.Vector3(0, 0, 0);
+                this.setSpecialAttackCounter(0);
+                this.isStunned = false;
                 this.isAlive = true;
             }
         }
