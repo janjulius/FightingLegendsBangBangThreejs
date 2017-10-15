@@ -6,7 +6,7 @@ class Fred extends Character {
         this.extraname = "der goblin";
         this.cid = 3;
         this.specialAtkString = "Hammer smash!";
-        this.hammerSmashDamage = 25;
+        this.hammerSmashDamage = 90;
         this.spcTimer = 0;
         this.specialExistTime = 0.2;
         this.specialExists = false;
@@ -68,8 +68,14 @@ class Fred extends Character {
                         for (var j = 0; j < players.length; j++) {
                             if (players[j].getId() == this.spcTargets[i]) {
                                 this.setSpecialAttackCounter(0);
-                                players[this.spcTargets[i]].setDamage(players[this.spcTargets[i]].getDamage() + this.hammerSmashDamage,
-                                    this.GetSpcDirection(players[this.spcTargets[i]]));
+                                players[this.spcTargets[i]].setDamage(
+                                    players[this.spcTargets[i]].getDamage() + this.hammerSmashDamage,
+                                    {
+                                        y: 1, z: this.GetSpcDirection(
+                                            players[this.spcTargets[i]]
+                                        )
+                                    }
+                                );
                             }
                         }
 
