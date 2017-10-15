@@ -104,6 +104,9 @@ THREE.GamepadControls = function () {
                         if (g.buttons[2].value == 1 && oldState[2] != g.buttons[2].value && p.swingTimer <= 0) {
                             p.swingTimer = p.swingCooldown;
                             p.chargeAttack = true;
+                        }                        
+                        if (g.buttons[3].value == 1 && oldState[3] != g.buttons[3].value) {
+                            p.specialAtk();
                         }
                     }
                 }

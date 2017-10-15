@@ -120,6 +120,15 @@ function getPlayerColors(id, opacity) {
     }
 }
 
+function distanceBetweenVector3( v1, v2 )
+{
+    var dx = v1.x - v2.x;
+    var dy = v1.y - v2.y;
+    var dz = v1.z - v2.z;
+
+    return Math.sqrt( dx * dx + dy * dy + dz * dz );
+}
+
 class Rect{
     constructor(x,y,h,w){
         this.x = x;
