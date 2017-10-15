@@ -41,7 +41,7 @@ class Fred extends Character {
             this.specialExists = true;
             this.specialObject.position.set(this.geometry.position.x, this.geometry.position.y, this.geometry.position.z);
             scene.add(this.specialObject);
-            this.specialCounter -= this.specialCounterThreshHold;
+            this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
         }
     }
 

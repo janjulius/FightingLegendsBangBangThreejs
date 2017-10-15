@@ -142,11 +142,6 @@ class Interface {
             this.pStock0[0].innerHTML = "❤" + this.players[0].getStock();
             this.spaBar0.value = this.players[0].getSpecialAttackCounter();
             var a = this.players[0].getDamage();
-            if (a >= 10 && a < 100) {
-                this.pDamage0[0].style.fontSize = "75px";
-            } else if (a >= 100) {
-                this.pDamage0[0].style.fontSize = "50px";
-            }
         }
         if (pid === 1) {
             this.pDamage1[0].innerHTML = this.players[1].getDamage() + "%";
@@ -154,11 +149,6 @@ class Interface {
             this.pStock1[0].innerHTML = "❤" + this.players[1].getStock();
             this.spaBar1.value = this.players[1].getSpecialAttackCounter();
             var a = this.players[1].getDamage();
-            if (a >= 10 && a < 100) {
-                this.pDamage1[0].style.fontSize = "75px";
-            } else if (a >= 100) {
-                this.pDamage1[0].style.fontSize = "50px";
-            }
         }
         if (pid === 2) {
             this.pDamage2[0].innerHTML = this.players[2].getDamage() + "%";
@@ -166,11 +156,6 @@ class Interface {
             this.pStock2[0].innerHTML = "❤" + this.players[2].getStock(); var a = this.players[0].getDamage();
             this.spaBar2.value = this.players[2].getSpecialAttackCounter();
             var a = this.players[2].getDamage();
-            if (a >= 10 && a < 100) {
-                this.pDamage2[0].style.fontSize = "75px";
-            } else if (a >= 100) {
-                this.pDamage2[0].style.fontSize = "50px";
-            }
         }
         if (pid === 3) {
             this.pDamage3[0].innerHTML = this.players[3].getDamage() + "%";
@@ -178,11 +163,6 @@ class Interface {
             this.pStock3[0].innerHTML = "❤" + this.players[3].getStock(); var a = this.players[0].getDamage();
             this.spaBar3.value = this.players[3].getSpecialAttackCounter();
             var a = this.players[3].getDamage();
-            if (a >= 10 && a < 100) {
-                this.pDamage3[0].style.fontSize = "75px";
-            } else if (a >= 100) {
-                this.pDamage3[0].style.fontSize = "50px";
-            }
         }
 
     }
