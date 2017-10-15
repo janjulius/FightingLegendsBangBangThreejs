@@ -27,7 +27,7 @@ class Paardman extends Character {
     specialAtk() {
 
         if (this.specialReady()) {
-            this.setSpecialAttackCounter(0);
+            this.target = undefined;
             this.horseChoice = Math.floor((Math.random() * 3) + 1);
             switch (this.horseChoice) {
                 case 1:   //stone     
@@ -48,6 +48,7 @@ class Paardman extends Character {
                     this.specialObject.position.set(0, this.geometry.position.y, this.geometry.position.z + this.attackDirection.z * 5);
                     this.flyDirection = this.attackDirection.z;
                     this.stoneVelocity = new THREE.Vector3(0, 0, this.attackDirection.z * ((this.stoneThrowSpeed) + 1));
+                    this.setSpecialAttackCounter(0);
                     scene.add(this.specialObject);
                     break;
                 case 2: //paper
@@ -67,6 +68,7 @@ class Paardman extends Character {
                     this.specialTimer = 300;
                     this.specialObject.position.set(0, this.geometry.position.y, this.geometry.position.z + this.attackDirection.z * 5);
                     this.flyDirection = this.attackDirection.z;
+                    this.setSpecialAttackCounter(0);
                     scene.add(this.specialObject);
 
                     break;
@@ -87,7 +89,7 @@ class Paardman extends Character {
                     this.specialTimer = 3;
                     this.specialObject.position.set(0, this.geometry.position.y, this.geometry.position.z + (this.attackDirection.z * 5));
                     this.flyDirection = this.attackDirection.z;
-
+                    this.setSpecialAttackCounter(0);
                     this.scissorVelocity = new THREE.Vector3(0, 0, this.attackDirection.z * ((this.scissorThrowSpeed) + 1));
                     scene.add(this.specialObject);
 
@@ -133,7 +135,6 @@ class Paardman extends Character {
                         break;
                     case 3:
                         this.specialObject.setLinearVelocity(this.scissorVelocity);
-
                         var _this = this;
                         this.specialObject.addEventListener('collision', function (other_object, relative_velocity, relative_rotation, contact_normal) {
                             if (_this.specialObject._physijs.touches.length > 0) {
@@ -153,16 +154,18 @@ class Paardman extends Character {
                 this.specialExists = false;
                 scene.remove(this.specialObject);
                 if (this.target != undefined) {
-                    switch (this.horseChoice) {
-                        case 1://stone
-                            players[this.target].setDamage(players[this.target].getDamage() + this.stoneDamage, { y: 1, z: this.flyDirection });
-                            break;
-                        case 2://paper
-                            players[this.target].setDamage(players[this.target].getDamage() + this.paperDamage, { y: 1, z: this.flyDirection });
-                            break;
-                        case 3://scissor
-                            players[this.target].setDamage(players[this.target].getDamage() + this.scissorDamage, { y: 1, z: this.flyDirection });
-                            break;
+                    if (this.target != this.id) {
+                        switch (this.horseChoice) {
+                            case 1://stone
+                                players[this.target].setDamage(players[this.target].getDamage() + this.stoneDamage, { y: 1, z: this.flyDirection });
+                                break;
+                            case 2://paper
+                                players[this.target].setDamage(players[this.target].getDamage() + this.paperDamage, { y: 1, z: this.flyDirection });
+                                break;
+                            case 3://scissor
+                                players[this.target].setDamage(players[this.target].getDamage() + this.scissorDamage, { y: 1, z: this.flyDirection });
+                                break;
+                        }
                     }
                 }
             }
