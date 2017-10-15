@@ -122,23 +122,13 @@ class Brawlhaven extends Level {
         scene.add(leftislandgrass);
         leftislandgrass.name = "ground";
 
-        var leftislandtriangle = new Physijs.SphereMesh(
-            new THREE.SphereGeometry(10, 0, 1),
-            matMud,
-            0
-        );
-        leftislandtriangle.receiveShadow = true;
-        leftislandtriangle.position.set(0, -6.5, 50);
-        scene.add(leftislandtriangle);
-        leftislandtriangle.name = "ground";
-
         var leftislandsquare = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15.5, 10, 7.5),
             matMud,
             0
         );
         leftislandsquare.receiveShadow = true;
-        leftislandsquare.position.set(0, -11, 53.5);
+        leftislandsquare.position.set(0, -11, 53.75);
         scene.add(leftislandsquare);
         leftislandsquare.name = "ground";
 
