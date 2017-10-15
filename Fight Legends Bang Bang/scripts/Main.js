@@ -9,6 +9,7 @@ var charSelect = true;
 var charScreens = [];
 var playerFiches = [];
 var controls = new THREE.GamepadControls();
+var level;
 gameInterface = new Interface();
 
 'use strict';
@@ -86,28 +87,33 @@ window.addEventListener('keydown', function (event) {
 
 function CalculateTargetsBoundingBox() {
     var padding = 0;
-    var minX = 9000;
-    var minY = 9000;
-    var maxX = -9000;
-    var maxY = -9000;
+    var minX = Infinity;
+    var minY = Infinity;
+    var maxX = -Infinity;
+    var maxY = -Infinity;
 
     for (var i = 0; i < playersPlaying; i++) {
+
+        if(!players[i].isAlive)
+            continue;
+
         var pos = players[i].geometry.position;
 
         minX = Math.min(minX, pos.z);
-        minY = Math.min(minY, pos.y - 15);
+        minY = Math.min(minY, pos.y);
         maxX = Math.max(maxX, pos.z);
-        maxY = Math.max(maxY, pos.y - 15);
+        maxY = Math.max(maxY, pos.y);
     }
 
-    var result = new Rect(minX - padding, minY - padding, (maxY - minY), (maxX - minX) + padding);
+    var result = new Rect(minX - padding, minY - padding, (maxY - minY) + padding, (maxX - minX) + padding);
 
     return result;
 }
 
 function CalculateCameraPosition(bb) {
     var center = bb.GetCenter();
-    var newPos = 70 + (bb.GetMagnitude() / 100);
+    var newPos = Math.abs(bb.GetMagnitude() / 100);
+    newPos += 120;
 
     return new THREE.Vector3(newPos, center.y, center.x);
 }
@@ -268,7 +274,7 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        var level = new Brawlhaven(); //temp level changer
+        level = new Brawlhaven(); //temp level changer
 
         /* var level;               //level randomizer
         let randomLevel;
