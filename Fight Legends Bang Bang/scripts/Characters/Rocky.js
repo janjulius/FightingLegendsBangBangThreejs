@@ -58,7 +58,7 @@ class Rocky extends Character {
                 }
                 if (this.specialTimer > 1.25 && this.specialTimer < 1.50) { //jump
                     this.isStunned = false;
-                    this.spJumpVelocity = new THREE.Vector3(0, 1, this.attackDirection.z * ((40) + 1));
+                    this.spJumpVelocity = new THREE.Vector3(0, 20, this.attackDirection.z * ((40) + 1));
                     this.geometry.setLinearVelocity(this.spJumpVelocity);
                 }
                 if (this.specialTimer > 0.5 && this.specialTimer < 1.25) { //dissapear
