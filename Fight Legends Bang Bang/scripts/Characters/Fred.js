@@ -67,7 +67,7 @@ class Fred extends Character {
                     for (var i = 0; i < this.spcTargets.length; i++) {
                         for (var j = 0; j < players.length; j++) {
                             if (players[j].getId() == this.spcTargets[i]) {
-                                this.setSpecialAttackCounter(this.specialCounter + this.specialIncrease);
+                                this.setSpecialAttackCounter(0);
                                 players[this.spcTargets[i]].setDamage(players[this.spcTargets[i]].getDamage() + this.hammerSmashDamage,
                                     this.GetSpcDirection(players[this.spcTargets[i]]));
                             }
