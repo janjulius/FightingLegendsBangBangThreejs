@@ -6,7 +6,7 @@ class Fred extends Character {
         this.extraname = "der goblin";
         this.cid = 3;
         this.specialAtkString = "Hammer smash!";
-        this.hammerSmashDamage = 25;
+        this.hammerSmashDamage = 90;
         this.spcTimer = 0;
         this.specialExistTime = 0.2;
         this.specialExists = false;
