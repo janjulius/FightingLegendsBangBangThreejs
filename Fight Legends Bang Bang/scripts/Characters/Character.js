@@ -21,6 +21,7 @@ class Character {
         this.jumped = false;
         this.grounded = false;
         this.isAlive = true;
+        this.isStunned = false;
         this.totalJump = 2;
         this.jumpsLeft = this.totalJump;
         this.specialCounter = 0;
@@ -254,7 +255,7 @@ class Character {
 
         this.velocity = new THREE.Vector3(0, this.velt + this.knockBack.y, ((this.direction.z * this.speed)) + this.knockBack.z);
 
-        this.geometry.setLinearVelocity(this.velocity);
+        this.geometry.setLinearVelocity(this.isStunned ? new THREE.Vector3(0, 0, 0) : this.velocity);
         this.geometry.setAngularVelocity(new THREE.Vector3(0, 0, 0));
         this.geometry.setAngularFactor(new THREE.Vector3(0, 0, 0));
         this.geometry.setLinearFactor(new THREE.Vector3(0, 1, 1));
