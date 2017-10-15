@@ -3,6 +3,9 @@ class Level{
         this.name = "";
         this.spawn = [{y: 0,z: 0}, {y: 0,z: 0}, {y: 0,z: 0}, {y: 0,z: 0}]
 
+        this.topLeft = {y: 0, z: 0};
+        this.bottomRight = {y: 0, z:0}
+
         this.burlywoodbrown = 0xDEB887;
         this.iceblue = 0xdcf3ff;
         this.mudbrown = 0x794c13;

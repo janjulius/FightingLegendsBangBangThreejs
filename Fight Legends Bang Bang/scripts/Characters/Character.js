@@ -17,6 +17,7 @@ class Character {
         this.blocking = false;
         this.jumped = false;
         this.grounded = false;
+        this.isAlive = true;
         this.totalJump = 2;
         this.jumpsLeft = this.totalJump;
         this.specialCounter = 0;
@@ -152,9 +153,19 @@ class Character {
     getCid() {
         return this.cid;
     }
-
+        
     specialReady(){
         return this.specialCounter >= this.specialCounterThreshHold;
+    }
+
+    CheckWithinArena() {
+        var arena = new Rect(level.topLeft.z, level.topLeft.y, level.bottomRight.y, level.bottomRight.z);
+
+        var playerPoint = { x: this.geometry.position.z, y: this.geometry.position.y };
+
+        if (!arena.Contains(playerPoint)) {
+            console.log("je bent er buiten");
+        }
     }
 
     CheckCollision() {
@@ -177,6 +188,8 @@ class Character {
     }
 
     Update(t) {
+
+        this.CheckWithinArena();
 
         if (this.knockBack.z > 0)
             this.knockBack.z -= 50 * t;
@@ -235,7 +248,7 @@ class Character {
                 this.normalAtk();
     }
 
-    UpdateChar(t){}
+    UpdateChar(t) { }
 
     AddGrounded() {
         var _this = this;

@@ -120,38 +120,33 @@ function getPlayerColors(id, opacity) {
     }
 }
 
-function distanceBetweenVector3( v1, v2 )
-{
+function distanceBetweenVector3(v1, v2) {
     var dx = v1.x - v2.x;
     var dy = v1.y - v2.y;
     var dz = v1.z - v2.z;
 
-    return Math.sqrt( dx * dx + dy * dy + dz * dz );
+    return Math.sqrt(dx * dx + dy * dy + dz * dz);
 }
 
-class Rect{
-    constructor(x,y,h,w){
+class Rect {
+    constructor(x, y, h, w) {
         this.x = x;
         this.y = y;
         this.height = h;
         this.width = w;
     }
 
-    GetCenter(){
-        return new THREE.Vector2(this.x + this.width/2,this.y + this.height);
+    GetCenter() {
+        return new THREE.Vector2(this.x + this.width / 2, this.y + this.height);
     }
 
-    GetMagnitude(){
+    GetMagnitude() {
         var w = this.width - this.x;
         var h = this.height - this.y;
-        return w*h;
+        return w * h;
     }
 
-    maxX(){
-        return this.width + this.x;
-    }
-
-    maxY(){
-        return this.height + this.y;
+    Contains(point) {
+        return point.x < this.x && point.x > this.width && point.y < this.y && point.y > this.height;
     }
 }
