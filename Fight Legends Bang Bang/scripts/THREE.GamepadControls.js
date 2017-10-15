@@ -12,6 +12,7 @@ THREE.GamepadControls = function () {
     this.target = new THREE.Vector3();
     this.deadZone = 0.3;
     this.pressedJump = [0, 0, 0, 0];
+    this.gamePad;
     this.oldGamepad;
 
     this.init = function () {
@@ -80,21 +81,21 @@ THREE.GamepadControls = function () {
 
     this.pollGamepads = function () {
 
-        var rawGamepads =
+        this.gamePad =
             (navigator.getGamepads && navigator.getGamepads()) ||
             (navigator.webkitGetGamepads && navigator.webkitGetGamepads());
 
-        if (rawGamepads) {
+        if (this.gamePad) {
 
             if (!this.oldGamepad) {
-                this.SetOldGamePadState(rawGamepads);
+                this.SetOldGamePadState(this.gamePad);
             }
 
             if (!charSelect) {
                 for (var i = 0; i < players.length; i++) {
                     var p = players[i];
-                    if (rawGamepads[i]) {
-                        var g = rawGamepads[i];
+                    if (this.gamePad[i]) {
+                        var g = this.gamePad[i];
                         var oldState = this.oldGamepad[i];
                         p.direction.z = this.filter(-g.axes[0]);
                         p.direction.y = this.filter(-g.axes[1]);
@@ -113,9 +114,9 @@ THREE.GamepadControls = function () {
                 }
 
             } else {
-                for (var i = 0; i < rawGamepads.length; i++) {
+                for (var i = 0; i < this.gamePad.length; i++) {
                     var p = players[i];
-                    var pad = rawGamepads[i];
+                    var pad = this.gamePad[i];
                     var oldState = this.oldGamepad[i];
                     if (pad) {
                         var spd = 0.2;
@@ -134,7 +135,7 @@ THREE.GamepadControls = function () {
                         }
                         if (i == 0) {
                             if (pad.buttons[9].value == 1) {
-                                playersPlaying = rawGamepads.length;
+                                playersPlaying = this.gamePad.length;
                                 charSelect = false;
                                 runGame();
                                 break;
@@ -143,7 +144,7 @@ THREE.GamepadControls = function () {
                     }
                 }
             }
-            this.SetOldGamePadState(rawGamepads);
+            this.SetOldGamePadState(this.gamePad);
         }
     }
 
