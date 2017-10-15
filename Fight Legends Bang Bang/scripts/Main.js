@@ -119,6 +119,7 @@ scene.addEventListener('update', function () {
         for (var i = 0; i < playersPlaying; i++) {
             var element = players[i];
             element.Update(timeElapsed);
+            element.UpdateChar(timeElapsed);
         }
 
         var boundingBox = CalculateTargetsBoundingBox();

@@ -34,6 +34,8 @@ class Character {
         this.attackRemoveCooldown = 0.1;
         this.attackDelay = 0.2;
 
+        this.specialTimer = 0;
+
         this.chargeAttack = false;
         this.knockBack = new THREE.Vector3(0, 0, 0);
         this.damageMulti = 1;
@@ -224,6 +226,8 @@ class Character {
             if (this.swingTimer > 0 && this.swingTimer < this.swingCooldown - this.attackDelay)
                 this.normalAtk();
     }
+
+    UpdateChar(t){}
 
     AddGrounded() {
         var _this = this;
