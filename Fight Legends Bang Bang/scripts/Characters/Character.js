@@ -115,6 +115,10 @@ class Character {
         this.id = id;
     }
 
+    getId(){
+        return this.id;
+    }
+
     setStock(s) {
         this.stock = s;
         gameInterface.UpdateGameInterface(this.id);
@@ -142,12 +146,22 @@ class Character {
     }
 
     setSpecialAttackCounter(a) {
+        if(this.specialCounter >= this.specialCounterThreshHold){
+            this.specialCounter = this.specialCounterThreshHold;
+            gameInterface.UpdateGameInterface(this.id);
+        } else {
         this.specialCounter = a;
+        gameInterface.UpdateGameInterface(this.id);
+        }
         gameInterface.UpdateGameInterface(this.id);
     }
 
     getCid() {
         return this.cid;
+    }
+
+    specialReady(){
+        return this.specialCounter >= this.specialCounterThreshHold;
     }
 
     CheckWithinArena() {

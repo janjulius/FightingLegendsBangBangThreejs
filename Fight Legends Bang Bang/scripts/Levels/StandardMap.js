@@ -4,7 +4,7 @@ class StandardMap extends Level {
 
         this.name = "StandardMap";
         this.topLeft = {y: 100, z: 100 } ;
-        this.bottomRight = {y: -75, z: -100};
+        this.bottomRight = {y: -50, z: -100};
 
         var possibleSpawns = [{ y: 5, z: 30 }, { y: 10, z: -8 }, { y: 10, z: 8 }, { y: 5, z: -30 }]
 
