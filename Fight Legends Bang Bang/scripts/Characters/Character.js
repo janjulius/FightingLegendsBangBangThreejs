@@ -34,7 +34,7 @@ class Character {
         this.swingTimer = 0;
         this.attackRemoveTimer = 0;
 
-        this.swingCooldown = 0.7;
+        this.swingCooldown = 0.5;
         this.attackRemoveCooldown = 0.1;
         this.attackDelay = 0.2;
         this.respawnDelay = 2;
