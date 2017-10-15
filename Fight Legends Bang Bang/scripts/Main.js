@@ -187,7 +187,6 @@ function runCharSelect() {
             scene.add(charScreen);
 
         }
-        console.log();
         camera.lookAt(charScreens[0].position);
         camera.position.set(40, 0, 0);
         camera.lookAt(new THREE.Vector3(0, 0, 0));
@@ -274,7 +273,7 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        level = new Brawlhaven(); //temp level changer
+        level = new ZeldaMap(); //temp level changer
 
         /* var level;               //level randomizer
         let randomLevel;
