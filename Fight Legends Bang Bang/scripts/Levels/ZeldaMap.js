@@ -3,8 +3,8 @@ class ZeldaMap extends Level {
         super();
         
         this.name = "ZeldaMap";
-        this.topLeft = {y: 125, z: 200 } ;
-        this.bottomRight = {y: -75, z: -200};
+        this.topLeft = {y: 125, z: 120 } ;
+        this.bottomRight = {y: -75, z: -120};
 
         var possibleSpawns = [{ y: 20, z: 50 }, { y: -12.50, z: 30 }, { y: 10, z: -30 }, { y: 32.5, z: -60 }];
 
