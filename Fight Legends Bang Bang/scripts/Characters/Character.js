@@ -145,8 +145,8 @@ class Character {
             dir.y = Math.abs(dir.y);
 
         this.damage = d;
-        this.knockBack.z = (d * this.damageMulti) * dir.z;
-        this.knockBack.y = (d * this.damageMulti) * dir.y;
+        this.knockBack.z = ((d+20) * this.damageMulti) * dir.z;
+        this.knockBack.y = ((d+20) * this.damageMulti) * dir.y;
         gameInterface.UpdateGameInterface(this.id);
     }
 
