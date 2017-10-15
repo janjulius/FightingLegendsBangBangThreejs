@@ -69,6 +69,11 @@ THREE.GamepadControls = function () {
 
     }
 
+    this.PressedButton = function (id, b) {
+        return this.gamePad[id].buttons[b].value == 1 && this.oldGamepad[id][b] != this.gamePad[id].buttons[b].value;
+    }
+
+
     this.SetOldGamePadState = function (a) {
         this.oldGamepad = new Array(4);
         for (var i = 0; i < a.length; i++) {
@@ -96,18 +101,17 @@ THREE.GamepadControls = function () {
                     var p = players[i];
                     if (this.gamePad[i]) {
                         var g = this.gamePad[i];
-                        var oldState = this.oldGamepad[i];
                         p.direction.z = this.filter(-g.axes[0]);
                         p.direction.y = this.filter(-g.axes[1]);
 
-                        if (g.buttons[0].value == 1 && oldState[0] != g.buttons[0].value) {
+                        if (this.PressedButton(i, 0)) {
                             p.jump();
                         }
-                        if (g.buttons[2].value == 1 && oldState[2] != g.buttons[2].value && p.swingTimer <= 0) {
+                        if (this.PressedButton(i, 2) && !p.isStunned && p.swingTimer <= 0) {
                             p.swingTimer = p.swingCooldown;
                             p.chargeAttack = true;
                         }
-                        if (g.buttons[3].value == 1 && oldState[3] != g.buttons[3].value) {
+                        if (this.PressedButton(i, 3) && !p.isStunned) {
                             p.specialAtk();
                         }
                     }
@@ -117,13 +121,12 @@ THREE.GamepadControls = function () {
                 for (var i = 0; i < this.gamePad.length; i++) {
                     var p = players[i];
                     var pad = this.gamePad[i];
-                    var oldState = this.oldGamepad[i];
                     if (pad) {
                         var spd = 0.2;
                         playerFiches[i].position.z -= this.filter(pad.axes[0]) * spd;
                         playerFiches[i].position.y -= this.filter(pad.axes[1]) * spd;
 
-                        if (pad.buttons[0].value == 1 && oldState[0] != pad.buttons[0].value) {
+                        if (this.PressedButton(i, 0)) {
                             ray0 = new THREE.Raycaster(playerFiches[i].position, new THREE.Vector3(-1, 0, 0));
                             var intersects = ray0.intersectObjects(scene.children);
                             for (var j = 0; j < intersects.length; j++) {
