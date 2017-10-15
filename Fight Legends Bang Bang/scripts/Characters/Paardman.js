@@ -29,7 +29,7 @@ class Paardman extends Character {
     specialAtk() {
 
         if (this.specialObject != undefined) { scene.remove(this.specialObject); }
-        this.horseChoice = 2;//Math.floor((Math.random() * 3) + 1);
+        this.horseChoice = 1;//Math.floor((Math.random() * 3) + 1);
         switch (this.horseChoice) {
             case 1:   //stone     
                 var stoneMaterial = Physijs.createMaterial(
