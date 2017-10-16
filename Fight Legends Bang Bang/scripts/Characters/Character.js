@@ -301,7 +301,7 @@ class Character {
             this.jumped = false;
         }
 
-
+        //een leon commentje
         if (this.direction.z > 0 && this.CheckSides("left")) { this.direction.z = 0 }
         else if (this.direction.z < 0 && this.CheckSides("right")) { this.direction.z = 0 }
 
