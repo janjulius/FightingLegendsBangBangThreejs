@@ -298,7 +298,11 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
+<<<<<<< HEAD
         level = new HyruleCastle(); //temp level changer
+=======
+        level = new ZeldaMap(); //temp level changer
+>>>>>>> 09e7594fa847478b62fc31ea2cff9d04d8519f3c
         /*
         //level randomizer
         let randomLevel;

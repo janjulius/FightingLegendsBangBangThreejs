@@ -110,15 +110,17 @@ THREE.GamepadControls = function () {
                         p.direction.z = this.filter(-g.axes[0]);
                         p.direction.y = this.filter(-g.axes[1]);
 
-                        if (this.PressedButton(i, 0)) {
+                        if (this.PressedButton(i, 0) && !p.isStunned) {
                             p.jump();
                         }
                         if (this.PressedButton(i, 2) && !p.isStunned && p.swingTimer <= 0) {
                             p.swingTimer = p.swingCooldown;
                             p.chargeAttack = true;
                         }
-                        if (this.PressedButton(i, 3) && !p.isStunned) {
-                            p.specialAtk();
+                        if (this.PressedButton(i, 3)) {
+                            if (!p.isStunned || p instanceof Willem) {
+                                p.specialAtk();
+                            }
                         }
                     }
                 }

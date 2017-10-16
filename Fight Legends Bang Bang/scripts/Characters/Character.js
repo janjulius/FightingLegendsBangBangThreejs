@@ -33,6 +33,7 @@ class Character {
         this.specialCounter = 0;
         this.specialCounterThreshHold = 100;
         this.swingObject;
+        this.specialExists = false;
 
         this.basicAttackDamage = 10;
         this.specialIncrease = 10;
@@ -50,6 +51,12 @@ class Character {
         this.chargeAttack = false;
         this.knockBack = new THREE.Vector3(0, 0, 0);
         this.damageMulti = 1;
+
+        this.maxGravityVelocity = 50;
+        this.gravityVelocity = 80;
+
+        this.touchingWalls = [-1, -1, -1, -1];
+
         console.log("created character");
     }
 
@@ -61,35 +68,41 @@ class Character {
         this.chargeAttack = false;
         this.attackRemoveTimer = this.attackRemoveCooldown;
         this.swingTimer = this.swingCooldown;
-        var swingMaterial = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial({
-                color: 0xffffff
-            }),
-            1,
-            0
-        );
-        this.swingObject = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(5, 5, 5),
-            swingMaterial
-        );
-        this.swingObject._dirtyPosition = true;
-        this.swingObject._dirtyRotation = true;
+
+        ///debug code
+        var geom = new THREE.BoxGeometry(5, 5, 5);
+        this.swingObject = new THREE.Mesh(geom, new THREE.MeshBasicMaterial({ color: 0xffffff }));
         this.swingObject.position.set(this.geometry.position.x,
             this.geometry.position.y + (this.attackDirection.y * 5),
             this.geometry.position.z + (this.attackDirection.z * 5));
-        var _this = this;
-        this.swingObject.addEventListener('collision', function (other_object, relative_velocity, relative_rotation, contact_normal) {
-            if (_this.swingObject._physijs.touches.length > 0) {
-                if (other_object.isPlayer) {
-                    var j = parseInt(other_object.name);
-                    if (_this.id != j) {
-                        _this.setSpecialAttackCounter(_this.specialCounter + _this.specialIncrease);
-                        players[j].setDamage(players[j].getDamage() + _this.basicAttackDamage, _this.attackDirection);
-                    }
+        scene.add(this.swingObject);
+        ///
+
+        for (var i = 0; i < playersPlaying; i++) {
+            var otherPlayer = players[i];
+            if (otherPlayer.id == this.id)
+                continue;
+
+            var hit = false;
+            if (distanceBetweenVector3(this.geometry.position, otherPlayer.geometry.position) < 10) {
+                var ydist = Math.abs(otherPlayer.geometry.position.y - this.geometry.position.y);
+                var zdist = Math.abs(otherPlayer.geometry.position.z - this.geometry.position.z);
+                var tol = 4.5;
+                if (this.attackDirection.z == 1 && otherPlayer.geometry.position.z > this.geometry.position.z && ydist < tol && zdist > tol) {
+                    hit = true;//links
+                } else if (this.attackDirection.z == -1 && otherPlayer.geometry.position.z < this.geometry.position.z && ydist < tol && zdist > tol) {
+                    hit = true;//rechts
+                } else if (this.attackDirection.y == 1 && otherPlayer.geometry.position.y > this.geometry.position.y && zdist < tol && ydist > tol) {
+                    hit = true;//boven
+                } else if (this.attackDirection.y == -1 && otherPlayer.geometry.position.y < this.geometry.position.y && zdist < tol && ydist > tol) {
+                    hit = true;//onder
                 }
             }
-        });
-        scene.add(this.swingObject);
+            if (hit) {
+                this.setSpecialAttackCounter(this.specialCounter + this.specialIncrease);
+                otherPlayer.setDamage(otherPlayer.getDamage() + this.basicAttackDamage, this.attackDirection);
+            }
+        }
     }
 
     doNormalAttack() {
@@ -148,8 +161,14 @@ class Character {
             return;
         }
 
-        if (this.grounded)
+        if (this.CheckSides("down"))
             dir.y = Math.abs(dir.y);
+        if (this.CheckSides("up"))
+            dir.y = -Math.abs(dir.y);
+        if (this.CheckSides("left"))
+            dir.z = -Math.abs(dir.z);
+        if (this.CheckSides("right"))
+            dir.z = Math.abs(dir.z);
 
         this.damage = d;
         this.knockBack.z = ((d + 20) * this.damageMulti) * dir.z;
@@ -164,10 +183,8 @@ class Character {
     setSpecialAttackCounter(a) {
         if (this.specialCounter > this.specialCounterThreshHold) {
             this.specialCounter = this.specialCounterThreshHold;
-            gameInterface.UpdateGameInterface(this.id);
         } else {
             this.specialCounter = a;
-            gameInterface.UpdateGameInterface(this.id);
         }
         gameInterface.UpdateGameInterface(this.id);
     }
@@ -192,28 +209,52 @@ class Character {
             this.respawnTimer = this.respawnDelay;
             this.isAlive = false;
             this.setStock(this.stock - 1);
+            this.specialExists = false;
             this.setSpecialAttackCounter(this.specialCounter / 2);
         }
     }
 
     CheckCollision() {
         var touchedGround = false;
+        var ids = new Array(this.geometry._physijs.touches.length);
         for (var i = 0; i < this.geometry._physijs.touches.length; i++) {
             var id = this.geometry._physijs.touches[i];
             var obj = scene._objects[id];
-
             if (obj) {
-                if (obj.isPlayer) {}
+                ids[i] = obj.id;
+                if (obj.isPlayer) { }
 
                 if (obj.name == "ground") {
                     touchedGround = true;
                 }
             }
+        }
 
+        for (var j = 0; j < this.touchingWalls.length; j++) {
+            var oid = this.touchingWalls[j];
+            if (oid != -1) {
+                if (!ids.includes(oid)) {
+                    this.touchingWalls[j] = -1;
+                }
+            }
         }
         if (!touchedGround)
             this.grounded = false;
     }
+
+    CheckSides(s) {
+        switch (s) {
+            case "left":
+                return this.touchingWalls[0] != -1;
+            case "right":
+                return this.touchingWalls[1] != -1;
+            case "up":
+                return this.touchingWalls[2] != -1;
+            case "down":
+                return this.touchingWalls[3] != -1;
+        }
+    }
+
 
     Update(t) {
 
@@ -261,13 +302,13 @@ class Character {
 
         var vel = this.geometry.getLinearVelocity();
 
-        if (this.velt > -50)
-            this.velt -= 80 * t;
+        if (this.velt > -this.maxGravityVelocity)
+            this.velt -= this.gravityVelocity * t;
 
         if (this.grounded)
             this.velt = 0;
 
-        if (this.jumped) {
+        if (this.jumped && !this.CheckSides("up")) {
             if (this.jumpsLeft > 0) {
                 this.velt = 50;
                 this.grounded = false;
@@ -276,7 +317,17 @@ class Character {
             this.jumped = false;
         }
 
-        this.velocity = new THREE.Vector3(0, this.velt + this.knockBack.y, ((this.direction.z * this.speed)) + this.knockBack.z);
+        var movespeed = this.direction.z * this.speed;
+        if (this.knockBack.z > 0 && this.direction.z < 0) {
+            this.knockBack.z -= this.speed * t;
+            movespeed = 0;
+        } else if (this.knockBack.z < 0 && this.direction.z > 0) {
+            this.knockBack.z += this.speed * t;
+            movespeed = 0;
+        }
+
+
+        this.velocity = new THREE.Vector3(0, this.velt + this.knockBack.y, movespeed + this.knockBack.z);
 
         this.geometry.setLinearVelocity(this.isStunned ? new THREE.Vector3(0, 0, 0) : this.velocity);
         this.geometry.setAngularVelocity(new THREE.Vector3(0, 0, 0));
@@ -310,11 +361,24 @@ class Character {
                 this.normalAtk();
     }
 
-    UpdateChar(t) {}
+    UpdateChar(t) { }
 
     AddGrounded() {
         var _this = this;
         this.geometry.addEventListener('collision', function (other_object, relative_velocity, relative_rotation, contact_normal) {
+
+            if (!other_object.isPlayer) {
+                if (contact_normal.z == 1) {
+                    _this.touchingWalls[0] = other_object.id;
+                } else if (contact_normal.z == -1) {
+                    _this.touchingWalls[1] = other_object.id;
+                } else if (contact_normal.y == 1) {
+                    _this.touchingWalls[2] = other_object.id;
+                } else if (contact_normal.y == -1) {
+                    _this.touchingWalls[3] = other_object.id;
+                }
+            }
+
             if (contact_normal.y < -0.9) {
                 _this.grounded = true;
                 _this.jumpsLeft = _this.totalJump;
@@ -322,7 +386,6 @@ class Character {
                 _this.grounded = false;
                 _this.velt = 0;
             }
-
             if (_this.knockBack.z != 0) {
                 if (contact_normal.z < -0.7 && !other_object.isPlayer) {
                     _this.knockBack.z = -_this.knockBack.z * 0.8;
