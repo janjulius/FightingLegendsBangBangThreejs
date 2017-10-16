@@ -20,6 +20,7 @@ class Level{
         this.saddlebrown = 0x8B4513;
         this.goldenrod = 0xDAA520;
         this.forestgreen = 0x228B22;
+        this.castle = 0x696969;
     
     }
 }

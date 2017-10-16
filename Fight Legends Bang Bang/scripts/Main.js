@@ -298,7 +298,7 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        level = new Deserto(); //temp level changer
+        level = new HyruleCastle(); //temp level changer
         /*
         //level randomizer
         let randomLevel;
