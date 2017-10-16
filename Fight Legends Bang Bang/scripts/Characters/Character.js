@@ -64,35 +64,41 @@ class Character {
         this.chargeAttack = false;
         this.attackRemoveTimer = this.attackRemoveCooldown;
         this.swingTimer = this.swingCooldown;
-        var swingMaterial = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial({
-                color: 0xffffff
-            }),
-            1,
-            0
-        );
-        this.swingObject = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(5, 5, 5),
-            swingMaterial
-        );
-        this.swingObject._dirtyPosition = true;
-        this.swingObject._dirtyRotation = true;
+
+        ///debug code
+        var geom = new THREE.BoxGeometry(5, 5, 5);
+        this.swingObject = new THREE.Mesh(geom, new THREE.MeshBasicMaterial({ color: 0xffffff }));
         this.swingObject.position.set(this.geometry.position.x,
             this.geometry.position.y + (this.attackDirection.y * 5),
             this.geometry.position.z + (this.attackDirection.z * 5));
-        var _this = this;
-        this.swingObject.addEventListener('collision', function (other_object, relative_velocity, relative_rotation, contact_normal) {
-            if (_this.swingObject._physijs.touches.length > 0) {
-                if (other_object.isPlayer) {
-                    var j = parseInt(other_object.name);
-                    if (_this.id != j) {
-                        _this.setSpecialAttackCounter(_this.specialCounter + _this.specialIncrease);
-                        players[j].setDamage(players[j].getDamage() + _this.basicAttackDamage, _this.attackDirection);
-                    }
+        scene.add(this.swingObject);
+        ///
+
+        for (var i = 0; i < playersPlaying; i++) {
+            var otherPlayer = players[i];
+            if (otherPlayer.id == this.id)
+                continue;
+
+            var hit = false;
+            if (distanceBetweenVector3(this.geometry.position, otherPlayer.geometry.position) < 10) {
+                var ydist = Math.abs(otherPlayer.geometry.position.y - this.geometry.position.y);
+                var zdist = Math.abs(otherPlayer.geometry.position.z - this.geometry.position.z);
+                var tol = 4.5;
+                if (this.attackDirection.z == 1 && otherPlayer.geometry.position.z > this.geometry.position.z && ydist < tol && zdist > tol) {
+                    hit = true;//links
+                } else if (this.attackDirection.z == -1 && otherPlayer.geometry.position.z < this.geometry.position.z && ydist < tol && zdist > tol) {
+                    hit = true;//rechts
+                } else if (this.attackDirection.y == 1 && otherPlayer.geometry.position.y > this.geometry.position.y && zdist < tol && ydist > tol) {
+                    hit = true;//boven
+                } else if (this.attackDirection.y == -1 && otherPlayer.geometry.position.y < this.geometry.position.y && zdist < tol && ydist > tol) {
+                    hit = true;//onder
                 }
             }
-        });
-        scene.add(this.swingObject);
+            if (hit) {
+                this.setSpecialAttackCounter(this.specialCounter + this.specialIncrease);
+                otherPlayer.setDamage(otherPlayer.getDamage() + this.basicAttackDamage, this.attackDirection);
+            }
+        }
     }
 
     doNormalAttack() {
@@ -151,14 +157,14 @@ class Character {
             return;
         }
 
-        if (this.touchingWalls[3] != -1)
+        if (this.CheckSides("down"))
             dir.y = Math.abs(dir.y);
-
-
-        if (dir.z > 0 && this.touchingWalls[0] != -1)
-            dir.z = -dir.z;
-        if (dir.z < 0 && this.touchingWalls[1] != -1)
-            dir.z = -dir.z;
+        if (this.CheckSides("up"))
+            dir.y = -Math.abs(dir.y);
+        if (this.CheckSides("left"))
+            dir.z = -Math.abs(dir.z);
+        if (this.CheckSides("right"))
+            dir.z = Math.abs(dir.z);
 
         this.damage = d;
         this.knockBack.z = ((d + 20) * this.damageMulti) * dir.z;
@@ -173,10 +179,8 @@ class Character {
     setSpecialAttackCounter(a) {
         if (this.specialCounter > this.specialCounterThreshHold) {
             this.specialCounter = this.specialCounterThreshHold;
-            gameInterface.UpdateGameInterface(this.id);
         } else {
             this.specialCounter = a;
-            gameInterface.UpdateGameInterface(this.id);
         }
         gameInterface.UpdateGameInterface(this.id);
     }
@@ -213,7 +217,7 @@ class Character {
             var obj = scene._objects[id];
             if (obj) {
                 ids[i] = obj.id;
-                if (obj.isPlayer) {}
+                if (obj.isPlayer) { }
 
                 if (obj.name == "ground") {
                     touchedGround = true;
@@ -232,6 +236,20 @@ class Character {
         if (!touchedGround)
             this.grounded = false;
     }
+
+    CheckSides(s) {
+        switch (s) {
+            case "left":
+                return this.touchingWalls[0] != -1;
+            case "right":
+                return this.touchingWalls[1] != -1;
+            case "up":
+                return this.touchingWalls[2] != -1;
+            case "down":
+                return this.touchingWalls[3] != -1;
+        }
+    }
+
 
     Update(t) {
 
@@ -285,7 +303,7 @@ class Character {
         if (this.grounded)
             this.velt = 0;
 
-        if (this.jumped) {
+        if (this.jumped && !this.CheckSides("up")) {
             if (this.jumpsLeft > 0) {
                 this.velt = 50;
                 this.grounded = false;
@@ -328,7 +346,7 @@ class Character {
                 this.normalAtk();
     }
 
-    UpdateChar(t) {}
+    UpdateChar(t) { }
 
     AddGrounded() {
         var _this = this;
