@@ -210,6 +210,8 @@ class Character {
             this.isAlive = false;
             this.setStock(this.stock - 1);
             this.specialExists = false;
+            this.maxGravityVelocity = 50;
+            this.gravityVelocity = 80;
             this.setSpecialAttackCounter(this.specialCounter / 2);
         }
     }
