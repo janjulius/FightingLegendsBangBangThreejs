@@ -10,6 +10,7 @@ class Willem extends Character {
         this.ultDamage = 40;
         this.ballSpeed = 80;
         this.specialExists = false;
+        if(DEBUG_MODE){this.specialIncrease = 100;}
         this.portrait = 'sprites/Characters/MenuSprites/willem.png';
         this.material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
@@ -45,6 +46,9 @@ class Willem extends Character {
     }
 
     specialAtk() {
+       // if (DEBUG_MODE) {
+       //    this.setSpecialAttackCounter(100);
+        //}
         console.log("PRESS SPECIAL BUTTON");
         if(this.specialExists){
             this.EndSpecial();

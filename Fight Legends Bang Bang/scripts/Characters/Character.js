@@ -212,6 +212,7 @@ class Character {
             this.specialExists = false;
             this.maxGravityVelocity = 50;
             this.gravityVelocity = 80;
+            this.velt = 0;
             this.setSpecialAttackCounter(this.specialCounter / 2);
         }
     }

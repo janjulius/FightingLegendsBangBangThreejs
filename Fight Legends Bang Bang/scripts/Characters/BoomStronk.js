@@ -100,6 +100,7 @@ class BoomStronk extends Character {
                 }
             }
         } else {
+            this.hitSomeone = true;
             this.maxGravityVelocity = 50;
             this.gravityVelocity = 80;
         }
