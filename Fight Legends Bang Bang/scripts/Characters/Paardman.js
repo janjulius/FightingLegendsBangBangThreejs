@@ -148,7 +148,6 @@ class Paardman extends Character {
                         });
                         break;
                 }
-                console.log(this.specialTimer);
             }
             if (this.specialTimer <= 0) {
                 this.specialExists = false;

@@ -97,7 +97,7 @@ function CalculateTargetsBoundingBox() {
 
     for (var i = 0; i < playersPlaying; i++) {
 
-        if(!players[i].isAlive){
+        if (!players[i].isAlive) {
             pAlive--;
             continue;
         }
@@ -105,12 +105,12 @@ function CalculateTargetsBoundingBox() {
         var pos = players[i].geometry.position;
 
         minX = Math.min(minX, pos.z);
-        minY = Math.min(minY, pos.y);
+        minY = Math.min(minY, pos.y - 5);
         maxX = Math.max(maxX, pos.z);
-        maxY = Math.max(maxY, pos.y);
+        maxY = Math.max(maxY, pos.y - 5);
     }
 
-    if(pAlive == 0){
+    if (pAlive == 0) {
         minX = 0;
         minY = 0;
         maxX = 0;
@@ -125,7 +125,7 @@ function CalculateTargetsBoundingBox() {
 function CalculateCameraPosition(bb) {
     var center = bb.GetCenter();
     var newPos = Math.abs(bb.GetMagnitude() / 100);
-    newPos += 120;
+    newPos += 150;
 
     return new THREE.Vector3(newPos, center.y, center.x);
 }
@@ -142,7 +142,7 @@ scene.addEventListener('update', function () {
 
         var boundingBox = CalculateTargetsBoundingBox();
         var np = CalculateCameraPosition(boundingBox);
-        camera.position.set(np.x, np.y, np.z);
+        camera.position.lerp(new THREE.Vector3(np.x, np.y, np.z), timeElapsed * 2);
         scene.simulate(undefined, 1); // run physics
     }
 });
@@ -170,7 +170,7 @@ function render() {
 
 function runCharSelect() {
 
-    music.addEventListener('ended', function() {
+    music.addEventListener('ended', function () {
         this.currentTime = 0;
         this.play();
     }, false);
