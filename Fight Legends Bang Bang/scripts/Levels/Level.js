@@ -17,6 +17,7 @@ class Level{
         this.tilegray = 0x747D7D;
         this.rusty = 0xB7410E;
         this.castle = 0x696969;
+        this.darkgreen = 0x006400;
     
     }
 }

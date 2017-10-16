@@ -14,7 +14,7 @@ class HyruleCastle extends Level {
         }, false);
         this.myAudio.play();
 
-        var possibleSpawns = [{ y: 20, z: 35 }, { y: 30, z: -8 }, { y: 30, z: 8 }, { y: 20, z: -35 }]
+        var possibleSpawns = [{ y: 17.5, z: 40 }, { y: 25, z: 8 }, { y: 60, z: 8 }, { y: 17.5, z: -30 }]
 
         function shuffle(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
@@ -126,5 +126,42 @@ class HyruleCastle extends Level {
         platform3.position.set(-6, 27.5, 7.5);
         scene.add(platform3);
         platform3.name = "ground";
+
+        var pointroof1 = new Physijs.BoxMesh(
+            new THREE.CylinderGeometry(0,5,50,40),
+            new THREE.MeshBasicMaterial( {color: this.darkgreen }),
+            0
+        )
+        pointroof1.receiveShadow = true;
+        pointroof1.position.set(-40,30,30);
+        scene.add(pointroof1);
+
+        var pointroof2 = new Physijs.BoxMesh(
+            new THREE.CylinderGeometry(0,5,20,40),
+            new THREE.MeshBasicMaterial( {color: this.darkgreen }),
+            0
+        )
+        pointroof2.receiveShadow = true;
+        pointroof2.position.set(-15, 70,6);
+        scene.add(pointroof2);
+
+        var pointroof3 = new Physijs.BoxMesh(
+            new THREE.CylinderGeometry(0,4,10,40),
+            new THREE.MeshBasicMaterial( {color: this.darkgreen }),
+            0
+        )
+        pointroof3.receiveShadow = true;
+        pointroof3.position.set(-7,20,-30);
+        scene.add(pointroof3);
+
+        var square = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 7.5, 7.5),
+            new THREE.MeshBasicMaterial({ color: this.darkgreen }),
+            0
+        );
+        square.receiveShadow = true;
+        square.position.set(-7, 12.5, -30);
+        scene.add(square);
+        square.name = "ground";
     }
 }
