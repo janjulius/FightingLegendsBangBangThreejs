@@ -317,7 +317,17 @@ class Character {
             this.jumped = false;
         }
 
-        this.velocity = new THREE.Vector3(0, this.velt + this.knockBack.y, ((this.direction.z * this.speed)) + this.knockBack.z);
+        var movespeed = this.direction.z * this.speed;
+        if (this.knockBack.z > 0 && this.direction.z < 0) {
+            this.knockBack.z -= this.speed * t;
+            movespeed = 0;
+        } else if (this.knockBack.z < 0 && this.direction.z > 0) {
+            this.knockBack.z += this.speed * t;
+            movespeed = 0;
+        }
+
+
+        this.velocity = new THREE.Vector3(0, this.velt + this.knockBack.y, movespeed + this.knockBack.z);
 
         this.geometry.setLinearVelocity(this.isStunned ? new THREE.Vector3(0, 0, 0) : this.velocity);
         this.geometry.setAngularVelocity(new THREE.Vector3(0, 0, 0));
