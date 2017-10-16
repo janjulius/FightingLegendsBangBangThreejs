@@ -6,8 +6,14 @@ class Character {
         this.specialAtkString = "base";
         this.damage = GAME_SETTINGS_HANDICAP;
 
-        this.direction = { y: 0, z: 0 };
-        this.attackDirection = { y: 0, z: 1 };
+        this.direction = {
+            y: 0,
+            z: 0
+        };
+        this.attackDirection = {
+            y: 0,
+            z: 1
+        };
 
         this.id = 0;
         this.cid = -1;
@@ -146,8 +152,8 @@ class Character {
             dir.y = Math.abs(dir.y);
 
         this.damage = d;
-        this.knockBack.z = ((d+20) * this.damageMulti) * dir.z;
-        this.knockBack.y = ((d+20) * this.damageMulti) * dir.y;
+        this.knockBack.z = ((d + 20) * this.damageMulti) * dir.z;
+        this.knockBack.y = ((d + 20) * this.damageMulti) * dir.y;
         gameInterface.UpdateGameInterface(this.id);
     }
 
@@ -177,11 +183,16 @@ class Character {
     CheckWithinArena() {
         var arena = new Rect(level.topLeft.z, level.topLeft.y, level.bottomRight.y, level.bottomRight.z);
 
-        var playerPoint = { x: this.geometry.position.z, y: this.geometry.position.y };
+        var playerPoint = {
+            x: this.geometry.position.z,
+            y: this.geometry.position.y
+        };
 
         if (!arena.Contains(playerPoint) && this.isAlive) {
             this.respawnTimer = this.respawnDelay;
             this.isAlive = false;
+            this.setStock(this.stock - 1);
+            this.setSpecialAttackCounter(this.specialCounter / 2);
         }
     }
 
@@ -192,7 +203,7 @@ class Character {
             var obj = scene._objects[id];
 
             if (obj) {
-                if (obj.isPlayer) { }
+                if (obj.isPlayer) {}
 
                 if (obj.name == "ground") {
                     touchedGround = true;
@@ -226,13 +237,25 @@ class Character {
 
 
         if (this.direction.z > 0.6)
-            this.attackDirection = { y: 0, z: 1 };
+            this.attackDirection = {
+                y: 0,
+                z: 1
+            };
         else if (this.direction.z < -0.6)
-            this.attackDirection = { y: 0, z: -1 };
+            this.attackDirection = {
+                y: 0,
+                z: -1
+            };
         else if (this.direction.y > 0.6)
-            this.attackDirection = { y: 1, z: 0 };
+            this.attackDirection = {
+                y: 1,
+                z: 0
+            };
         else if (this.direction.y < -0.6)
-            this.attackDirection = { y: -1, z: 0 };
+            this.attackDirection = {
+                y: -1,
+                z: 0
+            };
 
         this.CheckCollision();
 
@@ -273,9 +296,7 @@ class Character {
             if (this.respawnTimer < 0 && this.stock > 0) {
                 this.geometry.position.set(0, level.spawn[this.id].y, level.spawn[this.id].z);
                 this.geometry.__dirtyPosition = true;
-                this.setStock(this.stock - 1);
                 this.knockBack = new THREE.Vector3(0, 0, 0);
-                this.setSpecialAttackCounter(0);
                 this.isStunned = false;
                 this.isAlive = true;
             }
@@ -289,7 +310,7 @@ class Character {
                 this.normalAtk();
     }
 
-    UpdateChar(t) { }
+    UpdateChar(t) {}
 
     AddGrounded() {
         var _this = this;
