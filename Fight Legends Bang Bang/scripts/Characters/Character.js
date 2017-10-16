@@ -170,7 +170,7 @@ class Character {
         if (this.CheckSides("right"))
             dir.z = Math.abs(dir.z);
 
-        this.damage = d;
+        this.damage = Math.floor(d);
         this.knockBack.z = ((d + 20) * this.damageMulti) * dir.z;
         this.knockBack.y = ((d + 20) * this.damageMulti) * dir.y;
         gameInterface.UpdateGameInterface(this.id);
