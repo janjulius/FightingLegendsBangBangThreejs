@@ -19,6 +19,7 @@ class Rocky extends Character {
         this.claw1HitAudio = new Audio(soundFolderPath + 'Rocky_Claw_hit.wav');
         this.claw2HitAudio = new Audio(soundFolderPath + 'Rocky_Claw_hit.wav');
         this.claw3HitAudio = new Audio(soundFolderPath + 'Rocky_Claw_hit.wav');
+        this.finalClawHitAudio = new Audio(soundFolderPath + 'Rocky_final_claw_hit.wav');
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
             new THREE.MeshBasicMaterial({ color: 0xec00fb },
@@ -47,7 +48,6 @@ class Rocky extends Character {
                 if (distanceBetweenVector3(players[i].geometry.position, this.geometry.position) <= this.ultRange) {
                     if (distanceBetweenVector3(players[i].geometry.position, this.geometry.position)
                         <= distanceBetweenVector3(players[this.target].geometry.position, this.geometry.position)) {
-                        console.log("ROCKY: target " + players[i].name + " is closer than " + players[this.target].name + "");
                         this.target = i;
                     }
                 }
@@ -61,7 +61,6 @@ class Rocky extends Character {
     UpdateChar(t) {
         if (this.specialExists) {
             if (this.specialTimer > 0) {
-                console.log("test" + this.specialTimer);
                 this.specialTimer -= t;
                 if (this.specialTimer > 2 && this.specialTimer < 2.5) { //preparing
                     this.isStunned = true;
@@ -103,10 +102,10 @@ class Rocky extends Character {
                 }
             }
             if (this.specialTimer <= 0) {
-                console.log("ATTACK" + this.specialExists);
                 players[this.target].isStunned = false;
                 this.isStunned = false;
                 this.specialExists = false;
+                this.finalClawHitAudio.play();
 
                 players[this.target].setDamage(players[this.target].getDamage() + this.specialDamage
                     , { y: 1, z: players[this.target].attackDirection.z });
