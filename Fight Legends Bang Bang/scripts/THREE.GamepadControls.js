@@ -70,11 +70,17 @@ THREE.GamepadControls = function () {
     }
 
     this.PressedButton = function (id, b) {
+        if (!this.gamePad[id] && !this.oldGamepad[id])
+            return false;
+
         return this.gamePad[id].buttons[b].value == 1 && this.oldGamepad[id][b] != this.gamePad[id].buttons[b].value;
     }
 
 
     this.SetOldGamePadState = function (a) {
+        if (!a)
+            return;
+
         this.oldGamepad = new Array(4);
         for (var i = 0; i < a.length; i++) {
             this.oldGamepad[i] = new Array(17);
@@ -99,7 +105,7 @@ THREE.GamepadControls = function () {
             if (!charSelect) {
                 for (var i = 0; i < players.length; i++) {
                     var p = players[i];
-                    if (this.gamePad[i]) {
+                    if (this.gamePad[i] && p) {
                         var g = this.gamePad[i];
                         p.direction.z = this.filter(-g.axes[0]);
                         p.direction.y = this.filter(-g.axes[1]);

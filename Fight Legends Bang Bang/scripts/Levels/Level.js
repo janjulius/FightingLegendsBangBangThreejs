@@ -15,6 +15,7 @@ class Level{
         this.grassgreen = 0x4DBD33;
         this.mossgreen = 0xADDFAD;
         this.tilegray = 0x747D7D;
+        this.rusty = 0xB7410E;
     
     }
 }

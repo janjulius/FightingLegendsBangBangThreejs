@@ -9,6 +9,7 @@ class Fred extends Character {
         this.hammerSmashDamage = 90;
         this.spcTimer = 0;
         this.specialExistTime = 0.2;
+        this.specialRange = 20;
         this.specialExists = false;
         this.spcTargets = [];
         this.portrait = 'sprites/Characters/MenuSprites/fred.png';
@@ -50,7 +51,7 @@ class Fred extends Character {
 
             if (this.spcTimer > 0) {
                 this.spcTimer -= t;
-                this.specialObject.scale.set(this.specialObject.scale.x += 0.1, this.specialObject.scale.y += 0.1, this.specialObject.scale.z += 0.1);
+                this.specialObject.scale.set(this.specialObject.scale.x += 0.15, this.specialObject.scale.y += 0.15, this.specialObject.scale.z += 0.15);
             }
             if (this.spcTimer <= 0) {
                 this.specialExists = false;
@@ -59,13 +60,13 @@ class Fred extends Character {
                     if (i == this.id) {
                         continue;
                     }
-                    if (distanceBetweenVector3(this.geometry.position, players[i].geometry.position) <= 10) {
+                    if (distanceBetweenVector3(this.geometry.position, players[i].geometry.position) <= this.specialRange) {
                         this.spcTargets.push(players[i].getId());
                     }
                 }
                 if (this.spcTargets.length != 0) {
                     for (var i = 0; i < this.spcTargets.length; i++) {
-                        for (var j = 0; j < players.length; j++) {
+                        for (var j = 0; j < playersPlaying; j++) {
                             if (players[j].getId() == this.spcTargets[i]) {
                                 this.setSpecialAttackCounter(0);
                                 players[this.spcTargets[i]].setDamage(
