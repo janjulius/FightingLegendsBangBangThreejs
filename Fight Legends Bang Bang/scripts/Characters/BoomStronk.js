@@ -41,13 +41,13 @@ class BoomStronk extends Character {
     }
 
     UpdateChar(t) {
-        //console.log(this.specialTimer);
         if (this.specialExists) {
             if (this.specialTimer > 0) {
                 this.specialTimer -= t;
 
                 if (this.specialHealing) {
-                    console.log("healing");
+                    this.maxGravityVelocity = 50;
+                    this.gravityVelocity = 80;
                     this.isStunned = true;
                     if (this.specialTimer > 2) {
                         this.setDamage(Math.floor(this.healval / 2), { y: 0, z: 0 });
@@ -62,7 +62,6 @@ class BoomStronk extends Character {
 
                 } else {
                     if (this.grounded) {
-                        console.log("grounded");
                         this.specialTimer = 0;
                     }
                     var _this = this;
@@ -89,7 +88,6 @@ class BoomStronk extends Character {
                 }
             }
             if (this.specialTimer <= 0) {
-                console.log("special hit nobody attempting to heal" + this.hitSomeone);
                 if (!this.hitSomeone && !this.specialHealing) {
                     this.specialHealing = true;
                     this.hitSomeone = true;
