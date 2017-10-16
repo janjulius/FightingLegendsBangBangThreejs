@@ -12,7 +12,6 @@ class Rocky extends Character {
         this.specialDamage = 20;
         this.clawed = [];
         this.clawed[0] = false; this.clawed[1] = false; this.clawed[2] = false;
-        this.specialExists = false;
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
             new THREE.MeshBasicMaterial({ color: 0xec00fb },
@@ -25,6 +24,9 @@ class Rocky extends Character {
     }
 
     specialAtk() {
+        if (DEBUG_MODE) {
+            this.setSpecialAttackCounter(100);
+        }
         this.clawed[0] = false; this.clawed[1] = false; this.clawed[2] = false;
         if (this.specialReady()) {
             this.target;
@@ -88,7 +90,7 @@ class Rocky extends Character {
                 }
             }
             if (this.specialTimer <= 0) {
-                console.log("ATTACK");
+                console.log("ATTACK" + this.specialExists);
                 players[this.target].isStunned = false;
                 this.isStunned = false;
                 this.specialExists = false;

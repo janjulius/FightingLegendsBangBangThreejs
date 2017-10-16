@@ -33,6 +33,7 @@ class Character {
         this.specialCounter = 0;
         this.specialCounterThreshHold = 100;
         this.swingObject;
+        this.specialExists = false;
 
         this.basicAttackDamage = 10;
         this.specialIncrease = 10;
@@ -50,6 +51,9 @@ class Character {
         this.chargeAttack = false;
         this.knockBack = new THREE.Vector3(0, 0, 0);
         this.damageMulti = 1;
+
+        this.maxGravityVelocity = 50;
+        this.gravityVelocity = 80;
 
         this.touchingWalls = [-1, -1, -1, -1];
 
@@ -205,6 +209,7 @@ class Character {
             this.respawnTimer = this.respawnDelay;
             this.isAlive = false;
             this.setStock(this.stock - 1);
+            this.specialExists = false;
             this.setSpecialAttackCounter(this.specialCounter / 2);
         }
     }
@@ -297,8 +302,8 @@ class Character {
 
         var vel = this.geometry.getLinearVelocity();
 
-        if (this.velt > -50)
-            this.velt -= 80 * t;
+        if (this.velt > -this.maxGravityVelocity)
+            this.velt -= this.gravityVelocity * t;
 
         if (this.grounded)
             this.velt = 0;

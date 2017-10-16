@@ -25,9 +25,6 @@ class Fred extends Character {
     }
 
     specialAtk() {
-        if (DEBUG_MODE) {
-            this.setSpecialAttackCounter(100);
-        }
         if (this.specialReady()) {
             var specialMaterial = Physijs.createMaterial(
                 new THREE.MeshBasicMaterial({
