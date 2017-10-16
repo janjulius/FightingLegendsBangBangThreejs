@@ -10,7 +10,7 @@ class Willem extends Character {
         this.ultDamage = 40;
         this.ballSpeed = 80;
         this.specialExists = false;
-        if(DEBUG_MODE){this.specialIncrease = 100;}
+        if (DEBUG_MODE) { this.specialIncrease = 100; }
         this.portrait = 'sprites/Characters/MenuSprites/willem.png';
         this.material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
@@ -46,18 +46,18 @@ class Willem extends Character {
     }
 
     specialAtk() {
-       // if (DEBUG_MODE) {
-       //    this.setSpecialAttackCounter(100);
+        // if (DEBUG_MODE) {
+        //    this.setSpecialAttackCounter(100);
         //}
         console.log("PRESS SPECIAL BUTTON");
-        if(this.specialExists){
+        if (this.specialExists) {
             this.EndSpecial();
             console.log("attempt to end special early");
         }
         if (this.specialReady() && !this.specialExists) {
             this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
             this.ballVelocity = new THREE.Vector3(0, 0, this.attackDirection.z * ((this.ballSpeed) + 1));
-        
+
             this.specialTimer = 5;
             this.specialExists = true;
             this.ultpos = this.geometry.position;
@@ -69,28 +69,26 @@ class Willem extends Character {
         if (this.specialExists) {
             if (this.specialTimer > 0) {
                 this.specialTimer -= t;
-                if (this.specialTimer > 4 && this.specialTimer < 5) {
+                if (this.specialTimer > 4.02 && this.specialTimer < 5) {
+                    this.velt = 0;
                     this.isStunned = true;
-                    if (this.specialTimer < 4.1) {
-                        var pos = this.geometry.position;
-                        this.geometry.__dirtyPosition = true;
-                        this.geometry.__dirtyRotation = true;
-                        this.specialObject.__dirtyPosition = true;
-                        this.specialObject.__dirtyRotation = true;
-                        this.specialObject.position.set(0, this.ultpos.y + 5, this.ultpos.z);
-                        this.velt = 0;
-                    }
+                } if (this.specialTimer > 4 && this.specialTimer < 4.02) {
+                    var pos = this.geometry.position;
+                    this.specialObject.position.set(0, pos.y + 5, pos.z);
+                    this.geometry.__dirtyPosition = true;
+                    this.specialObject.__dirtyPosition = true;
+                    this.velt = 0;
                 }
+
                 if (this.specialTimer < 4) {
+                    this.maxGravityVelocity = 50;
+                    this.gravityVelocity = 80;
                     this.geometry.position.set(-1000, this.specialObject.position.y, this.specialObject.position.z);
 
                     this.specialObject.setLinearVelocity(this.ballVelocity);
                     for (var i = 0; i < playersPlaying; i++) {
                         if (i == this.id) {
                             continue;
-                        }
-                        if(i == 1){
-                            console.log(distanceBetweenVector3(this.specialObject.position, players[i].geometry.position));
                         }
 
                         if (distanceBetweenVector3(this.specialObject.position, players[i].geometry.position) <= 12) {
@@ -108,14 +106,14 @@ class Willem extends Character {
         }
     }
 
-    EndSpecial(){
+    EndSpecial() {
 
-                this.isStunned = false;
-                this.geometry.__dirtyPosition =true;
-                this.specialObject.__dirtyPosition =true;
-                this.geometry.position.set(0, this.specialObject.position.y, this.specialObject.position.z);
-                this.specialObject.position.set(-1000, 0,0);
-                this.specialExists = false;
+        this.isStunned = false;
+        this.geometry.__dirtyPosition = true;
+        this.specialObject.__dirtyPosition = true;
+        this.geometry.position.set(0, this.specialObject.position.y, this.specialObject.position.z);
+        this.specialObject.position.set(-1000, 0, 0);
+        this.specialExists = false;
     }
     GetSpcDirection(p) {
         if ((p.geometry.position.z - this.geometry.position.z) <= 0) {
