@@ -105,11 +105,11 @@ class Deserto extends Level {
         scene.add(burleywoodCube);
         burleywoodCube.name = "ground";
 
-        var cylinder = new Physijs.BoxMesh(
+        var cylinder = new THREE.Mesh(
             new THREE.CylinderGeometry(0,45,45,80),
             new THREE.MeshBasicMaterial( {color: this.goldenrod }),
             0
-        )
+        );
         cylinder.receiveShadow = true;
         cylinder.position.set(-40,12,70);
         scene.add(cylinder);
