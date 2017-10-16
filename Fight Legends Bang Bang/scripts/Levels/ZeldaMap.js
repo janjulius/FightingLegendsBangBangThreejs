@@ -7,7 +7,7 @@ class ZeldaMap extends Level {
         this.bottomRight = {y: -75, z: -140};
 
         this.myAudio = new Audio('Music/zelda.mp3');
-        this.myAudio.volume = 0.015;
+        this.myAudio.volume = MUSIC_VOLUME;
         this.myAudio.addEventListener('ended', function() {
             this.currentTime = 0;
             this.play();

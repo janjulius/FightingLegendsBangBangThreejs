@@ -174,7 +174,7 @@ function runCharSelect() {
         this.currentTime = 0;
         this.play();
     }, false);
-    music.volume = 0.015;
+    music.volume = MUSIC_VOLUME;
     music.play();
 
     if (charSelect) {
