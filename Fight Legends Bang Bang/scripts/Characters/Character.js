@@ -277,26 +277,10 @@ class Character {
             this.knockBack.y = 0;
 
 
-        if (this.direction.z > 0.6)
-            this.attackDirection = {
-                y: 0,
-                z: 1
-            };
-        else if (this.direction.z < -0.6)
-            this.attackDirection = {
-                y: 0,
-                z: -1
-            };
-        else if (this.direction.y > 0.6)
-            this.attackDirection = {
-                y: 1,
-                z: 0
-            };
-        else if (this.direction.y < -0.6)
-            this.attackDirection = {
-                y: -1,
-                z: 0
-            };
+        if (this.direction.z > 0.6) { this.attackDirection = { y: 0, z: 1 }; }
+        else if (this.direction.z < -0.6) { this.attackDirection = { y: 0, z: -1 }; }
+        else if (this.direction.y > 0.6) { this.attackDirection = { y: 1, z: 0 }; }
+        else if (this.direction.y < -0.6) { this.attackDirection = { y: -1, z: 0 }; }
 
         this.CheckCollision();
 
@@ -316,6 +300,10 @@ class Character {
             }
             this.jumped = false;
         }
+
+
+        if (this.direction.z > 0 && this.CheckSides("left")) { this.direction.z = 0 }
+        else if (this.direction.z < 0 && this.CheckSides("right")) { this.direction.z = 0 }
 
         var movespeed = this.direction.z * this.speed;
         if (this.knockBack.z > 0 && this.direction.z < 0) {

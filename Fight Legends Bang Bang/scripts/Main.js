@@ -103,11 +103,10 @@ function CalculateTargetsBoundingBox() {
         }
 
         var pos = players[i].geometry.position;
-
         minX = Math.min(minX, pos.z);
-        minY = Math.min(minY, pos.y - 5);
+        minY = Math.min(minY, pos.y);
         maxX = Math.max(maxX, pos.z);
-        maxY = Math.max(maxY, pos.y - 5);
+        maxY = Math.max(maxY, pos.y);
     }
 
     if (pAlive == 0) {
@@ -124,10 +123,16 @@ function CalculateTargetsBoundingBox() {
 
 function CalculateCameraPosition(bb) {
     var center = bb.GetCenter();
-    var newPos = Math.abs(bb.GetMagnitude() / 100);
-    newPos += 150;
+    var multi = Math.abs(bb.GetMagnitude() / 100);
+    //console.log(multi);
+    newPos = 150 + multi;
 
-    return new THREE.Vector3(newPos, center.y, center.x);
+    var result = new THREE.Vector3(newPos, center.y - (multi / 2), center.x);
+
+    result.y = clamp(result.y, level.bottomRight.y + 80, level.topLeft.y - 80);
+    result.z = clamp(result.z, level.bottomRight.z + 80, level.topLeft.z - 80);
+
+    return result;
 }
 
 scene.addEventListener('update', function () {

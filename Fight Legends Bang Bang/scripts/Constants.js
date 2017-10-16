@@ -131,6 +131,10 @@ function distanceBetweenVector3(v1, v2) {
     return Math.sqrt(dx * dx + dy * dy + dz * dz);
 }
 
+function clamp(num, min, max) {
+  return num <= min ? min : num >= max ? max : num;
+}
+
 class Rect {
     constructor(x, y, h, w) {
         this.x = x;
