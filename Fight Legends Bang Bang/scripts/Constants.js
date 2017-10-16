@@ -135,6 +135,10 @@ function clamp(num, min, max) {
   return num <= min ? min : num >= max ? max : num;
 }
 
+function lerp(a,  b,  c) {
+    return a + c * (b - a);
+}
+
 class Rect {
     constructor(x, y, h, w) {
         this.x = x;
