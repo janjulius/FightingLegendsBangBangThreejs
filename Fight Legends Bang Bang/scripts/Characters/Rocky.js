@@ -8,8 +8,9 @@ class Rocky extends Character {
         this.specialAtkString = "Shivering Leap";
         this.portrait = 'sprites/Characters/MenuSprites/rocky.png';
         this.Speed = 12;
-        this.clawDamage = 20;
-        this.specialDamage = 20;
+        this.clawDamage = 10;
+        this.specialDamage = 15;
+        this.ultRange = 400;
         this.clawed = [];
         this.clawed[0] = false; this.clawed[1] = false; this.clawed[2] = false;
         this.geometry = new Physijs.BoxMesh(
@@ -37,10 +38,12 @@ class Rocky extends Character {
                 if (this.target === undefined) {
                     this.target = i;
                 }
-                if (distanceBetweenVector3(players[i].geometry.position, this.geometry.position)
-                    <= distanceBetweenVector3(players[this.target].geometry.position, this.geometry.position)) {
-                    console.log("ROCKY: target " + players[i].name + " is closer than " + players[this.target].name + "");
-                    this.target = i;
+                if (distanceBetweenVector3(players[i].geometry.position, this.geometry.position) <= this.ultRange) {
+                    if (distanceBetweenVector3(players[i].geometry.position, this.geometry.position)
+                        <= distanceBetweenVector3(players[this.target].geometry.position, this.geometry.position)) {
+                        console.log("ROCKY: target " + players[i].name + " is closer than " + players[this.target].name + "");
+                        this.target = i;
+                    }
                 }
             }
             this.specialExists = true;
@@ -72,17 +75,17 @@ class Rocky extends Character {
                         players[this.target].geometry.position.z + -players[this.target].attackDirection.z * 5);
                     players[this.target].isStunned = true;
                     if (!this.clawed[0]) {
-                        players[this.target].setDamage(players[this.target].getDamage() + this.clawDamage, {y:0,z:0});
+                        players[this.target].setDamage(players[this.target].getDamage() + this.clawDamage, { y: 0, z: 0 });
                         this.clawed[0] = true;
                     }
                     if (this.specialTimer < 0.375) {
                         if (!this.clawed[1]) {
-                            players[this.target].setDamage(players[this.target].getDamage() + this.clawDamage, {y:0,z:0});
+                            players[this.target].setDamage(players[this.target].getDamage() + this.clawDamage, { y: 0, z: 0 });
                             this.clawed[1] = true;
                         }
                         if (this.specialTimer < 0.175) {
                             if (!this.clawed[2]) {
-                                players[this.target].setDamage(players[this.target].getDamage() + this.clawDamage, {y:0,z:0});
+                                players[this.target].setDamage(players[this.target].getDamage() + this.clawDamage, { y: 0, z: 0 });
                                 this.clawed[2] = true;
                             }
                         }
