@@ -170,7 +170,7 @@ class Character {
         if (this.CheckSides("right"))
             dir.z = Math.abs(dir.z);
 
-        this.damage = d;
+        this.damage = Math.floor(d);
         this.knockBack.z = ((d + 20) * this.damageMulti) * dir.z;
         this.knockBack.y = ((d + 20) * this.damageMulti) * dir.y;
         gameInterface.UpdateGameInterface(this.id);
@@ -262,22 +262,14 @@ class Character {
     Update(t) {
 
         this.CheckWithinArena();
+        this.CheckCollision();
 
-        if (this.knockBack.z > 0)
-            this.knockBack.z -= 50 * t;
-        if (this.knockBack.z < 0)
-            this.knockBack.z += 50 * t;
-
-        if (this.knockBack.z > -10 && this.knockBack.z < 10)
-            this.knockBack.z = 0;
-
-        if (this.knockBack.y > 0)
-            this.knockBack.y -= 50 * t;
-        if (this.knockBack.y < 0)
-            this.knockBack.y += 50 * t;
-
-        if (this.knockBack.y > -10 && this.knockBack.y < 10)
-            this.knockBack.y = 0;
+        if (this.knockBack.z > 0) { this.knockBack.z -= 50 * t; }
+        else if (this.knockBack.z < 0) { this.knockBack.z += 50 * t; }
+        if (this.knockBack.z > -10 && this.knockBack.z < 10) { this.knockBack.z = 0; }
+        if (this.knockBack.y > 0) { this.knockBack.y -= 50 * t; }
+        else if (this.knockBack.y < 0) { this.knockBack.y += 50 * t; }
+        if (this.knockBack.y > -10 && this.knockBack.y < 10) { this.knockBack.y = 0; }
 
 
         if (this.direction.z > 0.6) { this.attackDirection = { y: 0, z: 1 }; }
@@ -285,9 +277,6 @@ class Character {
         else if (this.direction.y > 0.6) { this.attackDirection = { y: 1, z: 0 }; }
         else if (this.direction.y < -0.6) { this.attackDirection = { y: -1, z: 0 }; }
 
-        this.CheckCollision();
-
-        var vel = this.geometry.getLinearVelocity();
 
         if (this.velt > -this.maxGravityVelocity)
             this.velt -= this.gravityVelocity * t;
@@ -304,7 +293,6 @@ class Character {
             this.jumped = false;
         }
 
-        //een leon commentje
         if (this.direction.z > 0 && this.CheckSides("left")) { this.direction.z = 0 }
         else if (this.direction.z < 0 && this.CheckSides("right")) { this.direction.z = 0 }
 
