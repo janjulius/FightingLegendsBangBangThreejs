@@ -13,6 +13,8 @@ class Rocky extends Character {
         this.ultRange = 400;
         this.clawed = [];
         this.clawed[0] = false; this.clawed[1] = false; this.clawed[2] = false;
+
+        this.ultVanishAudio = new Audio('Sounds/Characters/Rocky/Rocky_ult_vanish.wav');
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
             new THREE.MeshBasicMaterial({ color: 0xec00fb },
@@ -61,6 +63,7 @@ class Rocky extends Character {
                     this.isStunned = true;
                 }
                 if (this.specialTimer > 1.25 && this.specialTimer < 1.50) { //jump
+                    this.ultVanishAudio.play();
                     this.isStunned = false;
                     this.spJumpVelocity = new THREE.Vector3(0, 20, this.attackDirection.z * ((40) + 1));
                     this.geometry.setLinearVelocity(this.spJumpVelocity);
