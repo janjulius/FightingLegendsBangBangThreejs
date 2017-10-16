@@ -45,15 +45,13 @@ class Willem extends Character {
     }
 
     specialAtk() {
-        if (DEBUG_MODE) {
-            this.setSpecialAttackCounter(100);
-        }
         console.log("PRESS SPECIAL BUTTON");
         if(this.specialExists){
             this.EndSpecial();
             console.log("attempt to end special early");
         }
-        if (this.specialReady()) {
+        if (this.specialReady() && !this.specialExists) {
+            this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
             this.ballVelocity = new THREE.Vector3(0, 0, this.attackDirection.z * ((this.ballSpeed) + 1));
         
             this.specialTimer = 5;

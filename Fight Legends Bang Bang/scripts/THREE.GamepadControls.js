@@ -117,9 +117,11 @@ THREE.GamepadControls = function () {
                             p.swingTimer = p.swingCooldown;
                             p.chargeAttack = true;
                         }
-                        if (this.PressedButton(i, 3) && !p.isStunned) {
-                            p.specialAtk();
+                        if (this.PressedButton(i, 3)) {
+                            if(!p.isStunned || p instanceof Willem){
+                                p.specialAtk();
                         }
+                    }
                     }
                 }
 
