@@ -3,7 +3,7 @@ class ZeldaMap extends Level {
         super();
         
         this.name = "ZeldaMap";
-        this.topLeft = {y: 125, z: 140 } ;
+        this.topLeft = {y: 150, z: 140 } ;
         this.bottomRight = {y: -75, z: -140};
 
         this.myAudio = new Audio('Music/zelda.mp3');
