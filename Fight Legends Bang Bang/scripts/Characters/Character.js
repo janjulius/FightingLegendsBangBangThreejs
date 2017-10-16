@@ -50,6 +50,9 @@ class Character {
         this.chargeAttack = false;
         this.knockBack = new THREE.Vector3(0, 0, 0);
         this.damageMulti = 1;
+
+        this.touchingWalls = [-1, -1, -1, -1];
+
         console.log("created character");
     }
 
@@ -148,8 +151,14 @@ class Character {
             return;
         }
 
-        if (this.grounded)
+        if (this.touchingWalls[3] != -1)
             dir.y = Math.abs(dir.y);
+
+
+        if (dir.z > 0 && this.touchingWalls[0] != -1)
+            dir.z = -dir.z;
+        if (dir.z < 0 && this.touchingWalls[1] != -1)
+            dir.z = -dir.z;
 
         this.damage = d;
         this.knockBack.z = ((d + 20) * this.damageMulti) * dir.z;
@@ -198,18 +207,27 @@ class Character {
 
     CheckCollision() {
         var touchedGround = false;
+        var ids = new Array(this.geometry._physijs.touches.length);
         for (var i = 0; i < this.geometry._physijs.touches.length; i++) {
             var id = this.geometry._physijs.touches[i];
             var obj = scene._objects[id];
-
             if (obj) {
+                ids[i] = obj.id;
                 if (obj.isPlayer) {}
 
                 if (obj.name == "ground") {
                     touchedGround = true;
                 }
             }
+        }
 
+        for (var j = 0; j < this.touchingWalls.length; j++) {
+            var oid = this.touchingWalls[j];
+            if (oid != -1) {
+                if (!ids.includes(oid)) {
+                    this.touchingWalls[j] = -1;
+                }
+            }
         }
         if (!touchedGround)
             this.grounded = false;
@@ -315,6 +333,19 @@ class Character {
     AddGrounded() {
         var _this = this;
         this.geometry.addEventListener('collision', function (other_object, relative_velocity, relative_rotation, contact_normal) {
+
+            if (!other_object.isPlayer) {
+                if (contact_normal.z == 1) {
+                    _this.touchingWalls[0] = other_object.id;
+                } else if (contact_normal.z == -1) {
+                    _this.touchingWalls[1] = other_object.id;
+                } else if (contact_normal.y == 1) {
+                    _this.touchingWalls[2] = other_object.id;
+                } else if (contact_normal.y == -1) {
+                    _this.touchingWalls[3] = other_object.id;
+                }
+            }
+
             if (contact_normal.y < -0.9) {
                 _this.grounded = true;
                 _this.jumpsLeft = _this.totalJump;
@@ -322,7 +353,6 @@ class Character {
                 _this.grounded = false;
                 _this.velt = 0;
             }
-
             if (_this.knockBack.z != 0) {
                 if (contact_normal.z < -0.7 && !other_object.isPlayer) {
                     _this.knockBack.z = -_this.knockBack.z * 0.8;
