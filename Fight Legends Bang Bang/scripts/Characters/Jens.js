@@ -12,7 +12,7 @@ class Jens extends Character {
         this.hitplayer = [false, false, false, false];
         this.hitFinalPlayer = [false, false, false, false];
         var material = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial({ color: 0xFF0000 }),
+            new THREE.MeshBasicMaterial({ color: 0x000000 }),
             1,
             1
         );
