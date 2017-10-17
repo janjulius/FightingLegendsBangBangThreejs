@@ -113,7 +113,7 @@ class Metalplant extends Level {
         );
         rightRope1.rotateX(-0.2);
         rightRope1.receiveShadow = true;
-        rightRope1.position.set(-1, 25, -45);
+        rightRope1.position.set(-6, 25, -45);
         scene.add(rightRope1);
         rightRope1.name = "ground";
 
@@ -124,7 +124,7 @@ class Metalplant extends Level {
         );
         rightRope2.rotateX(0.2);
         rightRope2.receiveShadow = true;
-        rightRope2.position.set(-1, 25, -55);
+        rightRope2.position.set(-6, 25, -55);
         scene.add(rightRope2);
         rightRope2.name = "ground";
 
