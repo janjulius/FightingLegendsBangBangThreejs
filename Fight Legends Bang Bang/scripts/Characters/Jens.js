@@ -43,6 +43,7 @@ class Jens extends Character {
             this.target = this.generateRandom(0,playersPlaying-1);
             this.finalUlt = false;
             this.endPos = new THREE.Vector3(players[this.target].position);
+            this.endPos.y += 15;
 
             this.specialObject = new THREE.Mesh(new THREE.SphereGeometry(5, 32, 32),
                 new THREE.MeshBasicMaterial({
@@ -61,7 +62,7 @@ class Jens extends Character {
             if (!this.finalUlt) {
                 if (this.specialTimer > 0) {
                     this.specialTimer -= t;
-                    if ((this.specialObject.position.y - this.endPos.y) <= 2) {
+                    if (Math.abs((this.specialObject.position.y - this.endPos.y)) <= 2) {
                         this.specialTimer = 0.1;
                         this.finalUlt = true;
                     } else {
