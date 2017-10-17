@@ -12,7 +12,7 @@ class Metalplant extends Level {
         }, false);
         this.myAudio.play();
 
-        var possibleSpawns = [{ y: 40, z: 35 }, { y: 30, z: -2.5 }, { y: 20, z: 12.5 }, { y: 10, z: -50 }]
+        var possibleSpawns = [{ y: 40, z: 35 }, { y: 30, z: -2.5 }, { y: 30, z: 12.5 }, { y: 10, z: -50 }]
 
         function shuffle(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
@@ -91,30 +91,72 @@ class Metalplant extends Level {
             0
         );
         leftRope2.receiveShadow = true;
-        leftRope2.position.set(-6, 65, 47.5);
+        leftRope2.position.set(-6, 65, 45);
         scene.add(leftRope2);
         leftRope2.name = "ground";
 
-        var middlePillar = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 35, 2.5),
+        var middleBrokenPillar = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 35, 2.5),
             new THREE.MeshBasicMaterial({ color: this.rustydark }),
             0
         );
-        middlePillar.receiveShadow = true;
-        middlePillar.position.set(-6, -30, 5);
-        scene.add(middlePillar);
-        middlePillar.name = "ground";
+        middleBrokenPillar.rotation.x = 10;
+        middleBrokenPillar.receiveShadow = true;
+        middleBrokenPillar.position.set(-3, -27.5, -4);
+        scene.add(middleBrokenPillar);
+        middleBrokenPillar.name = "ground";
 
-        var middlePillar = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 35, 2.5),
-            new THREE.MeshBasicMaterial({ color: this.rustydark }),
+        var rightRope1 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 50, 1),
+            new THREE.MeshBasicMaterial({ color: this.rope }),
             0
         );
-        middlePillar.rotateX(15);
-        middlePillar.receiveShadow = true;
-        middlePillar.position.set(-6, -30, 5);
-        scene.add(middlePillar);
-        middlePillar.name = "ground";
+        rightRope1.rotateX(-0.2);
+        rightRope1.receiveShadow = true;
+        rightRope1.position.set(-1, 25, -45);
+        scene.add(rightRope1);
+        rightRope1.name = "ground";
+
+        var rightRope2 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 50, 1),
+            new THREE.MeshBasicMaterial({ color: this.rope }),
+            0
+        );
+        rightRope2.rotateX(0.2);
+        rightRope2.receiveShadow = true;
+        rightRope2.position.set(-1, 25, -55);
+        scene.add(rightRope2);
+        rightRope2.name = "ground";
+
+        var rightplatformHigh = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 7.5),
+            new THREE.MeshBasicMaterial({ color: this.rusty }),
+            0
+        );
+        rightplatformHigh.receiveShadow = true;
+        rightplatformHigh.position.set(1, 50, -50);
+        scene.add(rightplatformHigh);
+        rightplatformHigh.name = "ground";
+
+        var rightRope3 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 50, 1),
+            new THREE.MeshBasicMaterial({ color: this.rope }),
+            0
+        );
+        rightRope3.receiveShadow = true;
+        rightRope3.position.set(-1, 75, -52.5);
+        scene.add(rightRope3);
+        rightRope3.name = "ground";
+
+        var rightRope4 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 50, 1),
+            new THREE.MeshBasicMaterial({ color: this.rope }),
+            0
+        );
+        rightRope4.receiveShadow = true;
+        rightRope4.position.set(-1, 75, -48.5);
+        scene.add(rightRope4);
+        rightRope4.name = "ground";
         
     }
 }
