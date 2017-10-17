@@ -3,8 +3,8 @@ class ZeldaMap extends Level {
         super();
 
         this.name = "ZeldaMap";
-        this.topLeft = {y: 150, z: 200 } ;
-        this.bottomRight = {y: -75, z: -200};
+        this.topLeft = { y: 150, z: 200 };
+        this.bottomRight = { y: -75, z: -200 };
         var material;
         this.myAudio = new Audio('Music/zelda.mp3');
         this.myAudio.volume = MUSIC_VOLUME;
@@ -33,29 +33,14 @@ class ZeldaMap extends Level {
 
         this.spawn = shuffle(possibleSpawns)
 
-        // instantiate a loader
-        var loader = new THREE.TextureLoader();
-
-        // load a resource
-        loader.load(
-            // resource URL
-            'Textures/water.png',
-            // Function when resource is loaded
-            function (texture) {
-                // do something with the texture
-                material = new THREE.MeshBasicMaterial({
-                    map: texture
-                });
-            },
-            // Function called when download progresses
-            function (xhr) {
-                console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-            },
-            // Function called when download errors
-            function (xhr) {
-                console.log('An error happened');
-            }
-        );
+        material = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: THREE.ImageUtils.loadTexture(' Textures/water.png ' )
+            }),
+            0,
+            1
+        )
 
         var leftsmallisland = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 5, 10),

@@ -53,8 +53,9 @@ class Willem extends Character {
             this.EndSpecial();
         }
         if (this.specialReady() && !this.specialExists && !this.isStunned) {
-            this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
-            this.ballVelocity = new THREE.Vector3(0, 0, this.attackDirection.z * ((this.ballSpeed) + 1));
+            this.setSpecialAttackCounter(0);
+            var dir = this.attackDirection.z == 0 ? -1 : this.attackDirection.z;
+            this.ballVelocity = new THREE.Vector3(0, 0, dir * ((this.ballSpeed) + 1));
             this.willemUltStartSound.play();
             this.specialTimer = 5;
             this.beginSPecial = true;
@@ -111,14 +112,14 @@ class Willem extends Character {
                 }
             }
             if (this.specialTimer <= 0) {
-                this.velt = 0;
                 this.EndSpecial();
             }
         }
     }
 
     EndSpecial() {
-
+        this.velt = 0;
+        this.jumpsLeft = this.totalJump;
         this.isStunned = false;
         this.geometry.__dirtyPosition = true;
         this.specialObject.__dirtyPosition = true;

@@ -30,7 +30,7 @@ class Character {
         this._jump = false;
 
         this.basicAttackDamage = 10;
-        this.specialIncrease = 100;
+        this.specialIncrease = 10;
 
         this.swingTimer = 0;
         this.attackRemoveTimer = 0;
@@ -270,10 +270,10 @@ class Character {
         if (this.knockBack.y > -10 && this.knockBack.y < 10) { this.knockBack.y = 0; }
 
 
-        if (this.direction.z > 0.6) { this.attackDirection = { y: 0, z: 1 }; }
-        else if (this.direction.z < -0.6) { this.attackDirection = { y: 0, z: -1 }; }
-        else if (this.direction.y > 0.6) { this.attackDirection = { y: 1, z: 0 }; }
-        else if (this.direction.y < -0.6) { this.attackDirection = { y: -1, z: 0 }; }
+        if (this.direction.z > 0.5) { this.attackDirection = { y: 0, z: 1 }; }
+        else if (this.direction.z < -0.5) { this.attackDirection = { y: 0, z: -1 }; }
+        else if (this.direction.y > 0.5) { this.attackDirection = { y: 1, z: 0 }; }
+        else if (this.direction.y < -0.5) { this.attackDirection = { y: -1, z: 0 }; }
 
 
         if (this.velt > -this.maxGravityVelocity) {
