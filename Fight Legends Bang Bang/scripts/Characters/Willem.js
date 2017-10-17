@@ -11,6 +11,7 @@ class Willem extends Character {
         this.ballSpeed = 80;
         this.specialExists = false;
         this.hitplayer = [false, false, false, false];
+        this.ultCharging = false;
         this.portrait = 'sprites/Characters/MenuSprites/willem.png';
         this.material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
@@ -46,13 +47,10 @@ class Willem extends Character {
     }
 
     specialAtk() {
-        //if (DEBUG_MODE) {
-        //    this.setSpecialAttackCounter(100);
-        //}
-        if (this.specialExists) {
+        if (this.specialExists && !this.ultCharging) {
             this.EndSpecial();
         }
-        if (this.specialReady() && !this.specialExists) {
+        if (this.specialReady() && !this.specialExists && !this.isStunned) {
             this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
             this.ballVelocity = new THREE.Vector3(0, 0, this.attackDirection.z * ((this.ballSpeed) + 1));
 
@@ -70,6 +68,7 @@ class Willem extends Character {
                 if (this.specialTimer > 4.05 && this.specialTimer < 5) {
                     this.velt = 0;
                     this.isStunned = true;
+                    this.ultCharging = true;
                 }
                 if (this.specialTimer > 4 && this.specialTimer < 4.05) {
                     var pos = this.geometry.position;
@@ -82,6 +81,7 @@ class Willem extends Character {
                 }
 
                 if (this.specialTimer < 4) {
+                    this.ultCharging = false;
                     this.maxGravityVelocity = 50;
                     this.gravityVelocity = 80;
                     this.geometry.position.set(-1000, this.specialObject.position.y, this.specialObject.position.z);

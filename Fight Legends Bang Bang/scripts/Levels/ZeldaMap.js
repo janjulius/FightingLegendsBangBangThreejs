@@ -1,14 +1,14 @@
 class ZeldaMap extends Level {
     constructor() {
         super();
-        
+
         this.name = "ZeldaMap";
         this.topLeft = {y: 150, z: 200 } ;
         this.bottomRight = {y: -75, z: -200};
-
+        var material;
         this.myAudio = new Audio('Music/zelda.mp3');
         this.myAudio.volume = MUSIC_VOLUME;
-        this.myAudio.addEventListener('ended', function() {
+        this.myAudio.addEventListener('ended', function () {
             this.currentTime = 0;
             this.play();
         }, false);
@@ -18,15 +18,11 @@ class ZeldaMap extends Level {
 
         function shuffle(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
-
-            // While there remain elements to shuffle...
             while (0 !== currentIndex) {
 
-                // Pick a remaining element...
                 randomIndex = Math.floor(Math.random() * currentIndex);
                 currentIndex -= 1;
 
-                // And swap it with the current element.
                 temporaryValue = array[currentIndex];
                 array[currentIndex] = array[randomIndex];
                 array[randomIndex] = temporaryValue;
@@ -37,10 +33,33 @@ class ZeldaMap extends Level {
 
         this.spawn = shuffle(possibleSpawns)
 
+        // instantiate a loader
+        var loader = new THREE.TextureLoader();
+
+        // load a resource
+        loader.load(
+            // resource URL
+            'Textures/water.png',
+            // Function when resource is loaded
+            function (texture) {
+                // do something with the texture
+                material = new THREE.MeshBasicMaterial({
+                    map: texture
+                });
+            },
+            // Function called when download progresses
+            function (xhr) {
+                console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+            },
+            // Function called when download errors
+            function (xhr) {
+                console.log('An error happened');
+            }
+        );
 
         var leftsmallisland = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 5, 10),
-            new THREE.MeshBasicMaterial({ color: this.mossgreen }),
+            material,
             0
         );
         leftsmallisland.receiveShadow = true;

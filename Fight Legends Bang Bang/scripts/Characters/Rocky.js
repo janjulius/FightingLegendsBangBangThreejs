@@ -8,8 +8,8 @@ class Rocky extends Character {
         this.specialAtkString = "Shivering Leap";
         this.portrait = 'sprites/Characters/MenuSprites/rocky.png';
         this.Speed = 12;
-        this.clawDamage = 10;
-        this.specialDamage = 15;
+        this.clawDamage = 12;
+        this.specialDamage = 17;
         this.ultRange = 400;
         this.clawed = [];
         this.clawed[0] = false; this.clawed[1] = false; this.clawed[2] = false;

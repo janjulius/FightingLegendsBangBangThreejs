@@ -88,6 +88,16 @@ class Character {
 
             var hit = false;
             if (distanceBetweenVector3(this.geometry.position, otherPlayer.geometry.position) < 10) {
+
+                var randomSound; 
+                randomSound = Math.floor((Math.random() * 7));
+
+                var hitSounds =['Sounds/hit2.wav' , 'Sounds/hit3.wav', 'Sounds/hit4.wav',
+                'Sounds/hit5.wav', 'Sounds/hit6.wav', 'Sounds/hit7.wav', 'Sounds/hit16.wav']
+
+                var hit= new Audio(hitSounds[randomSound]);
+                hit.volume = MUSIC_VOLUME;
+
                 var ydist = Math.abs(otherPlayer.geometry.position.y - this.geometry.position.y);
                 var zdist = Math.abs(otherPlayer.geometry.position.z - this.geometry.position.z);
                 var tol = 4.5;

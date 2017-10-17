@@ -32,6 +32,7 @@ class BoomStronk extends Character {
         this.hitSomeone = false;
         this.specialHealing = false;
         if (this.specialReady()) {
+            this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
             this.specialExists = true;
             this.specialTimer = 5;
         }
