@@ -53,7 +53,7 @@ class Willem extends Character {
             this.EndSpecial();
         }
         if (this.specialReady() && !this.specialExists && !this.isStunned) {
-            this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
+            this.setSpecialAttackCounter(0);
             var dir = this.attackDirection.z == 0 ? -1 : this.attackDirection.z;
             this.ballVelocity = new THREE.Vector3(0, 0, dir * ((this.ballSpeed) + 1));
             this.willemUltStartSound.play();
