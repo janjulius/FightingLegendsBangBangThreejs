@@ -12,7 +12,7 @@ class Fred extends Character {
         this.specialRange = 20;
         this.specialExists = false;
         this.spcTargets = [];
-        this.ultSound = new Audio('Sounds/Characters/Fred/Fred_ult_sound.mp3');
+        this.ultSound = new Audio('Sounds/Characters/Fred/Fred_ult_sound.wav');
         this.portrait = 'sprites/Characters/MenuSprites/fred.png';
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),

@@ -35,9 +35,11 @@ class Character {
         this.swingObject;
         this.specialExists = false;
         this._jump = false;
+        this.knockbackImmunity = false;
+        this.takeDamageMultiplier = 1;
 
         this.basicAttackDamage = 10;
-        this.specialIncrease = 10;
+        this.specialIncrease = 100;
 
         this.swingTimer = 0;
         this.attackRemoveTimer = 0;
@@ -89,13 +91,13 @@ class Character {
             var hit = false;
             if (distanceBetweenVector3(this.geometry.position, otherPlayer.geometry.position) < 10) {
 
-                var randomSound; 
+                var randomSound;
                 randomSound = Math.floor((Math.random() * 7));
 
-                var hitSounds =['Sounds/hit2.wav' , 'Sounds/hit3.wav', 'Sounds/hit4.wav',
-                'Sounds/hit5.wav', 'Sounds/hit6.wav', 'Sounds/hit7.wav', 'Sounds/hit16.wav']
+                var hitSounds = ['Sounds/hit2.wav', 'Sounds/hit3.wav', 'Sounds/hit4.wav',
+                    'Sounds/hit5.wav', 'Sounds/hit6.wav', 'Sounds/hit7.wav', 'Sounds/hit16.wav']
 
-                var hitSound= new Audio(hitSounds[randomSound]);
+                var hitSound = new Audio(hitSounds[randomSound]);
                 hitSound.volume = MUSIC_VOLUME;
                 hitSound.play();
                 var ydist = Math.abs(otherPlayer.geometry.position.y - this.geometry.position.y);
@@ -113,7 +115,7 @@ class Character {
             }
             if (hit) {
                 this.setSpecialAttackCounter(this.specialCounter + this.specialIncrease);
-                otherPlayer.setDamage(otherPlayer.getDamage() + this.basicAttackDamage, this.attackDirection);
+                otherPlayer.setDamage(otherPlayer.getDamage() + (this.basicAttackDamage * otherPlayer.takeDamageMultiplier), this.attackDirection);
             }
         }
     }
@@ -184,8 +186,10 @@ class Character {
             dir.z = Math.abs(dir.z);
 
         this.damage = Math.floor(d);
-        this.knockBack.z = ((d + 20) * this.damageMulti) * dir.z;
-        this.knockBack.y = ((d + 20) * this.damageMulti) * dir.y;
+        if (!this.knockbackImmunity) {
+            this.knockBack.z = ((d + 20) * this.damageMulti) * dir.z;
+            this.knockBack.y = ((d + 20) * this.damageMulti) * dir.y;
+        }
         gameInterface.UpdateGameInterface(this.id);
     }
 
@@ -239,7 +243,7 @@ class Character {
             var obj = scene._objects[id];
             if (obj) {
                 ids[i] = obj.id;
-                if (obj.isPlayer) {}
+                if (obj.isPlayer) { }
 
                 if (obj.name == "ground") {
                     touchedGround = true;
@@ -402,7 +406,7 @@ class Character {
                 this.normalAtk();
     }
 
-    UpdateChar(t) {}
+    UpdateChar(t) { }
 
     AddGrounded() {
         var _this = this;
