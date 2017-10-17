@@ -12,7 +12,7 @@ class Metalplant extends Level {
         }, false);
         this.myAudio.play();
 
-        var possibleSpawns = [{ y: 40, z: 35 }, { y: 30, z: -2.5 }, { y: 30, z: 12.5 }, { y: 10, z: -50 }]
+        var possibleSpawns = [{ y: 40, z: 35 }, { y: 30, z: -2.5 }, { y: 20, z: 12.5 }, { y: 10, z: -50 }]
 
         function shuffle(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
@@ -74,5 +74,47 @@ class Metalplant extends Level {
         leftplatform.position.set(0, 35, 35);
         scene.add(leftplatform);
         leftplatform.name = "ground";
+
+        var leftRope1 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 60, 1),
+            new THREE.MeshBasicMaterial({ color: this.rope }),
+            0
+        );
+        leftRope1.receiveShadow = true;
+        leftRope1.position.set(-6, 65, 27.5);
+        scene.add(leftRope1);
+        leftRope1.name = "ground";
+
+        var leftRope2 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 60, 1),
+            new THREE.MeshBasicMaterial({ color: this.rope }),
+            0
+        );
+        leftRope2.receiveShadow = true;
+        leftRope2.position.set(-6, 65, 47.5);
+        scene.add(leftRope2);
+        leftRope2.name = "ground";
+
+        var middlePillar = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(15, 35, 2.5),
+            new THREE.MeshBasicMaterial({ color: this.rustydark }),
+            0
+        );
+        middlePillar.receiveShadow = true;
+        middlePillar.position.set(-6, -30, 5);
+        scene.add(middlePillar);
+        middlePillar.name = "ground";
+
+        var middlePillar = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(15, 35, 2.5),
+            new THREE.MeshBasicMaterial({ color: this.rustydark }),
+            0
+        );
+        middlePillar.rotateX(15);
+        middlePillar.receiveShadow = true;
+        middlePillar.position.set(-6, -30, 5);
+        scene.add(middlePillar);
+        middlePillar.name = "ground";
+        
     }
 }
