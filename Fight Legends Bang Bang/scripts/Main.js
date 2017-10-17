@@ -301,12 +301,12 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        level = new ZeldaMap(); //temp level changer
+        level = new HyruleCastle(); //temp level changer
         /*
         //level randomizer
         let randomLevel;
-        randomLevel = Math.floor((Math.random() * 4) + 1);
-
+        randomLevel = Math.floor((Math.random() * 7) + 1);
+        
         switch(randomLevel){
             case 1 :
                     level = new Brawlhaven();
@@ -320,8 +320,23 @@ function runGame() {
             case 4 : 
                     level = new ZeldaMap();
             break;
+            case 5 : 
+                    level = new Deserto();
+            break;
+            case 6 : 
+                    level = new Metalplant();
+            break;
+            case 7 : 
+                    level = new HyruleCastle();
+            break;
         }
         */
+
+        var bound = new THREE.BoxGeometry(1, level.topLeft.y + Math.abs(level.bottomRight.y), level.topLeft.z + Math.abs(level.bottomRight.z));
+        var object = new THREE.Mesh(bound, new THREE.MeshBasicMaterial(0xff0000));
+        var box = new THREE.BoxHelper(object, 0xffff00);
+        scene.add(box);
+
         console.log(playersPlaying);
         for (var k = 0; k < playersPlaying; k++) {
             var choice = getClassByCharId(players[k]);

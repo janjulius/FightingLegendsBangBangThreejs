@@ -3,8 +3,8 @@ class Deserto extends Level {
         super();
 
         this.name = "Deserto";
-        this.topLeft = {y: 100, z: 150 } ;
-        this.bottomRight = {y: -50, z: -100};
+        this.topLeft = {y: 200, z: 250 };
+        this.bottomRight = {y: -100, z: -250};
         this.myAudio = new Audio('Music/subspaceEmissary.mp3');
         this.myAudio.addEventListener('ended', function() {
             this.currentTime = 0;

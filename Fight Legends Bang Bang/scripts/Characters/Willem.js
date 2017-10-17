@@ -13,6 +13,7 @@ class Willem extends Character {
         this.hitplayer = [false, false, false, false];
         this.ultCharging = false;
         this.portrait = 'sprites/Characters/MenuSprites/willem.png';
+        this.willemUltStartSound = new Audio('Sounds/Characters/Willem/Willem_ult_sound.wav');
         this.material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff
@@ -53,7 +54,7 @@ class Willem extends Character {
         if (this.specialReady() && !this.specialExists && !this.isStunned) {
             this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
             this.ballVelocity = new THREE.Vector3(0, 0, this.attackDirection.z * ((this.ballSpeed) + 1));
-
+            this.willemUltStartSound.play();
             this.specialTimer = 5;
             this.specialExists = true;
             this.ultpos = this.geometry.position;
