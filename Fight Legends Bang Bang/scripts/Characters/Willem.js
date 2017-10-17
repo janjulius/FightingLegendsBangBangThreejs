@@ -9,6 +9,7 @@ class Willem extends Character {
         this.target;
         this.ultDamage = 100;
         this.ballSpeed = 80;
+        this.beginSPecial = false;
         this.specialExists = false;
         this.hitplayer = [false, false, false, false];
         this.ultCharging = false;
@@ -29,7 +30,7 @@ class Willem extends Character {
         );
 
         this.specialObject = new Physijs.SphereMesh(
-            new THREE.SphereGeometry(7, 7, 7),
+            new THREE.SphereGeometry(5, 16, 16),
             this.material
         );
         this.specialObject.position.set(-10000, y, z);
@@ -56,6 +57,7 @@ class Willem extends Character {
             this.ballVelocity = new THREE.Vector3(0, 0, this.attackDirection.z * ((this.ballSpeed) + 1));
             this.willemUltStartSound.play();
             this.specialTimer = 5;
+            this.beginSPecial = true;
             this.specialExists = true;
             this.ultpos = this.geometry.position;
             this.oldpos = this.geometry.position;
@@ -71,21 +73,24 @@ class Willem extends Character {
                     this.isStunned = true;
                     this.ultCharging = true;
                 }
-                if (this.specialTimer > 4 && this.specialTimer < 4.05) {
+                if (this.specialTimer < 4 && this.beginSPecial) {
+                    console.log(this.specialTimer);
                     var pos = this.geometry.position;
                     this.specialObject.position.set(0, pos.y + (this.grounded ? 5 : 0), pos.z);
-                    this.geometry.__dirtyPosition = true;
                     this.specialObject.__dirtyPosition = true;
+                    this.isStunned = true;
                     this.velt = 0;
                     this.geometry.position.set(-1000, this.specialObject.position.y, this.specialObject.position.z);
-
+                    this.geometry.__dirtyPosition = true;
+                    this.beginSPecial = false;
                 }
 
                 if (this.specialTimer < 4) {
                     this.ultCharging = false;
-                    this.maxGravityVelocity = 50;
-                    this.gravityVelocity = 80;
+                    if (this.ballVelocity.y > -70)
+                        this.ballVelocity.y -= 80 * t;
                     this.geometry.position.set(-1000, this.specialObject.position.y, this.specialObject.position.z);
+                    this.geometry.__dirtyPosition = true;
 
                     this.specialObject.setLinearVelocity(this.ballVelocity);
                     for (var i = 0; i < playersPlaying; i++) {
@@ -94,19 +99,19 @@ class Willem extends Character {
                         }
 
                         if (distanceBetweenVector3(this.specialObject.position, players[i].geometry.position) <= 12) {
-                            
+
                             if (!this.hitplayer[i]) {
                                 players[i].setDamage(players[i].getDamage() + this.ultDamage, {
                                     y: 1,
                                     z: this.GetSpcDirection(players[i])
-                                });
-                                this.hitplayer[i] = true;
+                                }); this.hitplayer[i] = true;
                             }
                         }
                     }
                 }
             }
             if (this.specialTimer <= 0) {
+                this.velt = 0;
                 this.EndSpecial();
             }
         }
@@ -120,7 +125,7 @@ class Willem extends Character {
         this.geometry.position.set(0, this.specialObject.position.y, this.specialObject.position.z);
         this.specialObject.position.set(-1000, 0, 0);
         this.specialExists = false;
-        for(var i = 0; i < this.hitplayer.length; i++){
+        for (var i = 0; i < this.hitplayer.length; i++) {
             this.hitplayer[i] = false;
         }
     }
