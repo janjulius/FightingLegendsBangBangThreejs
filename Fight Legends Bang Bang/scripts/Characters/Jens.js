@@ -61,7 +61,7 @@ class Jens extends Character {
             if (!this.finalUlt) {
                 if (this.specialTimer > 0) {
                     this.specialTimer -= t;
-                    if ((this.specialObject.position.y - this.endPos.y - 20) <= 2) {
+                    if ((this.specialObject.position.y - this.endPos.y) <= 2) {
                         this.specialTimer = 0.1;
                         this.finalUlt = true;
                     } else {
@@ -105,7 +105,7 @@ class Jens extends Character {
         }
     }
     GetSpcDirection(p) {
-        if ((p.geometry.position.z - this.geometry.position.z) <= 0) {
+        if ((p.geometry.position.z - this.specialObject.position.z) <= 0) {
             return -1;
         } else {
             return 1;
