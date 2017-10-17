@@ -42,8 +42,10 @@ class Jens extends Character {
             }
             this.target = this.generateRandom(0,playersPlaying-1);
             this.finalUlt = false;
-            this.endPos = new THREE.Vector3(players[this.target].position);
-            this.endPos.y += 15;
+            this.endPos = new THREE.Vector3(players[this.target].geometry.position.x, players[this.target].geometry.position.y, players[this.target].geometry.position.z);
+
+            console.log(players[this.target].geometry.position.y);
+            console.log(this.endPos.y);
 
             this.specialObject = new THREE.Mesh(new THREE.SphereGeometry(5, 32, 32),
                 new THREE.MeshBasicMaterial({
@@ -53,6 +55,7 @@ class Jens extends Character {
             this.specialTimer = 30;
             this.specialExists = true;
             this.specialObject.position.set(0, level.topLeft.y, players[this.target].geometry.position.z);
+        
         }
 
     }
@@ -63,10 +66,10 @@ class Jens extends Character {
                 if (this.specialTimer > 0) {
                     this.specialTimer -= t;
                     if (Math.abs((this.specialObject.position.y - this.endPos.y)) <= 2) {
+                        console.log(this.specialObject.position.y);
                         this.specialTimer = 0.1;
                         this.finalUlt = true;
                     } else {
-                        this.specialObject.position.y -= this.ballFallSpeed;
                         for (var i = 0; i < playersPlaying; i++) {
                             if (distanceBetweenVector3(this.specialObject.position, players[i].geometry.position) <= 5) {
                                 if (!this.hitplayer[i]) {
@@ -78,6 +81,7 @@ class Jens extends Character {
                                 }
                             }
                         }
+                        this.specialObject.position.y -= this.ballFallSpeed;
                     }
                 }
             } else {
@@ -116,7 +120,7 @@ class Jens extends Character {
     generateRandom(min, max) {
         var num = Math.floor(Math.random() * (max - min + 1)) + min;
         if (!players[num].isAlive) {
-            this.generateRandom(min, max);
+            num = this.generateRandom(min, max);
         }
             return num;
     }
