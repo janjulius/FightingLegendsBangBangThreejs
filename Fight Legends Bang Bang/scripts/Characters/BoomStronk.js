@@ -28,9 +28,6 @@ class BoomStronk extends Character {
 
 
     specialAtk() {
-        if (DEBUG_MODE) {
-            this.setSpecialAttackCounter(100);
-        }
         this.healval = this.getDamage();
         this.hitSomeone = false;
         this.specialHealing = false;
@@ -59,6 +56,7 @@ class BoomStronk extends Character {
                     } if (this.specialTimer < 0.1) {
                         this.specialHealing = true;
                         this.hitSomeone = true;
+                        this.setSpecialAttackCounter(0);
                     }
 
                 } else {
@@ -77,6 +75,7 @@ class BoomStronk extends Character {
                                         players[_this.target].geometry.position.set(players[_this.target].geometry.position.x, players[_this.target].geometry.position.y, players[_this.target].geometry.position.z + 5 * _this.GetSpcDirection(players[_this.target]));
                                         players[_this.target].setDamage(players[_this.target].getDamage() + -_this.velt / 3, { y: 1, z: _this.GetSpcDirection(players[_this.target]) });
                                         _this.specialExists = false;
+                                        this.setSpecialAttackCounter(0);
                                     }
                                 }
                             }
