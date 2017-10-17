@@ -42,6 +42,27 @@ class ZeldaMap extends Level {
             1
         )
 
+
+        var geometry = new CubeGeometry(500, 500, 500);
+        var cubeMaterials = 
+        {
+            new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('Textures/water.png') side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('Textures/water.png') side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('Textures/water.png') side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('Textures/water.png') side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('Textures/water.png') side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('Textures/water.png') side: THREE.DoubleSide} )
+        };
+
+        var cubeMaterial = new THREE.MeshFaceMaterial( cubeMaterials);
+        var cube = new THREE.Mesh (geometry, cubeMaterial);
+        scene.add(cube);
+
         var leftsmallisland = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 5, 10),
             material,
