@@ -10,9 +10,6 @@ class Willem extends Character {
         this.ultDamage = 100;
         this.ballSpeed = 80;
         this.specialExists = false;
-        if (DEBUG_MODE) {
-            this.specialIncrease = 100;
-        }
         this.hitplayer = [false, false, false, false];
         this.portrait = 'sprites/Characters/MenuSprites/willem.png';
         this.material = Physijs.createMaterial(
@@ -52,10 +49,8 @@ class Willem extends Character {
         //if (DEBUG_MODE) {
         //    this.setSpecialAttackCounter(100);
         //}
-        console.log("PRESS SPECIAL BUTTON");
         if (this.specialExists) {
             this.EndSpecial();
-            console.log("attempt to end special early");
         }
         if (this.specialReady() && !this.specialExists) {
             this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
@@ -75,10 +70,8 @@ class Willem extends Character {
                 if (this.specialTimer > 4.05 && this.specialTimer < 5) {
                     this.velt = 0;
                     this.isStunned = true;
-                    console.log("PREPARING" + this.geometry.position.y);
                 }
                 if (this.specialTimer > 4 && this.specialTimer < 4.05) {
-                    console.log("ALMOST READY" + this.geometry.position.y);
                     var pos = this.geometry.position;
                     this.specialObject.position.set(0, pos.y + (this.grounded ? 5 : 0), pos.z);
                     this.geometry.__dirtyPosition = true;

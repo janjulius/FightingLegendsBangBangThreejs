@@ -32,9 +32,6 @@ class Rocky extends Character {
     }
 
     specialAtk() {
-        if (DEBUG_MODE) {
-            this.setSpecialAttackCounter(100);
-        }
         this.clawed[0] = false; this.clawed[1] = false; this.clawed[2] = false;
         if (this.specialReady()) {
             this.target;
