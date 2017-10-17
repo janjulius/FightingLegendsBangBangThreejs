@@ -301,7 +301,7 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        level = new ZeldaMap(); //temp level changer
+        level = new HyruleCastle(); //temp level changer
         /*
         //level randomizer
         let randomLevel;
