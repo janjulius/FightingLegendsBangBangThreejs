@@ -27,6 +27,7 @@ class Paardman extends Character {
     specialAtk() {
 
         if (this.specialReady()) {
+            this.setSpecialAttackCounter(0);
             this.target = undefined;
             this.horseChoice = Math.floor((Math.random() * 3) + 1);
             switch (this.horseChoice) {
@@ -48,7 +49,7 @@ class Paardman extends Character {
                     this.specialObject.position.set(0, this.geometry.position.y, this.geometry.position.z + this.attackDirection.z * 5);
                     this.flyDirection = this.attackDirection.z;
                     this.stoneVelocity = new THREE.Vector3(0, 0, this.attackDirection.z * ((this.stoneThrowSpeed) + 1));
-                    this.setSpecialAttackCounter(0);
+                    
                     scene.add(this.specialObject);
                     break;
                 case 2: //paper
@@ -68,7 +69,7 @@ class Paardman extends Character {
                     this.specialTimer = 300;
                     this.specialObject.position.set(0, this.geometry.position.y, this.geometry.position.z + this.attackDirection.z * 5);
                     this.flyDirection = this.attackDirection.z;
-                    this.setSpecialAttackCounter(0);
+                    
                     scene.add(this.specialObject);
 
                     break;
@@ -89,7 +90,7 @@ class Paardman extends Character {
                     this.specialTimer = 3;
                     this.specialObject.position.set(0, this.geometry.position.y, this.geometry.position.z + (this.attackDirection.z * 5));
                     this.flyDirection = this.attackDirection.z;
-                    this.setSpecialAttackCounter(0);
+                    
                     this.scissorVelocity = new THREE.Vector3(0, 0, this.attackDirection.z * ((this.scissorThrowSpeed) + 1));
                     scene.add(this.specialObject);
 
