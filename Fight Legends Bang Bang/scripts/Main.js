@@ -68,8 +68,6 @@ function init() {
     light.shadowDarkness = .7;
     scene.add(light);
 
-
-
     if (charSelect) {
         runCharSelect();
     }
