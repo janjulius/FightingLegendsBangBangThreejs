@@ -30,7 +30,7 @@ class Character {
         this._jump = false;
 
         this.basicAttackDamage = 10;
-        this.specialIncrease = 10;
+        this.specialIncrease = 100;
 
         this.swingTimer = 0;
         this.attackRemoveTimer = 0;
