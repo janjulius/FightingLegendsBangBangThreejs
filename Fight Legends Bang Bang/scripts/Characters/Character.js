@@ -34,7 +34,6 @@ class Character {
         this.specialCounterThreshHold = 100;
         this.swingObject;
         this.specialExists = false;
-        this._jump = false;
 
         this.basicAttackDamage = 10;
         this.specialIncrease = 10;
@@ -72,9 +71,7 @@ class Character {
 
         ///debug code
         var geom = new THREE.BoxGeometry(5, 5, 5);
-        this.swingObject = new THREE.Mesh(geom, new THREE.MeshBasicMaterial({
-            color: 0xffffff
-        }));
+        this.swingObject = new THREE.Mesh(geom, new THREE.MeshBasicMaterial({ color: 0xffffff }));
         this.swingObject.position.set(this.geometry.position.x,
             this.geometry.position.y + (this.attackDirection.y * 5),
             this.geometry.position.z + (this.attackDirection.z * 5));
@@ -102,13 +99,13 @@ class Character {
                 var zdist = Math.abs(otherPlayer.geometry.position.z - this.geometry.position.z);
                 var tol = 4.5;
                 if (this.attackDirection.z == 1 && otherPlayer.geometry.position.z > this.geometry.position.z && ydist < tol && zdist > tol) {
-                    hit = true; //links
+                    hit = true;//links
                 } else if (this.attackDirection.z == -1 && otherPlayer.geometry.position.z < this.geometry.position.z && ydist < tol && zdist > tol) {
-                    hit = true; //rechts
+                    hit = true;//rechts
                 } else if (this.attackDirection.y == 1 && otherPlayer.geometry.position.y > this.geometry.position.y && zdist < tol && ydist > tol) {
-                    hit = true; //boven
+                    hit = true;//boven
                 } else if (this.attackDirection.y == -1 && otherPlayer.geometry.position.y < this.geometry.position.y && zdist < tol && ydist > tol) {
-                    hit = true; //onder
+                    hit = true;//onder
                 }
             }
             if (hit) {
@@ -221,7 +218,6 @@ class Character {
         if (!arena.Contains(playerPoint) && this.isAlive) {
             this.respawnTimer = this.respawnDelay;
             this.isAlive = false;
-            this.isStunned = true;
             this.setStock(this.stock - 1);
             this.specialExists = false;
             this.maxGravityVelocity = 50;
@@ -239,7 +235,7 @@ class Character {
             var obj = scene._objects[id];
             if (obj) {
                 ids[i] = obj.id;
-                if (obj.isPlayer) {}
+                if (obj.isPlayer) { }
 
                 if (obj.name == "ground") {
                     touchedGround = true;
@@ -278,45 +274,18 @@ class Character {
         this.CheckWithinArena();
         this.CheckCollision();
 
-        if (this.knockBack.z > 0) {
-            this.knockBack.z -= 50 * t;
-        } else if (this.knockBack.z < 0) {
-            this.knockBack.z += 50 * t;
-        }
-        if (this.knockBack.z > -10 && this.knockBack.z < 10) {
-            this.knockBack.z = 0;
-        }
-        if (this.knockBack.y > 0) {
-            this.knockBack.y -= 50 * t;
-        } else if (this.knockBack.y < 0) {
-            this.knockBack.y += 50 * t;
-        }
-        if (this.knockBack.y > -10 && this.knockBack.y < 10) {
-            this.knockBack.y = 0;
-        }
+        if (this.knockBack.z > 0) { this.knockBack.z -= 50 * t; }
+        else if (this.knockBack.z < 0) { this.knockBack.z += 50 * t; }
+        if (this.knockBack.z > -10 && this.knockBack.z < 10) { this.knockBack.z = 0; }
+        if (this.knockBack.y > 0) { this.knockBack.y -= 50 * t; }
+        else if (this.knockBack.y < 0) { this.knockBack.y += 50 * t; }
+        if (this.knockBack.y > -10 && this.knockBack.y < 10) { this.knockBack.y = 0; }
 
 
-        if (this.direction.z > 0.6) {
-            this.attackDirection = {
-                y: 0,
-                z: 1
-            };
-        } else if (this.direction.z < -0.6) {
-            this.attackDirection = {
-                y: 0,
-                z: -1
-            };
-        } else if (this.direction.y > 0.6) {
-            this.attackDirection = {
-                y: 1,
-                z: 0
-            };
-        } else if (this.direction.y < -0.6) {
-            this.attackDirection = {
-                y: -1,
-                z: 0
-            };
-        }
+        if (this.direction.z > 0.6) { this.attackDirection = { y: 0, z: 1 }; }
+        else if (this.direction.z < -0.6) { this.attackDirection = { y: 0, z: -1 }; }
+        else if (this.direction.y > 0.6) { this.attackDirection = { y: 1, z: 0 }; }
+        else if (this.direction.y < -0.6) { this.attackDirection = { y: -1, z: 0 }; }
 
 
         if (this.velt > -this.maxGravityVelocity)
@@ -325,38 +294,17 @@ class Character {
         if (this.grounded)
             this.velt = 0;
 
-
-        if ((this.CheckSides("left") || this.CheckSides("right")) && !this.CheckSides("down") && !this._jump) {
-            this.jumpsLeft = this.totalJump;
-            if (this.velt < -10)
-                this.velt = -10;
-
-            if (this.knockBack.z > -20 && this.knockBack.z < 20)
-                this.knockBack.z = 0;
-        }
-
-        this._jump = false;
-
         if (this.jumped && !this.CheckSides("up")) {
             if (this.jumpsLeft > 0) {
-
-                if (this.CheckSides("right") && !this.CheckSides("down"))
-                    this.knockBack.z += 40;
-                if (this.CheckSides("left") && !this.CheckSides("down"))
-                    this.knockBack.z -= 40;
                 this.velt = 50;
                 this.grounded = false;
                 this.jumpsLeft--;
-                this._jump = true;
             }
             this.jumped = false;
         }
 
-        if (this.direction.z > 0 && this.CheckSides("left")) {
-            this.direction.z = 0
-        } else if (this.direction.z < 0 && this.CheckSides("right")) {
-            this.direction.z = 0
-        }
+        if (this.direction.z > 0 && this.CheckSides("left")) { this.direction.z = 0 }
+        else if (this.direction.z < 0 && this.CheckSides("right")) { this.direction.z = 0 }
 
         var movespeed = this.direction.z * this.speed;
         if (this.knockBack.z > 0 && this.direction.z < 0) {
@@ -402,7 +350,7 @@ class Character {
                 this.normalAtk();
     }
 
-    UpdateChar(t) {}
+    UpdateChar(t) { }
 
     AddGrounded() {
         var _this = this;
