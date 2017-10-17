@@ -112,14 +112,14 @@ class Willem extends Character {
                 }
             }
             if (this.specialTimer <= 0) {
-                this.velt = 0;
                 this.EndSpecial();
             }
         }
     }
 
     EndSpecial() {
-
+        this.velt = 0;
+        this.jumpsLeft = this.totalJump;
         this.isStunned = false;
         this.geometry.__dirtyPosition = true;
         this.specialObject.__dirtyPosition = true;
