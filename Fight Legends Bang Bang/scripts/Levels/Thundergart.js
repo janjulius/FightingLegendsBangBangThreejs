@@ -3,8 +3,8 @@ class Thundergart extends Level {
         super();
 
         this.name = "Thundergart";
-        this.topLeft = {y: 100, z: 100 } ;
-        this.bottomRight = {y: -50, z: -100};
+        this.topLeft = {y: 200, z: 150 } ;
+        this.bottomRight = {y: -70, z: -150};
 
         this.myAudio.addEventListener('ended', function() {
             this.currentTime = 0;
