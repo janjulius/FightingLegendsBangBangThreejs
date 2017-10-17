@@ -35,6 +35,26 @@ class Metalplant extends Level {
 
         this.spawn = shuffle(possibleSpawns)
 
+        var geometry = new THREE.CubeGeometry(1000, 1000, 1000);
+        var cubeMaterials = 
+        [
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_ft.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_bk.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_up.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_dn.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_rt.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_lf.png'), side: THREE.DoubleSide} )
+        ];
+
+        var cubeMaterial = new THREE.MeshFaceMaterial( cubeMaterials);
+        var cube = new THREE.Mesh (geometry, cubeMaterial);
+        scene.add(cube);
+
         var middleBase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 2.5, 25),
             new THREE.MeshBasicMaterial({ color: this.rusty }),
@@ -113,7 +133,7 @@ class Metalplant extends Level {
         );
         rightRope1.rotateX(-0.2);
         rightRope1.receiveShadow = true;
-        rightRope1.position.set(-6, 25, -45);
+        rightRope1.position.set(-10, 25, -45);
         scene.add(rightRope1);
         rightRope1.name = "ground";
 
@@ -124,7 +144,7 @@ class Metalplant extends Level {
         );
         rightRope2.rotateX(0.2);
         rightRope2.receiveShadow = true;
-        rightRope2.position.set(-6, 25, -55);
+        rightRope2.position.set(-10, 25, -55);
         scene.add(rightRope2);
         rightRope2.name = "ground";
 
