@@ -3,8 +3,8 @@ class HyruleCastle extends Level {
         super();
 
         this.name = "HyruleCastle";
-        this.topLeft = {y: 100, z: 100 } ;
-        this.bottomRight = {y: -50, z: -100};
+        this.topLeft = {y: 150, z: 200 } ;
+        this.bottomRight = {y: -70, z: -200};
 
         this.myAudio = new Audio('Music/Castle.mp3');
         this.myAudio.volume = MUSIC_VOLUME;

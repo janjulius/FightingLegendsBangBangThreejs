@@ -7,10 +7,10 @@ class Willem extends Character {
         this.cid = 0;
         this.ultDir;
         this.target;
-        this.ultDamage = 40;
+        this.ultDamage = 100;
         this.ballSpeed = 80;
         this.specialExists = false;
-        if (DEBUG_MODE) { this.specialIncrease = 100; }
+        this.hitplayer = [false, false, false, false];
         this.portrait = 'sprites/Characters/MenuSprites/willem.png';
         this.material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
@@ -46,13 +46,11 @@ class Willem extends Character {
     }
 
     specialAtk() {
-        // if (DEBUG_MODE) {
+        //if (DEBUG_MODE) {
         //    this.setSpecialAttackCounter(100);
         //}
-        console.log("PRESS SPECIAL BUTTON");
         if (this.specialExists) {
             this.EndSpecial();
-            console.log("attempt to end special early");
         }
         if (this.specialReady() && !this.specialExists) {
             this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
@@ -69,15 +67,18 @@ class Willem extends Character {
         if (this.specialExists) {
             if (this.specialTimer > 0) {
                 this.specialTimer -= t;
-                if (this.specialTimer > 4.02 && this.specialTimer < 5) {
+                if (this.specialTimer > 4.05 && this.specialTimer < 5) {
                     this.velt = 0;
                     this.isStunned = true;
-                } if (this.specialTimer > 4 && this.specialTimer < 4.02) {
+                }
+                if (this.specialTimer > 4 && this.specialTimer < 4.05) {
                     var pos = this.geometry.position;
-                    this.specialObject.position.set(0, pos.y + 5, pos.z);
+                    this.specialObject.position.set(0, pos.y + (this.grounded ? 5 : 0), pos.z);
                     this.geometry.__dirtyPosition = true;
                     this.specialObject.__dirtyPosition = true;
                     this.velt = 0;
+                    this.geometry.position.set(-1000, this.specialObject.position.y, this.specialObject.position.z);
+
                 }
 
                 if (this.specialTimer < 4) {
@@ -92,10 +93,13 @@ class Willem extends Character {
                         }
 
                         if (distanceBetweenVector3(this.specialObject.position, players[i].geometry.position) <= 12) {
-                            players[i].setDamage(players[i].getDamage() + this.ultDamage, {
-                                y: 1,
-                                z: this.GetSpcDirection(players[i])
-                            });
+                            
+                            if (!this.hitplayer[i]) {
+                                players[i].setDamage(players[i].getDamage() + this.ultDamage, {
+                                    y: 1,
+                                    z: this.GetSpcDirection(players[i])
+                                });this.hitplayer[i] = true;
+                            }
                         }
                     }
                 }
@@ -114,6 +118,9 @@ class Willem extends Character {
         this.geometry.position.set(0, this.specialObject.position.y, this.specialObject.position.z);
         this.specialObject.position.set(-1000, 0, 0);
         this.specialExists = false;
+        for(var i = 0; i < this.hitplayer.length; i++){
+            this.hitplayer[i] = false;
+        }
     }
     GetSpcDirection(p) {
         if ((p.geometry.position.z - this.geometry.position.z) <= 0) {
