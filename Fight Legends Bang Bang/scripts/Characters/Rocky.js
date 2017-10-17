@@ -33,7 +33,8 @@ class Rocky extends Character {
 
     specialAtk() {
         this.clawed[0] = false; this.clawed[1] = false; this.clawed[2] = false;
-        if (this.specialReady()) {
+        if (this.specialReady()) { 
+            this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
             this.target;
             for (var i = 0; i < playersPlaying; i++) {
                 if (this.id == i) {
@@ -51,8 +52,7 @@ class Rocky extends Character {
             }
             this.specialExists = true;
             this.specialTimer = 2;
-            this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
-        }
+           }
     }
 
     UpdateChar(t) {
