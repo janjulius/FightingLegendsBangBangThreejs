@@ -99,7 +99,8 @@ class Willem extends Character {
                                 players[i].setDamage(players[i].getDamage() + this.ultDamage, {
                                     y: 1,
                                     z: this.GetSpcDirection(players[i])
-                                });this.hitplayer[i] = true;
+                                });
+                                this.hitplayer[i] = true;
                             }
                         }
                     }
