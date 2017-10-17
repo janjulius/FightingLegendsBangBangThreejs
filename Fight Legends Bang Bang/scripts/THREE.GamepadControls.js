@@ -142,7 +142,7 @@ THREE.GamepadControls = function () {
                                 gameInterface.UpdateCharSelectInterface(i, players[i]);
                                 var selectSound = new Audio("Music/Class" + intersects[j].object.myCharId + ".m4a");
 
-                                //selectSound.volume = ANNOUNCER_VOLUME;
+                                selectSound.volume = ANNOUNCER_VOLUME;
                                 selectSound.play();
                             }
                         }
