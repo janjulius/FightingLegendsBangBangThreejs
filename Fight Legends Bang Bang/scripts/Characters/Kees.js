@@ -28,7 +28,7 @@ class Kees extends Character {
 
     specialAtk() {
         if (this.specialReady()) {
-            this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
+            this.setSpecialAttackCounter(0);
             this.specialTimer = 1;
             this.specialExists = true;
         }
