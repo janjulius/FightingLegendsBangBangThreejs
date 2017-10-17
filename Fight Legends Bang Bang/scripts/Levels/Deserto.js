@@ -5,6 +5,7 @@ class Deserto extends Level {
         this.name = "Deserto";
         this.topLeft = {y: 200, z: 250 };
         this.bottomRight = {y: -100, z: -250};
+        var material;
         this.myAudio = new Audio('Music/subspaceEmissary.mp3');
         this.myAudio.addEventListener('ended', function() {
             this.currentTime = 0;
@@ -36,7 +37,7 @@ class Deserto extends Level {
         this.spawn = shuffle(possibleSpawns)
 
         var bottom = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(50, 10, 120),
+            new THREE.CubeGeometry(50, 10, 130),
             new THREE.MeshBasicMaterial({ color: this.sandyellow }),
             0
         );
@@ -95,19 +96,35 @@ class Deserto extends Level {
         scene.add(upper);
         upper.name = "ground";
 
-        var burleywoodCube = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 15, 5),
-            new THREE.MeshBasicMaterial({ color: this.saddlebrown }),
+        material = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: THREE.ImageUtils.loadTexture(' Textures/cactus.jpg ' )
+            }),
+            0,
+            1
+        )
+        var cactusBase = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(15, 18, 3),
+            material,
             0
         );
-        burleywoodCube.receiveShadow = true;
-        burleywoodCube.position.set(0, 0, 0);
-        scene.add(burleywoodCube);
-        burleywoodCube.name = "ground";
+        cactusBase.receiveShadow = true;
+        cactusBase.position.set(0, 0, 0);
+        scene.add(cactusBase);
+        cactusBase.name = "ground";
 
+        material = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: THREE.ImageUtils.loadTexture(' Textures/pyramid.jpg ' )
+            }),
+            0,
+            1
+        )
         var cylinder = new THREE.Mesh(
             new THREE.CylinderGeometry(0,45,45,80),
-            new THREE.MeshBasicMaterial( {color: this.goldenrod }),
+            material,
             0
         );
         cylinder.receiveShadow = true;
