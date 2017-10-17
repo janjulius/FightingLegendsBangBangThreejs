@@ -6,6 +6,8 @@ class BoomStronk extends Character {
         this.Speed = 12;
         this.cid = 5;
         this.hitSomeone = false;
+        this.maxGrav = this.maxGravityVelocity;
+        this.gravVel = this.gravityVelocity;
         this.specialDamage = 50;
         this.specialHealing = false;
         this.portrait = 'sprites/Characters/MenuSprites/boom_stronk.png'
@@ -95,14 +97,14 @@ class BoomStronk extends Character {
                     this.specialTimer = 3;
                 } else {
                     this.specialExists = false;
-                    this.maxGravityVelocity = 50;
-                    this.gravityVelocity = 80;
+                    this.maxGravityVelocity = this.maxGrav;
+                    this.gravityVelocity = this.gravVel;
                 }
             }
         } else {
             this.hitSomeone = true;
-            this.maxGravityVelocity = 50;
-            this.gravityVelocity = 80;
+            this.maxGravityVelocity = this.maxGrav;
+            this.gravityVelocity = this.gravVel;
         }
     }
 

@@ -6,14 +6,8 @@ class Character {
         this.specialAtkString = "base";
         this.damage = GAME_SETTINGS_HANDICAP;
 
-        this.direction = {
-            y: 0,
-            z: 0
-        };
-        this.attackDirection = {
-            y: 0,
-            z: 1
-        };
+        this.direction = { y: 0, z: 0 };
+        this.attackDirection = { y: 0, z: 1 };
 
         this.id = 0;
         this.cid = -1;
@@ -25,7 +19,6 @@ class Character {
         this.velt = 0;
         this.blocking = false;
         this.jumped = false;
-        this.grounded = false;
         this.isAlive = true;
         this.isStunned = false;
         this.totalJump = 2;
@@ -53,7 +46,7 @@ class Character {
         this.knockBack = new THREE.Vector3(0, 0, 0);
         this.damageMulti = 1;
 
-        this.maxGravityVelocity = 50;
+        this.maxGravityVelocity = 100;
         this.gravityVelocity = 80;
 
         this.touchingWalls = [-1, -1, -1, -1];
@@ -89,15 +82,9 @@ class Character {
             var hit = false;
             if (distanceBetweenVector3(this.geometry.position, otherPlayer.geometry.position) < 10) {
 
-                var randomSound; 
+                var randomSound;
                 randomSound = Math.floor((Math.random() * 7));
 
-                var hitSounds =['Sounds/hit2.wav' , 'Sounds/hit3.wav', 'Sounds/hit4.wav',
-                'Sounds/hit5.wav', 'Sounds/hit6.wav', 'Sounds/hit7.wav', 'Sounds/hit16.wav']
-
-                var hitSound= new Audio(hitSounds[randomSound]);
-                hitSound.volume = MUSIC_VOLUME;
-                hitSound.play();
                 var ydist = Math.abs(otherPlayer.geometry.position.y - this.geometry.position.y);
                 var zdist = Math.abs(otherPlayer.geometry.position.z - this.geometry.position.z);
                 var tol = 4.5;
@@ -112,6 +99,11 @@ class Character {
                 }
             }
             if (hit) {
+                var hitSounds = ['Sounds/hit2.wav', 'Sounds/hit3.wav', 'Sounds/hit4.wav',
+                    'Sounds/hit5.wav', 'Sounds/hit6.wav', 'Sounds/hit7.wav', 'Sounds/hit16.wav'];
+                var hitSound = new Audio(hitSounds[randomSound]);
+                hitSound.volume = MUSIC_VOLUME;
+                hitSound.play();
                 this.setSpecialAttackCounter(this.specialCounter + this.specialIncrease);
                 otherPlayer.setDamage(otherPlayer.getDamage() + this.basicAttackDamage, this.attackDirection);
             }
@@ -232,18 +224,12 @@ class Character {
     }
 
     CheckCollision() {
-        var touchedGround = false;
         var ids = new Array(this.geometry._physijs.touches.length);
         for (var i = 0; i < this.geometry._physijs.touches.length; i++) {
             var id = this.geometry._physijs.touches[i];
             var obj = scene._objects[id];
             if (obj) {
                 ids[i] = obj.id;
-                if (obj.isPlayer) {}
-
-                if (obj.name == "ground") {
-                    touchedGround = true;
-                }
             }
         }
 
@@ -255,8 +241,6 @@ class Character {
                 }
             }
         }
-        if (!touchedGround)
-            this.grounded = false;
     }
 
     CheckSides(s) {
@@ -278,60 +262,35 @@ class Character {
         this.CheckWithinArena();
         this.CheckCollision();
 
-        if (this.knockBack.z > 0) {
-            this.knockBack.z -= 50 * t;
-        } else if (this.knockBack.z < 0) {
-            this.knockBack.z += 50 * t;
-        }
-        if (this.knockBack.z > -10 && this.knockBack.z < 10) {
-            this.knockBack.z = 0;
-        }
-        if (this.knockBack.y > 0) {
-            this.knockBack.y -= 50 * t;
-        } else if (this.knockBack.y < 0) {
-            this.knockBack.y += 50 * t;
-        }
-        if (this.knockBack.y > -10 && this.knockBack.y < 10) {
-            this.knockBack.y = 0;
-        }
+        if (this.knockBack.z > 0) { this.knockBack.z -= 50 * t; }
+        else if (this.knockBack.z < 0) { this.knockBack.z += 50 * t; }
+        if (this.knockBack.z > -10 && this.knockBack.z < 10) { this.knockBack.z = 0; }
+        if (this.knockBack.y > 0) { this.knockBack.y -= 50 * t; }
+        else if (this.knockBack.y < 0) { this.knockBack.y += 50 * t; }
+        if (this.knockBack.y > -10 && this.knockBack.y < 10) { this.knockBack.y = 0; }
 
 
-        if (this.direction.z > 0.6) {
-            this.attackDirection = {
-                y: 0,
-                z: 1
-            };
-        } else if (this.direction.z < -0.6) {
-            this.attackDirection = {
-                y: 0,
-                z: -1
-            };
-        } else if (this.direction.y > 0.6) {
-            this.attackDirection = {
-                y: 1,
-                z: 0
-            };
-        } else if (this.direction.y < -0.6) {
-            this.attackDirection = {
-                y: -1,
-                z: 0
-            };
+        if (this.direction.z > 0.6) { this.attackDirection = { y: 0, z: 1 }; }
+        else if (this.direction.z < -0.6) { this.attackDirection = { y: 0, z: -1 }; }
+        else if (this.direction.y > 0.6) { this.attackDirection = { y: 1, z: 0 }; }
+        else if (this.direction.y < -0.6) { this.attackDirection = { y: -1, z: 0 }; }
+
+
+        if (this.velt > -this.maxGravityVelocity) {
+            let extraVel = this.direction.y < 0 ? -this.direction.y * (this.gravityVelocity / 2) : 0;
+            this.velt -= (this.gravityVelocity + extraVel) * t;
         }
 
-
-        if (this.velt > -this.maxGravityVelocity)
-            this.velt -= this.gravityVelocity * t;
-
-        if (this.grounded)
+        if (this.CheckSides("down") && !this._jump)
             this.velt = 0;
 
 
         if ((this.CheckSides("left") || this.CheckSides("right")) && !this.CheckSides("down") && !this._jump) {
             this.jumpsLeft = this.totalJump;
-            if (this.velt < -10)
-                this.velt = -10;
+            if (this.velt < -15 + this.direction.y * 10)
+                this.velt = -15 + this.direction.y * 10;
 
-            if (this.knockBack.z > -20 && this.knockBack.z < 20)
+            if (this.knockBack.z > -30 && this.knockBack.z < 30)
                 this.knockBack.z = 0;
         }
 
@@ -345,7 +304,6 @@ class Character {
                 if (this.CheckSides("left") && !this.CheckSides("down"))
                     this.knockBack.z -= 40;
                 this.velt = 50;
-                this.grounded = false;
                 this.jumpsLeft--;
                 this._jump = true;
             }
@@ -402,7 +360,7 @@ class Character {
                 this.normalAtk();
     }
 
-    UpdateChar(t) {}
+    UpdateChar(t) { }
 
     AddGrounded() {
         var _this = this;
@@ -421,10 +379,8 @@ class Character {
             }
 
             if (contact_normal.y < -0.9) {
-                _this.grounded = true;
                 _this.jumpsLeft = _this.totalJump;
             } else if (contact_normal.y > 0.8) {
-                _this.grounded = false;
                 _this.velt = 0;
             }
             if (_this.knockBack.z != 0) {
