@@ -95,9 +95,9 @@ class Character {
                 var hitSounds =['Sounds/hit2.wav' , 'Sounds/hit3.wav', 'Sounds/hit4.wav',
                 'Sounds/hit5.wav', 'Sounds/hit6.wav', 'Sounds/hit7.wav', 'Sounds/hit16.wav']
 
-                var hit= new Audio(hitSounds[randomSound]);
-                hit.volume = MUSIC_VOLUME;
-
+                var hitSound= new Audio(hitSounds[randomSound]);
+                hitSound.volume = MUSIC_VOLUME;
+                hitSound.play();
                 var ydist = Math.abs(otherPlayer.geometry.position.y - this.geometry.position.y);
                 var zdist = Math.abs(otherPlayer.geometry.position.z - this.geometry.position.z);
                 var tol = 4.5;
