@@ -35,6 +35,26 @@ class Thundergart extends Level {
 
         this.spawn = shuffle(possibleSpawns)
 
+        var geometry = new THREE.CubeGeometry(1000, 1000, 1000);
+        var cubeMaterials = 
+        [
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_ft.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_bk.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_up.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_dn.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_rt.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_lf.png'), side: THREE.DoubleSide} )
+        ];
+
+        var cubeMaterial = new THREE.MeshFaceMaterial( cubeMaterials);
+        var cube = new THREE.Mesh (geometry, cubeMaterial);
+        scene.add(cube);
+
         var leftbase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 30),
             new THREE.MeshBasicMaterial({ color: this.iceblue }),
