@@ -87,8 +87,8 @@ class Willem extends Character {
 
                 if (this.specialTimer < 4) {
                     this.ultCharging = false;
-                    if (this.ballVelocity.y > -50)
-                        this.ballVelocity.y -= 60 * t;
+                    if (this.ballVelocity.y > -70)
+                        this.ballVelocity.y -= 80 * t;
                     this.geometry.position.set(-1000, this.specialObject.position.y, this.specialObject.position.z);
                     this.geometry.__dirtyPosition = true;
 

@@ -74,5 +74,89 @@ class Metalplant extends Level {
         leftplatform.position.set(0, 35, 35);
         scene.add(leftplatform);
         leftplatform.name = "ground";
+
+        var leftRope1 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 60, 1),
+            new THREE.MeshBasicMaterial({ color: this.rope }),
+            0
+        );
+        leftRope1.receiveShadow = true;
+        leftRope1.position.set(-6, 65, 27.5);
+        scene.add(leftRope1);
+        leftRope1.name = "ground";
+
+        var leftRope2 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 60, 1),
+            new THREE.MeshBasicMaterial({ color: this.rope }),
+            0
+        );
+        leftRope2.receiveShadow = true;
+        leftRope2.position.set(-6, 65, 45);
+        scene.add(leftRope2);
+        leftRope2.name = "ground";
+
+        var middleBrokenPillar = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 35, 2.5),
+            new THREE.MeshBasicMaterial({ color: this.rustydark }),
+            0
+        );
+        middleBrokenPillar.rotation.x = 10;
+        middleBrokenPillar.receiveShadow = true;
+        middleBrokenPillar.position.set(-3, -27.5, -4);
+        scene.add(middleBrokenPillar);
+        middleBrokenPillar.name = "ground";
+
+        var rightRope1 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 50, 1),
+            new THREE.MeshBasicMaterial({ color: this.rope }),
+            0
+        );
+        rightRope1.rotateX(-0.2);
+        rightRope1.receiveShadow = true;
+        rightRope1.position.set(-1, 25, -45);
+        scene.add(rightRope1);
+        rightRope1.name = "ground";
+
+        var rightRope2 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 50, 1),
+            new THREE.MeshBasicMaterial({ color: this.rope }),
+            0
+        );
+        rightRope2.rotateX(0.2);
+        rightRope2.receiveShadow = true;
+        rightRope2.position.set(-1, 25, -55);
+        scene.add(rightRope2);
+        rightRope2.name = "ground";
+
+        var rightplatformHigh = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 7.5),
+            new THREE.MeshBasicMaterial({ color: this.rusty }),
+            0
+        );
+        rightplatformHigh.receiveShadow = true;
+        rightplatformHigh.position.set(1, 50, -50);
+        scene.add(rightplatformHigh);
+        rightplatformHigh.name = "ground";
+
+        var rightRope3 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 50, 1),
+            new THREE.MeshBasicMaterial({ color: this.rope }),
+            0
+        );
+        rightRope3.receiveShadow = true;
+        rightRope3.position.set(-1, 75, -52.5);
+        scene.add(rightRope3);
+        rightRope3.name = "ground";
+
+        var rightRope4 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 50, 1),
+            new THREE.MeshBasicMaterial({ color: this.rope }),
+            0
+        );
+        rightRope4.receiveShadow = true;
+        rightRope4.position.set(-1, 75, -48.5);
+        scene.add(rightRope4);
+        rightRope4.name = "ground";
+        
     }
 }
