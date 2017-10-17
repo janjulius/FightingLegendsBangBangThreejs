@@ -42,26 +42,26 @@ class ZeldaMap extends Level {
             1
         )
 
-
-        var geometry = new CubeGeometry(500, 500, 500);
+        var geometry = new THREE.CubeGeometry(1000, 1000, 1000);
         var cubeMaterials = 
-        {
-            new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('Textures/water.png') side: THREE.DoubleSide} ),
+        [
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_ft.JPG'), side: THREE.DoubleSide} ),
             
-            new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('Textures/water.png') side: THREE.DoubleSide} ),
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_bk.JPG'), side: THREE.DoubleSide} ),
             
-            new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('Textures/water.png') side: THREE.DoubleSide} ),
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_up.JPG'), side: THREE.DoubleSide} ),
             
-            new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('Textures/water.png') side: THREE.DoubleSide} ),
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_dn.JPG'), side: THREE.DoubleSide} ),
             
-            new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('Textures/water.png') side: THREE.DoubleSide} ),
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_rt.JPG'), side: THREE.DoubleSide} ),
             
-            new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('Textures/water.png') side: THREE.DoubleSide} )
-        };
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_lf.JPG'), side: THREE.DoubleSide} )
+        ];
 
         var cubeMaterial = new THREE.MeshFaceMaterial( cubeMaterials);
         var cube = new THREE.Mesh (geometry, cubeMaterial);
         scene.add(cube);
+        
 
         var leftsmallisland = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 5, 10),
