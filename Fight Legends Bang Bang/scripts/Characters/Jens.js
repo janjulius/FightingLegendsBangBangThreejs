@@ -44,9 +44,6 @@ class Jens extends Character {
             this.finalUlt = false;
             this.endPos = new THREE.Vector3(players[this.target].geometry.position.x, players[this.target].geometry.position.y, players[this.target].geometry.position.z);
 
-            console.log(players[this.target].geometry.position.y);
-            console.log(this.endPos.y);
-
             this.specialObject = new THREE.Mesh(new THREE.SphereGeometry(5, 32, 32),
                 new THREE.MeshBasicMaterial({
                     color: 0xff0000
@@ -66,7 +63,6 @@ class Jens extends Character {
                 if (this.specialTimer > 0) {
                     this.specialTimer -= t;
                     if (Math.abs((this.specialObject.position.y - this.endPos.y)) <= 2) {
-                        console.log(this.specialObject.position.y);
                         this.specialTimer = 0.1;
                         this.finalUlt = true;
                     } else {
