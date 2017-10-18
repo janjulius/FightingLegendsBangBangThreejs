@@ -73,7 +73,7 @@ class HyruleCastle extends Level {
             1
         )
 
-        var touwtje = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur.png ' )
+        var touwtje = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur2.png ' )
         touwtje.wrapS = touwtje.wrapT = THREE.RepeatWrapping;
         touwtje.repeat.set(8, 14);
 
@@ -88,7 +88,7 @@ class HyruleCastle extends Level {
 
         var rauwtje = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur.png ' )
         rauwtje.wrapS = rauwtje.wrapT = THREE.RepeatWrapping;
-        rauwtje.repeat.set(6, 12);
+        rauwtje.repeat.set(6, 18);
 
         MinderGroteKastelenmuur = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
