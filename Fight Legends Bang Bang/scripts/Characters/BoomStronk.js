@@ -10,11 +10,14 @@ class BoomStronk extends Character {
         this.gravVel = this.gravityVelocity;
         this.specialDamage = 50;
         this.specialHealing = false;
-        this.portrait = 'sprites/Characters/MenuSprites/boom_stronk.png'
+        this.portrait = 'sprites/Characters/MenuSprites/boom_stronk.png';
+
+        this.ultStartSound = new Audio('Sounds/Characters/Boom Stronk/Boom_stronk_ult_start.wav');
+        this.ultEnd1Sound = new Audio('Sounds/Characters/Boom Stronk/Boom_stronk_ult_end_1.wav');
         var material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({ color: 0x4b0909 }),
-            1,
-            1
+            0,
+            0
         );
 
         this.specialAtkString = "Take root";
@@ -34,6 +37,7 @@ class BoomStronk extends Character {
         this.hitSomeone = false;
         this.specialHealing = false;
         if (this.specialReady()) {
+            this.ultStartSound.play();
             this.setSpecialAttackCounter(0);
             this.specialExists = true;
             this.specialTimer = 5;
@@ -64,6 +68,7 @@ class BoomStronk extends Character {
 
                 } else {
                     if (this.CheckSides("down")) {
+                        this.ultEnd1Sound.play();
                         this.specialTimer = 0;
                     }
                     var _this = this;

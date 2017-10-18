@@ -19,7 +19,7 @@ class Willem extends Character {
             new THREE.MeshBasicMaterial({
                 color: 0xffffff
             }),
-            1,
+            0,
             0
         );
 

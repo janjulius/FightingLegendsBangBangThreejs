@@ -11,10 +11,13 @@ class Jens extends Character {
         this.ballFallSpeed = 2;
         this.hitplayer = [false, false, false, false];
         this.hitFinalPlayer = [false, false, false, false];
+
+        this.bombFallingAudio = new Audio('Sounds/Characters/Jens/Bomb_falling.mp3');
+        this.bombExploding = new Audio('Sounds/Characters/Jens/Bomb_explode.wav');
         var material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({ color: 0x000000 }),
-            1,
-            1
+            0,
+            0
         );
 
         this.specialAtkString = "Cannon Barrage";
@@ -26,10 +29,6 @@ class Jens extends Character {
         this.geometry.position.set(0, y, z);
         scene.add(this.geometry);
         console.log("created " + this.name);
-    }
-
-    block() {
-        //no block
     }
 
     specialAtk() {
@@ -78,6 +77,7 @@ class Jens extends Character {
                             }
                         }
                         this.specialObject.position.y -= this.ballFallSpeed;
+                        this.bombFallingAudio.play();
                     }
                 }
             } else {
@@ -86,6 +86,8 @@ class Jens extends Character {
                     if (this.specialObject.scale.x < 3) {
                         this.specialObject.scale.set(2, 2, 2);
                     }
+                    this.bombFallingAudio.pause();
+                    this.bombExploding.play();
                     for (var i = 0; i < playersPlaying; i++) {
                         if (distanceBetweenVector3(this.specialObject.position, players[i].geometry.position) < 15) {
                             if (!this.hitFinalPlayer[i]) {

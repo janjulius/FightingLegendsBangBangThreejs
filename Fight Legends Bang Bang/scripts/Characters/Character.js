@@ -65,6 +65,8 @@ class Character {
 
         this.touchingWalls = [-1, -1, -1, -1];
 
+
+        
         this.blockMaterial = THREE.ImageUtils.loadTexture('sprites/Characters/BlockIcon.png');
         this.blockObject = new THREE.Mesh(
             new THREE.BoxGeometry(0.1, 4, 4),
@@ -159,7 +161,6 @@ class Character {
         this.canBlock = false;
         this.blockTimer = this.blockTime;
         this.blockCooldownTimer = this.blockCooldownTime;
-
     }
 
     idle() {
@@ -190,9 +191,8 @@ class Character {
     }
 
     setDamage(d, dir) {
-        if (this.blocking) {
-            return;
-        }
+        if (!this.blocking) {
+        
 
         if (this.CheckSides("down"))
             dir.y = Math.abs(dir.y);
@@ -209,6 +209,7 @@ class Character {
             this.knockBack.y = ((d + 20) * this.damageMulti) * dir.y;
         }
         gameInterface.UpdateGameInterface(this.id);
+    }
     }
 
     getSpecialAttackCounter() {
@@ -241,6 +242,12 @@ class Character {
         };
 
         if (!arena.Contains(playerPoint) && this.isAlive) {
+            var r = Math.floor((Math.random() * 3));
+            var cheerSounds = ['Sounds/Crowd/Crowd_cheer_1.wav', 'Sounds/Crowd/Crowd_cheer_2.wav', 'Sounds/Crowd/Crowd_cheer_3.wav'];
+            var cSound = new Audio(cheerSounds[r]);
+            cSound.volume = MUSIC_VOLUME;
+            cSound.play();
+            console.log(r);
             this.respawnTimer = this.respawnDelay;
             this.isAlive = false;
             this.isStunned = true;
