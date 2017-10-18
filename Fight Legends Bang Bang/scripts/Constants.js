@@ -109,6 +109,19 @@ function getCharImgByNameOrId(p) {
     }
 }
 
+function getPlayerIndicatorSprite(id){
+    switch(id){
+        case 0:
+            return 'sprites/P1Icon.png';
+        case 1:
+            return 'sprites/P2Icon.png';
+        case 2:
+            return 'sprites/P3Icon.png';
+        case 3:
+            return 'sprites/P4Icon.png';
+    }
+}
+
 function getPlayerColors(id, opacity) {
     switch (id) {
         case 0:

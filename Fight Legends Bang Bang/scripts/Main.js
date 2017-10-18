@@ -8,8 +8,11 @@ var playersPlaying = 4;
 var charSelect = true;
 var charScreens = [];
 var playerFiches = [];
+var playerBlockIcons = [];
 var controls = new THREE.GamepadControls();
 var level;
+var spawnOverheads = true;
+var blockingPossible = true;
 var music = new Audio('Music/selectMusic.mp3');
 gameInterface = new Interface();
 
@@ -302,7 +305,7 @@ function runGame() {
         }
 
         level = new HyruleCastle(); //temp level changer
-        
+
         /*
         //level randomizer
         let randomLevel;
@@ -347,7 +350,32 @@ function runGame() {
             players[k].AddGrounded();
             players[k].geometry.name = k;
             players[k].geometry.isPlayer = true;
+            if (spawnOverheads) {
+                this.playerFloaterMaterial = THREE.ImageUtils.loadTexture(getPlayerIndicatorSprite(k));
+                this.playerFloater = new THREE.Mesh(new THREE.BoxGeometry(0.1, 5, 5),
+                    new THREE.MeshBasicMaterial({ transparent: true, map: this.playerFloaterMaterial }));
+
+                this.playerFloater.position.set(5.1, 7, 0);
+
+                players[k].geometry.add(playerFloater);
+            }
+            if(blockingPossible){ 
+                this.blockMaterial = THREE.ImageUtils.loadTexture('sprites/Characters/BlockIcon.png');
+            
+            playerBlockIcons[k] = new THREE.Mesh(
+                new THREE.BoxGeometry(0.1, 4, 4),
+                new THREE.MeshBasicMaterial(
+                    {
+                        transparent: true, map: this.blockMaterial
+                    }
+                ), 0, 1
+            )
+            playerBlockIcons[k].position.set(5.1, 0, 0);
+            players[k].geometry.add(playerBlockIcons[k]);
+            playerBlockIcons[k].material.opacity = 0;
         }
+        }
+
         //console.log(box.getvelocity());
 
 

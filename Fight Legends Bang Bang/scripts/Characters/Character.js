@@ -65,20 +65,6 @@ class Character {
 
         this.touchingWalls = [-1, -1, -1, -1];
 
-
-        
-        this.blockMaterial = THREE.ImageUtils.loadTexture('sprites/Characters/BlockIcon.png');
-        this.blockObject = new THREE.Mesh(
-            new THREE.BoxGeometry(0.1, 4, 4),
-            new THREE.MeshBasicMaterial(
-                {
-                    transparent: true, map: this.blockMaterial
-                }
-            ), 0, 1
-        )
-        this.blockObject.position.set(-1000, 1, 1);
-        scene.add(this.blockObject);
-
         console.log("created character");
     }
 
@@ -466,14 +452,13 @@ class Character {
                 this.normalAtk();
 
         if (this.blockTimer > 0) {
-            this.blockObject.position.set(this.geometry.position.x + 5, this.geometry.position.y, this.geometry.position.z);
-            this.blockObject.__dirtyPosition = true;
+            playerBlockIcons[this.id].material.opacity = 1;
             this.blockTimer -= t;
         }
 
         if (this.blockTimer <= 0) {
             if (this.blocking) {
-                this.blockObject.position.set(-1000, 1, 1);
+                playerBlockIcons[this.id].material.opacity = 0;
                 this.blocking = false;
             }
         }
