@@ -21,7 +21,7 @@ init();
 
 function init() {
     scene = new Physijs.Scene;
-    scene.setGravity(new THREE.Vector3(0, 0, 0));
+    scene.setGravity(new THREE.Vector3(0, -30, 0));
 
     renderer = new THREE.WebGLRenderer({});
     renderer.setSize(window.innerWidth, window.innerHeight);
