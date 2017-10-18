@@ -276,15 +276,15 @@ class ZeldaMap extends Level {
         scene.add(lowerisland2);
         lowerisland2.name = "ground";
 
-        var lowerplatform = new THREE.Mesh(
+        var lowerplatform = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 10),
-            touwtje
+            touwtje,
+            0
         );
         lowerplatform.receiveShadow = true;
         lowerplatform.position.set(0, -35, -10);
         scene.add(lowerplatform);
         lowerplatform.name = "ground";
-        this.oneWayPlatforms.push(lowerplatform);
 
     }
 }
