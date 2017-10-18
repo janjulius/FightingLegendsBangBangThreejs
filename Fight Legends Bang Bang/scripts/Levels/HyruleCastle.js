@@ -61,14 +61,10 @@ class HyruleCastle extends Level {
         kms.wrapS = kms.wrapT = THREE.RepeatWrapping;
         kms.repeat.set(2, 4);
 
-        var Kastelenmuur = Physijs.createMaterial(
+        var Kastelenmuur =
             new THREE.MeshBasicMaterial({
-                color: 0xffffff,
-                map: kms,
-            }),
-            0,
-            1
-        )
+                map: kms
+            })
 
         var touwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur2.png ' )
         touwtje.wrapS = touwtje.wrapT = THREE.RepeatWrapping;
@@ -87,14 +83,9 @@ class HyruleCastle extends Level {
         rauwtje.wrapS = rauwtje.wrapT = THREE.RepeatWrapping;
         rauwtje.repeat.set(3, 18);
 
-        var MinderGroteKastelenmuur = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial({
-                color: 0xffffff,
-                map: rauwtje,
-            }),
-            0,
-            1
-        )
+        var MinderGroteKastelenmuur = new THREE.MeshBasicMaterial({
+                map: rauwtje
+            })
 
         var donkertouwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur2_dark.png ' )
         donkertouwtje.wrapS = donkertouwtje.wrapT = THREE.RepeatWrapping;
@@ -160,15 +151,56 @@ class HyruleCastle extends Level {
             1
         )
 
-        var middleLowRooftop = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 150, 20),
+        // var geometry = new THREE.CubeGeometry(1000, 1000, 1000);
+        // var cubeMaterials = 
+        // [
+        //     new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_ft.png'), side: THREE.DoubleSide} ),
+            
+        //     new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_bk.png'), side: THREE.DoubleSide} ),
+            
+        //     new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_up.png'), side: THREE.DoubleSide} ),
+            
+        //     new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_dn.png'), side: THREE.DoubleSide} ),
+            
+        //     new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_rt.png'), side: THREE.DoubleSide} ),
+            
+        //     new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_lf.png'), side: THREE.DoubleSide} )
+        // ];
+
+        // var cubeMaterial = new THREE.MeshFaceMaterial( cubeMaterials);
+        // var cube = new THREE.Mesh (geometry, cubeMaterial);
+        // scene.add(cube);
+        
+        var geometrie = new THREE.CubeGeometry(15,150,20)
+        var Kubusmaterialen = [
             MinderGroteKastelenmuur,
+            MinderGroteKastelenmuur,
+            Kastelenmuur,
+            Kastelenmuur,
+            MinderGroteKastelenmuur,
+            MinderGroteKastelenmuur
+        ];
+
+        var Kubusmateriaal = new THREE.MeshBasicMaterial( Kubusmaterialen);
+        var kubus = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(15, 150, 20),
+            Kubusmateriaal,
             0
         );
-        middleLowRooftop.receiveShadow = true;
-        middleLowRooftop.position.set(0, -75, 20);
-        scene.add(middleLowRooftop);
-        middleLowRooftop.name = "ground";
+        kubus.receiveShadow = true;
+        kubus.position.set(0, -75, 20);
+        scene.add(kubus);
+
+
+        // var middleLowRooftop = new Physijs.BoxMesh(
+        //     new THREE.CubeGeometry(15, 150, 20),
+        //     MinderGroteKastelenmuur,
+        //     0
+        // );
+        // middleLowRooftop.receiveShadow = true;
+        // middleLowRooftop.position.set(0, -75, 20);
+        // scene.add(middleLowRooftop);
+        // middleLowRooftop.name = "ground";
 
         var rightRooftop = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 150, 30),

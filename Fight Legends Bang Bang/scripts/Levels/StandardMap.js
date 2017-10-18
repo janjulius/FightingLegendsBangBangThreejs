@@ -66,7 +66,7 @@ class StandardMap extends Level {
         bottom.name = "ground";
 
         var leftplatform = new THREE.Mesh(
-            new THREE.CubeGeometry(15, 2, 15),
+            new THREE.CubeGeometry(15, 1, 15),
             new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
             0
         );
@@ -77,7 +77,7 @@ class StandardMap extends Level {
         this.oneWayPlatforms.push(leftplatform);
 
         var rightplatform = new THREE.Mesh(
-            new THREE.CubeGeometry(15, 2, 15),
+            new THREE.CubeGeometry(15, 1, 15),
             new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
             0
         );
@@ -88,7 +88,7 @@ class StandardMap extends Level {
         this.oneWayPlatforms.push(rightplatform);
 
         var upper = new THREE.Mesh(
-            new THREE.CubeGeometry(15, 2, 30),
+            new THREE.CubeGeometry(15, 1, 30),
             new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
             0
         );
