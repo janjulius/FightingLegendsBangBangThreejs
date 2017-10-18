@@ -119,6 +119,9 @@ THREE.GamepadControls = function () {
                         if (this.PressedButton(i, 3)) {
                             p.pressedbuttonY();
                         }
+                        if(this.PressedButton(i, 5)){
+                            p.pressedbuttonRT();
+                        }
                     }
                 }
 

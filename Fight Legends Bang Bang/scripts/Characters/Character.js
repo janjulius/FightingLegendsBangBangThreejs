@@ -37,6 +37,12 @@ class Character {
         this.knockbackImmunity = false;
         this.takeDamageMultiplier = 1;
 
+        this.blockTime = 0.3;
+        this.blockTimer = 0;
+        this.blockCooldownTimer = 0;
+        this.blockCooldownTime = 2;
+        this.canBlock = true;
+
         this.basicAttackDamage = 10;
         this.specialIncrease = 10;
 
@@ -58,6 +64,17 @@ class Character {
         this.gravityVelocity = 80;
 
         this.touchingWalls = [-1, -1, -1, -1];
+        
+        this.blockMaterial = THREE.ImageUtils.loadTexture('sprites/Characters/BlockIcon.png');
+        this.blockObject = new THREE.Mesh(
+        new THREE.BoxGeometry(0.1, 4, 4),
+         new THREE.MeshBasicMaterial(
+            { transparent: true, map: this.blockMaterial
+        }
+        ),0,1
+        )
+        this.blockObject.position.set(-1000, 1,1);
+        scene.add(this.blockObject);
 
         console.log("created character");
     }
@@ -67,6 +84,7 @@ class Character {
     }
 
     normalAtk() {
+        if(!this.blocking){
         this.chargeAttack = false;
         this.attackRemoveTimer = this.attackRemoveCooldown;
         this.swingTimer = this.swingCooldown;
@@ -117,6 +135,7 @@ class Character {
                 otherPlayer.setDamage(otherPlayer.getDamage() + this.basicAttackDamage * this.takeDamageMultiplier, this.attackDirection);
             }
         }
+        }
     }
 
     doNormalAttack() {
@@ -136,7 +155,10 @@ class Character {
 
     block() {
         this.blocking = true;
-
+        this.canBlock = false;
+        this.blockTimer = this.blockTime;
+        this.blockCooldownTimer = this.blockCooldownTime;
+        
     }
 
     idle() {
@@ -301,6 +323,14 @@ class Character {
             this.specialAtk();
     }
 
+    pressedbuttonRT(){
+        if(!this.isStunned){
+            if(this.canBlock){
+               this.block();
+            }
+        }
+    }
+
     Update(t) {
 
         this.CheckWithinArena();
@@ -428,6 +458,27 @@ class Character {
         if (this.chargeAttack)
             if (this.swingTimer > 0 && this.swingTimer < this.swingCooldown - this.attackDelay)
                 this.normalAtk();
+
+        if(this.blockTimer > 0){
+            this.blockObject.position.set(this.geometry.position.x + 5, this.geometry.position.y, this.geometry.position.z);
+            this.blockObject.__dirtyPosition = true;
+            this.blockTimer -= t;
+        }
+        
+        if(this.blockTimer <= 0){
+            if(this.blocking){
+            this.blockObject.position.set(-1000, 1, 1);
+            this.blocking = false;
+            }
+        }
+
+        if(this.blockCooldownTimer > 0)
+            this.blockCooldownTimer -= t;
+        
+        if(this.blockCooldownTimer <= 0)
+            this.canBlock = true;
+        
+        console.log(this.blockCooldownTimer);
     }
 
     UpdateChar(t) {}
