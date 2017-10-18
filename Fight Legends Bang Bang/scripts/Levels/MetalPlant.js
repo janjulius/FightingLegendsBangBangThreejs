@@ -38,17 +38,17 @@ class Metalplant extends Level {
         var geometry = new THREE.CubeGeometry(1000, 1000, 1000);
         var cubeMaterials = 
         [
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_ft.png'), side: THREE.DoubleSide} ),
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/Orange_sky/front.png'), side: THREE.DoubleSide} ),
             
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_bk.png'), side: THREE.DoubleSide} ),
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/Orange_sky/back.png'), side: THREE.DoubleSide} ),
             
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_up.png'), side: THREE.DoubleSide} ),
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/Orange_sky/up.png'), side: THREE.DoubleSide} ),
             
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_dn.png'), side: THREE.DoubleSide} ),
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/Orange_sky/down.png'), side: THREE.DoubleSide} ),
             
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_rt.png'), side: THREE.DoubleSide} ),
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/Orange_sky/right.png'), side: THREE.DoubleSide} ),
             
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_lf.png'), side: THREE.DoubleSide} )
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/Orange_sky/left.png'), side: THREE.DoubleSide} )
         ];
 
         var cubeMaterial = new THREE.MeshFaceMaterial( cubeMaterials);
@@ -164,7 +164,7 @@ class Metalplant extends Level {
             0
         );
         rightRope3.receiveShadow = true;
-        rightRope3.position.set(-1, 75, -52.5);
+        rightRope3.position.set(-10, 75, -52.5);
         scene.add(rightRope3);
         rightRope3.name = "ground";
 
@@ -174,7 +174,7 @@ class Metalplant extends Level {
             0
         );
         rightRope4.receiveShadow = true;
-        rightRope4.position.set(-1, 75, -48.5);
+        rightRope4.position.set(-10, 75, -48.5);
         scene.add(rightRope4);
         rightRope4.name = "ground";
         
