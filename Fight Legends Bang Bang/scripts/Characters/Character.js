@@ -178,24 +178,24 @@ class Character {
 
     setDamage(d, dir) {
         if (!this.blocking) {
-        
 
-        if (this.CheckSides("down"))
-            dir.y = Math.abs(dir.y);
-        if (this.CheckSides("up"))
-            dir.y = -Math.abs(dir.y);
-        if (this.CheckSides("left"))
-            dir.z = -Math.abs(dir.z);
-        if (this.CheckSides("right"))
-            dir.z = Math.abs(dir.z);
 
-        this.damage = Math.floor(d);
-        if (!this.knockbackImmunity) {
-            this.knockBack.z = ((d + 20) * this.damageMulti) * dir.z;
-            this.knockBack.y = ((d + 20) * this.damageMulti) * dir.y;
+            if (this.CheckSides("down"))
+                dir.y = Math.abs(dir.y);
+            if (this.CheckSides("up"))
+                dir.y = -Math.abs(dir.y);
+            if (this.CheckSides("left"))
+                dir.z = -Math.abs(dir.z);
+            if (this.CheckSides("right"))
+                dir.z = Math.abs(dir.z);
+
+            this.damage = Math.floor(d);
+            if (!this.knockbackImmunity) {
+                this.knockBack.z = ((d + 20) * this.damageMulti) * dir.z;
+                this.knockBack.y = ((d + 20) * this.damageMulti) * dir.y;
+            }
+            gameInterface.UpdateGameInterface(this.id);
         }
-        gameInterface.UpdateGameInterface(this.id);
-    }
     }
 
     getSpecialAttackCounter() {
@@ -370,7 +370,7 @@ class Character {
 
 
         if (this.velt > -this.maxGravityVelocity) {
-            let extraVel = this.direction.y < 0 ? -this.direction.y * (this.gravityVelocity / 2) : 0;
+            let extraVel = this.direction.y < 0 ? -this.direction.y * (this.gravityVelocity) : 0;
             this.velt -= (this.gravityVelocity + extraVel) * t;
         }
 
@@ -476,16 +476,14 @@ class Character {
         var _this = this;
         this.geometry.addEventListener('collision', function (other_object, relative_velocity, relative_rotation, contact_normal) {
 
-            if (!other_object.isPlayer) {
-                if (contact_normal.z == 1) {
-                    _this.touchingWalls[0] = other_object.id;
-                } else if (contact_normal.z == -1) {
-                    _this.touchingWalls[1] = other_object.id;
-                } else if (contact_normal.y == 1) {
-                    _this.touchingWalls[2] = other_object.id;
-                } else if (contact_normal.y == -1) {
-                    _this.touchingWalls[3] = other_object.id;
-                }
+            if (contact_normal.z == 1 && !other_object.isPlayer) {
+                _this.touchingWalls[0] = other_object.id;
+            } else if (contact_normal.z == -1 && !other_object.isPlayer) {
+                _this.touchingWalls[1] = other_object.id;
+            } else if (contact_normal.y == 1 && !other_object.isPlayer) {
+                _this.touchingWalls[2] = other_object.id;
+            } else if (contact_normal.y == -1) {
+                _this.touchingWalls[3] = other_object.id;
             }
 
             if (contact_normal.y < -0.9) {

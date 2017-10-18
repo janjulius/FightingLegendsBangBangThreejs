@@ -3,12 +3,12 @@ class HyruleCastle extends Level {
         super();
 
         this.name = "HyruleCastle";
-        this.topLeft = {y: 150, z: 200 } ;
-        this.bottomRight = {y: -70, z: -200};
+        this.topLeft = { y: 150, z: 200 };
+        this.bottomRight = { y: -70, z: -200 };
 
         this.myAudio = new Audio('Music/Castle.mp3');
         this.myAudio.volume = MUSIC_VOLUME;
-        this.myAudio.addEventListener('ended', function() {
+        this.myAudio.addEventListener('ended', function () {
             this.currentTime = 0;
             this.play();
         }, false);
@@ -38,26 +38,26 @@ class HyruleCastle extends Level {
         this.spawn = shuffle(possibleSpawns)
 
         var geometry = new THREE.CubeGeometry(1000, 1000, 1000);
-        var cubeMaterials = 
-        [
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_ft.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_bk.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_up.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_dn.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_rt.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_lf.png'), side: THREE.DoubleSide} )
-        ];
+        var cubeMaterials =
+            [
+                new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_ft.png'), side: THREE.DoubleSide }),
 
-        var cubeMaterial = new THREE.MeshFaceMaterial( cubeMaterials);
-        var cube = new THREE.Mesh (geometry, cubeMaterial);
+                new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_bk.png'), side: THREE.DoubleSide }),
+
+                new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_up.png'), side: THREE.DoubleSide }),
+
+                new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_dn.png'), side: THREE.DoubleSide }),
+
+                new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_rt.png'), side: THREE.DoubleSide }),
+
+                new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_lf.png'), side: THREE.DoubleSide })
+            ];
+
+        var cubeMaterial = new THREE.MeshFaceMaterial(cubeMaterials);
+        var cube = new THREE.Mesh(geometry, cubeMaterial);
         scene.add(cube);
 
-        var kms = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur_dark.png ' )
+        var kms = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur_dark.png ')
         kms.wrapS = kms.wrapT = THREE.RepeatWrapping;
         kms.repeat.set(2, 4);
 
@@ -70,7 +70,7 @@ class HyruleCastle extends Level {
             1
         )
 
-        var touwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur2.png ' )
+        var touwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur2.png ')
         touwtje.wrapS = touwtje.wrapT = THREE.RepeatWrapping;
         touwtje.repeat.set(4, 16);
 
@@ -83,7 +83,7 @@ class HyruleCastle extends Level {
             1
         )
 
-        var rauwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur.png ' )
+        var rauwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur.png ')
         rauwtje.wrapS = rauwtje.wrapT = THREE.RepeatWrapping;
         rauwtje.repeat.set(3, 18);
 
@@ -96,7 +96,21 @@ class HyruleCastle extends Level {
             1
         )
 
-        var donkertouwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur2_dark.png ' )
+        var flat = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur.png ')
+        flat.wrapS = flat.wrapT = THREE.RepeatWrapping;
+        flat.repeat.set(2,2);
+
+        var middleLowRoofTopping = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: flat,
+            }),
+            0,
+            1
+        )
+
+
+        var donkertouwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur2_dark.png ')
         donkertouwtje.wrapS = donkertouwtje.wrapT = THREE.RepeatWrapping;
         donkertouwtje.repeat.set(8, 16);
 
@@ -109,7 +123,7 @@ class HyruleCastle extends Level {
             1
         )
 
-        var platformtouwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Platform_tile_1.png ' )
+        var platformtouwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Platform_tile_1.png ')
         platformtouwtje.wrapS = platformtouwtje.wrapT = THREE.RepeatWrapping;
         platformtouwtje.repeat.set(1, 1);
 
@@ -122,7 +136,7 @@ class HyruleCastle extends Level {
             1
         )
 
-        var puntje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/roof_tile_1.png ' )
+        var puntje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/roof_tile_1.png ')
         puntje.wrapS = puntje.wrapT = THREE.RepeatWrapping;
         puntje.repeat.set(2, 1);
 
@@ -135,7 +149,7 @@ class HyruleCastle extends Level {
             1
         )
 
-        var puntje2 = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/roof_tile_1.png ' )
+        var puntje2 = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/roof_tile_1.png ')
         puntje2.wrapS = puntje2.wrapT = THREE.RepeatWrapping;
         puntje2.repeat.set(1, 5);
 
@@ -147,7 +161,7 @@ class HyruleCastle extends Level {
             0,
             1
         )
-        var puntje3 = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/roof_tile_1.png ' )
+        var puntje3 = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/roof_tile_1.png ')
         puntje3.wrapS = puntje3.wrapT = THREE.RepeatWrapping;
         puntje3.repeat.set(1, 2);
 
@@ -159,6 +173,16 @@ class HyruleCastle extends Level {
             0,
             1
         )
+
+        var middleLowRoofTopping = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(15.5, 0.1, 20.5),
+            middleLowRoofTopping,
+            0
+        );
+        middleLowRoofTopping.receiveShadow = true;
+        middleLowRoofTopping.position.set(0, 0.1, 20);
+        scene.add(middleLowRoofTopping);
+        middleLowRoofTopping.name = "ground";
 
         var middleLowRooftop = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 150, 20),
@@ -251,35 +275,36 @@ class HyruleCastle extends Level {
         this.oneWayPlatforms.push(platform3);
 
         var pointroof1 = new Physijs.BoxMesh(
-            new THREE.CylinderGeometry(0,5,50,40),
+            new THREE.CylinderGeometry(0, 5, 50, 40),
             puntj2,
             0
         )
         pointroof1.receiveShadow = true;
-        pointroof1.position.set(-40,30,30);
+        pointroof1.position.set(-40, 30, 30);
         scene.add(pointroof1);
 
         var pointroof2 = new Physijs.BoxMesh(
-            new THREE.CylinderGeometry(0,5,20,40),
+            new THREE.CylinderGeometry(0, 5, 20, 40),
             puntj3,
             0
         )
         pointroof2.receiveShadow = true;
-        pointroof2.position.set(-15, 70,6);
+        pointroof2.position.set(-15, 70, 6);
         scene.add(pointroof2);
 
         var pointroof3 = new Physijs.BoxMesh(
-            new THREE.CylinderGeometry(0,4,10,40),
+            new THREE.CylinderGeometry(0, 4, 10, 40),
             puntj,
             0
         )
         pointroof3.receiveShadow = true;
-        pointroof3.position.set(-7,20,-30);
+        pointroof3.position.set(-7, 20, -30);
         scene.add(pointroof3);
 
         var square = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 7.5, 7.5),
-            puntj
+            puntj,
+            0
         );
         square.receiveShadow = true;
         square.position.set(-7, 12.5, -30);
