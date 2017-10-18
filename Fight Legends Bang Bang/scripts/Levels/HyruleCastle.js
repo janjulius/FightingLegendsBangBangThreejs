@@ -6,6 +6,8 @@ class HyruleCastle extends Level {
         this.topLeft = {y: 150, z: 200 } ;
         this.bottomRight = {y: -70, z: -200};
         var Kastelenmuur;
+        var GroteKastelenmuur;
+        var MinderGroteKastelenmuur;
 
         this.myAudio = new Audio('Music/Castle.mp3');
         this.myAudio.volume = MUSIC_VOLUME;
@@ -58,10 +60,40 @@ class HyruleCastle extends Level {
         var cube = new THREE.Mesh (geometry, cubeMaterial);
         scene.add(cube);
 
+        var kms = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur.png ' )
+        kms.wrapS = kms.wrapT = THREE.RepeatWrapping;
+        kms.repeat.set(4, 4);
+
         Kastelenmuur = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
-                map: THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur.png ' ),
+                map: kms,
+            }),
+            0,
+            1
+        )
+
+        var touwtje = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur.png ' )
+        touwtje.wrapS = touwtje.wrapT = THREE.RepeatWrapping;
+        touwtje.repeat.set(8, 14);
+
+        GroteKastelenmuur = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: touwtje,
+            }),
+            0,
+            1
+        )
+
+        var rauwtje = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur.png ' )
+        rauwtje.wrapS = rauwtje.wrapT = THREE.RepeatWrapping;
+        rauwtje.repeat.set(6, 12);
+
+        MinderGroteKastelenmuur = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: rauwtje,
             }),
             0,
             1
@@ -69,7 +101,7 @@ class HyruleCastle extends Level {
 
         var middleLowRooftop = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 150, 20),
-            Kastelenmuur,
+            MinderGroteKastelenmuur,
             0
         );
         middleLowRooftop.receiveShadow = true;
@@ -79,7 +111,7 @@ class HyruleCastle extends Level {
 
         var rightRooftop = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 150, 30),
-            Kastelenmuur,
+            GroteKastelenmuur,
             0
         );
         rightRooftop.receiveShadow = true;
@@ -89,7 +121,7 @@ class HyruleCastle extends Level {
 
         var leftRooftop = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 150, 20),
-            Kastelenmuur,
+            MinderGroteKastelenmuur,
             0
         );
         leftRooftop.receiveShadow = true;
@@ -99,7 +131,7 @@ class HyruleCastle extends Level {
 
         var middleRooftop = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 45),
-            Kastelenmuur,
+            GroteKastelenmuur,
             0
         );
         middleRooftop.receiveShadow = true;
@@ -109,7 +141,7 @@ class HyruleCastle extends Level {
 
         var middleRoofBase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(1, 150, 45),
-            Kastelenmuur,
+            GroteKastelenmuur,
             0
         );
         middleRoofBase.receiveShadow = true;
