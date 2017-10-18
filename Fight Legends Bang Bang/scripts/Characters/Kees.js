@@ -10,8 +10,8 @@ class Kees extends Character {
         this.stunTime = 1.9; // +0.1
         var material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({ color: 0x786e6e }),
-            1,
-            1
+            0,
+            0
         );
 
         this.specialAtkString = "Expose to the light";

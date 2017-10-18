@@ -9,8 +9,8 @@ class Berend extends Character {
         this.ultSound = new Audio('Sounds/Characters/Berend/Berend_ult_shout.wav');
         var material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({ color: 0x8B4513 }),
-            1,
-            1
+            0,
+            0
         );
 
         this.specialAtkString = "Assert dominance";

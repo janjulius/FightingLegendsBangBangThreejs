@@ -20,10 +20,14 @@ class Rocky extends Character {
         this.claw2HitAudio = new Audio(soundFolderPath + 'Rocky_Claw_hit.wav');
         this.claw3HitAudio = new Audio(soundFolderPath + 'Rocky_Claw_hit.wav');
         this.finalClawHitAudio = new Audio(soundFolderPath + 'Rocky_final_claw_hit.wav');
+        var material = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({ color: 0xec00fb }),
+            0,
+            0
+        );
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
-            new THREE.MeshBasicMaterial({ color: 0xec00fb },
-                1)
+            material
         );
         this.geometry.castShadow = true;
         this.geometry.position.set(0, y, z);

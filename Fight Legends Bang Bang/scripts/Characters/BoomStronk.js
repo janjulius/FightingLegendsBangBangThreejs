@@ -13,8 +13,8 @@ class BoomStronk extends Character {
         this.portrait = 'sprites/Characters/MenuSprites/boom_stronk.png'
         var material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({ color: 0x4b0909 }),
-            1,
-            1
+            0,
+            0
         );
 
         this.specialAtkString = "Take root";

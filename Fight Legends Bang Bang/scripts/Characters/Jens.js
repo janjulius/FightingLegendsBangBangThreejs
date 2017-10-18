@@ -13,8 +13,8 @@ class Jens extends Character {
         this.hitFinalPlayer = [false, false, false, false];
         var material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({ color: 0x000000 }),
-            1,
-            1
+            0,
+            0
         );
 
         this.specialAtkString = "Cannon Barrage";
