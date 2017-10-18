@@ -113,7 +113,7 @@ class Brawlhaven extends Level {
         scene.add(uppergrassright);
 
         var grassplatform = new THREE.Mesh(
-            new THREE.CubeGeometry(15, 1, 9),
+            new THREE.CubeGeometry(15, 1, 9.5),
             matGrass
         );
         grassplatform.receiveShadow = true;
