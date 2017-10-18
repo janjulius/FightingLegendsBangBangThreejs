@@ -115,7 +115,7 @@ class HyruleCastle extends Level {
 
         var platformtouwtje = THREE.ImageUtils.loadTexture(' Textures/Platform_tile_1.png ' )
         platformtouwtje.wrapS = platformtouwtje.wrapT = THREE.RepeatWrapping;
-        platformtouwtje.repeat.set(2, 1);
+        platformtouwtje.repeat.set(1, 1);
 
         var platformtile = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
@@ -215,7 +215,7 @@ class HyruleCastle extends Level {
         middleRoofBase.name = "ground";
 
         var CastleTower = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(1, 40, 15),
+            new THREE.CubeGeometry(15, 40, 15),
             Kastelenmuur,
             0
         );
