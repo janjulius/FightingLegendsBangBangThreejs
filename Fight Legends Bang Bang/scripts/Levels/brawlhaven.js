@@ -91,7 +91,7 @@ class Brawlhaven extends Level {
             matGrass
         );
         uppergrassleft.receiveShadow = true;
-        uppergrassleft.position.set(0, 1.5, 15);
+        uppergrassleft.position.set(0, 2, 15);
         scene.add(uppergrassleft);
 
         var upperbaseright = new Physijs.BoxMesh(
@@ -109,7 +109,7 @@ class Brawlhaven extends Level {
             matGrass
         );
         uppergrassright.receiveShadow = true;
-        uppergrassright.position.set(0, 1.5, -15);
+        uppergrassright.position.set(0, 2, -15);
         scene.add(uppergrassright);
 
         var grassplatform = new THREE.Mesh(
