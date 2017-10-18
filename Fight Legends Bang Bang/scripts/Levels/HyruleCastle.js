@@ -8,6 +8,7 @@ class HyruleCastle extends Level {
         var Kastelenmuur;
         var GroteKastelenmuur;
         var MinderGroteKastelenmuur;
+        var DonkereGroteKastelenmuur;
 
         this.myAudio = new Audio('Music/Castle.mp3');
         this.myAudio.volume = MUSIC_VOLUME;
@@ -62,7 +63,7 @@ class HyruleCastle extends Level {
 
         var kms = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur_dark.png ' )
         kms.wrapS = kms.wrapT = THREE.RepeatWrapping;
-        kms.repeat.set(4, 4);
+        kms.repeat.set(2, 4);
 
         Kastelenmuur = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
@@ -75,7 +76,7 @@ class HyruleCastle extends Level {
 
         var touwtje = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur2.png ' )
         touwtje.wrapS = touwtje.wrapT = THREE.RepeatWrapping;
-        touwtje.repeat.set(8, 14);
+        touwtje.repeat.set(4, 16);
 
         GroteKastelenmuur = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
@@ -88,12 +89,76 @@ class HyruleCastle extends Level {
 
         var rauwtje = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur.png ' )
         rauwtje.wrapS = rauwtje.wrapT = THREE.RepeatWrapping;
-        rauwtje.repeat.set(6, 18);
+        rauwtje.repeat.set(3, 18);
 
         MinderGroteKastelenmuur = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
                 map: rauwtje,
+            }),
+            0,
+            1
+        )
+
+        var donkertouwtje = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur2_dark.png ' )
+        donkertouwtje.wrapS = donkertouwtje.wrapT = THREE.RepeatWrapping;
+        donkertouwtje.repeat.set(8, 16);
+
+        DonkereGroteKastelenmuur = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: donkertouwtje,
+            }),
+            0,
+            1
+        )
+
+        var platformtouwtje = THREE.ImageUtils.loadTexture(' Textures/Platform_tile_1.png ' )
+        platformtouwtje.wrapS = platformtouwtje.wrapT = THREE.RepeatWrapping;
+        platformtouwtje.repeat.set(2, 1);
+
+        var platformtile = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: platformtouwtje,
+            }),
+            0,
+            1
+        )
+
+        var puntje = THREE.ImageUtils.loadTexture(' Textures/roof_tile_1.png ' )
+        puntje.wrapS = puntje.wrapT = THREE.RepeatWrapping;
+        puntje.repeat.set(2, 1);
+
+        var puntj = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: puntje,
+            }),
+            0,
+            1
+        )
+
+        var puntje2 = THREE.ImageUtils.loadTexture(' Textures/roof_tile_1.png ' )
+        puntje2.wrapS = puntje2.wrapT = THREE.RepeatWrapping;
+        puntje2.repeat.set(1, 5);
+
+        var puntj2 = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: puntje2,
+            }),
+            0,
+            1
+        )
+        var puntje3 = THREE.ImageUtils.loadTexture(' Textures/roof_tile_1.png ' )
+        puntje3.wrapS = puntje3.wrapT = THREE.RepeatWrapping;
+        puntje3.repeat.set(1, 2);
+
+        var puntj3 = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: puntje3,
             }),
             0,
             1
@@ -131,7 +196,7 @@ class HyruleCastle extends Level {
 
         var middleRooftop = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 45),
-            GroteKastelenmuur,
+            platformtile,
             0
         );
         middleRooftop.receiveShadow = true;
@@ -141,7 +206,7 @@ class HyruleCastle extends Level {
 
         var middleRoofBase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(1, 150, 45),
-            GroteKastelenmuur,
+            DonkereGroteKastelenmuur,
             0
         );
         middleRoofBase.receiveShadow = true;
@@ -161,7 +226,7 @@ class HyruleCastle extends Level {
 
         var platform1 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 7.5),
-            new THREE.MeshBasicMaterial({ color: this.tilegray }),
+            platformtile,
             0
         );
         platform1.receiveShadow = true;
@@ -171,7 +236,7 @@ class HyruleCastle extends Level {
 
         var platform2 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 7.5),
-            new THREE.MeshBasicMaterial({ color: this.tilegray }),
+            platformtile,
             0
         );
         platform2.receiveShadow = true;
@@ -181,7 +246,7 @@ class HyruleCastle extends Level {
 
         var platform3 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 7.5),
-            new THREE.MeshBasicMaterial({ color: this.tilegray }),
+            platformtile,
             0
         );
         platform3.receiveShadow = true;
@@ -191,7 +256,7 @@ class HyruleCastle extends Level {
 
         var pointroof1 = new Physijs.BoxMesh(
             new THREE.CylinderGeometry(0,5,50,40),
-            new THREE.MeshBasicMaterial( {color: this.darkgreen }),
+            puntj2,
             0
         )
         pointroof1.receiveShadow = true;
@@ -200,7 +265,7 @@ class HyruleCastle extends Level {
 
         var pointroof2 = new Physijs.BoxMesh(
             new THREE.CylinderGeometry(0,5,20,40),
-            new THREE.MeshBasicMaterial( {color: this.darkgreen }),
+            puntj3,
             0
         )
         pointroof2.receiveShadow = true;
@@ -209,7 +274,7 @@ class HyruleCastle extends Level {
 
         var pointroof3 = new Physijs.BoxMesh(
             new THREE.CylinderGeometry(0,4,10,40),
-            new THREE.MeshBasicMaterial( {color: this.darkgreen }),
+            puntj,
             0
         )
         pointroof3.receiveShadow = true;
@@ -218,7 +283,7 @@ class HyruleCastle extends Level {
 
         var square = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 7.5, 7.5),
-            new THREE.MeshBasicMaterial({ color: this.darkgreen }),
+            puntj,
             0
         );
         square.receiveShadow = true;
