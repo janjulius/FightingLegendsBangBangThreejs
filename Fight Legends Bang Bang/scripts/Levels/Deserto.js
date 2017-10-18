@@ -109,7 +109,7 @@ class Deserto extends Level {
         material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
-                map: THREE.ImageUtils.loadTexture(' Textures/cactus.jpg ' )
+                map: THREE.ImageUtils.loadTexture(' Textures/Deserto/cactus.jpg ' )
             }),
             0,
             1
@@ -169,7 +169,7 @@ class Deserto extends Level {
         material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
-                map: THREE.ImageUtils.loadTexture(' Textures/pyramid.jpg ' )
+                map: THREE.ImageUtils.loadTexture(' Textures/Deserto/pyramid.jpg ' )
             }),
             0,
             1
@@ -187,7 +187,7 @@ class Deserto extends Level {
         material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
-                map: THREE.ImageUtils.loadTexture(' Textures/wood.jpg ' )
+                map: THREE.ImageUtils.loadTexture(' Textures/Deserto/wood.jpg ' )
             }),
             0,
             1

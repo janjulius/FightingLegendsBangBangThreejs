@@ -5,7 +5,6 @@ class ZeldaMap extends Level {
         this.name = "ZeldaMap";
         this.topLeft = { y: 150, z: 200 };
         this.bottomRight = { y: -75, z: -200 };
-        var material;
         this.myAudio = new Audio('Music/zelda.mp3');
         this.myAudio.volume = MUSIC_VOLUME;
         this.myAudio.addEventListener('ended', function () {
@@ -33,39 +32,82 @@ class ZeldaMap extends Level {
 
         this.spawn = shuffle(possibleSpawns)
 
-        material = Physijs.createMaterial(
+
+
+        var geometry = new THREE.CubeGeometry(1000, 1000, 1000);
+        var cubeMaterials =
+            [
+                new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_ft.png'), side: THREE.DoubleSide }),
+
+                new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_bk.png'), side: THREE.DoubleSide }),
+
+                new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_up.png'), side: THREE.DoubleSide }),
+
+                new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_dn.png'), side: THREE.DoubleSide }),
+
+                new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_rt.png'), side: THREE.DoubleSide }),
+
+                new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_lf.png'), side: THREE.DoubleSide })
+            ];
+
+        var cubeMaterial = new THREE.MeshFaceMaterial(cubeMaterials);
+        var cube = new THREE.Mesh(geometry, cubeMaterial);
+        scene.add(cube);
+        var kms = THREE.ImageUtils.loadTexture(' Textures/HyruleTemple/mossyStone.png ')
+        kms.wrapS = kms.wrapT = THREE.RepeatWrapping;
+        kms.repeat.set(4, 2);
+
+        var material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
-                map: THREE.ImageUtils.loadTexture(' Textures/water.png ' )
+                map: kms,
             }),
             0,
             1
         )
 
-        var geometry = new THREE.CubeGeometry(1000, 1000, 1000);
-        var cubeMaterials = 
-        [
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_ft.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_bk.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_up.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_dn.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_rt.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_lf.png'), side: THREE.DoubleSide} )
-        ];
+        var texture2 = THREE.ImageUtils.loadTexture(' Textures/HyruleTemple/mossyStone.png ' )
+        texture2.wrapS = texture2.wrapT = THREE.RepeatWrapping;
+        texture2.repeat.set(1, 0.3);
 
-        var cubeMaterial = new THREE.MeshFaceMaterial( cubeMaterials);
-        var cube = new THREE.Mesh (geometry, cubeMaterial);
-        scene.add(cube);
-        
+        var texture2 = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: texture2,
+            }),
+            0,
+            1
+        )
+
+        var texture3 = THREE.ImageUtils.loadTexture(' Textures/HyruleTemple/mossyStone.png ' )
+        texture3.wrapS = texture3.wrapT = THREE.RepeatWrapping;
+        texture3.repeat.set(1.1, 1.1);
+
+        var texture3 = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: texture3,
+            }),
+            0,
+            1
+        )
+
+        var touwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleTemple/Kastelenmuur2.png ' )
+        touwtje.wrapS = touwtje.wrapT = THREE.RepeatWrapping;
+        touwtje.repeat.set(1, 1);
+
+        var touwtje = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: touwtje,
+            }),
+            0,
+            1
+        )
 
         var leftsmallisland = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 5, 10),
-            material,
+            texture2,
             0
         );
         leftsmallisland.receiveShadow = true;
@@ -75,7 +117,7 @@ class ZeldaMap extends Level {
 
         var leftsmallislandsolid = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 10),
-            new THREE.MeshBasicMaterial({ color: this.mossgreen }),
+            texture3,
             0
         );
         leftsmallislandsolid.receiveShadow = true;
@@ -105,7 +147,7 @@ class ZeldaMap extends Level {
 
         var leftlargeislandsolid = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 5),
-            new THREE.MeshBasicMaterial({ color: this.mossgreen }),
+            texture3,
             0
         );
         leftlargeislandsolid.receiveShadow = true;
@@ -115,7 +157,7 @@ class ZeldaMap extends Level {
 
         var leftlargeislandsolid2 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 12.5, 15),
-            new THREE.MeshBasicMaterial({ color: this.mossgreen }),
+            texture3,
             0
         );
         leftlargeislandsolid2.receiveShadow = true;
@@ -125,7 +167,7 @@ class ZeldaMap extends Level {
 
         var leftlargeislandsolid3 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 15),
-            new THREE.MeshBasicMaterial({ color: this.mossgreen }),
+            texture3,
             0
         );
         leftlargeislandsolid3.receiveShadow = true;
@@ -185,7 +227,7 @@ class ZeldaMap extends Level {
 
         var mainisland = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 20, 50),
-            new THREE.MeshBasicMaterial({ color: this.mossgreen }),
+            material,
             0
         );
         mainisland.receiveShadow = true;
@@ -195,17 +237,17 @@ class ZeldaMap extends Level {
 
         var mainislandplatform = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 1, 10),
-            new THREE.MeshBasicMaterial({ color: this.mossgreen }),
+            texture2,
             0
         );
         mainislandplatform.receiveShadow = true;
-        mainislandplatform.position.set(0, 7, -65);
+        mainislandplatform.position.set(0, 7, -70);
         scene.add(mainislandplatform);
         mainislandplatform.name = "ground";
 
         var mainisland2 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 5, 20),
-            new THREE.MeshBasicMaterial({ color: this.mossgreen }),
+            texture2,
             0
         );
         mainisland2.receiveShadow = true;
@@ -215,7 +257,7 @@ class ZeldaMap extends Level {
 
         var lowerisland1 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 30, 25),
-            new THREE.MeshBasicMaterial({ color: this.mossgreen }),
+            material,
             0
         );
         lowerisland1.receiveShadow = true;
@@ -225,7 +267,7 @@ class ZeldaMap extends Level {
 
         var lowerisland2 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 22.5, 25),
-            new THREE.MeshBasicMaterial({ color: this.mossgreen }),
+            material,
             0
         );
         lowerisland2.receiveShadow = true;
@@ -235,7 +277,7 @@ class ZeldaMap extends Level {
 
         var lowerplatform = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 10),
-            new THREE.MeshBasicMaterial({ color: this.tilegray }),
+            touwtje,
             0
         );
         lowerplatform.receiveShadow = true;

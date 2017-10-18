@@ -61,7 +61,7 @@ class HyruleCastle extends Level {
         var cube = new THREE.Mesh (geometry, cubeMaterial);
         scene.add(cube);
 
-        var kms = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur_dark.png ' )
+        var kms = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur_dark.png ' )
         kms.wrapS = kms.wrapT = THREE.RepeatWrapping;
         kms.repeat.set(2, 4);
 
@@ -74,7 +74,7 @@ class HyruleCastle extends Level {
             1
         )
 
-        var touwtje = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur2.png ' )
+        var touwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur2.png ' )
         touwtje.wrapS = touwtje.wrapT = THREE.RepeatWrapping;
         touwtje.repeat.set(4, 16);
 
@@ -87,7 +87,7 @@ class HyruleCastle extends Level {
             1
         )
 
-        var rauwtje = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur.png ' )
+        var rauwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur.png ' )
         rauwtje.wrapS = rauwtje.wrapT = THREE.RepeatWrapping;
         rauwtje.repeat.set(3, 18);
 
@@ -100,7 +100,7 @@ class HyruleCastle extends Level {
             1
         )
 
-        var donkertouwtje = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur2_dark.png ' )
+        var donkertouwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Kastelenmuur2_dark.png ' )
         donkertouwtje.wrapS = donkertouwtje.wrapT = THREE.RepeatWrapping;
         donkertouwtje.repeat.set(8, 16);
 
@@ -113,7 +113,7 @@ class HyruleCastle extends Level {
             1
         )
 
-        var platformtouwtje = THREE.ImageUtils.loadTexture(' Textures/Platform_tile_1.png ' )
+        var platformtouwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/Platform_tile_1.png ' )
         platformtouwtje.wrapS = platformtouwtje.wrapT = THREE.RepeatWrapping;
         platformtouwtje.repeat.set(1, 1);
 
@@ -126,7 +126,7 @@ class HyruleCastle extends Level {
             1
         )
 
-        var puntje = THREE.ImageUtils.loadTexture(' Textures/roof_tile_1.png ' )
+        var puntje = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/roof_tile_1.png ' )
         puntje.wrapS = puntje.wrapT = THREE.RepeatWrapping;
         puntje.repeat.set(2, 1);
 
@@ -139,7 +139,7 @@ class HyruleCastle extends Level {
             1
         )
 
-        var puntje2 = THREE.ImageUtils.loadTexture(' Textures/roof_tile_1.png ' )
+        var puntje2 = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/roof_tile_1.png ' )
         puntje2.wrapS = puntje2.wrapT = THREE.RepeatWrapping;
         puntje2.repeat.set(1, 5);
 
@@ -151,7 +151,7 @@ class HyruleCastle extends Level {
             0,
             1
         )
-        var puntje3 = THREE.ImageUtils.loadTexture(' Textures/roof_tile_1.png ' )
+        var puntje3 = THREE.ImageUtils.loadTexture(' Textures/HyruleCastle/roof_tile_1.png ' )
         puntje3.wrapS = puntje3.wrapT = THREE.RepeatWrapping;
         puntje3.repeat.set(1, 2);
 
