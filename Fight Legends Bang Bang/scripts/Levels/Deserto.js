@@ -66,7 +66,7 @@ class Deserto extends Level {
         scene.add(bottom);
         bottom.name = "ground";
 
-        var rightplatform = new Physijs.BoxMesh(
+        var rightplatform = new THREE.Mesh(
             new THREE.CubeGeometry(15, 2, 15),
             new THREE.MeshBasicMaterial({ color: this.saddlebrown }),
             0
@@ -75,8 +75,9 @@ class Deserto extends Level {
         rightplatform.position.set(0, 0, -50);
         scene.add(rightplatform);
         rightplatform.name = "ground";
+        this.oneWayPlatforms.push(rightplatform);
 
-        var leftplatform = new Physijs.BoxMesh(
+        var leftplatform = new THREE.Mesh(
             new THREE.CubeGeometry(15, 2, 15),
             new THREE.MeshBasicMaterial({ color: this.saddlebrown }),
             0
@@ -85,8 +86,9 @@ class Deserto extends Level {
         leftplatform.position.set(0, 0, 150);
         scene.add(leftplatform);
         leftplatform.name = "ground";
+        this.oneWayPlatforms.push(leftplatform);
 
-        var leftupplatform = new Physijs.BoxMesh(
+        var leftupplatform = new THREE.Mesh(
             new THREE.CubeGeometry(10, 2, 40),
             new THREE.MeshBasicMaterial({ color: this.saddlebrown }),
             0
@@ -95,8 +97,9 @@ class Deserto extends Level {
         leftupplatform.position.set(0, 15, 60);
         scene.add(leftupplatform);
         leftupplatform.name = "ground";
+        this.oneWayPlatforms.push(leftupplatform);
 
-        var upper = new Physijs.BoxMesh(
+        var upper = new THREE.Mesh(
             new THREE.CubeGeometry(15, 2, 60),
             new THREE.MeshBasicMaterial({ color: this.saddlebrown }),
             0
@@ -105,6 +108,7 @@ class Deserto extends Level {
         upper.position.set(0, 3, 60);
         scene.add(upper);
         upper.name = "ground";
+        this.oneWayPlatforms.push(upper);
 
         material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
