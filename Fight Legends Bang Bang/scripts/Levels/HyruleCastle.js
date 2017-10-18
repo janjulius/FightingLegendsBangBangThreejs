@@ -303,7 +303,8 @@ class HyruleCastle extends Level {
 
         var square = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 7.5, 7.5),
-            puntj
+            puntj,
+            0
         );
         square.receiveShadow = true;
         square.position.set(-7, 12.5, -30);
