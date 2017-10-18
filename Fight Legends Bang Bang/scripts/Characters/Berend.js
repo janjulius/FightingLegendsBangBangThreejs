@@ -5,6 +5,11 @@ class Berend extends Character {
         this.name = "Berend";
         this.Speed = 4;
         this.cid = 7;
+        this.ultSpecialIncrease = 0;
+        this.ultBasicAttackDamage = 18;
+        this.ultTakeDamageMultiplier = 2;
+        this.ultSpeed = 80;
+        this.ultAttackDelay = 0.1;
         this.portrait = 'sprites/Characters/MenuSprites/berend.png';
         this.ultSound = new Audio('Sounds/Characters/Berend/Berend_ult_shout.wav');
         var material = Physijs.createMaterial(
@@ -38,12 +43,12 @@ class Berend extends Character {
         if (this.specialExists) {
             if (this.specialTimer > 0) {
                 this.specialTimer -= t;
-                this.specialIncrease = 0;
-                this.basicAttackDamage = 18;
-                this.takeDamageMultiplier = 2;
+                this.specialIncrease = this.ultSpecialIncrease;
+                this.basicAttackDamage = this.ultBasicAttackDamage;
+                this.takeDamageMultiplier = this.ultTakeDamageMultiplier;
                 this.knockbackImmunity = true;
-                this.speed = 80;
-                this.attackDelay = 0.1;
+                this.speed = this.ultSpeed;
+                this.attackDelay = this.ultAttackDelay;
             }
             if (this.specialTimer <= 0) {
                 this.specialExists = false;
