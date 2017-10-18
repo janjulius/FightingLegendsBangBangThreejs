@@ -280,7 +280,7 @@ class Character {
             var intersects2 = ray2.intersectObjects(level.oneWayPlatforms);
             //var obj2 = intersects2[0].object;
 
-            if (this.velt <= 0 && this.direction.y > -0.6) {
+            if (this.velt <= 0 && this.direction.y > -0.9) {
                 if (intersects1[0] || intersects2[0]) {
                     this.touchingWalls[3] = 20;
                     this.jumpsLeft = this.totalJump;
