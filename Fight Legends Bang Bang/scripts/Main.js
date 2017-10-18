@@ -301,8 +301,8 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        level = new ZeldaMap(); //temp level changer
-        /*
+        //level = new Brawlhaven(); //temp level changer
+        
 
         //level randomizer
         let randomLevel;
@@ -331,7 +331,7 @@ function runGame() {
                     level = new HyruleCastle();
             break;
         }
-        */
+        
 
 
         var bound = new THREE.BoxGeometry(1, level.topLeft.y + Math.abs(level.bottomRight.y), level.topLeft.z + Math.abs(level.bottomRight.z));

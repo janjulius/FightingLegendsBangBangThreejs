@@ -118,15 +118,15 @@ class Brawlhaven extends Level {
         scene.add(uppergrassright);
         uppergrassright.name = "ground";
 
-        var grassplatform = new Physijs.BoxMesh(
+        var grassplatform = new THREE.Mesh(
             new THREE.CubeGeometry(15, 1, 9),
-            matGrass,
-            0
+            matGrass
         );
         grassplatform.receiveShadow = true;
         grassplatform.position.set(0, 2, 0);
         scene.add(grassplatform);
         grassplatform.name = "ground";
+        this.oneWayPlatforms.push(grassplatform);
 
         var leftislandbase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 20, 15),
