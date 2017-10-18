@@ -116,13 +116,13 @@ class Metalplant extends Level {
         leftRope2.name = "ground";
 
         var middleBrokenPillar = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(1, 140, 2.5),
+            new THREE.CubeGeometry(15, 140, 2.5),
             new THREE.MeshBasicMaterial({ color: this.rustydark }),
             0
         );
         middleBrokenPillar.rotation.x = 10;
         middleBrokenPillar.receiveShadow = true;
-        middleBrokenPillar.position.set(-3, -70, -4);
+        middleBrokenPillar.position.set(-16, -70, -32.5);
         scene.add(middleBrokenPillar);
         middleBrokenPillar.name = "ground";
 

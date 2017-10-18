@@ -12,7 +12,7 @@ class Thundergart extends Level {
         }, false);
         this.myAudio.play();
 
-        var possibleSpawns = [{ y: 5, z: 30 }, { y: 5, z: 15 }, { y: 5, z: -25 }, { y: 5, z: -40 }]
+        var possibleSpawns = [{ y: 10, z: 60 }, { y: 10, z: 20 }, { y: 10, z: -20 }, { y: 10, z: -60 }]
 
         function shuffle(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
@@ -56,35 +56,36 @@ class Thundergart extends Level {
         scene.add(cube);
 
         var leftbase = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 10, 30),
+            new THREE.CubeGeometry(15, 25, 50),
             new THREE.MeshBasicMaterial({ color: this.iceblue }),
             0
         );
         leftbase.receiveShadow = true;
-        leftbase.position.set(0, -5, 20);
+        leftbase.position.set(0, -5, 40);
         scene.add(leftbase);
         leftbase.name = "ground";
 
         var rightbase = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 10, 30),
+            new THREE.CubeGeometry(15, 25, 50),
             new THREE.MeshBasicMaterial({ color: this.iceblue }),
             0
         );
         rightbase.receiveShadow = true;
-        rightbase.position.set(0, -5, -30);
+        rightbase.position.set(0, -5, -40);
         scene.add(rightbase);
         rightbase.name = "ground";
 
 
-        var platform = new Physijs.BoxMesh(
+        var platform = new THREE.Mesh(
             new THREE.CubeGeometry(15, 1, 30),
             new THREE.MeshBasicMaterial({ color: this.iceblue }),
             0
         );
         platform.receiveShadow = true;
-        platform.position.set(0, -0.5, -10);
+        platform.position.set(0, 7, 0);
         scene.add(platform);
         platform.name = "ground";
+        this.oneWayPlatforms.push(platform);
 
     }
 }
