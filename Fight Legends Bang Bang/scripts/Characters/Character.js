@@ -64,16 +64,17 @@ class Character {
         this.gravityVelocity = 80;
 
         this.touchingWalls = [-1, -1, -1, -1];
-        
+
         this.blockMaterial = THREE.ImageUtils.loadTexture('sprites/Characters/BlockIcon.png');
         this.blockObject = new THREE.Mesh(
-        new THREE.BoxGeometry(0.1, 4, 4),
-         new THREE.MeshBasicMaterial(
-            { transparent: true, map: this.blockMaterial
-        }
-        ),0,1
+            new THREE.BoxGeometry(0.1, 4, 4),
+            new THREE.MeshBasicMaterial(
+                {
+                    transparent: true, map: this.blockMaterial
+                }
+            ), 0, 1
         )
-        this.blockObject.position.set(-1000, 1,1);
+        this.blockObject.position.set(-1000, 1, 1);
         scene.add(this.blockObject);
 
         console.log("created character");
@@ -84,57 +85,57 @@ class Character {
     }
 
     normalAtk() {
-        if(!this.blocking){
-        this.chargeAttack = false;
-        this.attackRemoveTimer = this.attackRemoveCooldown;
-        this.swingTimer = this.swingCooldown;
+        if (!this.blocking) {
+            this.chargeAttack = false;
+            this.attackRemoveTimer = this.attackRemoveCooldown;
+            this.swingTimer = this.swingCooldown;
 
-        ///debug code
-        var geom = new THREE.BoxGeometry(5, 5, 5);
-        this.swingObject = new THREE.Mesh(geom, new THREE.MeshBasicMaterial({
-            color: 0xffffff
-        }));
-        this.swingObject.position.set(this.geometry.position.x,
-            this.geometry.position.y + (this.attackDirection.y * 5),
-            this.geometry.position.z + (this.attackDirection.z * 5));
-        scene.add(this.swingObject);
-        ///
+            ///debug code
+            var geom = new THREE.BoxGeometry(5, 5, 5);
+            this.swingObject = new THREE.Mesh(geom, new THREE.MeshBasicMaterial({
+                color: 0xffffff
+            }));
+            this.swingObject.position.set(this.geometry.position.x,
+                this.geometry.position.y + (this.attackDirection.y * 5),
+                this.geometry.position.z + (this.attackDirection.z * 5));
+            scene.add(this.swingObject);
+            ///
 
-        for (var i = 0; i < playersPlaying; i++) {
-            var otherPlayer = players[i];
-            if (otherPlayer.id == this.id)
-                continue;
+            for (var i = 0; i < playersPlaying; i++) {
+                var otherPlayer = players[i];
+                if (otherPlayer.id == this.id)
+                    continue;
 
-            var hit = false;
-            if (distanceBetweenVector3(this.geometry.position, otherPlayer.geometry.position) < 10) {
+                var hit = false;
+                if (distanceBetweenVector3(this.geometry.position, otherPlayer.geometry.position) < 10) {
 
-                var randomSound;
-                randomSound = Math.floor((Math.random() * 7));
+                    var randomSound;
+                    randomSound = Math.floor((Math.random() * 7));
 
-                var ydist = Math.abs(otherPlayer.geometry.position.y - this.geometry.position.y);
-                var zdist = Math.abs(otherPlayer.geometry.position.z - this.geometry.position.z);
-                var tol = 4.5;
-                if (this.attackDirection.z == 1 && otherPlayer.geometry.position.z > this.geometry.position.z && ydist < tol && zdist > tol) {
-                    hit = true; //links
-                } else if (this.attackDirection.z == -1 && otherPlayer.geometry.position.z < this.geometry.position.z && ydist < tol && zdist > tol) {
-                    hit = true; //rechts
-                } else if (this.attackDirection.y == 1 && otherPlayer.geometry.position.y > this.geometry.position.y && zdist < tol && ydist > tol) {
-                    hit = true; //boven
-                } else if (this.attackDirection.y == -1 && otherPlayer.geometry.position.y < this.geometry.position.y && zdist < tol && ydist > tol) {
-                    hit = true; //onder
+                    var ydist = Math.abs(otherPlayer.geometry.position.y - this.geometry.position.y);
+                    var zdist = Math.abs(otherPlayer.geometry.position.z - this.geometry.position.z);
+                    var tol = 4.5;
+                    if (this.attackDirection.z == 1 && otherPlayer.geometry.position.z > this.geometry.position.z && ydist < tol && zdist > tol) {
+                        hit = true; //links
+                    } else if (this.attackDirection.z == -1 && otherPlayer.geometry.position.z < this.geometry.position.z && ydist < tol && zdist > tol) {
+                        hit = true; //rechts
+                    } else if (this.attackDirection.y == 1 && otherPlayer.geometry.position.y > this.geometry.position.y && zdist < tol && ydist > tol) {
+                        hit = true; //boven
+                    } else if (this.attackDirection.y == -1 && otherPlayer.geometry.position.y < this.geometry.position.y && zdist < tol && ydist > tol) {
+                        hit = true; //onder
+                    }
+                }
+                if (hit) {
+                    var hitSounds = ['Sounds/hit2.wav', 'Sounds/hit3.wav', 'Sounds/hit4.wav',
+                        'Sounds/hit5.wav', 'Sounds/hit6.wav', 'Sounds/hit7.wav', 'Sounds/hit16.wav'
+                    ];
+                    var hitSound = new Audio(hitSounds[randomSound]);
+                    hitSound.volume = MUSIC_VOLUME;
+                    hitSound.play();
+                    this.setSpecialAttackCounter(this.specialCounter + this.specialIncrease);
+                    otherPlayer.setDamage(otherPlayer.getDamage() + this.basicAttackDamage * this.takeDamageMultiplier, this.attackDirection);
                 }
             }
-            if (hit) {
-                var hitSounds = ['Sounds/hit2.wav', 'Sounds/hit3.wav', 'Sounds/hit4.wav',
-                    'Sounds/hit5.wav', 'Sounds/hit6.wav', 'Sounds/hit7.wav', 'Sounds/hit16.wav'
-                ];
-                var hitSound = new Audio(hitSounds[randomSound]);
-                hitSound.volume = MUSIC_VOLUME;
-                hitSound.play();
-                this.setSpecialAttackCounter(this.specialCounter + this.specialIncrease);
-                otherPlayer.setDamage(otherPlayer.getDamage() + this.basicAttackDamage * this.takeDamageMultiplier, this.attackDirection);
-            }
-        }
         }
     }
 
@@ -158,7 +159,7 @@ class Character {
         this.canBlock = false;
         this.blockTimer = this.blockTime;
         this.blockCooldownTimer = this.blockCooldownTime;
-        
+
     }
 
     idle() {
@@ -270,23 +271,21 @@ class Character {
                 }
             }
         }
-        if (level.oneWayPlatforms.length > 0) {
+        if (level.oneWayPlatforms.length > 0 && this.velt <= 0 && this.direction.y > -0.9) {
             var pos1 = new THREE.Vector3(0, this.geometry.position.y, this.geometry.position.z + 2.5);
-            var ray1 = new THREE.Raycaster(pos1, new THREE.Vector3(0, -1, 0), 2, 2.6);
+            var ray1 = new THREE.Raycaster(pos1, new THREE.Vector3(0, -1, 0), 1.5, 2.8);
             var intersects1 = ray1.intersectObjects(level.oneWayPlatforms);
-            //var obj1 = intersects1[0].object;
             var pos2 = new THREE.Vector3(0, this.geometry.position.y, this.geometry.position.z - 2.5);
-            var ray2 = new THREE.Raycaster(pos2, new THREE.Vector3(0, -1, 0), 2, 2.6);
+            var ray2 = new THREE.Raycaster(pos2, new THREE.Vector3(0, -1, 0), 1.5, 2.8);
             var intersects2 = ray2.intersectObjects(level.oneWayPlatforms);
-            //var obj2 = intersects2[0].object;
-
-            if (this.velt <= 0 && this.direction.y > -0.9) {
-                if (intersects1[0] || intersects2[0]) {
-                    this.touchingWalls[3] = 20;
-                    this.jumpsLeft = this.totalJump;
-                    if (this.knockBack.y < 0) {
-                        this.knockBack.y = -this.knockBack.y * 0.8;
-                    }
+            if (intersects1[0] || intersects2[0]) {
+                this.touchingWalls[3] = 20;
+                this.jumpsLeft = this.totalJump;
+                var ypos = intersects1[0] ? intersects1[0].object.position.y : intersects2[0].object.position.y;
+                this.geometry.position.y = ypos + 3;
+                this.geometry.__dirtyPosition = true;
+                if (this.knockBack.y < 0) {
+                    this.knockBack.y = -this.knockBack.y * 0.8;
                 }
             }
         }
@@ -323,10 +322,10 @@ class Character {
             this.specialAtk();
     }
 
-    pressedbuttonRT(){
-        if(!this.isStunned){
-            if(this.canBlock){
-               this.block();
+    pressedbuttonRT() {
+        if (!this.isStunned) {
+            if (this.canBlock) {
+                this.block();
             }
         }
     }
@@ -459,29 +458,27 @@ class Character {
             if (this.swingTimer > 0 && this.swingTimer < this.swingCooldown - this.attackDelay)
                 this.normalAtk();
 
-        if(this.blockTimer > 0){
+        if (this.blockTimer > 0) {
             this.blockObject.position.set(this.geometry.position.x + 5, this.geometry.position.y, this.geometry.position.z);
             this.blockObject.__dirtyPosition = true;
             this.blockTimer -= t;
         }
-        
-        if(this.blockTimer <= 0){
-            if(this.blocking){
-            this.blockObject.position.set(-1000, 1, 1);
-            this.blocking = false;
+
+        if (this.blockTimer <= 0) {
+            if (this.blocking) {
+                this.blockObject.position.set(-1000, 1, 1);
+                this.blocking = false;
             }
         }
 
-        if(this.blockCooldownTimer > 0)
+        if (this.blockCooldownTimer > 0)
             this.blockCooldownTimer -= t;
-        
-        if(this.blockCooldownTimer <= 0)
+
+        if (this.blockCooldownTimer <= 0)
             this.canBlock = true;
-        
-        console.log(this.blockCooldownTimer);
     }
 
-    UpdateChar(t) {}
+    UpdateChar(t) { }
 
     AddGrounded() {
         var _this = this;
