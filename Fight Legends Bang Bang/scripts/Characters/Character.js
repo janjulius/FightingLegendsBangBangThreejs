@@ -6,8 +6,14 @@ class Character {
         this.specialAtkString = "base";
         this.damage = GAME_SETTINGS_HANDICAP;
 
-        this.direction = { y: 0, z: 0 };
-        this.attackDirection = { y: 0, z: 1 };
+        this.direction = {
+            y: 0,
+            z: 0
+        };
+        this.attackDirection = {
+            y: 0,
+            z: 1
+        };
 
         this.id = 0;
         this.cid = -1;
@@ -102,7 +108,8 @@ class Character {
             }
             if (hit) {
                 var hitSounds = ['Sounds/hit2.wav', 'Sounds/hit3.wav', 'Sounds/hit4.wav',
-                    'Sounds/hit5.wav', 'Sounds/hit6.wav', 'Sounds/hit7.wav', 'Sounds/hit16.wav'];
+                    'Sounds/hit5.wav', 'Sounds/hit6.wav', 'Sounds/hit7.wav', 'Sounds/hit16.wav'
+                ];
                 var hitSound = new Audio(hitSounds[randomSound]);
                 hitSound.volume = MUSIC_VOLUME;
                 hitSound.play();
@@ -190,11 +197,11 @@ class Character {
     }
 
     setSpecialAttackCounter(a) {
-        if (this.specialCounter > this.specialCounterThreshHold) {
-            this.specialCounter = this.specialCounterThreshHold;
-        } else {
-            this.specialCounter = a;
-        }
+        this.specialCounter = a;
+
+        if(this.specialCounter > this.specialCounterThreshHold)
+            this.setSpecialAttackCounter = this.specialCounterThreshHold;
+
         gameInterface.UpdateGameInterface(this.id);
     }
 
@@ -235,6 +242,7 @@ class Character {
             if (obj) {
                 ids[i] = obj.id;
             }
+            /*
             if (obj.isPlayer) {
                 var ydist = obj.position.y - this.geometry.position.y;
                 if (ydist < -4.8) {
@@ -245,6 +253,7 @@ class Character {
                     this.geometry.__dirtyPosition = true;
                 }
             }
+            */
         }
 
         for (var j = 0; j < this.touchingWalls.length; j++) {
@@ -270,24 +279,68 @@ class Character {
         }
     }
 
+    pressedbuttonA() {
+        if (!this.isStunned) {
+            this.jump();
+        }
+    }
+
+    pressedbuttonX() {
+        if (this.swingTimer <= 0 && !this.isStunned) {
+            this.swingTimer = this.swingCooldown;
+            this.chargeAttack = true;
+        }
+    }
+
+    pressedbuttonY() {
+        if (!this.isStunned)
+            this.specialAtk();
+    }
 
     Update(t) {
 
         this.CheckWithinArena();
         this.CheckCollision(t);
 
-        if (this.knockBack.z > 0) { this.knockBack.z -= 50 * t; }
-        else if (this.knockBack.z < 0) { this.knockBack.z += 50 * t; }
-        if (this.knockBack.z > -10 && this.knockBack.z < 10) { this.knockBack.z = 0; }
-        if (this.knockBack.y > 0) { this.knockBack.y -= 50 * t; }
-        else if (this.knockBack.y < 0) { this.knockBack.y += 50 * t; }
-        if (this.knockBack.y > -10 && this.knockBack.y < 10) { this.knockBack.y = 0; }
+        if (this.knockBack.z > 0) {
+            this.knockBack.z -= 50 * t;
+        } else if (this.knockBack.z < 0) {
+            this.knockBack.z += 50 * t;
+        }
+        if (this.knockBack.z > -10 && this.knockBack.z < 10) {
+            this.knockBack.z = 0;
+        }
+        if (this.knockBack.y > 0) {
+            this.knockBack.y -= 50 * t;
+        } else if (this.knockBack.y < 0) {
+            this.knockBack.y += 50 * t;
+        }
+        if (this.knockBack.y > -10 && this.knockBack.y < 10) {
+            this.knockBack.y = 0;
+        }
 
 
-        if (this.direction.z > 0.5) { this.attackDirection = { y: 0, z: 1 }; }
-        else if (this.direction.z < -0.5) { this.attackDirection = { y: 0, z: -1 }; }
-        else if (this.direction.y > 0.5) { this.attackDirection = { y: 1, z: 0 }; }
-        else if (this.direction.y < -0.5) { this.attackDirection = { y: -1, z: 0 }; }
+        if (this.direction.z > 0.5) {
+            this.attackDirection = {
+                y: 0,
+                z: 1
+            };
+        } else if (this.direction.z < -0.5) {
+            this.attackDirection = {
+                y: 0,
+                z: -1
+            };
+        } else if (this.direction.y > 0.5) {
+            this.attackDirection = {
+                y: 1,
+                z: 0
+            };
+        } else if (this.direction.y < -0.5) {
+            this.attackDirection = {
+                y: -1,
+                z: 0
+            };
+        }
 
 
         if (this.velt > -this.maxGravityVelocity) {
@@ -374,7 +427,7 @@ class Character {
                 this.normalAtk();
     }
 
-    UpdateChar(t) { }
+    UpdateChar(t) {}
 
     AddGrounded() {
         var _this = this;
