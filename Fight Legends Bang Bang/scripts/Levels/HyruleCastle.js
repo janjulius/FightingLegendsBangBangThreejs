@@ -220,7 +220,7 @@ class HyruleCastle extends Level {
             0
         );
         CastleTower.receiveShadow = true;
-        CastleTower.position.set(-6, 40, 5);
+        CastleTower.position.set(-8, 40, 5);
         scene.add(CastleTower);
         CastleTower.name = "ground";
 
