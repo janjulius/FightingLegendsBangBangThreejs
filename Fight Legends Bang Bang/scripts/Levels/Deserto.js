@@ -13,7 +13,7 @@ class Deserto extends Level {
         }, false);
         this.myAudio.play();
 
-        var possibleSpawns = [{ y: 20, z: 0 }, { y: 16, z: 60}, { y: 30, z: 20 }, { y: 20, z: -50 }]
+        var possibleSpawns = [{ y: 20, z: 0 }, { y: 16, z: 60}, { y: 30, z: 20 }, { y: 20, z: -50 }, { y: 10, z: 150}];
 
         function shuffle(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
@@ -36,15 +36,45 @@ class Deserto extends Level {
 
         this.spawn = shuffle(possibleSpawns)
 
+        var geometry = new THREE.CubeGeometry(1000, 1000, 1000);
+        var cubeMaterials = 
+        [
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_ft.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_bk.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_up.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_dn.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_rt.png'), side: THREE.DoubleSide} ),
+            
+            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_lf.png'), side: THREE.DoubleSide} )
+        ];
+
+        var cubeMaterial = new THREE.MeshFaceMaterial( cubeMaterials);
+        var cube = new THREE.Mesh (geometry, cubeMaterial);
+        scene.add(cube);
+
         var bottom = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(50, 10, 130),
+            new THREE.CubeGeometry(50, 20, 130),
             new THREE.MeshBasicMaterial({ color: this.sandyellow }),
             0
         );
         bottom.receiveShadow = true;
-        bottom.position.set(0, -13, 45);
+        bottom.position.set(0, -20, 45);
         scene.add(bottom);
         bottom.name = "ground";
+
+        var rightplatform = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(15, 2, 15),
+            new THREE.MeshBasicMaterial({ color: this.saddlebrown }),
+            0
+        );
+        rightplatform.receiveShadow = true;
+        rightplatform.position.set(0, 0, -50);
+        scene.add(rightplatform);
+        rightplatform.name = "ground";
 
         var leftplatform = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 2, 15),
@@ -52,7 +82,7 @@ class Deserto extends Level {
             0
         );
         leftplatform.receiveShadow = true;
-        leftplatform.position.set(0, 0, -50);
+        leftplatform.position.set(0, 0, 150);
         scene.add(leftplatform);
         leftplatform.name = "ground";
 
@@ -65,26 +95,6 @@ class Deserto extends Level {
         leftupplatform.position.set(0, 15, 60);
         scene.add(leftupplatform);
         leftupplatform.name = "ground";
-
-        var rightplatform = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 2, 30),
-            new THREE.MeshBasicMaterial({ color: this.forestgreen }),
-            0
-        );
-        rightplatform.receiveShadow = true;
-        rightplatform.position.set(0, 8.5, 0);
-        scene.add(rightplatform);
-        rightplatform.name = "ground";
-
-        var uprightplatform = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 2, 12),
-            new THREE.MeshBasicMaterial({ color: this.forestgreen }),
-            0
-        );
-        uprightplatform.receiveShadow = true;
-        uprightplatform.position.set(0, 20, 0);
-        scene.add(uprightplatform);
-        uprightplatform.name = "ground";
 
         var upper = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 2, 60),
@@ -105,7 +115,7 @@ class Deserto extends Level {
             1
         )
         var cactusBase = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 18, 3),
+            new THREE.CubeGeometry(3, 20, 3),
             material,
             0
         );
@@ -113,6 +123,48 @@ class Deserto extends Level {
         cactusBase.position.set(0, 0, 0);
         scene.add(cactusBase);
         cactusBase.name = "ground";
+
+        var leftCactus = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(3,3,1.5),
+            material,
+            0
+        );
+        leftCactus.receiveShadow = true;
+        leftCactus.position.set(0, 6, 2);
+        scene.add(leftCactus);
+        leftCactus.name = "ground";
+
+        var leftupCactus = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(3, 8, 3),
+            material,
+            0
+        );
+
+        leftupCactus.receiveShadow = true;
+        leftupCactus.position.set(0, 8.5, 4);
+        scene.add(leftupCactus);
+        leftupCactus.name = "ground";
+
+        var rightCactus = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(3,3,1.5),
+            material,
+            0
+        );
+        rightCactus.receiveShadow = true;
+        rightCactus.position.set(0, 4, -2);
+        scene.add(rightCactus);
+        rightCactus.name = "ground";
+
+        var rightupCactus = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(3, 8, 3),
+            material,
+            0
+        );
+
+        rightupCactus.receiveShadow = true;
+        rightupCactus.position.set(0, 6.5, -4);
+        scene.add(rightupCactus);
+        rightupCactus.name = "ground";
 
         material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
@@ -131,5 +183,24 @@ class Deserto extends Level {
         cylinder.position.set(-40,12,70);
         scene.add(cylinder);
         cylinder.name = "ground";
+
+        material = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: THREE.ImageUtils.loadTexture(' Textures/wood.jpg ' )
+            }),
+            0,
+            1
+        )
+        var pillar = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(3, 150, 10),
+            material,
+            0
+        );
+        pillar.receiveShadow = true;
+        pillar.position.set(0, -100, 50);
+        scene.add(pillar);
+        pillar.name = "ground";
+
     }
 }
