@@ -53,7 +53,7 @@ class ZeldaMap extends Level {
         var cubeMaterial = new THREE.MeshFaceMaterial(cubeMaterials);
         var cube = new THREE.Mesh(geometry, cubeMaterial);
         scene.add(cube);
-        var kms = THREE.ImageUtils.loadTexture(' Textures/mossyStone.png ')
+        var kms = THREE.ImageUtils.loadTexture(' Textures/HyruleTemple/mossyStone.png ')
         kms.wrapS = kms.wrapT = THREE.RepeatWrapping;
         kms.repeat.set(4, 2);
 
@@ -66,7 +66,7 @@ class ZeldaMap extends Level {
             1
         )
 
-        var texture2 = THREE.ImageUtils.loadTexture(' Textures/mossyStone.png ' )
+        var texture2 = THREE.ImageUtils.loadTexture(' Textures/HyruleTemple/mossyStone.png ' )
         texture2.wrapS = texture2.wrapT = THREE.RepeatWrapping;
         texture2.repeat.set(1, 0.3);
 
@@ -79,7 +79,7 @@ class ZeldaMap extends Level {
             1
         )
 
-        var texture3 = THREE.ImageUtils.loadTexture(' Textures/mossyStone.png ' )
+        var texture3 = THREE.ImageUtils.loadTexture(' Textures/HyruleTemple/mossyStone.png ' )
         texture3.wrapS = texture3.wrapT = THREE.RepeatWrapping;
         texture3.repeat.set(1.1, 1.1);
 
@@ -92,7 +92,7 @@ class ZeldaMap extends Level {
             1
         )
 
-        var touwtje = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur2.png ' )
+        var touwtje = THREE.ImageUtils.loadTexture(' Textures/HyruleTemple/Kastelenmuur2.png ' )
         touwtje.wrapS = touwtje.wrapT = THREE.RepeatWrapping;
         touwtje.repeat.set(1, 1);
 
