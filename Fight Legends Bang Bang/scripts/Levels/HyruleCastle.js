@@ -60,7 +60,7 @@ class HyruleCastle extends Level {
         var cube = new THREE.Mesh (geometry, cubeMaterial);
         scene.add(cube);
 
-        var kms = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur.png ' )
+        var kms = THREE.ImageUtils.loadTexture(' Textures/Kastelenmuur_dark.png ' )
         kms.wrapS = kms.wrapT = THREE.RepeatWrapping;
         kms.repeat.set(4, 4);
 
