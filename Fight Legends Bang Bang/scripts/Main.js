@@ -330,7 +330,7 @@ function runGame() {
                     level = new HyruleCastle();
             break;
         }
-        */
+        
 
         var bound = new THREE.BoxGeometry(1, level.topLeft.y + Math.abs(level.bottomRight.y), level.topLeft.z + Math.abs(level.bottomRight.z));
         var object = new THREE.Mesh(bound, new THREE.MeshBasicMaterial(0xff0000));

@@ -48,6 +48,10 @@ class Willem extends Character {
 
     }
 
+    pressedbuttonY() {
+            this.specialAtk();
+    }
+
     specialAtk() {
         if (this.specialExists && !this.ultCharging) {
             this.EndSpecial();
@@ -119,6 +123,7 @@ class Willem extends Character {
 
     EndSpecial() {
         this.velt = 0;
+        this.setSpecialAttackCounter(0);
         this.jumpsLeft = this.totalJump;
         this.isStunned = false;
         this.geometry.__dirtyPosition = true;
