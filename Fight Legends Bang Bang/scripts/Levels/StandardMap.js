@@ -65,7 +65,7 @@ class StandardMap extends Level {
         scene.add(bottom);
         bottom.name = "ground";
 
-        var leftplatform = new Physijs.BoxMesh(
+        var leftplatform = new THREE.Mesh(
             new THREE.CubeGeometry(15, 2, 15),
             new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
             0
@@ -74,8 +74,9 @@ class StandardMap extends Level {
         leftplatform.position.set(0, 15, -35);
         scene.add(leftplatform);
         leftplatform.name = "ground";
+        this.oneWayPlatforms.push(leftplatform);
 
-        var rightplatform = new Physijs.BoxMesh(
+        var rightplatform = new THREE.Mesh(
             new THREE.CubeGeometry(15, 2, 15),
             new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
             0
@@ -84,8 +85,9 @@ class StandardMap extends Level {
         rightplatform.position.set(0, 15, 35);
         scene.add(rightplatform);
         rightplatform.name = "ground";
+        this.oneWayPlatforms.push(rightplatform);
 
-        var upper = new Physijs.BoxMesh(
+        var upper = new THREE.Mesh(
             new THREE.CubeGeometry(15, 2, 30),
             new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
             0
@@ -94,5 +96,6 @@ class StandardMap extends Level {
         upper.position.set(0, 25, 0);
         scene.add(upper);
         upper.name = "ground";
+        this.oneWayPlatforms.push(upper);
     }
 }
