@@ -250,11 +250,11 @@ class Character {
         }
         if (level.oneWayPlatforms.length > 0) {
             var pos1 = new THREE.Vector3(0, this.geometry.position.y, this.geometry.position.z + 2.5);
-            var ray1 = new THREE.Raycaster(pos1, new THREE.Vector3(0, -1, 0), 0, 2.6);
+            var ray1 = new THREE.Raycaster(pos1, new THREE.Vector3(0, -1, 0), 2, 2.6);
             var intersects1 = ray1.intersectObjects(level.oneWayPlatforms);
             //var obj1 = intersects1[0].object;
             var pos2 = new THREE.Vector3(0, this.geometry.position.y, this.geometry.position.z - 2.5);
-            var ray2 = new THREE.Raycaster(pos2, new THREE.Vector3(0, -1, 0), 0, 2.6);
+            var ray2 = new THREE.Raycaster(pos2, new THREE.Vector3(0, -1, 0), 2, 2.6);
             var intersects2 = ray2.intersectObjects(level.oneWayPlatforms);
             //var obj2 = intersects2[0].object;
 
