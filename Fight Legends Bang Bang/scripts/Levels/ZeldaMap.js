@@ -125,25 +125,25 @@ class ZeldaMap extends Level {
         scene.add(leftsmallislandsolid);
         leftsmallislandsolid.name = "ground";
 
-        var leftplatform1 = new Physijs.BoxMesh(
+        var leftplatform1 = new THREE.Mesh(
             new THREE.CubeGeometry(15, 1, 10),
-            new THREE.MeshBasicMaterial({ color: this.tilegray }),
-            0
+            new THREE.MeshBasicMaterial({ color: this.tilegray })
         );
         leftplatform1.receiveShadow = true;
         leftplatform1.position.set(0, 17, 35);
         scene.add(leftplatform1);
         leftplatform1.name = "ground";
+        this.oneWayPlatforms.push(leftplatform1);
 
-        var leftplatform2 = new Physijs.BoxMesh(
+        var leftplatform2 = new THREE.Mesh(
             new THREE.CubeGeometry(15, 1, 5),
-            new THREE.MeshBasicMaterial({ color: this.tilegray }),
-            0
+            new THREE.MeshBasicMaterial({ color: this.tilegray })
         );
         leftplatform2.receiveShadow = true;
         leftplatform2.position.set(0, 8, 38);
         scene.add(leftplatform2);
         leftplatform2.name = "ground";
+        this.oneWayPlatforms.push(leftplatform2);
 
         var leftlargeislandsolid = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 10, 5),
@@ -175,7 +175,7 @@ class ZeldaMap extends Level {
         scene.add(leftlargeislandsolid3);
         leftlargeislandsolid3.name = "ground";
 
-        var middleplatform1 = new Physijs.BoxMesh(
+        var middleplatform1 = new THREE.Mesh(
             new THREE.CubeGeometry(15, 1, 5),
             new THREE.MeshBasicMaterial({ color: this.tilegray }),
             0
@@ -184,46 +184,47 @@ class ZeldaMap extends Level {
         middleplatform1.position.set(0, 20, -20);
         scene.add(middleplatform1);
         middleplatform1.name = "ground";
+        this.oneWayPlatforms.push(middleplatform1);
 
-        var middleplatform2 = new Physijs.BoxMesh(
+        var middleplatform2 = new THREE.Mesh(
             new THREE.CubeGeometry(15, 1, 10),
-            new THREE.MeshBasicMaterial({ color: this.tilegray }),
-            0
+            new THREE.MeshBasicMaterial({ color: this.tilegray })
         );
         middleplatform2.receiveShadow = true;
         middleplatform2.position.set(0, 25, -40);
         scene.add(middleplatform2);
         middleplatform2.name = "ground";
+        this.oneWayPlatforms.push(middleplatform2);
 
-        var middleplatform3 = new Physijs.BoxMesh(
+        var middleplatform3 = new THREE.Mesh(
             new THREE.CubeGeometry(15, 1, 10),
-            new THREE.MeshBasicMaterial({ color: this.tilegray }),
-            0
+            new THREE.MeshBasicMaterial({ color: this.tilegray })
         );
         middleplatform3.receiveShadow = true;
         middleplatform3.position.set(0, 30, -60);
         scene.add(middleplatform3);
         middleplatform3.name = "ground";
+        this.oneWayPlatforms.push(middleplatform3);
 
-        var middleplatform4 = new Physijs.BoxMesh(
+        var middleplatform4 = new THREE.Mesh(
             new THREE.CubeGeometry(15, 1, 10),
-            new THREE.MeshBasicMaterial({ color: this.tilegray }),
-            0
+            new THREE.MeshBasicMaterial({ color: this.tilegray })
         );
         middleplatform4.receiveShadow = true;
         middleplatform4.position.set(0, 40, -60);
         scene.add(middleplatform4);
         middleplatform4.name = "ground";
+        this.oneWayPlatforms.push(middleplatform4);
 
-        var middleplatform5 = new Physijs.BoxMesh(
+        var middleplatform5 = new THREE.Mesh(
             new THREE.CubeGeometry(15, 1, 27.5),
-            new THREE.MeshBasicMaterial({ color: this.tilegray }),
-            0
+            new THREE.MeshBasicMaterial({ color: this.tilegray })
         );
         middleplatform5.receiveShadow = true;
         middleplatform5.position.set(0, 30, 11);
         scene.add(middleplatform5);
         middleplatform5.name = "ground";
+        this.oneWayPlatforms.push(middleplatform5);
 
         var mainisland = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 20, 50),
@@ -235,15 +236,15 @@ class ZeldaMap extends Level {
         scene.add(mainisland);
         mainisland.name = "ground";
 
-        var mainislandplatform = new Physijs.BoxMesh(
+        var mainislandplatform = new THREE.Mesh(
             new THREE.CubeGeometry(15, 1, 10),
-            texture2,
-            0
+            texture2
         );
         mainislandplatform.receiveShadow = true;
         mainislandplatform.position.set(0, 7, -70);
         scene.add(mainislandplatform);
         mainislandplatform.name = "ground";
+        this.oneWayPlatforms.push(mainislandplatform);
 
         var mainisland2 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 5, 20),
@@ -275,15 +276,15 @@ class ZeldaMap extends Level {
         scene.add(lowerisland2);
         lowerisland2.name = "ground";
 
-        var lowerplatform = new Physijs.BoxMesh(
+        var lowerplatform = new THREE.Mesh(
             new THREE.CubeGeometry(15, 10, 10),
-            touwtje,
-            0
+            touwtje
         );
         lowerplatform.receiveShadow = true;
         lowerplatform.position.set(0, -35, -10);
         scene.add(lowerplatform);
         lowerplatform.name = "ground";
+        this.oneWayPlatforms.push(lowerplatform);
 
     }
 }

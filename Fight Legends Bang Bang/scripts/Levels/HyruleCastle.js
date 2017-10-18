@@ -277,7 +277,7 @@ class HyruleCastle extends Level {
         pointroof3.position.set(-7,20,-30);
         scene.add(pointroof3);
 
-        var square = new THREE.Mesh(
+        var square = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 7.5, 7.5),
             puntj
         );
@@ -285,6 +285,5 @@ class HyruleCastle extends Level {
         square.position.set(-7, 12.5, -30);
         scene.add(square);
         square.name = "ground";
-        this.oneWayPlatforms.push(square);
     }
 }
