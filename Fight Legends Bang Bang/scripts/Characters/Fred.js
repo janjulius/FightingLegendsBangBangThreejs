@@ -29,7 +29,7 @@ class Fred extends Character {
 
     specialAtk() {
         if (this.specialReady()) {
-            this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
+            this.setSpecialAttackCounter(0);
             var specialMaterial = Physijs.createMaterial(
                 new THREE.MeshBasicMaterial({
                     color: 0xffffff

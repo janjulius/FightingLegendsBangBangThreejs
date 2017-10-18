@@ -35,7 +35,7 @@ class Jens extends Character {
     specialAtk() {
 
         if (this.specialReady()) {
-            this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
+            this.setSpecialAttackCounter(0);
             for (var i = 0; i < this.hitplayer.length; i++) {
                 this.hitplayer[i] = false;
                 this.hitFinalPlayer[i] = false;

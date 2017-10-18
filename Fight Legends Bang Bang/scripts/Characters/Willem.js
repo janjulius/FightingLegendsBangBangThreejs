@@ -77,7 +77,7 @@ class Willem extends Character {
                 if (this.specialTimer < 4 && this.beginSPecial) {
                     console.log(this.specialTimer);
                     var pos = this.geometry.position;
-                    this.specialObject.position.set(0, pos.y + (this.grounded ? 5 : 0), pos.z);
+                    this.specialObject.position.set(0, pos.y + (this.CheckSides("down") ? 5 : 0), pos.z);
                     this.specialObject.__dirtyPosition = true;
                     this.isStunned = true;
                     this.velt = 0;

@@ -34,7 +34,7 @@ class BoomStronk extends Character {
         this.hitSomeone = false;
         this.specialHealing = false;
         if (this.specialReady()) {
-            this.setSpecialAttackCounter(this.getSpecialAttackCounter() - this.specialCounterThreshHold);
+            this.setSpecialAttackCounter(0);
             this.specialExists = true;
             this.specialTimer = 5;
         }
@@ -63,7 +63,7 @@ class BoomStronk extends Character {
                     }
 
                 } else {
-                    if (this.grounded) {
+                    if (this.CheckSides("down")) {
                         this.specialTimer = 0;
                     }
                     var _this = this;
