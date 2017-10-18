@@ -65,13 +65,12 @@ class Interface {
             this.pName0[0].innerHTML = p0.name;
             this.pName0[0].style.textAlign = "center";
 
-            this.playerInterface[0].style.backgroundColor = "rgba(255, 0, 0, 0.3)";
+            this.playerInterface[0].style.backgroundColor = getPlayerColors(0, 0.8);
 
             this.pDamage0[0].innerHTML = p0.getDamage() + "%";
             this.pDamage0[0].style.textShadow = "2px 2px 4px black";
             this.pDamage0[0].style.fontSize = INTERFACE_DAMAGE_TEXT_SIZE;
             this.pDamage0[0].style.textAlign = "center";
-            console.log(getDamagePercentageColor(p0.getDamage));
             this.pDamage0[0].style.color = getDamagePercentageColor(p0.getDamage);
 
             this.pStock0[0].style.fontSize = INTERFACE_STOCK_TEXT_SIZE;
@@ -85,7 +84,7 @@ class Interface {
             this.pName1[0].innerHTML = p1.name;
             this.pName1[0].style.textAlign = "center";
 
-            this.playerInterface[1].style.backgroundColor = "rgba(0, 0, 255, 0.3)";
+            this.playerInterface[1].style.backgroundColor = getPlayerColors(1, 0.8);
 
             this.pDamage1[0].innerHTML = p1.getDamage() + "%";
             this.pDamage1[0].style.textShadow = "2px 2px 4px black";
@@ -101,7 +100,7 @@ class Interface {
         if (p2 !== 0) { //interface specific for player 2
             this.pName2[0].innerHTML = p2.name;
             this.pName2[0].style.textAlign = "center";
-            this.playerInterface[2].style.backgroundColor = "rgba(255, 165, 0, 0.3)";
+            this.playerInterface[2].style.backgroundColor = getPlayerColors(2, 0.8);
             this.pDamage2[0].innerHTML = p2.getDamage() + "%";
             this.pDamage2[0].style.textShadow = "2px 2px 4px black";
             this.pDamage2[0].style.fontSize = INTERFACE_DAMAGE_TEXT_SIZE;
@@ -115,7 +114,7 @@ class Interface {
         if (p3 !== 0) { //interface speicific for player 3
             this.pName3[0].innerHTML = p3.name;
             this.pName3[0].style.textAlign = "center";
-            this.playerInterface[3].style.backgroundColor = "rgba(0, 255, 0, 0.3)";
+            this.playerInterface[3].style.backgroundColor = getPlayerColors(3, 0.8);
             this.pDamage3[0].innerHTML = p3.getDamage() + "%";
             this.pDamage3[0].style.textShadow = "2px 2px 4px black";
             this.pDamage3[0].style.fontSize = INTERFACE_DAMAGE_TEXT_SIZE;
@@ -187,7 +186,7 @@ class Interface {
             a.position = "absolute";
             a.width = "400px";
             a.height = "150px";
-            a.backgroundColor = getPlayerColors(i, 0.5);
+            a.backgroundColor = getPlayerColors(i, 0.8);
             a.top = basep * i + 5 + "%";
             this.cNames[i][0].style.color = "white";
             this.cNames[i][0].style.textShadow = "2px 2px 4px black";
