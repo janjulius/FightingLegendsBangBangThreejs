@@ -40,20 +40,18 @@ class Kees extends Character {
                 this.specialTimer -= t;
             }
             if (this.specialTimer < 1) {
-                console.log("specialling");
                 this.isStunned = true;
             }
             if (this.specialTimer <= 0.1) {
                 this.stunnedTimer = this.stunTime;
                 if (this.attackDirection.z == -1) {
-                    console.log(this.attackDirection);
                     for (var i = 0; i < playersPlaying; i++) {
                         if (players[i].attackDirection.z == 1 && (players[i].geometry.position.z < this.geometry.position.z)) {
                             players[i].isStunned = true;
                             if (!this.hitplayer[i]) {
                                 players[i].setDamage(players[i].getDamage() + (
                                     Math.abs((distanceBetweenVector3(
-                                        this.geometry.position, players[i].geometry.position) - 100)
+                                        this.geometry.position, players[i].geometry.position))
                                     )
                                 ),
                                     { y: 0, z: 0 }
@@ -70,7 +68,7 @@ class Kees extends Character {
                             if (!this.hitplayer[i]) {
                                 players[i].setDamage(players[i].getDamage() + (
                                     Math.abs((distanceBetweenVector3(
-                                        this.geometry.position, players[i].geometry.position) - 100)
+                                        this.geometry.position, players[i].geometry.position))
                                     )
                                 ),
                                     { y: 0, z: 0 }

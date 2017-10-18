@@ -35,11 +35,10 @@ class Berend extends Character {
     }
 
     UpdateChar(t) {
-        console.log(this.knockbackImmunity);
         if (this.specialExists) {
             if (this.specialTimer > 0) {
                 this.specialTimer -= t;
-                this.specialIncrease = 20;
+                this.specialIncrease = 0;
                 this.basicAttackDamage = 18;
                 this.takeDamageMultiplier = 2;
                 this.knockbackImmunity = true;

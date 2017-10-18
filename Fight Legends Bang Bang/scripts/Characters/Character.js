@@ -223,13 +223,23 @@ class Character {
         }
     }
 
-    CheckCollision() {
+    CheckCollision(t) {
         var ids = new Array(this.geometry._physijs.touches.length);
         for (var i = 0; i < this.geometry._physijs.touches.length; i++) {
             var id = this.geometry._physijs.touches[i];
             var obj = scene._objects[id];
             if (obj) {
                 ids[i] = obj.id;
+            }
+            if (obj.isPlayer) {
+                var ydist = obj.position.y - this.geometry.position.y;
+                if (ydist < -4.8) {
+                    if (obj.position.z > this.geometry.position.z)
+                        this.geometry.position.z -= 50 * t;
+                    else if (obj.position.z < this.geometry.position.z)
+                        this.geometry.position.z += 50 * t;
+                    this.geometry.__dirtyPosition = true;
+                }
             }
         }
 
@@ -260,7 +270,7 @@ class Character {
     Update(t) {
 
         this.CheckWithinArena();
-        this.CheckCollision();
+        this.CheckCollision(t);
 
         if (this.knockBack.z > 0) { this.knockBack.z -= 50 * t; }
         else if (this.knockBack.z < 0) { this.knockBack.z += 50 * t; }
