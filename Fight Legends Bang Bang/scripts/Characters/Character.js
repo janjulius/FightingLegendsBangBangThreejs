@@ -144,10 +144,6 @@ class Character {
 
     }
 
-    getMoveSpeed() {
-        console.log("my movementspeed is :" + this.moveSpeed);
-    }
-
     setId(id) {
         this.id = id;
     }
@@ -185,7 +181,7 @@ class Character {
             dir.z = Math.abs(dir.z);
 
         this.damage = Math.floor(d);
-        if(!this.knockbackImmunity){
+        if (!this.knockbackImmunity) {
             this.knockBack.z = ((d + 20) * this.damageMulti) * dir.z;
             this.knockBack.y = ((d + 20) * this.damageMulti) * dir.y;
         }
@@ -199,7 +195,7 @@ class Character {
     setSpecialAttackCounter(a) {
         this.specialCounter = a;
 
-        if(this.specialCounter > this.specialCounterThreshHold)
+        if (this.specialCounter > this.specialCounterThreshHold)
             this.specialCounter = this.specialCounterThreshHold;
 
         gameInterface.UpdateGameInterface(this.id);
@@ -242,18 +238,6 @@ class Character {
             if (obj) {
                 ids[i] = obj.id;
             }
-            /*
-            if (obj.isPlayer) {
-                var ydist = obj.position.y - this.geometry.position.y;
-                if (ydist < -4.8) {
-                    if (obj.position.z > this.geometry.position.z)
-                        this.geometry.position.z -= 50 * t;
-                    else if (obj.position.z < this.geometry.position.z)
-                        this.geometry.position.z += 50 * t;
-                    this.geometry.__dirtyPosition = true;
-                }
-            }
-            */
         }
 
         for (var j = 0; j < this.touchingWalls.length; j++) {
@@ -261,6 +245,26 @@ class Character {
             if (oid != -1) {
                 if (!ids.includes(oid)) {
                     this.touchingWalls[j] = -1;
+                }
+            }
+        }
+        if (level.oneWayPlatforms.length > 0) {
+            var pos1 = new THREE.Vector3(0, this.geometry.position.y, this.geometry.position.z + 2.5);
+            var ray1 = new THREE.Raycaster(pos1, new THREE.Vector3(0, -1, 0), 0, 2.6);
+            var intersects1 = ray1.intersectObjects(level.oneWayPlatforms);
+            //var obj1 = intersects1[0].object;
+            var pos2 = new THREE.Vector3(0, this.geometry.position.y, this.geometry.position.z - 2.5);
+            var ray2 = new THREE.Raycaster(pos2, new THREE.Vector3(0, -1, 0), 0, 2.6);
+            var intersects2 = ray2.intersectObjects(level.oneWayPlatforms);
+            //var obj2 = intersects2[0].object;
+
+            if (this.velt <= 0 && this.direction.y > -0.6) {
+                if (intersects1[0] || intersects2[0]) {
+                    this.touchingWalls[3] = 20;
+                    this.jumpsLeft = this.totalJump;
+                    if (this.knockBack.y < 0) {
+                        this.knockBack.y = -this.knockBack.y * 0.8;
+                    }
                 }
             }
         }
@@ -348,8 +352,9 @@ class Character {
             this.velt -= (this.gravityVelocity + extraVel) * t;
         }
 
-        if (this.CheckSides("down") && !this._jump)
+        if (this.CheckSides("down") && !this._jump) {
             this.velt = 0;
+        }
 
 
         if ((this.CheckSides("left") || this.CheckSides("right")) && !this.CheckSides("down") && !this._jump) {
@@ -362,7 +367,6 @@ class Character {
         }
 
         this._jump = false;
-
         if (this.jumped && !this.CheckSides("up")) {
             if (this.jumpsLeft > 0) {
 
@@ -391,7 +395,6 @@ class Character {
             this.knockBack.z += this.speed * t;
             movespeed = 0;
         }
-
 
         this.velocity = new THREE.Vector3(0, this.velt + this.knockBack.y, movespeed + this.knockBack.z);
 

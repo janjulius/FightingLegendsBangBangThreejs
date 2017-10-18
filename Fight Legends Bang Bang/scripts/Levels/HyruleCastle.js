@@ -194,15 +194,15 @@ class HyruleCastle extends Level {
         scene.add(leftRooftop);
         leftRooftop.name = "ground";
 
-        var middleRooftop = new Physijs.BoxMesh(
+        var middleRooftop = new THREE.Mesh(
             new THREE.CubeGeometry(15, 1, 45),
-            platformtile,
-            0
+            platformtile
         );
         middleRooftop.receiveShadow = true;
         middleRooftop.position.set(0, 20, 10);
         scene.add(middleRooftop);
         middleRooftop.name = "ground";
+        this.oneWayPlatforms.push(middleRooftop);
 
         var middleRoofBase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(1, 150, 45),

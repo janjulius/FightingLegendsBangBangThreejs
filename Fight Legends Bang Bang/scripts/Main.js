@@ -21,7 +21,7 @@ init();
 
 function init() {
     scene = new Physijs.Scene;
-    scene.setGravity(new THREE.Vector3(0, -30, 0));
+    scene.setGravity(new THREE.Vector3(0, 0, 0));
 
     renderer = new THREE.WebGLRenderer({});
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -121,9 +121,9 @@ function CalculateTargetsBoundingBox() {
 
 function CalculateCameraPosition(bb) {
     var center = bb.GetCenter();
-    var multi = Math.abs(bb.GetMagnitude() / 100);
+    var multi = Math.abs(bb.GetMagnitude() / 50);
     //console.log(multi);
-    newPos = 150 + multi;
+    newPos = clamp(150 + multi, 150, 400);
 
     var result = new THREE.Vector3(newPos, center.y - (multi / 2), center.x);
 
@@ -145,7 +145,7 @@ scene.addEventListener('update', function () {
 
         var boundingBox = CalculateTargetsBoundingBox();
         var np = CalculateCameraPosition(boundingBox);
-        camera.position.lerp(new THREE.Vector3(np.x, np.y, np.z), timeElapsed * 2);
+        camera.position.lerp(new THREE.Vector3(np.x, np.y, np.z), timeElapsed);
         scene.simulate(undefined, 1); // run physics
     }
 });
@@ -332,7 +332,7 @@ function runGame() {
             break;
         }
         */
-        
+
 
         var bound = new THREE.BoxGeometry(1, level.topLeft.y + Math.abs(level.bottomRight.y), level.topLeft.z + Math.abs(level.bottomRight.z));
         var object = new THREE.Mesh(bound, new THREE.MeshBasicMaterial(0xff0000));
