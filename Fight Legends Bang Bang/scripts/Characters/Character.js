@@ -34,6 +34,8 @@ class Character {
         this.swingObject;
         this.specialExists = false;
         this._jump = false;
+        this.knockbackImmunity = false;
+        this.takeDamageMultiplier = 1;
 
         this.basicAttackDamage = 10;
         this.specialIncrease = 10;
@@ -112,7 +114,7 @@ class Character {
                 hitSound.volume = MUSIC_VOLUME;
                 hitSound.play();
                 this.setSpecialAttackCounter(this.specialCounter + this.specialIncrease);
-                otherPlayer.setDamage(otherPlayer.getDamage() + this.basicAttackDamage, this.attackDirection);
+                otherPlayer.setDamage(otherPlayer.getDamage() + this.basicAttackDamage * this.takeDamageMultiplier, this.attackDirection);
             }
         }
     }
@@ -183,8 +185,10 @@ class Character {
             dir.z = Math.abs(dir.z);
 
         this.damage = Math.floor(d);
-        this.knockBack.z = ((d + 20) * this.damageMulti) * dir.z;
-        this.knockBack.y = ((d + 20) * this.damageMulti) * dir.y;
+        if(!this.knockbackImmunity){
+            this.knockBack.z = ((d + 20) * this.damageMulti) * dir.z;
+            this.knockBack.y = ((d + 20) * this.damageMulti) * dir.y;
+        }
         gameInterface.UpdateGameInterface(this.id);
     }
 
