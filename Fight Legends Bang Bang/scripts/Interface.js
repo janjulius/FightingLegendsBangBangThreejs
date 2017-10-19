@@ -253,6 +253,15 @@ class Interface {
             for(var i = 0; i < playersPlaying; i ++){
                 this.endGameScreen[i].style.visibility = "visible";
             }
+            for (var i = 0; i < playersPlaying; i++) {
+                if (players[i].readyForNextGame) {
+                    this.readyTexts[i].innerHTML = "READY!";
+                    this.readyTexts[i].style.color = "green";
+                } else {
+                    this.readyTexts[i].innerHTML = "Ready for next battle?";
+                    this.readyTexts[i].style.color = "red";
+                }
+            }
         } else {
 
             this.endGameScreen[0] = document.getElementById("pEndInterface0");
