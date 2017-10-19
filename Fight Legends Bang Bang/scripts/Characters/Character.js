@@ -369,7 +369,7 @@ class Character {
             gameInterface.UpdateEndScreen();
             for(var i = 0; i < playersPlaying; i++){
                 if(!players[i].readyForNextGame){
-                    break;
+                    return;
                 }
                 EndGame();
             }

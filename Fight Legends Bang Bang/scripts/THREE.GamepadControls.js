@@ -162,7 +162,7 @@ THREE.GamepadControls = function () {
                             }
                         }
                         if (i == 0) {
-                            if (pad.buttons[9].value == 1) {
+                            if (this.PressedButton(i, 9)) {
                                 playersPlaying = this.gamePad.length;
                                 charSelect = false;
                                 runGame();
