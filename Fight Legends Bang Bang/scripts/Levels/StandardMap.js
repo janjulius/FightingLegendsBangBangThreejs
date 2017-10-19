@@ -38,22 +38,7 @@ class StandardMap extends Level {
         this.spawn = shuffle(possibleSpawns)
 
         var geometry = new THREE.CubeGeometry(1000, 1000, 1000);
-        var cubeMaterials = 
-        [
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_ft.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_bk.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_up.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_dn.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_rt.png'), side: THREE.DoubleSide} ),
-            
-            new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/sor_sea/sea_lf.png'), side: THREE.DoubleSide} )
-        ];
-
-        var cubeMaterial = new THREE.MeshFaceMaterial( cubeMaterials);
+        var cubeMaterial = new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/MarioBox/skybox.jpg'), side: THREE.DoubleSide});
         var cube = new THREE.Mesh (geometry, cubeMaterial);
         scene.add(cube);
 
@@ -61,6 +46,7 @@ class StandardMap extends Level {
         groundTex.wrapS = groundTex.wrapT = THREE.RepeatWrapping;
         groundTex.repeat.set(32, 4);
 
+        
         material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
@@ -269,11 +255,49 @@ class StandardMap extends Level {
         scene.add(questionmark3);
         questionmark3.name = "ground";
         
+    	material = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent : true,
+                map: THREE.ImageUtils.loadTexture(' Textures/MarioLevel/coin.png ' )
+            }),
+            0,
+            1
+        )
+        var coin = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(0.1, 4, 4),
+            material,
+            0
+        )
+        coin.receiveShadow = true;
+        coin.position.set(0, 32, 39);
+        scene.add(coin);
+        coin.name = "ground";
+        
+        material = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent : true,
+                map: THREE.ImageUtils.loadTexture(' Textures/MarioLevel/bush.png ' )
+            }),
+            0,
+            1
+        )
+        var bush = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 4, 4),
+            material,
+            0
+        )
+        bush.receiveShadow = true;
+        bush.position.set(0,2, 39);
+        scene.add(bush);
+        bush.name = "ground";
+
         while (questionmark.hit = false)
         {
          foreach (character in players)
          {
-             if (character.position.y <= questionmark.position.y - 0.3)
+             if (character.position.y <= questionmark.position.y - 3)
              {
                 material = Physijs.createMaterial(
                     new THREE.MeshBasicMaterial({
