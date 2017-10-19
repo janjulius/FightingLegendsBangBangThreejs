@@ -201,8 +201,24 @@ function render() {
     renderer.clearDepth();
 }
 
+function EndGame(){
+    for (var i = scene.children.length - 1; i >= 0; i--) {
+        scene.remove(scene.children[i]);
+    }
+
+    gameEnded = false;
+    playersPlaying = 4;
+    charSelect = true;
+    gamePaused = false;
+    placesLeft = 4;
+    playerWon = -1;
+
+    runCharSelect();
+}
+
 function runCharSelect() {
 
+    music = new Audio('Music/selectMusic.mp3');
     music.addEventListener('ended', function () {
         this.currentTime = 0;
         this.play();
@@ -282,7 +298,6 @@ function getPlayers() {
 }
 
 function runGame() {
-
     this.music.pause();
     this.music.currentTime = 0;
 
