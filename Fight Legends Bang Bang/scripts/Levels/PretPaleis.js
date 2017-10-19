@@ -228,7 +228,7 @@ class PretPaleis extends Level {
             0
         );
         back.receiveShadow = true;
-        back.position.set(-6, 40, 0);
+        back.position.set(-4, 40, 0);
         scene.add(back);
         back.name = "ground";
 
