@@ -105,7 +105,7 @@ THREE.GamepadControls = function () {
             if (!charSelect) {
                 for (var i = 0; i < players.length; i++) {
                     var p = players[i];
-                    if (this.gamePad[i] && p) {
+                    if (this.gamePad[i] && p instanceof Character) {
                         var g = this.gamePad[i];
                         p.direction.z = this.filter(-g.axes[0]);
                         p.direction.y = this.filter(-g.axes[1]);

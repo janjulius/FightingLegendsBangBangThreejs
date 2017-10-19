@@ -274,8 +274,6 @@ class Character {
                 placesLeft--;
             }
             this.specialExists = false;
-            this.maxGravityVelocity = 50;
-            this.gravityVelocity = 80;
             this.velt = 0;
             this.setSpecialAttackCounter(this.specialCounter / 2);
 
@@ -363,16 +361,18 @@ class Character {
         }
     }
 
-    pressedbuttonStart(){
-        if(!this.readyForNextGame){
+    pressedbuttonStart() {
+        if (!this.readyForNextGame) {
             this.readyForNextGame = true;
             gameInterface.UpdateEndScreen();
-            for(var i = 0; i < playersPlaying; i++){
-                if(!players[i].readyForNextGame){
-                    return;
+            var allReady = true;
+            for (var i = 0; i < playersPlaying; i++) {
+                if (!players[i].readyForNextGame) {
+                    allReady = false;
                 }
-                EndGame();
             }
+            if (allReady)
+                EndGame();
         }
     }
 

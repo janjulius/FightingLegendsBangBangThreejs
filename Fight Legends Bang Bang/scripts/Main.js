@@ -201,9 +201,13 @@ function render() {
     renderer.clearDepth();
 }
 
-function EndGame(){
+function EndGame() {
     for (var i = scene.children.length - 1; i >= 0; i--) {
         scene.remove(scene.children[i]);
+    }
+    for (var j = 0; j < playersPlaying; j++) {
+        players[j] = players[j].cid;
+        console.log(players[j]);
     }
     gameInterface.ClearEndInterface();
 
@@ -287,9 +291,8 @@ function runCharSelect() {
             fische = new Physijs.BoxMesh(new THREE.BoxGeometry(0, 1, 1), material, 0);
             playerFiches[i] = fische;
             scene.add(fische);
-            if (DEBUG_MODE) {
-                players[i] = 0;
-            }
+            console.log(players[i]);
+            players[i] = players[i] ? players[i] : 0;
         }
     }
 }
@@ -309,7 +312,7 @@ function runGame() {
             scene.remove(scene.children[i]);
         }
 
-        level = new FlyingIsland(); //temp level changer
+        level = new Thundergart(); //temp level changer
 
 
         //level randomizer
@@ -356,6 +359,8 @@ function runGame() {
             players[k].AddGrounded();
             players[k].geometry.name = k;
             players[k].geometry.isPlayer = true;
+            players[k].geometry.rotation.set(0, 0, 0);
+            players[k].geometry.__dirtyRotation = true;
             if (spawnOverheads) {
                 this.playerFloaterMaterial = THREE.ImageUtils.loadTexture(getPlayerIndicatorSprite(k));
                 this.playerFloater = new THREE.Mesh(new THREE.BoxGeometry(0.1, 5, 5),
