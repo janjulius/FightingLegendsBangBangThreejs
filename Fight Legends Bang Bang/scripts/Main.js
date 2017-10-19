@@ -308,7 +308,7 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        level = new StandardMap(); //temp level changer
+        level = new PretPaleis(); //temp level changer
 
         
         //level randomizer
