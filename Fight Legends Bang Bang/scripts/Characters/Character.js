@@ -262,6 +262,10 @@ class Character {
             this.respawnTimer = this.respawnDelay;
             this.isAlive = false;
             this.isStunned = true;
+
+            if (this.damage > this.THighestDamageSurvived)
+                this.THighestDamageSurvived = this.damage;
+
             this.setStock(this.stock - 1);
             if (this.stock == 0) {
                 this.Tplace = placesLeft;
@@ -272,9 +276,6 @@ class Character {
             this.gravityVelocity = 80;
             this.velt = 0;
             this.setSpecialAttackCounter(this.specialCounter / 2);
-
-            if (this.damage < this.THighestDamageSurvived)
-                this.THighestDamageSurvived = this.damage;
 
             this.TDeaths++;
             players[this.TLastPerson != -1 ? this.TLastPerson : this.id].TKills++;
