@@ -66,6 +66,8 @@ class Character {
         this.touchingWalls = [-1, -1, -1, -1];
 
         ///tracking data
+        this.Tplace = -1;
+        this.TLastPerson = -1;
         this.TDamageDone = 0;
         this.TDamageTaken = 0;
         this.TDamageHealed = 0;
