@@ -134,7 +134,7 @@ class Character {
                     hitSound.volume = MUSIC_VOLUME;
                     hitSound.play();
                     this.setSpecialAttackCounter(this.specialCounter + this.specialIncrease);
-                    otherPlayer.setDamage(otherPlayer.getDamage() + this.basicAttackDamage * this.takeDamageMultiplier, this.attackDirection);
+                    otherPlayer.setDamage(otherPlayer.getDamage() + this.basicAttackDamage * this.takeDamageMultiplier, this.attackDirection, this.id, 0);
                 }
             }
         }
@@ -192,6 +192,15 @@ class Character {
     setDamage(d, dir, oid, type) {
         if (!this.blocking) {
 
+            this.TDamageTaken += d;
+            this.TLastPerson = oid;
+            if (type == 0)
+                players[oid].TDamageDone += d;
+            else if (type == 1)
+                players[oid].TDamageDoneWithUlt += d;
+            else if (type == 2) {
+                players[oid].TDamageHealed += this.damage - d;
+            }
 
             if (this.CheckSides("down"))
                 dir.y = Math.abs(dir.y);
@@ -208,6 +217,8 @@ class Character {
                 this.knockBack.y = ((d + 20) * this.damageMulti) * dir.y;
             }
             gameInterface.UpdateGameInterface(this.id);
+        } else {
+            this.TDamageBlocked += d;
         }
     }
 
@@ -246,16 +257,25 @@ class Character {
             var cSound = new Audio(cheerSounds[r]);
             cSound.volume = MUSIC_VOLUME;
             cSound.play();
-            console.log(r);
             this.respawnTimer = this.respawnDelay;
             this.isAlive = false;
             this.isStunned = true;
             this.setStock(this.stock - 1);
+            if (this.stock == 0) {
+                this.Tplace = placesLeft;
+                placesLeft--;
+            }
             this.specialExists = false;
             this.maxGravityVelocity = 50;
             this.gravityVelocity = 80;
             this.velt = 0;
             this.setSpecialAttackCounter(this.specialCounter / 2);
+
+            if (this.damage > this.THighestDamageSurvived)
+                this.THighestDamageSurvived = this.damage;
+
+            this.TDeaths++;
+            players[this.TLastPerson != -1 ? this.TLastPerson : this.id].TKills++;
         }
     }
 
@@ -326,6 +346,9 @@ class Character {
     pressedbuttonY() {
         if (!this.isStunned)
             this.specialAtk();
+
+        if (this.specialReady())
+            this.TotalUltsUsed++;
     }
 
     pressedbuttonRT() {

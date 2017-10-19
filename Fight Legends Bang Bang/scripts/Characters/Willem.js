@@ -49,7 +49,7 @@ class Willem extends Character {
     }
 
     pressedbuttonY() {
-            this.specialAtk();
+        this.specialAtk();
     }
 
     specialAtk() {
@@ -108,7 +108,8 @@ class Willem extends Character {
                                 players[i].setDamage(players[i].getDamage() + this.ultDamage, {
                                     y: 1,
                                     z: this.GetSpcDirection(players[i])
-                                }); this.hitplayer[i] = true;
+                                }, this.id, 1);
+                                this.hitplayer[i] = true;
                             }
                         }
                     }

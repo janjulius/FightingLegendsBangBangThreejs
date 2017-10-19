@@ -15,7 +15,9 @@ class Jens extends Character {
         this.bombFallingAudio = new Audio('Sounds/Characters/Jens/Bomb_falling.mp3');
         this.bombExploding = new Audio('Sounds/Characters/Jens/Bomb_explode.wav');
         var material = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial({ color: 0x000000 }),
+            new THREE.MeshBasicMaterial({
+                color: 0x000000
+            }),
             0,
             0
         );
@@ -39,7 +41,7 @@ class Jens extends Character {
                 this.hitplayer[i] = false;
                 this.hitFinalPlayer[i] = false;
             }
-            this.target = this.generateRandom(0,playersPlaying-1);
+            this.target = this.generateRandom(0, playersPlaying - 1);
             this.finalUlt = false;
             this.endPos = new THREE.Vector3(players[this.target].geometry.position.x, players[this.target].geometry.position.y, players[this.target].geometry.position.z);
 
@@ -51,7 +53,7 @@ class Jens extends Character {
             this.specialTimer = 30;
             this.specialExists = true;
             this.specialObject.position.set(0, level.topLeft.y, players[this.target].geometry.position.z);
-        
+
         }
 
     }
@@ -71,7 +73,7 @@ class Jens extends Character {
                                     players[i].setDamage(players[i].getDamage() + this.ultDamage, {
                                         y: 1,
                                         z: this.GetSpcDirection(players[i])
-                                    });
+                                    }, this.id, 1);
                                     this.hitplayer[i] = true;
                                 }
                             }
@@ -94,7 +96,7 @@ class Jens extends Character {
                                 players[i].setDamage(players[i].getDamage() + this.ultFinalDamage, {
                                     y: 1,
                                     z: this.GetSpcDirection(players[i])
-                                });
+                                }, this.id, 1);
                                 this.hitFinalPlayer[i] = true;
                             }
                         }
@@ -120,7 +122,7 @@ class Jens extends Character {
         if (!players[num].isAlive) {
             num = this.generateRandom(min, max);
         }
-            return num;
+        return num;
     }
 
 }

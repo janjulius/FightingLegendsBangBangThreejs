@@ -14,7 +14,9 @@ class Paardman extends Character {
         this.scissorDamage = 80;
         this.paperDamage = 250;
         var material = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial({ color: 0xffad60 }),
+            new THREE.MeshBasicMaterial({
+                color: 0xffad60
+            }),
             0,
             0
         );
@@ -35,7 +37,7 @@ class Paardman extends Character {
             this.target = undefined;
             this.horseChoice = Math.floor((Math.random() * 3) + 1);
             switch (this.horseChoice) {
-                case 1:   //stone     
+                case 1: //stone     
                     var stoneMaterial = Physijs.createMaterial(
                         new THREE.MeshBasicMaterial({
                             color: 0x4d4c4c
@@ -53,7 +55,7 @@ class Paardman extends Character {
                     this.specialObject.position.set(0, this.geometry.position.y, this.geometry.position.z + this.attackDirection.z * 5);
                     this.flyDirection = this.attackDirection.z;
                     this.stoneVelocity = new THREE.Vector3(0, 0, this.attackDirection.z * ((this.stoneThrowSpeed) + 1));
-                    
+
                     scene.add(this.specialObject);
                     break;
                 case 2: //paper
@@ -73,7 +75,7 @@ class Paardman extends Character {
                     this.specialTimer = 300;
                     this.specialObject.position.set(0, this.geometry.position.y, this.geometry.position.z + this.attackDirection.z * 5);
                     this.flyDirection = this.attackDirection.z;
-                    
+
                     scene.add(this.specialObject);
 
                     break;
@@ -94,7 +96,7 @@ class Paardman extends Character {
                     this.specialTimer = 3;
                     this.specialObject.position.set(0, this.geometry.position.y, this.geometry.position.z + (this.attackDirection.z * 5));
                     this.flyDirection = this.attackDirection.z;
-                    
+
                     this.scissorVelocity = new THREE.Vector3(0, 0, this.attackDirection.z * ((this.scissorThrowSpeed) + 1));
                     scene.add(this.specialObject);
 
@@ -160,14 +162,23 @@ class Paardman extends Character {
                 if (this.target != undefined) {
                     if (this.target != this.id) {
                         switch (this.horseChoice) {
-                            case 1://stone
-                                players[this.target].setDamage(players[this.target].getDamage() + this.stoneDamage, { y: 1, z: this.flyDirection });
+                            case 1: //stone
+                                players[this.target].setDamage(players[this.target].getDamage() + this.stoneDamage, {
+                                    y: 1,
+                                    z: this.flyDirection
+                                }, this.id, 1);
                                 break;
-                            case 2://paper
-                                players[this.target].setDamage(players[this.target].getDamage() + this.paperDamage, { y: 1, z: this.flyDirection });
+                            case 2: //paper
+                                players[this.target].setDamage(players[this.target].getDamage() + this.paperDamage, {
+                                    y: 1,
+                                    z: this.flyDirection
+                                }, this.id, 1);
                                 break;
-                            case 3://scissor
-                                players[this.target].setDamage(players[this.target].getDamage() + this.scissorDamage, { y: 1, z: this.flyDirection });
+                            case 3: //scissor
+                                players[this.target].setDamage(players[this.target].getDamage() + this.scissorDamage, {
+                                    y: 1,
+                                    z: this.flyDirection
+                                }, this.id, 1);
                                 break;
                         }
                     }

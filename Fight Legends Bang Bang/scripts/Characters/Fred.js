@@ -15,7 +15,9 @@ class Fred extends Character {
         this.ultSound = new Audio('Sounds/Characters/Fred/Fred_ult_sound.wav');
         this.portrait = 'sprites/Characters/MenuSprites/fred.png';
         var material = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial({ color: 0xffad60 }),
+            new THREE.MeshBasicMaterial({
+                color: 0x0F8C00
+            }),
             0,
             0
         );
@@ -81,8 +83,7 @@ class Fred extends Character {
                                         z: this.GetSpcDirection(
                                             players[this.spcTargets[i]]
                                         )
-                                    }
-                                );
+                                    }, this.id, 1);
                             }
                         }
 

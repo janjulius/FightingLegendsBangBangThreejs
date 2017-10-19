@@ -52,13 +52,13 @@ class BoomStronk extends Character {
                 if (this.specialHealing) {
                     this.isStunned = true;
                     if (this.specialTimer > 2) {
-                        this.setDamage(Math.floor(this.healval / 2), { y: 0, z: 0 });
+                        this.setDamage(Math.floor(this.healval / 2), { y: 0, z: 0 }, this.id, 2);
                         this.maxGravityVelocity = 50;
                         this.gravityVelocity = 80;
                     } if (this.specialTimer > 1 && this.specialTimer < 2) {
-                        this.setDamage(Math.floor(this.healval / 3), { y: 0, z: 0 });
+                        this.setDamage(Math.floor(this.healval / 3), { y: 0, z: 0 }, this.id, 2);
                     } if (this.specialTimer < 1) {
-                        this.setDamage(0, { y: 0, z: 0 });
+                        this.setDamage(0, { y: 0, z: 0 }, this.id, 2);
                         this.isStunned = false;
                     } if (this.specialTimer < 0.1) {
                         this.specialHealing = true;
@@ -81,7 +81,7 @@ class BoomStronk extends Character {
                                         _this.hitSomeone = true;
                                         players[_this.target].geometry.__dirtyPosition = true;
                                         players[_this.target].geometry.position.set(players[_this.target].geometry.position.x, players[_this.target].geometry.position.y, players[_this.target].geometry.position.z + 5 * _this.GetSpcDirection(players[_this.target]));
-                                        players[_this.target].setDamage(players[_this.target].getDamage() + -_this.velt / 3, { y: 1, z: _this.GetSpcDirection(players[_this.target]) });
+                                        players[_this.target].setDamage(players[_this.target].getDamage() + -_this.velt / 3, { y: 1, z: _this.GetSpcDirection(players[_this.target]) }, _this.id, 1);
                                         _this.specialExists = false;
                                         _this.setSpecialAttackCounter(0);
                                     }
