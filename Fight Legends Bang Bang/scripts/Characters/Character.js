@@ -271,7 +271,7 @@ class Character {
             this.velt = 0;
             this.setSpecialAttackCounter(this.specialCounter / 2);
 
-            if (this.damage > this.THighestDamageSurvived)
+            if (this.damage < this.THighestDamageSurvived)
                 this.THighestDamageSurvived = this.damage;
 
             this.TDeaths++;
@@ -344,11 +344,10 @@ class Character {
     }
 
     pressedbuttonY() {
-        if (!this.isStunned)
-            this.specialAtk();
-
         if (this.specialReady())
             this.TotalUltsUsed++;
+        if (!this.isStunned)
+            this.specialAtk();
     }
 
     pressedbuttonRT() {
