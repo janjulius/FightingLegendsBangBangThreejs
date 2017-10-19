@@ -65,6 +65,17 @@ class Character {
 
         this.touchingWalls = [-1, -1, -1, -1];
 
+        ///tracking data
+        this.TDamageDone = 0;
+        this.TDamageTaken = 0;
+        this.TDamageHealed = 0;
+        this.THighestDamageSurvived = 0;
+        this.TKills = 0;
+        this.TDeaths = 0;
+        this.TDamageBlocked = 0;
+        this.TDamageDoneWithUlt = 0;
+        this.TotalUltsUsed = 0;
+
         console.log("created character");
     }
 
@@ -176,7 +187,7 @@ class Character {
         return this.damage;
     }
 
-    setDamage(d, dir) {
+    setDamage(d, dir, oid, type) {
         if (!this.blocking) {
 
 
@@ -470,7 +481,7 @@ class Character {
             this.canBlock = true;
     }
 
-    UpdateChar(t) { }
+    UpdateChar(t) {}
 
     AddGrounded() {
         var _this = this;

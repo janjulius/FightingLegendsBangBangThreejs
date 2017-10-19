@@ -304,9 +304,9 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        level = new HyruleCastle(); //temp level changer
+        //level = new HyruleCastle(); //temp level changer
 
-        /*
+        
         //level randomizer
         let randomLevel;
         randomLevel = Math.floor((Math.random() * 7) + 1);
@@ -334,7 +334,7 @@ function runGame() {
                     level = new HyruleCastle();
             break;
         }
-        */
+        
 
 
         var bound = new THREE.BoxGeometry(1, level.topLeft.y + Math.abs(level.bottomRight.y), level.topLeft.z + Math.abs(level.bottomRight.z));
