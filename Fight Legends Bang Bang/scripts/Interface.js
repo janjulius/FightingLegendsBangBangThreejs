@@ -2,6 +2,7 @@ class Interface {
 
     constructor() { //to load any files
         this.playerInterface = [];
+        this.playerCharSelectInterface = [];
         this.players = [];
         this.cNames = [];
         this.endGameScreen = [];
@@ -184,26 +185,26 @@ class Interface {
     LoadCharSelectInterface() {
 
         if (this.loadedCharSelectInterface) {
-            for (var i = 0; i < this.playerInterface.length; i++) {
-                this.playerInterface[i].style.visibility = "visible";
+            for (var i = 0; i < this.playerCharSelectInterface.length; i++) {
+                this.playerCharSelectInterface[i].style.visibility = "visible";
 
             }
         } else {
             this.mainInterface = document.getElementById("CharSelectInterface");
 
-            this.playerInterface[0] = document.getElementById("pCharInterface0");
-            this.playerInterface[1] = document.getElementById("pCharInterface1");
-            this.playerInterface[2] = document.getElementById("pCharInterface2");
-            this.playerInterface[3] = document.getElementById("pCharInterface3");
+            this.playerCharSelectInterface[0] = document.getElementById("pCharInterface0");
+            this.playerCharSelectInterface[1] = document.getElementById("pCharInterface1");
+            this.playerCharSelectInterface[2] = document.getElementById("pCharInterface2");
+            this.playerCharSelectInterface[3] = document.getElementById("pCharInterface3");
 
-            this.cNames[0] = this.playerInterface[0].getElementsByClassName("pName");
-            this.cNames[1] = this.playerInterface[1].getElementsByClassName("pName");
-            this.cNames[2] = this.playerInterface[2].getElementsByClassName("pName");
-            this.cNames[3] = this.playerInterface[3].getElementsByClassName("pName");
+            this.cNames[0] = this.playerCharSelectInterface[0].getElementsByClassName("pName");
+            this.cNames[1] = this.playerCharSelectInterface[1].getElementsByClassName("pName");
+            this.cNames[2] = this.playerCharSelectInterface[2].getElementsByClassName("pName");
+            this.cNames[3] = this.playerCharSelectInterface[3].getElementsByClassName("pName");
 
             var basep = 25;
-            for (var i = 0; i < this.playerInterface.length; i++) {
-                var a = this.playerInterface[i].style;
+            for (var i = 0; i < this.playerCharSelectInterface.length; i++) {
+                var a = this.playerCharSelectInterface[i].style;
                 a.right = "0px";
                 a.position = "absolute";
                 a.width = "400px";
@@ -220,16 +221,16 @@ class Interface {
     }
 
     UpdateCharSelectInterface(fid, p) {
-        this.playerInterface[fid].style.backgroundImage = "url(" + getCharImgByNameOrId(p) + ")";
-        this.playerInterface[fid].style.backgroundSize = "200px 200px";
-        this.playerInterface[fid].style.backgroundPosition = "bottom right";
-        this.playerInterface[fid].style.backgroundRepeat = "no-repeat";
+        this.playerCharSelectInterface[fid].style.backgroundImage = "url(" + getCharImgByNameOrId(p) + ")";
+        this.playerCharSelectInterface[fid].style.backgroundSize = "200px 200px";
+        this.playerCharSelectInterface[fid].style.backgroundPosition = "bottom right";
+        this.playerCharSelectInterface[fid].style.backgroundRepeat = "no-repeat";
         this.cNames[fid][0].innerHTML = getCharNameById(p);
     }
 
     ClearCharSelectInterface() {
-        for (var i = 0; i < this.playerInterface.length; i++) {
-            this.playerInterface[i].style.visibility = "hidden";
+        for (var i = 0; i < this.playerCharSelectInterface.length; i++) {
+            this.playerCharSelectInterface[i].style.visibility = "hidden";
 
         }
     }
