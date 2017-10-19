@@ -124,11 +124,13 @@ THREE.GamepadControls = function () {
                                 p.pressedbuttonRT();
                             }
                         }
-                        if (this.PressedButton(i, 9)) {
-                            gamePaused = !gamePaused;
-                            if (!gamePaused) {
-                                var timeElapsed = clock.getDelta();
-                                scene.simulate(undefined, 1);
+                        if (!gameEnded) {
+                            if (this.PressedButton(i, 9)) {
+                                gamePaused = !gamePaused;
+                                if (!gamePaused) {
+                                    var timeElapsed = clock.getDelta();
+                                    scene.simulate(undefined, 1);
+                                }
                             }
                         }
                     }
