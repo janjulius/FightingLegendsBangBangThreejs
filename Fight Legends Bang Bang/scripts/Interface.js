@@ -369,7 +369,7 @@ class Interface {
 
                 this.readyTexts[i] = document.createElement('div');
                 a.appendChild( this.readyTexts[i]);
-                readyTexts[i].className = "readyText";
+                this.readyTexts[i].className = "readyText";
                 this.readyTexts[i].innerHTML = "Ready for next battle?";
                 this.readyTexts[i].style.color = "red";
     
