@@ -20,6 +20,10 @@ class Interface {
             this.spaBar2.style.visibility = "visible";
             this.spaBar1.style.visibility = "visible";
             this.spaBar3.style.visibility = "visible";
+            this.spaBar0.value = this.players[0].getSpecialAttackCounter();
+            this.spaBar1.value = this.players[1].getSpecialAttackCounter();
+            this.spaBar2.value = this.players[2].getSpecialAttackCounter();
+            this.spaBar3.value = this.players[3].getSpecialAttackCounter();
         } else {
 
             var w = document.width;
@@ -248,6 +252,15 @@ class Interface {
         if (this.loadedEndScreenInterface) {
             for(var i = 0; i < playersPlaying; i ++){
                 this.endGameScreen[i].style.visibility = "visible";
+            }
+            for (var i = 0; i < playersPlaying; i++) {
+                if (players[i].readyForNextGame) {
+                    this.readyTexts[i].innerHTML = "READY!";
+                    this.readyTexts[i].style.color = "green";
+                } else {
+                    this.readyTexts[i].innerHTML = "Ready for next battle?";
+                    this.readyTexts[i].style.color = "red";
+                }
             }
         } else {
 

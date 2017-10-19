@@ -17,7 +17,9 @@ var gameEnded = false;
 var gamePaused = false;
 var spawnOverheads = true;
 var blockingPossible = true;
+var previousWinner;
 var music = new Audio('Music/selectMusic.mp3');
+var thisGameWinnerAudio = new Audio('Music/this_games_winner_is.m4a');
 gameInterface = new Interface();
 
 'use strict';
@@ -186,6 +188,12 @@ function render() {
                     playerWon = j;
                     placesLeft = 0;
                     plr.isStunned = true;
+                    previousWinner = plr.cid;
+                    this.thisGameWinnerAudio.play();
+                    this.thisGameWinnerAudio.addEventListener('ended', function() {
+                        var winnerSound = new Audio("Music/Class" + previousWinner + ".m4a");
+                        winnerSound.play();
+                    });
                 }
             }
         }
