@@ -49,6 +49,9 @@ class Willem extends Character {
     }
 
     pressedbuttonY() {
+        if (this.specialReady())
+            this.TotalUltsUsed++;
+
         this.specialAtk();
     }
 

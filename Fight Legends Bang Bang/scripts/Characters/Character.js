@@ -194,15 +194,15 @@ class Character {
     setDamage(d, dir, oid, type) {
         if (!this.blocking) {
 
-            if (type == 0){
-                players[oid].TDamageDone += d;
+            if (type == 0) {
+                players[oid].TDamageDone += d - this.damage;
                 this.TDamageTaken += d - this.damage;
                 this.TLastPerson = oid;
-            }else if (type == 1){
-                players[oid].TDamageDoneWithUlt += d;
+            } else if (type == 1) {
+                players[oid].TDamageDoneWithUlt += d - this.damage;
                 this.TDamageTaken += d - this.damage;
                 this.TLastPerson = oid;
-            }else if (type == 2) {
+            } else if (type == 2) {
                 players[oid].TDamageHealed += this.damage - d;
             }
 
@@ -264,6 +264,10 @@ class Character {
             this.respawnTimer = this.respawnDelay;
             this.isAlive = false;
             this.isStunned = true;
+
+            if (this.damage > this.THighestDamageSurvived)
+                this.THighestDamageSurvived = this.damage;
+
             this.setStock(this.stock - 1);
             if (this.stock == 0) {
                 this.Tplace = placesLeft;
@@ -274,9 +278,6 @@ class Character {
             this.gravityVelocity = 80;
             this.velt = 0;
             this.setSpecialAttackCounter(this.specialCounter / 2);
-
-            if (this.damage < this.THighestDamageSurvived)
-                this.THighestDamageSurvived = this.damage;
 
             this.TDeaths++;
             players[this.TLastPerson != -1 ? this.TLastPerson : this.id].TKills++;
@@ -522,7 +523,7 @@ class Character {
             this.canBlock = true;
     }
 
-    UpdateChar(t) {}
+    UpdateChar(t) { }
 
     AddGrounded() {
         var _this = this;

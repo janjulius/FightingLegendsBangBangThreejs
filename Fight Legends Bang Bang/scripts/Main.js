@@ -201,8 +201,24 @@ function render() {
     renderer.clearDepth();
 }
 
+function EndGame(){
+    for (var i = scene.children.length - 1; i >= 0; i--) {
+        scene.remove(scene.children[i]);
+    }
+
+    gameEnded = false;
+    playersPlaying = 4;
+    charSelect = true;
+    gamePaused = false;
+    placesLeft = 4;
+    playerWon = -1;
+
+    runCharSelect();
+}
+
 function runCharSelect() {
 
+    music = new Audio('Music/selectMusic.mp3');
     music.addEventListener('ended', function () {
         this.currentTime = 0;
         this.play();
@@ -282,7 +298,6 @@ function getPlayers() {
 }
 
 function runGame() {
-
     this.music.pause();
     this.music.currentTime = 0;
 
@@ -293,36 +308,40 @@ function runGame() {
             scene.remove(scene.children[i]);
         }
 
+<<<<<<< HEAD
         // level = new StandardMap(); //temp level changer
+=======
+        level = new FlyingIsland(); //temp level changer
+>>>>>>> 56dfc8fcfc095f7fd75d4def3941c9016084cef1
 
 
         //level randomizer
-        let randomLevel;
-        randomLevel = Math.floor((Math.random() * 7) + 1);
+        // let randomLevel;
+        // randomLevel = Math.floor((Math.random() * 7) + 1);
 
-        switch(randomLevel){
-            case 1 :
-                    level = new Brawlhaven();
-            break;
-            case 2 :
-                    level = new Thundergart();
-            break;
-            case 3 : 
-                    level = new StandardMap();
-            break;
-            case 4 : 
-                    level = new ZeldaMap();
-            break;
-            case 5 : 
-                    level = new Deserto();
-            break;
-            case 6 : 
-                    level = new Metalplant();
-            break;
-            case 7 : 
-                    level = new HyruleCastle();
-            break;
-        }
+        // switch(randomLevel){
+        //     case 1 :
+        //             level = new Brawlhaven();
+        //     break;
+        //     case 2 :
+        //             level = new Thundergart();
+        //     break;
+        //     case 3 : 
+        //             level = new StandardMap();
+        //     break;
+        //     case 4 : 
+        //             level = new ZeldaMap();
+        //     break;
+        //     case 5 : 
+        //             level = new Deserto();
+        //     break;
+        //     case 6 : 
+        //             level = new Metalplant();
+        //     break;
+        //     case 7 : 
+        //             level = new HyruleCastle();
+        //     break;
+        // }
 
 
 
