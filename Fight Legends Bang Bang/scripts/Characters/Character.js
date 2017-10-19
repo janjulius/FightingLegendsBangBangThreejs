@@ -192,13 +192,15 @@ class Character {
     setDamage(d, dir, oid, type) {
         if (!this.blocking) {
 
-            this.TDamageTaken += d;
-            this.TLastPerson = oid;
-            if (type == 0)
+            if (type == 0){
                 players[oid].TDamageDone += d;
-            else if (type == 1)
+                this.TDamageTaken += d - this.damage;
+                this.TLastPerson = oid;
+            }else if (type == 1){
                 players[oid].TDamageDoneWithUlt += d;
-            else if (type == 2) {
+                this.TDamageTaken += d - this.damage;
+                this.TLastPerson = oid;
+            }else if (type == 2) {
                 players[oid].TDamageHealed += this.damage - d;
             }
 

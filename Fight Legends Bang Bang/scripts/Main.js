@@ -274,44 +274,6 @@ function runCharSelect() {
                 players[i] = 0;
             }
         }
-
-        window.addEventListener('keydown', function (event) {
-            if (event.keyCode == 68) { //d
-                ray0 = new THREE.Raycaster(playerFiches[0].position, new THREE.Vector3(-1, 0, 0));
-                var intersects = ray0.intersectObjects(scene.children);
-                for (var i = 0; i < intersects.length; i++) {
-                    players[0] = intersects[i].object.myCharId;
-                    gameInterface.UpdateCharSelectInterface(0, players[0]);
-                }
-                playerFiches[0].position.z = playerFiches[0].position.z + 1;
-                //ray0.set(playerFiches[0].position, new THREE.Vector3(1,0,0));
-            } else if (event.keyCode == 70) { //f
-                ray0 = new THREE.Raycaster(playerFiches[1].position, new THREE.Vector3(-1, 0, 0));
-                var intersects = ray0.intersectObjects(scene.children);
-                for (var i = 0; i < intersects.length; i++) {
-                    players[1] = intersects[i].object.myCharId;
-                    gameInterface.UpdateCharSelectInterface(1, players[1]);
-                }
-                playerFiches[1].position.z = playerFiches[1].position.z + 1;
-                playerFiches[0].position.y = playerFiches[0].position.y + 1;
-            } else if (event.keyCode == 87) { //w
-                ray0 = new THREE.Raycaster(playerFiches[2].position, new THREE.Vector3(-1, 0, 0));
-                var intersects = ray0.intersectObjects(scene.children);
-                for (var i = 0; i < intersects.length; i++) {
-                    players[2] = intersects[i].object.myCharId;
-                    gameInterface.UpdateCharSelectInterface(2, players[2]);
-                }
-                playerFiches[2].position.z = playerFiches[2].position.z + 1;
-            } else if (event.keyCode == 83) { //s
-                ray0 = new THREE.Raycaster(playerFiches[3].position, new THREE.Vector3(-1, 0, 0));
-                var intersects = ray0.intersectObjects(scene.children);
-                for (var i = 0; i < intersects.length; i++) {
-                    players[3] = intersects[i].object.myCharId;
-                    gameInterface.UpdateCharSelectInterface(3, players[3]);
-                }
-                playerFiches[3].position.z = playerFiches[3].position.z + 1;
-            }
-        });
     }
 }
 
@@ -329,10 +291,6 @@ function runGame() {
 
         for (var i = scene.children.length - 1; i >= 0; i--) {
             scene.remove(scene.children[i]);
-        }
-
-        for (var i = 0; i < 8; i++) {
-            charScreens[i].position.set(100, 100, 100);
         }
 
         //level = new FlyingIsland(); //temp level changer
