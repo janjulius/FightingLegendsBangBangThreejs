@@ -96,33 +96,33 @@ class Metalplant extends Level {
         leftplatform.name = "ground";
 
         var leftRope1 = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(1, 60, 1),
+            new THREE.CubeGeometry(1, 150, 1),
             new THREE.MeshBasicMaterial({ color: this.rope }),
             0
         );
         leftRope1.receiveShadow = true;
-        leftRope1.position.set(-6, 65, 27.5);
+        leftRope1.position.set(-6, 115, 27.5);
         scene.add(leftRope1);
         leftRope1.name = "ground";
 
         var leftRope2 = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(1, 60, 1),
+            new THREE.CubeGeometry(1, 150, 1),
             new THREE.MeshBasicMaterial({ color: this.rope }),
             0
         );
         leftRope2.receiveShadow = true;
-        leftRope2.position.set(-6, 65, 45);
+        leftRope2.position.set(-6, 115, 45);
         scene.add(leftRope2);
         leftRope2.name = "ground";
 
         var middleBrokenPillar = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(1, 35, 2.5),
+            new THREE.CubeGeometry(15, 140, 2.5),
             new THREE.MeshBasicMaterial({ color: this.rustydark }),
             0
         );
         middleBrokenPillar.rotation.x = 10;
         middleBrokenPillar.receiveShadow = true;
-        middleBrokenPillar.position.set(-3, -27.5, -4);
+        middleBrokenPillar.position.set(-16, -70, -32.5);
         scene.add(middleBrokenPillar);
         middleBrokenPillar.name = "ground";
 
@@ -159,22 +159,22 @@ class Metalplant extends Level {
         rightplatformHigh.name = "ground";
 
         var rightRope3 = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(1, 50, 1),
+            new THREE.CubeGeometry(1, 150, 1),
             new THREE.MeshBasicMaterial({ color: this.rope }),
             0
         );
         rightRope3.receiveShadow = true;
-        rightRope3.position.set(-10, 75, -52.5);
+        rightRope3.position.set(-10, 125, -55);
         scene.add(rightRope3);
         rightRope3.name = "ground";
 
         var rightRope4 = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(1, 50, 1),
+            new THREE.CubeGeometry(1, 150, 1),
             new THREE.MeshBasicMaterial({ color: this.rope }),
             0
         );
         rightRope4.receiveShadow = true;
-        rightRope4.position.set(-10, 75, -48.5);
+        rightRope4.position.set(-10, 125, -50);
         scene.add(rightRope4);
         rightRope4.name = "ground";
         

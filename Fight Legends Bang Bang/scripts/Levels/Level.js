@@ -5,6 +5,7 @@ class Level{
 
         this.topLeft = {y: 0, z: 0};
         this.bottomRight = {y: 0, z:0}
+        this.oneWayPlatforms = [];
 
         this.myAudio= new Audio('Music/mortalKombat.mp3');
         this.myAudio.volume = MUSIC_VOLUME;

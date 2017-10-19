@@ -19,7 +19,7 @@ class Willem extends Character {
             new THREE.MeshBasicMaterial({
                 color: 0xffffff
             }),
-            1,
+            0,
             0
         );
 
@@ -49,7 +49,7 @@ class Willem extends Character {
     }
 
     pressedbuttonY() {
-            this.specialAtk();
+        this.specialAtk();
     }
 
     specialAtk() {
@@ -79,7 +79,6 @@ class Willem extends Character {
                     this.ultCharging = true;
                 }
                 if (this.specialTimer < 4 && this.beginSPecial) {
-                    console.log(this.specialTimer);
                     var pos = this.geometry.position;
                     this.specialObject.position.set(0, pos.y + (this.CheckSides("down") ? 5 : 0), pos.z);
                     this.specialObject.__dirtyPosition = true;
@@ -109,7 +108,8 @@ class Willem extends Character {
                                 players[i].setDamage(players[i].getDamage() + this.ultDamage, {
                                     y: 1,
                                     z: this.GetSpcDirection(players[i])
-                                }); this.hitplayer[i] = true;
+                                }, this.id, 1);
+                                this.hitplayer[i] = true;
                             }
                         }
                     }

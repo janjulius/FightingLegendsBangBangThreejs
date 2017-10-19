@@ -12,7 +12,9 @@ class Rocky extends Character {
         this.specialDamage = 17;
         this.ultRange = 400;
         this.clawed = [];
-        this.clawed[0] = false; this.clawed[1] = false; this.clawed[2] = false;
+        this.clawed[0] = false;
+        this.clawed[1] = false;
+        this.clawed[2] = false;
 
         var soundFolderPath = 'Sounds/Characters/Rocky/';
         this.ultVanishAudio = new Audio(soundFolderPath + 'Rocky_ult_vanish.wav');
@@ -20,10 +22,16 @@ class Rocky extends Character {
         this.claw2HitAudio = new Audio(soundFolderPath + 'Rocky_Claw_hit.wav');
         this.claw3HitAudio = new Audio(soundFolderPath + 'Rocky_Claw_hit.wav');
         this.finalClawHitAudio = new Audio(soundFolderPath + 'Rocky_final_claw_hit.wav');
+        var material = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xec00fb
+            }),
+            0,
+            0
+        );
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
-            new THREE.MeshBasicMaterial({ color: 0xec00fb },
-                1)
+            material
         );
         this.geometry.castShadow = true;
         this.geometry.position.set(0, y, z);
@@ -32,8 +40,10 @@ class Rocky extends Character {
     }
 
     specialAtk() {
-        this.clawed[0] = false; this.clawed[1] = false; this.clawed[2] = false;
-        if (this.specialReady()) { 
+        this.clawed[0] = false;
+        this.clawed[1] = false;
+        this.clawed[2] = false;
+        if (this.specialReady()) {
             this.setSpecialAttackCounter(0);
             this.target;
             for (var i = 0; i < playersPlaying; i++) {
@@ -44,15 +54,15 @@ class Rocky extends Character {
                     this.target = i;
                 }
                 if (distanceBetweenVector3(players[i].geometry.position, this.geometry.position) <= this.ultRange) {
-                    if (distanceBetweenVector3(players[i].geometry.position, this.geometry.position)
-                        <= distanceBetweenVector3(players[this.target].geometry.position, this.geometry.position)) {
+                    if (distanceBetweenVector3(players[i].geometry.position, this.geometry.position) <=
+                        distanceBetweenVector3(players[this.target].geometry.position, this.geometry.position)) {
                         this.target = i;
                     }
                 }
             }
             this.specialExists = true;
             this.specialTimer = 2;
-           }
+        }
     }
 
     UpdateChar(t) {
@@ -78,19 +88,28 @@ class Rocky extends Character {
                         players[this.target].geometry.position.z + -players[this.target].attackDirection.z * 5);
                     players[this.target].isStunned = true;
                     if (!this.clawed[0]) {
-                        players[this.target].setDamage(players[this.target].getDamage() + this.clawDamage, { y: 0, z: 0 });
+                        players[this.target].setDamage(players[this.target].getDamage() + this.clawDamage, {
+                            y: 0,
+                            z: 0
+                        }, this.id, 1);
                         this.clawed[0] = true;
                         this.claw1HitAudio.play();
                     }
                     if (this.specialTimer < 0.625) {
                         if (!this.clawed[1]) {
-                            players[this.target].setDamage(players[this.target].getDamage() + this.clawDamage, { y: 0, z: 0 });
+                            players[this.target].setDamage(players[this.target].getDamage() + this.clawDamage, {
+                                y: 0,
+                                z: 0
+                            }, this.id, 1);
                             this.clawed[1] = true;
                             this.claw2HitAudio.play();
                         }
                         if (this.specialTimer < 0.3) {
                             if (!this.clawed[2]) {
-                                players[this.target].setDamage(players[this.target].getDamage() + this.clawDamage, { y: 0, z: 0 });
+                                players[this.target].setDamage(players[this.target].getDamage() + this.clawDamage, {
+                                    y: 0,
+                                    z: 0
+                                }, this.id, 1);
                                 this.clawed[2] = true;
                                 this.claw3HitAudio.play();
                             }
@@ -104,8 +123,10 @@ class Rocky extends Character {
                 this.specialExists = false;
                 this.finalClawHitAudio.play();
 
-                players[this.target].setDamage(players[this.target].getDamage() + this.specialDamage
-                    , { y: 1, z: players[this.target].attackDirection.z });
+                players[this.target].setDamage(players[this.target].getDamage() + this.specialDamage, {
+                    y: 1,
+                    z: players[this.target].attackDirection.z
+                }, this.id, 1);
                 this.geometry.__dirtyPosition = true;
                 this.geometry.__dirtyRotation = true;
 

@@ -9,9 +9,11 @@ class Kees extends Character {
         this.stunnedTimer;
         this.stunTime = 1.9; // +0.1
         var material = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial({ color: 0x786e6e }),
-            1,
-            1
+            new THREE.MeshBasicMaterial({
+                color: 0x786e6e
+            }),
+            0,
+            0
         );
 
         this.specialAtkString = "Expose to the light";
@@ -51,11 +53,11 @@ class Kees extends Character {
                             if (!this.hitplayer[i]) {
                                 players[i].setDamage(players[i].getDamage() + (
                                     Math.abs((distanceBetweenVector3(
-                                        this.geometry.position, players[i].geometry.position))
-                                    )
-                                ),
-                                    { y: 0, z: 0 }
-                                );
+                                        this.geometry.position, players[i].geometry.position)))
+                                ), {
+                                    y: 0,
+                                    z: 0
+                                }, this.id, 1);
                                 this.hitplayer[i] = true;
                             }
                         }
@@ -68,28 +70,28 @@ class Kees extends Character {
                             if (!this.hitplayer[i]) {
                                 players[i].setDamage(players[i].getDamage() + (
                                     Math.abs((distanceBetweenVector3(
-                                        this.geometry.position, players[i].geometry.position))
-                                    )
-                                ),
-                                    { y: 0, z: 0 }
-                                );
+                                        this.geometry.position, players[i].geometry.position)))
+                                ), {
+                                    y: 0,
+                                    z: 0
+                                }, this.id, 1);
                                 this.hitplayer[i] = true;
                             }
                         }
                     }
                 }
             }
-            if(this.specialTimer < 0){
+            if (this.specialTimer < 0) {
                 this.isStunned = false;
                 this.specialExists = false;
             }
         }
-        if(this.stunnedTimer > 0){
+        if (this.stunnedTimer > 0) {
             this.stunnedTimer -= t;
         }
-        if(this.stunnedTimer <= 0){
+        if (this.stunnedTimer <= 0) {
             for (var i = 0; i < playersPlaying; i++) {
-                if(this.hitplayer[i]){
+                if (this.hitplayer[i]) {
                     players[i].isStunned = false;
                     this.hitplayer[i] = false;
                 }
