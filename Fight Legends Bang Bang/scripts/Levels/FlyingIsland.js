@@ -188,7 +188,7 @@ class FlyingIsland extends Level {
         MainDirt.name = "ground";
 
         var Trunk = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(0, 25, 5),
+            new THREE.CubeGeometry(0.5, 25, 5),
             treeTrunk,
             0
         );
@@ -198,7 +198,7 @@ class FlyingIsland extends Level {
         Trunk.name = "ground";
 
         var Leaves = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(0, 20, 20),
+            new THREE.CubeGeometry(0.5, 20, 20),
             Tree,
             0
         );
@@ -208,7 +208,7 @@ class FlyingIsland extends Level {
         Leaves.name = "ground";
 
         var silverBlock1 = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(1, 20, 10),
+            new THREE.CubeGeometry(15, 20, 10),
             Silver,
             0
         );
@@ -218,7 +218,7 @@ class FlyingIsland extends Level {
         silverBlock1.name = "ground";
 
         var silverBlock2 = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(1, 10, 40),
+            new THREE.CubeGeometry(15, 10, 40),
             Silver2,
             0
         );
@@ -228,7 +228,7 @@ class FlyingIsland extends Level {
         silverBlock2.name = "ground";
 
         var silverBlock3 = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(1, 20, 10),
+            new THREE.CubeGeometry(15, 20, 10),
             Silver,
             0
         );
@@ -238,7 +238,7 @@ class FlyingIsland extends Level {
         silverBlock3.name = "ground";
 
         var WoodenDoor = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(1, 10, 5),
+            new THREE.CubeGeometry(0, 10, 5),
             Door,
             0
         );
@@ -248,7 +248,7 @@ class FlyingIsland extends Level {
         WoodenDoor.name = "ground";
 
         var darkSilverBlock = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(1, 20, 30),
+            new THREE.CubeGeometry(0, 20, 30),
             darkSilver,
             0
         );
