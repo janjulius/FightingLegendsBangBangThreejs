@@ -1,4 +1,4 @@
-class Level{
+class Level {
     constructor(){
         this.name = "";
         this.spawn = [{y: 0,z: 0}, {y: 0,z: 0}, {y: 0,z: 0}, {y: 0,z: 0}]
@@ -6,10 +6,10 @@ class Level{
         this.topLeft = {y: 0, z: 0};
         this.bottomRight = {y: 0, z:0}
         this.oneWayPlatforms = [];
-
         this.myAudio= new Audio('Music/mortalKombat.mp3');
         this.myAudio.volume = MUSIC_VOLUME;
 
+        this.oneWayPlatforms = [];
         this.burlywoodbrown = 0xDEB887;
         this.iceblue = 0xdcf3ff;
         this.mudbrown = 0x794c13;

@@ -6,6 +6,7 @@ class StandardMap extends Level {
         this.topLeft = {y: 200, z: 150 } ;
         this.bottomRight = {y: -70, z: -150};
         var material;
+        var players = getPlayers();
 
         this.myAudio.addEventListener('ended', function() {
             this.currentTime = 0;
@@ -110,7 +111,6 @@ class StandardMap extends Level {
         upper.position.set(0, 25, 0);
         scene.add(upper);
         upper.name = "ground";
-<<<<<<< HEAD
 
         material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
@@ -271,9 +271,9 @@ class StandardMap extends Level {
         
         while (questionmark.hit = false)
         {
-         foreach (character in this.players)
+         foreach (character in players)
          {
-             if (character.position.y <= questionmark.position.y - 0.1)
+             if (character.position.y <= questionmark.position.y - 0.3)
              {
                 material = Physijs.createMaterial(
                     new THREE.MeshBasicMaterial({
@@ -289,8 +289,5 @@ class StandardMap extends Level {
              }
          }
         }
-=======
-        this.oneWayPlatforms.push(upper);
->>>>>>> 1f54ef9e707f38a189779f0358c6d60182299e95
     }
 }
