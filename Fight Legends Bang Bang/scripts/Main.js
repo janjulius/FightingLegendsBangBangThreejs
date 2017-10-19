@@ -293,36 +293,36 @@ function runGame() {
             scene.remove(scene.children[i]);
         }
 
-        //level = new FlyingIsland(); //temp level changer
+        level = new FlyingIsland(); //temp level changer
 
 
         //level randomizer
-        let randomLevel;
-        randomLevel = Math.floor((Math.random() * 7) + 1);
+        // let randomLevel;
+        // randomLevel = Math.floor((Math.random() * 7) + 1);
 
-        switch(randomLevel){
-            case 1 :
-                    level = new Brawlhaven();
-            break;
-            case 2 :
-                    level = new Thundergart();
-            break;
-            case 3 : 
-                    level = new StandardMap();
-            break;
-            case 4 : 
-                    level = new ZeldaMap();
-            break;
-            case 5 : 
-                    level = new Deserto();
-            break;
-            case 6 : 
-                    level = new Metalplant();
-            break;
-            case 7 : 
-                    level = new HyruleCastle();
-            break;
-        }
+        // switch(randomLevel){
+        //     case 1 :
+        //             level = new Brawlhaven();
+        //     break;
+        //     case 2 :
+        //             level = new Thundergart();
+        //     break;
+        //     case 3 : 
+        //             level = new StandardMap();
+        //     break;
+        //     case 4 : 
+        //             level = new ZeldaMap();
+        //     break;
+        //     case 5 : 
+        //             level = new Deserto();
+        //     break;
+        //     case 6 : 
+        //             level = new Metalplant();
+        //     break;
+        //     case 7 : 
+        //             level = new HyruleCastle();
+        //     break;
+        // }
 
 
 
