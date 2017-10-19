@@ -145,6 +145,7 @@ class Interface {
             if (p3 === 0) {
                 console.log("p3 is undefined");
             }
+            this.loadedGameInterface = true;
         }
     }
 
@@ -214,6 +215,7 @@ class Interface {
                 this.cNames[i][0].style.fontSize = "25px";
                 this.cNames[i][0].style.margin = "10px 10px 10px 10px";
             }
+            this.loadedCharSelectInterface = true;
         }
     }
 
@@ -400,6 +402,9 @@ class Interface {
                 this.readyTexts[i].style.color = "red";
 
             }
+
+            
+            this.loadedEndScreenInterface = true;
         }
     }
 
