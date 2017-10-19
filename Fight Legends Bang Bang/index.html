@@ -1,145 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>FIGHTING LEGENDS BANG BANG</title>
-		<meta charset="utf-8">
-		<meta id="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				font-family: Monospace;
-				background-color: #f0f0f0;
-				margin: 0px;
-				overflow: hidden;
-			}
-			#info {
-				position: absolute;
-				top: 0px;
-				width: 100%;
-				padding: 5px;
-				text-align:center;
-			}
-			.pSPABar{
-				height: 0px;
-				width: 0px;
-			}
-			#pHealth0{
-				visibility: hidden;
-			}
-			#pHealth1{
-				visibility: hidden;
-			}
-			#pHealth2{
-				visibility: hidden;
-			}
-			#pHealth3{
-				visibility: hidden;
-			}
-		</style>
-	</head>
-	<body>
-		<div id="CharSelectInterface">
-			<div id="pCharInterface0">
 
-		<div class="pName">
-		</div>
-				</div>
-			<div id="pCharInterface1">
+<head>
+	<title>FIGHTING LEGENDS BANG BANG</title>
+	<meta charset="utf-8">
+	<meta id="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<style>
+		body {
+			font-family: Monospace;
+			background-color: #f0f0f0;
+			margin: 0px;
+			overflow: hidden;
+		}
 
-		<div class="pName">
-		</div>
-				</div>
-			<div id="pCharInterface2">
+		#info {
+			position: absolute;
+			top: 0px;
+			width: 100%;
+			padding: 5px;
+			text-align: center;
+		}
 
-		<div class="pName">
-		</div>
-				</div>
-			<div id="pCharInterface3">
+		.pSPABar {
+			height: 0px;
+			width: 0px;
+		}
 
-		<div class="pName">
-		</div>
-				</div>
+		#pHealth0 {
+			visibility: hidden;
+		}
 
+		#pHealth1 {
+			visibility: hidden;
+		}
+
+		#pHealth2 {
+			visibility: hidden;
+		}
+
+		#pHealth3 {
+			visibility: hidden;
+		}
+
+		.left{
+			width: 70%;
+			text-align: left;
+			margin: 5px 0px;
+		}
+
+		.right{
+			text-align: right;
+			width:30%;
+			right: 0;
+			margin: 5px 0px;
+		}
+
+		 li {
+			list-style: none;
+			display: inline-block;
+		}
+		ul{
+			left: 0;
+			margin: 0;
+			padding: 0;
+		}
+		.panel{
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="CharSelectInterface">
+		<div id="pCharInterface0">
+
+			<div class="pName">
 			</div>
-<div id="GameInterface">
-	<div id="pGameInterface0">
-		<div class="pName">
 		</div>
-		<div class="pDamage">
+		<div id="pCharInterface1">
+
+			<div class="pName">
+			</div>
 		</div>
-		<div class="pStock">
+		<div id="pCharInterface2">
+
+			<div class="pName">
+			</div>
 		</div>
-		<div class="pIcon">
+		<div id="pCharInterface3">
+
+			<div class="pName">
+			</div>
 		</div>
-		<div class="pSPABar"><progress id="pHealth0" value="0" max="100"></progress>
+
+	</div>
+	<div id="GameInterface">
+		<div id="pGameInterface0">
+			<div class="pName">
+			</div>
+			<div class="pDamage">
+			</div>
+			<div class="pStock">
+			</div>
+			<div class="pIcon">
+			</div>
+			<div class="pSPABar">
+				<progress id="pHealth0" value="0" max="100"></progress>
+			</div>
+		</div>
+		<div id="pGameInterface1">
+			<div class="pName">
+			</div>
+			<div class="pDamage">
+			</div>
+			<div class="pStock">
+			</div>
+			<div class="pIcon">
+			</div>
+			<div class="pSPABar">
+				<progress id="pHealth1" value="0" max="100"></progress>
+			</div>
+		</div>
+		<div id="pGameInterface2">
+			<div class="pName">
+			</div>
+			<div class="pDamage">
+			</div>
+			<div class="pStock">
+			</div>
+			<div class="pIcon">
+			</div>
+			<div class="pSPABar">
+				<progress id="pHealth2" value="0" max="100"></progress>
+			</div>
+		</div>
+		<div id="pGameInterface3">
+			<div class="pName">
+			</div>
+			<div class="pDamage">
+			</div>
+			<div class="pStock">
+			</div>
+			<div class="pIcon">
+			</div>
+			<div class="pSPABar">
+				<progress id="pHealth3" value="0" max="100"></progress>
+			</div>
 		</div>
 	</div>
-	<div id="pGameInterface1">
-		<div class="pName">	
+	<div id="EndScreenInterface">
+		<div id="pEndInterface0">
+
 		</div>
-		<div class="pDamage">
+		<div id="pEndInterface1">
+
 		</div>
-		<div class="pStock">
+		<div id="pEndInterface2">
+
 		</div>
-		<div class="pIcon">
-		</div>
-		<div class="pSPABar"><progress id="pHealth1" value="0" max="100"></progress>
+		<div id="pEndInterface3">
+
 		</div>
 	</div>
-	<div id="pGameInterface2">
-		<div class="pName">
-		</div>
-		<div class="pDamage">
-		</div>
-		<div class="pStock">
-		</div>
-		<div class="pIcon">
-		</div>
-		<div class="pSPABar"><progress id="pHealth2" value="0" max="100"></progress>
-		</div>
-	</div>
-	<div id="pGameInterface3">
-		<div class="pName">
-		</div>
-		<div class="pDamage">
-		</div>
-		<div class="pStock">
-		</div>
-		<div class="pIcon">
-		</div>
-		<div class="pSPABar"><progress id="pHealth3" value="0" max="100"></progress>
-		</div>
-	</div>
-</div>
 
-		<script src="scripts/Constants.js"></script>
-		<script src="scripts/Settings.js"></script>
-		<script src="threejs/three.min.js"></script>
-		<script src="physi/physi.js"></script>
-		<script src="scripts/stats.js"></script>
-		<script src="scripts/THREE.GamepadControls.js"></script>	
-		<script src="scripts/Characters/Character.js"></script>
+	<script src="scripts/Constants.js"></script>
+	<script src="scripts/Settings.js"></script>
+	<script src="threejs/three.min.js"></script>
+	<script src="physi/physi.js"></script>
+	<script src="scripts/stats.js"></script>
+	<script src="scripts/THREE.GamepadControls.js"></script>
+	<script src="scripts/Characters/Character.js"></script>
 
-		<script src="scripts/Characters/Willem.js"></script>
-		<script src="scripts/Characters/Rocky.js"></script>
-		<script src="scripts/Characters/Fred.js"></script>
-		<script src="scripts/Characters/Paardman.js"></script>
-		<script src="scripts/Characters/Jens.js"></script>
-		<script src="scripts/Characters/Berend.js"></script>
-		<script src="scripts/Characters/BoomStronk.js"></script>
-		<script src="scripts/Characters/Kees.js"></script>
+	<script src="scripts/Characters/Willem.js"></script>
+	<script src="scripts/Characters/Rocky.js"></script>
+	<script src="scripts/Characters/Fred.js"></script>
+	<script src="scripts/Characters/Paardman.js"></script>
+	<script src="scripts/Characters/Jens.js"></script>
+	<script src="scripts/Characters/Berend.js"></script>
+	<script src="scripts/Characters/BoomStronk.js"></script>
+	<script src="scripts/Characters/Kees.js"></script>
 
-		<script src="scripts/Interface.js"></script>
-		<script src="scripts/Levels/Level.js"></script>
-		<script src="scripts/Levels/Thundergart.js"></script>
-		<script src="scripts/Levels/Brawlhaven.js"></script>
-		<script src="scripts/Levels/StandardMap.js"></script>
-		<script src="scripts/Levels/ZeldaMap.js"></script>
-		<script src="scripts/Levels/Metalplant.js"></script>
-		<script src="scripts/Levels/Deserto.js"></script>
-		<script src="scripts/Levels/HyruleCastle.js"></script>
-		
-		<script src="scripts/Main.js"></script>
+	<script src="scripts/Interface.js"></script>
+	<script src="scripts/Levels/Level.js"></script>
+	<script src="scripts/Levels/Thundergart.js"></script>
+	<script src="scripts/Levels/Brawlhaven.js"></script>
+	<script src="scripts/Levels/StandardMap.js"></script>
+	<script src="scripts/Levels/ZeldaMap.js"></script>
+	<script src="scripts/Levels/Metalplant.js"></script>
+	<script src="scripts/Levels/Deserto.js"></script>
+	<script src="scripts/Levels/HyruleCastle.js"></script>
+
+	<script src="scripts/Main.js"></script>
 
 
-	</body>
+</body>
+
 </html>

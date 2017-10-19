@@ -3,7 +3,7 @@ class Paardman extends Character {
     constructor(y, z) {
         super();
         this.name = "Paardman";
-        this.cid = 2;
+        this.cid = 1;
         this.specialAtkString = "Stone, paper, scissors";
         this.portrait = 'sprites/Characters/MenuSprites/paardman2.png';
         this.stoneThrowSpeed = 40;

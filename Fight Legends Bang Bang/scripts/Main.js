@@ -381,6 +381,7 @@ function runGame() {
 
         gameInterface.ClearCharSelectInterface();
         gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]);
+
         scene.simulate();
         physics_stats.update();
         requestAnimationFrame(animate);
