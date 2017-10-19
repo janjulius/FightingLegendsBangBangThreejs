@@ -192,8 +192,8 @@ function render() {
 
         if (camera.position.x < 55) {
             gameEnded = true;
-            //gameInterface.ClearGameInterface();
-            //gameInterface.LoadEndGameScreen();
+            gameInterface.ClearGameInterface();
+            gameInterface.LoadEndGameScreen();
         }
     }
 
