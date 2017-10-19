@@ -257,12 +257,11 @@ class Character {
             var cSound = new Audio(cheerSounds[r]);
             cSound.volume = MUSIC_VOLUME;
             cSound.play();
-            console.log(r);
             this.respawnTimer = this.respawnDelay;
             this.isAlive = false;
             this.isStunned = true;
             this.setStock(this.stock - 1);
-            if(this.stock == 0){
+            if (this.stock == 0) {
                 this.Tplace = placesLeft;
                 placesLeft--;
             }
@@ -276,7 +275,7 @@ class Character {
                 this.THighestDamageSurvived = this.damage;
 
             this.TDeaths++;
-            players[this.TLastPerson].TKills++;
+            players[this.TLastPerson != -1 ? this.TLastPerson : this.id].TKills++;
         }
     }
 

@@ -110,17 +110,26 @@ THREE.GamepadControls = function () {
                         p.direction.z = this.filter(-g.axes[0]);
                         p.direction.y = this.filter(-g.axes[1]);
 
-                        if (this.PressedButton(i, 0)) {
-                            p.pressedbuttonA();
+                        if (!gameEnded && !gamePaused) {
+                            if (this.PressedButton(i, 0)) {
+                                p.pressedbuttonA();
+                            }
+                            if (this.PressedButton(i, 2)) {
+                                p.pressedbuttonX();
+                            }
+                            if (this.PressedButton(i, 3)) {
+                                p.pressedbuttonY();
+                            }
+                            if (this.PressedButton(i, 5)) {
+                                p.pressedbuttonRT();
+                            }
                         }
-                        if (this.PressedButton(i, 2)) {
-                            p.pressedbuttonX();
-                        }
-                        if (this.PressedButton(i, 3)) {
-                            p.pressedbuttonY();
-                        }
-                        if(this.PressedButton(i, 5)){
-                            p.pressedbuttonRT();
+                        if (this.PressedButton(i, 9)) {
+                            gamePaused = !gamePaused;
+                            if (!gamePaused) {
+                                var timeElapsed = clock.getDelta();
+                                scene.simulate(undefined, 1);
+                            }
                         }
                     }
                 }
