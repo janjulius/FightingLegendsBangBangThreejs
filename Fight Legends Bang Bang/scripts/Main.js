@@ -205,6 +205,7 @@ function EndGame(){
     for (var i = scene.children.length - 1; i >= 0; i--) {
         scene.remove(scene.children[i]);
     }
+    gameInterface.ClearEndInterface();
 
     gameEnded = false;
     playersPlaying = 4;
