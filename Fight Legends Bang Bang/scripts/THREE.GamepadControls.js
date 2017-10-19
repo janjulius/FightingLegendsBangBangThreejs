@@ -132,6 +132,10 @@ THREE.GamepadControls = function () {
                                     scene.simulate(undefined, 1);
                                 }
                             }
+                        } else {
+                            if (this.PressedButton(i, 9)) {
+                                p.pressedbuttonStart();
+                            }
                         }
                     }
                 }

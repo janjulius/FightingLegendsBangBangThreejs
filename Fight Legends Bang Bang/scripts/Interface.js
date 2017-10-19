@@ -5,6 +5,7 @@ class Interface {
             this.players = [];
             this.cNames = [];
             this.endGameScreen = [];
+            this.readyTexts = [];
         }
     
         LoadGameInterface(p0, p1, p2, p3) {
@@ -356,7 +357,34 @@ class Interface {
                 ul.appendChild(actualDmgHealed);
                 actualDmgHealed.className = "right";
                 actualDmgHealed.innerHTML = this.players[i].TDamageHealed;
+
+                var position = document.createElement('img');
+                a.appendChild(position);
+                position.src = this.getPlayerFinishImages(this.players[i].Tplace);
+                position.style.marginLeft = "auto";
+                position.style.marginRight = "auto";
+                position.style.display = "block";
+                position.style.width = "250px";
+                position.style.height = "250px";
+
+                this.readyTexts[i] = document.createElement('div');
+                a.appendChild( this.readyTexts[i]);
+                readyTexts[i].className = "readyText";
+                this.readyTexts[i].innerHTML = "Ready for next battle?";
+                this.readyTexts[i].style.color = "red";
     
+            }
+        }
+
+        UpdateEndScreen(){
+            for(var i = 0; i < playersPlaying; i++){
+                if(players[i].readyForNextGame){
+                    this.readyTexts[i].innerHTML = "READY!";
+                    this.readyTexts[i].style.color = "green";
+                } else {
+                this.readyTexts[i].innerHTML = "Ready for next battle?";
+                this.readyTexts[i].style.color = "red";
+                }
             }
         }
     
@@ -371,6 +399,19 @@ class Interface {
             return "#a9a046";
             case 3:
             return "#008000";
+        }
+    }
+
+    getPlayerFinishImages(rank){
+        switch(rank){
+            case 1:
+                return 'sprites/Result_rank_1.png';
+            case 2:
+                return 'sprites/Result_rank_2.png';
+            case 3:
+                return 'sprites/Result_rank_3.png';
+            case 4:
+                return 'sprites/Result_rank_4.png';
         }
     }
     

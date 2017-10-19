@@ -293,7 +293,7 @@ function runGame() {
             scene.remove(scene.children[i]);
         }
 
-        //level = new FlyingIsland(); //temp level changer
+        // level = new StandardMap(); //temp level changer
 
 
         //level randomizer
