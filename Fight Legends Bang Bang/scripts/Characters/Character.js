@@ -262,6 +262,10 @@ class Character {
             this.isAlive = false;
             this.isStunned = true;
             this.setStock(this.stock - 1);
+            if(this.stock == 0){
+                this.Tplace = placesLeft;
+                placesLeft--;
+            }
             this.specialExists = false;
             this.maxGravityVelocity = 50;
             this.gravityVelocity = 80;
