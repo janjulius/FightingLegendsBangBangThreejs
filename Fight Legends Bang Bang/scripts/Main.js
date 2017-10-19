@@ -11,6 +11,10 @@ var playerFiches = [];
 var playerBlockIcons = [];
 var controls = new THREE.GamepadControls();
 var level;
+var placesLeft = 4;
+var playerWon = -1;
+var gameEnded = false;
+var gamePaused = false;
 var spawnOverheads = true;
 var blockingPossible = true;
 var music = new Audio('Music/selectMusic.mp3');
@@ -148,8 +152,10 @@ scene.addEventListener('update', function () {
 
         var boundingBox = CalculateTargetsBoundingBox();
         var np = CalculateCameraPosition(boundingBox);
-        camera.position.lerp(new THREE.Vector3(np.x, np.y, np.z), timeElapsed);
-        scene.simulate(undefined, 1); // run physics
+        camera.position.lerp(placesLeft > 0 ? new THREE.Vector3(np.x, np.y, np.z) : new THREE.Vector3(50, players[playerWon].geometry.position.y, players[playerWon].geometry.position.z), timeElapsed);
+
+        if (!gameEnded && !gamePaused)
+            scene.simulate(undefined, 1); // run physics
     }
 });
 
@@ -170,6 +176,27 @@ function animate() {
 
 function render() {
     renderer.clear();
+
+    if (placesLeft <= 1 && !gameEnded) {
+        if (placesLeft == 1) {
+            for (var j = 0; j < playersPlaying; j++) {
+                var plr = players[j];
+                if (plr.Tplace == -1) {
+                    plr.Tplace = 1;
+                    playerWon = j;
+                    placesLeft = 0;
+                    plr.isStunned = true;
+                }
+            }
+        }
+
+        if (camera.position.x < 55) {
+            gameEnded = true;
+            gameInterface.ClearGameInterface();
+            gameInterface.LoadEndGameScreen();
+        }
+    }
+
     renderer.render(scene, camera);
     renderer.clearDepth();
 }
@@ -308,9 +335,9 @@ function runGame() {
             charScreens[i].position.set(100, 100, 100);
         }
 
-        level = new PretPaleis(); //temp level changer
+        level = new FlyingIsland(); //temp level changer
 
-        
+
         //level randomizer
         // let randomLevel;
         // randomLevel = Math.floor((Math.random() * 7) + 1);
@@ -346,6 +373,7 @@ function runGame() {
         var box = new THREE.BoxHelper(object, 0xffff00);
         scene.add(box);
 
+        placesLeft = playersPlaying;
         console.log(playersPlaying);
         for (var k = 0; k < playersPlaying; k++) {
             var choice = getClassByCharId(players[k]);
@@ -357,27 +385,29 @@ function runGame() {
             if (spawnOverheads) {
                 this.playerFloaterMaterial = THREE.ImageUtils.loadTexture(getPlayerIndicatorSprite(k));
                 this.playerFloater = new THREE.Mesh(new THREE.BoxGeometry(0.1, 5, 5),
-                    new THREE.MeshBasicMaterial({ transparent: true, map: this.playerFloaterMaterial }));
+                    new THREE.MeshBasicMaterial({
+                        transparent: true,
+                        map: this.playerFloaterMaterial
+                    }));
 
                 this.playerFloater.position.set(5.1, 7, 0);
 
                 players[k].geometry.add(playerFloater);
             }
-            if(blockingPossible){ 
+            if (blockingPossible) {
                 this.blockMaterial = THREE.ImageUtils.loadTexture('sprites/Characters/BlockIcon.png');
-            
-            playerBlockIcons[k] = new THREE.Mesh(
-                new THREE.BoxGeometry(0.1, 4, 4),
-                new THREE.MeshBasicMaterial(
-                    {
-                        transparent: true, map: this.blockMaterial
-                    }
-                ), 0, 1
-            )
-            playerBlockIcons[k].position.set(5.1, 0, 0);
-            players[k].geometry.add(playerBlockIcons[k]);
-            playerBlockIcons[k].material.opacity = 0;
-        }
+
+                playerBlockIcons[k] = new THREE.Mesh(
+                    new THREE.BoxGeometry(0.1, 4, 4),
+                    new THREE.MeshBasicMaterial({
+                        transparent: true,
+                        map: this.blockMaterial
+                    }), 0, 1
+                )
+                playerBlockIcons[k].position.set(5.1, 0, 0);
+                players[k].geometry.add(playerBlockIcons[k]);
+                playerBlockIcons[k].material.opacity = 0;
+            }
         }
 
         //console.log(box.getvelocity());
@@ -385,6 +415,7 @@ function runGame() {
 
         gameInterface.ClearCharSelectInterface();
         gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]);
+
         scene.simulate();
         physics_stats.update();
         requestAnimationFrame(animate);

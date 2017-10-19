@@ -3,8 +3,8 @@ class PretPaleis extends Level {
         super();
 
         this.name = "PretPaleis";
-        this.topLeft = {y: 200, z: 150 } ;
-        this.bottomRight = {y: -70, z: -150};
+        this.topLeft = {y: 100, z: 80 } ;
+        this.bottomRight = {y: -70, z: -80};
 
         this.myAudio.addEventListener('ended', function() {
             this.currentTime = 0;
@@ -12,7 +12,7 @@ class PretPaleis extends Level {
         }, false);
         this.myAudio.play();
 
-        var possibleSpawns = [{ y: 10, z: 0 }, { y: 10, z: 0 }, { y: 10, z: -0 }, { y: 10, z: -0 }]
+        var possibleSpawns = [{ y: 30, z: 40 }, { y: 30, z: -40 }, { y: 60, z: -0 }, { y: 10, z: -0 }]
 
         function shuffle(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
@@ -55,7 +55,7 @@ class PretPaleis extends Level {
         var cube = new THREE.Mesh (geometry, cubeMaterial);
         scene.add(cube);
 
-        var jungleVine = THREE.ImageUtils.loadTexture(' Textures/PretPaleis/naamloos.png ')
+        var jungleVine = THREE.ImageUtils.loadTexture(' Textures/PretPaleis/notsodark.png ')
         jungleVine.wrapS = jungleVine.wrapT = THREE.RepeatWrapping;
         jungleVine.repeat.set(1, 10);
 
@@ -68,9 +68,9 @@ class PretPaleis extends Level {
             1
         )
 
-        var jungleVinelonger = THREE.ImageUtils.loadTexture(' Textures/PretPaleis/naamloos.png ')
+        var jungleVinelonger = THREE.ImageUtils.loadTexture(' Textures/PretPaleis/notsodark.png ')
         jungleVinelonger.wrapS = jungleVinelonger.wrapT = THREE.RepeatWrapping;
-        jungleVinelonger.repeat.set(1, 20);
+        jungleVinelonger.repeat.set(1, 40);
 
         var vineslonger = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
@@ -81,7 +81,7 @@ class PretPaleis extends Level {
             1
         )
 
-        var crystal = THREE.ImageUtils.loadTexture(' Textures/PretPaleis/naamloos.png ')
+        var crystal = THREE.ImageUtils.loadTexture(' Textures/PretPaleis/notsodark.png ')
         crystal.wrapS = crystal.wrapT = THREE.RepeatWrapping;
         crystal.repeat.set(3, 1);
 
@@ -94,7 +94,7 @@ class PretPaleis extends Level {
             1
         )
 
-        var vertical = THREE.ImageUtils.loadTexture(' Textures/PretPaleis/naamloos.png ')
+        var vertical = THREE.ImageUtils.loadTexture(' Textures/PretPaleis/notsodark.png ')
         vertical.wrapS = vertical.wrapT = THREE.RepeatWrapping;
         vertical.repeat.set(1, 3);
 
@@ -107,13 +107,26 @@ class PretPaleis extends Level {
             1
         )
 
+        var dark = THREE.ImageUtils.loadTexture(' Textures/PretPaleis/DARKIES.png ')
+        dark.wrapS = dark.wrapT = THREE.RepeatWrapping;
+        dark.repeat.set(50, 50);
+
+        var DARKIES = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: dark,
+            }),
+            0,
+            1
+        )
+
         var leftvines = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 100, 5),
             vines,
             0
         );
         leftvines.receiveShadow = true;
-        leftvines.position.set(0, -20, 50);
+        leftvines.position.set(0, -20, 40);
         scene.add(leftvines);
         leftvines.name = "ground";
 
@@ -123,7 +136,7 @@ class PretPaleis extends Level {
             0
         );
         leftvinesUpper.receiveShadow = true;
-        leftvinesUpper.position.set(0, 100, 50);
+        leftvinesUpper.position.set(0, 100, 40);
         scene.add(leftvinesUpper);
         leftvinesUpper.name = "ground";
 
@@ -133,7 +146,7 @@ class PretPaleis extends Level {
             0
         );
         rightvines.receiveShadow = true;
-        rightvines.position.set(0, -20, -50);
+        rightvines.position.set(0, -20, -40);
         scene.add(rightvines);
         rightvines.name = "ground";
 
@@ -143,28 +156,28 @@ class PretPaleis extends Level {
             0
         );
         rightvinesUpper.receiveShadow = true;
-        rightvinesUpper.position.set(0, 100, -50);
+        rightvinesUpper.position.set(0, 100, -40);
         scene.add(rightvinesUpper);
         rightvinesUpper.name = "ground";
 
         var leftvineslong = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 200, 5),
+            new THREE.CubeGeometry(15, 400, 5),
             vineslonger,
             0
         );
         leftvineslong.receiveShadow = true;
-        leftvineslong.position.set(0, -20, 100);
+        leftvineslong.position.set(0, -20, 75);
         scene.add(leftvineslong);
         leftvineslong.name = "ground";
 
         
         var rightvineslong = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 200, 5),
+            new THREE.CubeGeometry(15, 400, 5),
             vineslonger,
             0
         );
         rightvineslong.receiveShadow = true;
-        rightvineslong.position.set(0, -20, -100);
+        rightvineslong.position.set(0, -20, -75);
         scene.add(rightvineslong);
         rightvineslong.name = "ground";
 
@@ -185,7 +198,7 @@ class PretPaleis extends Level {
             0
         );
         crystal2.receiveShadow = true;
-        crystal2.position.set(0, 30, 12.5);
+        crystal2.position.set(0, 19, 12.5);
         scene.add(crystal2);
         crystal2.name = "ground";
 
@@ -195,7 +208,7 @@ class PretPaleis extends Level {
             0
         );
         crystal3.receiveShadow = true;
-        crystal3.position.set(0, 30, -12.5);
+        crystal3.position.set(0, 19, -12.5);
         scene.add(crystal3);
         crystal3.name = "ground";
 
@@ -205,9 +218,19 @@ class PretPaleis extends Level {
             0
         );
         crystal4.receiveShadow = true;
-        crystal4.position.set(0, 50, 0);
+        crystal4.position.set(0, 40, 0);
         scene.add(crystal4);
         crystal4.name = "ground";
+
+        var back = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(1, 500, 500),
+            DARKIES,
+            0
+        );
+        back.receiveShadow = true;
+        back.position.set(-4, 40, 0);
+        scene.add(back);
+        back.name = "ground";
 
     }
 }
