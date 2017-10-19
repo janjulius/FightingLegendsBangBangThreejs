@@ -192,15 +192,15 @@ class Character {
     setDamage(d, dir, oid, type) {
         if (!this.blocking) {
 
-            if (type == 0){
-                players[oid].TDamageDone += d;
+            if (type == 0) {
+                players[oid].TDamageDone += d - this.damage;
                 this.TDamageTaken += d - this.damage;
                 this.TLastPerson = oid;
-            }else if (type == 1){
-                players[oid].TDamageDoneWithUlt += d;
+            } else if (type == 1) {
+                players[oid].TDamageDoneWithUlt += d - this.damage;
                 this.TDamageTaken += d - this.damage;
                 this.TLastPerson = oid;
-            }else if (type == 2) {
+            } else if (type == 2) {
                 players[oid].TDamageHealed += this.damage - d;
             }
 
@@ -507,7 +507,7 @@ class Character {
             this.canBlock = true;
     }
 
-    UpdateChar(t) {}
+    UpdateChar(t) { }
 
     AddGrounded() {
         var _this = this;
