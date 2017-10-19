@@ -16,7 +16,7 @@ class Fred extends Character {
         this.portrait = 'sprites/Characters/MenuSprites/fred.png';
         var material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
-                color: 0xffad60
+                color: 0x0F8C00
             }),
             0,
             0
