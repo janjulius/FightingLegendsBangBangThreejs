@@ -288,6 +288,10 @@ function runCharSelect() {
     }
 }
 
+function getPlayers() {
+    return players;
+}
+
 function runGame() {
 
     this.music.pause();
@@ -306,35 +310,35 @@ function runGame() {
 
         level = new PretPaleis(); //temp level changer
 
-        /*
-        //level randomizer
-        let randomLevel;
-        randomLevel = Math.floor((Math.random() * 7) + 1);
         
-        switch(randomLevel){
-            case 1 :
-                    level = new Brawlhaven();
-            break;
-            case 2 :
-                    level = new Thundergart();
-            break;
-            case 3 : 
-                    level = new StandardMap();
-            break;
-            case 4 : 
-                    level = new ZeldaMap();
-            break;
-            case 5 : 
-                    level = new Deserto();
-            break;
-            case 6 : 
-                    level = new Metalplant();
-            break;
-            case 7 : 
-                    level = new HyruleCastle();
-            break;
-        }
-        */
+        //level randomizer
+        // let randomLevel;
+        // randomLevel = Math.floor((Math.random() * 7) + 1);
+        
+        // switch(randomLevel){
+        //     case 1 :
+        //             level = new Brawlhaven();
+        //     break;
+        //     case 2 :
+        //             level = new Thundergart();
+        //     break;
+        //     case 3 : 
+        //             level = new StandardMap();
+        //     break;
+        //     case 4 : 
+        //             level = new ZeldaMap();
+        //     break;
+        //     case 5 : 
+        //             level = new Deserto();
+        //     break;
+        //     case 6 : 
+        //             level = new Metalplant();
+        //     break;
+        //     case 7 : 
+        //             level = new HyruleCastle();
+        //     break;
+        // }
+        
 
 
         var bound = new THREE.BoxGeometry(1, level.topLeft.y + Math.abs(level.bottomRight.y), level.topLeft.z + Math.abs(level.bottomRight.z));

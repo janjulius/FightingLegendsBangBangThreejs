@@ -65,6 +65,19 @@ class Character {
 
         this.touchingWalls = [-1, -1, -1, -1];
 
+        ///tracking data
+        this.Tplace = -1;
+        this.TLastPerson = -1;
+        this.TDamageDone = 0;
+        this.TDamageTaken = 0;
+        this.TDamageHealed = 0;
+        this.THighestDamageSurvived = 0;
+        this.TKills = 0;
+        this.TDeaths = 0;
+        this.TDamageBlocked = 0;
+        this.TDamageDoneWithUlt = 0;
+        this.TotalUltsUsed = 0;
+
         console.log("created character");
     }
 
@@ -121,7 +134,7 @@ class Character {
                     hitSound.volume = MUSIC_VOLUME;
                     hitSound.play();
                     this.setSpecialAttackCounter(this.specialCounter + this.specialIncrease);
-                    otherPlayer.setDamage(otherPlayer.getDamage() + this.basicAttackDamage * this.takeDamageMultiplier, this.attackDirection);
+                    otherPlayer.setDamage(otherPlayer.getDamage() + this.basicAttackDamage * this.takeDamageMultiplier, this.attackDirection, this.id, 0);
                 }
             }
         }
@@ -176,9 +189,18 @@ class Character {
         return this.damage;
     }
 
-    setDamage(d, dir) {
+    setDamage(d, dir, oid, type) {
         if (!this.blocking) {
 
+            this.TDamageTaken += d;
+            this.TLastPerson = oid;
+            if (type == 0)
+                players[oid].TDamageDone += d;
+            else if (type == 1)
+                players[oid].TDamageDoneWithUlt += d;
+            else if (type == 2) {
+                players[oid].TDamageHealed += this.damage - d;
+            }
 
             if (this.CheckSides("down"))
                 dir.y = Math.abs(dir.y);
@@ -195,6 +217,8 @@ class Character {
                 this.knockBack.y = ((d + 20) * this.damageMulti) * dir.y;
             }
             gameInterface.UpdateGameInterface(this.id);
+        } else {
+            this.TDamageBlocked += d;
         }
     }
 
@@ -243,6 +267,12 @@ class Character {
             this.gravityVelocity = 80;
             this.velt = 0;
             this.setSpecialAttackCounter(this.specialCounter / 2);
+
+            if (this.damage > this.THighestDamageSurvived)
+                this.THighestDamageSurvived = this.damage;
+
+            this.TDeaths++;
+            players[this.TLastPerson].TKills++;
         }
     }
 
@@ -313,6 +343,9 @@ class Character {
     pressedbuttonY() {
         if (!this.isStunned)
             this.specialAtk();
+
+        if (this.specialReady())
+            this.TotalUltsUsed++;
     }
 
     pressedbuttonRT() {
@@ -470,7 +503,7 @@ class Character {
             this.canBlock = true;
     }
 
-    UpdateChar(t) { }
+    UpdateChar(t) {}
 
     AddGrounded() {
         var _this = this;

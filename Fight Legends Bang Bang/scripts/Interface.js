@@ -4,6 +4,7 @@ class Interface {
         this.playerInterface = [];
         this.players = [];
         this.cNames = [];
+        this.endGameScreen = [];
     }
 
     LoadGameInterface(p0, p1, p2, p3) {
@@ -208,6 +209,10 @@ class Interface {
             this.playerInterface[i].style.visibility = "hidden";
 
         }
+    }
+
+    LoadEndGameScreen() {
+
     }
 
 }
