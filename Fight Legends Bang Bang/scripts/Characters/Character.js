@@ -78,6 +78,8 @@ class Character {
         this.TDamageDoneWithUlt = 0;
         this.TotalUltsUsed = 0;
 
+        this.readyForNextGame = false;
+
         console.log("created character");
     }
 
@@ -357,6 +359,19 @@ class Character {
         if (!this.isStunned) {
             if (this.canBlock) {
                 this.block();
+            }
+        }
+    }
+
+    pressedbuttonStart(){
+        if(!this.readyForNextGame){
+            this.readyForNextGame = true;
+            gameInterface.UpdateEndScreen();
+            for(var i = 0; i < playersPlaying; i++){
+                if(!players[i].readyForNextGame){
+                    return;
+                }
+                EndGame();
             }
         }
     }
