@@ -109,6 +109,39 @@ function getCharImgByNameOrId(p) {
     }
 }
 
+function getStageImgByNameOrId(a){
+    switch(a){
+        case "Brawlhaven":
+        case 0:
+            return 'sprites/Levels/MenuSprites/BrawlHaven.png';
+        case "Deserto":
+        case 1:
+            return 'sprites/Levels/MenuSprites/Deserto.png';
+        case "FlyingIsland":
+        case 2:
+            return 'sprites/Levels/MenuSprites/FlyingIsland.png';
+        case "HyruleCastle":
+        case 3:
+            return 'sprites/Levels/MenuSprites/HyruleCastle.png';
+        case "Metalplant":
+        case 4:
+            return 'sprites/Levels/MenuSprites/Metalplant.png';
+        case "PretPaleis":
+        case 5:
+            return 'sprites/Levels/MenuSprites/PretPaleis.png';
+        case "StandardMap":
+        case 6:
+            return 'sprites/Levels/MenuSprites/StandardMap.png';
+        case "Thundergart":
+        case 7:
+            return 'sprites/Levels/MenuSprites/Thundergart.png';
+        case "ZeldaMap":
+        case 8:
+            return 'sprites/Levels/MenuSprites/ZeldaMap.png';
+    }
+
+}
+
 function getPlayerIndicatorSprite(id){
     switch(id){
         case 0:

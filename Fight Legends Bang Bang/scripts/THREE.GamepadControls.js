@@ -102,53 +102,80 @@ THREE.GamepadControls = function () {
                 this.SetOldGamePadState(this.gamePad);
             }
 
-            if (!charSelect) {
-                for (var i = 0; i < players.length; i++) {
-                    var p = players[i];
-                    if (this.gamePad[i] && p instanceof Character) {
-                        var g = this.gamePad[i];
-                        p.direction.z = this.filter(-g.axes[0]);
-                        p.direction.y = this.filter(-g.axes[1]);
 
-                        if (!gameEnded && !gamePaused) {
-                            if (this.PressedButton(i, 0)) {
-                                p.pressedbuttonA();
-                            }
-                            if (this.PressedButton(i, 2)) {
-                                p.pressedbuttonX();
-                            }
-                            if (this.PressedButton(i, 3)) {
-                                p.pressedbuttonY();
-                            }
-                            if (this.PressedButton(i, 5)) {
-                                p.pressedbuttonRT();
+            if (!charSelect) {
+
+                if (levelSelect) {
+                    var pad = this.gamePad[0];
+                    if (pad) {
+                        var spd = 0.2;
+
+                        if (levelSelect) {
+                            playerFiches[0].position.z -= this.filter(pad.axes[0]) * spd;
+                            playerFiches[0].position.y -= this.filter(pad.axes[1]) * spd;
+                        }
+
+                        if (this.PressedButton(0, 0)) {
+                            ray0 = new THREE.Raycaster(playerFiches[0].position, new THREE.Vector3(-1, 0, 0));
+                            var intersects = ray0.intersectObjects(scene.children);
+                            for (var j = 0; j < intersects.length; j++) {
+                                selectedLevel = intersects[j].object.myLevelId;
                             }
                         }
-                        if (!gameEnded) {
-                            if (this.PressedButton(i, 9)) {
-                                gamePaused = !gamePaused;
-                                if (!gamePaused) {
-                                    var timeElapsed = clock.getDelta();
-                                    scene.simulate(undefined, 1);
+                    }
+                    if (this.PressedButton(0, 9)) {
+                        charSelect = false;
+                        levelSelect = false;
+                        runGame();
+                    }
+                } else {
+
+                    for (var i = 0; i < players.length; i++) {
+                        var p = players[i];
+                        if (this.gamePad[i] && p instanceof Character) {
+                            var g = this.gamePad[i];
+                            p.direction.z = this.filter(-g.axes[0]);
+                            p.direction.y = this.filter(-g.axes[1]);
+
+                            if (!gameEnded && !gamePaused) {
+                                if (this.PressedButton(i, 0)) {
+                                    p.pressedbuttonA();
+                                }
+                                if (this.PressedButton(i, 2)) {
+                                    p.pressedbuttonX();
+                                }
+                                if (this.PressedButton(i, 3)) {
+                                    p.pressedbuttonY();
+                                }
+                                if (this.PressedButton(i, 5)) {
+                                    p.pressedbuttonRT();
                                 }
                             }
-                        } else {
-                            if (this.PressedButton(i, 9)) {
-                                p.pressedbuttonStart();
+                            if (!gameEnded) {
+                                if (this.PressedButton(i, 9)) {
+                                    gamePaused = !gamePaused;
+                                    if (!gamePaused) {
+                                        var timeElapsed = clock.getDelta();
+                                        scene.simulate(undefined, 1);
+                                    }
+                                }
+                            } else {
+                                if (this.PressedButton(i, 9)) {
+                                    p.pressedbuttonStart();
+                                }
                             }
                         }
                     }
                 }
-
             } else {
                 for (var i = 0; i < this.gamePad.length; i++) {
                     var p = players[i];
                     var pad = this.gamePad[i];
                     if (pad) {
                         var spd = 0.2;
+
                         playerFiches[i].position.z -= this.filter(pad.axes[0]) * spd;
                         playerFiches[i].position.y -= this.filter(pad.axes[1]) * spd;
-
                         if (this.PressedButton(i, 0)) {
                             ray0 = new THREE.Raycaster(playerFiches[i].position, new THREE.Vector3(-1, 0, 0));
                             var intersects = ray0.intersectObjects(scene.children);
@@ -160,12 +187,16 @@ THREE.GamepadControls = function () {
                                 selectSound.volume = ANNOUNCER_VOLUME;
                                 selectSound.play();
                             }
+
                         }
                         if (i == 0) {
                             if (this.PressedButton(i, 9)) {
                                 playersPlaying = this.gamePad.length;
-                                charSelect = false;
-                                runGame();
+                                if (charSelect) {
+                                    charSelect = false;
+                                    levelSelect = true;
+                                    runLevelSelect();
+                                }
                                 break;
                             }
                         }
