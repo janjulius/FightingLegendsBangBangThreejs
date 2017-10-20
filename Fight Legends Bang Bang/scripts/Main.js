@@ -290,14 +290,11 @@ function runCharSelect() {
                     c = 0x33cc33;
                     break;
             }
-            material = Physijs.createMaterial(
+            material = 
                 new THREE.MeshBasicMaterial({
-                    color: c
-                }),
-                0,
-                1
-            );
-            fische = new Physijs.BoxMesh(new THREE.BoxGeometry(0, 1, 1), material, 0);
+                    map:THREE.ImageUtils.loadTexture('sprites/p' + (i+1) + 'Hand.png'), transparent : true
+                });
+            fische = new Physijs.BoxMesh(new THREE.BoxGeometry(0, 2, 2), material, 0);
             playerFiches[i] = fische;
             scene.add(fische);
             console.log(players[i]);
