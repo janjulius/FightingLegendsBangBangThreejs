@@ -27,4 +27,9 @@ class Level {
         this.rusty = 0xB75D0E;
     
     }
+
+    StopMusic(){
+        this.myAudio.pause();
+        this.myAudio.currentTime = 0;
+    }
 }

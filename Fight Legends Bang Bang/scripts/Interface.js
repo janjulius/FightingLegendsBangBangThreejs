@@ -156,32 +156,32 @@ class Interface {
 
     UpdateGameInterface(pid) {
         if (pid === 0) {
-            this.pDamage0[0].innerHTML = this.players[0].getDamage() + "%";
-            this.pDamage0[0].style.color = getDamagePercentageColor(this.players[0].getDamage());
-            this.pStock0[0].innerHTML = "❤" + this.players[0].getStock();
-            this.spaBar0.value = this.players[0].getSpecialAttackCounter();
-            var a = this.players[0].getDamage();
+            this.pDamage0[0].innerHTML = players[0].getDamage() + "%";
+            this.pDamage0[0].style.color = getDamagePercentageColor(players[0].getDamage());
+            this.pStock0[0].innerHTML = "❤" + players[0].getStock();
+            this.spaBar0.value = players[0].getSpecialAttackCounter();
+            var a = players[0].getDamage();
         }
         if (pid === 1) {
-            this.pDamage1[0].innerHTML = this.players[1].getDamage() + "%";
-            this.pDamage1[0].style.color = getDamagePercentageColor(this.players[1].getDamage());
-            this.pStock1[0].innerHTML = "❤" + this.players[1].getStock();
-            this.spaBar1.value = this.players[1].getSpecialAttackCounter();
-            var a = this.players[1].getDamage();
+            this.pDamage1[0].innerHTML = players[1].getDamage() + "%";
+            this.pDamage1[0].style.color = getDamagePercentageColor(players[1].getDamage());
+            this.pStock1[0].innerHTML = "❤" + players[1].getStock();
+            this.spaBar1.value = players[1].getSpecialAttackCounter();
+            var a = players[1].getDamage();
         }
         if (pid === 2) {
-            this.pDamage2[0].innerHTML = this.players[2].getDamage() + "%";
-            this.pDamage2[0].style.color = getDamagePercentageColor(this.players[2].getDamage());
-            this.pStock2[0].innerHTML = "❤" + this.players[2].getStock(); var a = this.players[0].getDamage();
-            this.spaBar2.value = this.players[2].getSpecialAttackCounter();
-            var a = this.players[2].getDamage();
+            this.pDamage2[0].innerHTML = players[2].getDamage() + "%";
+            this.pDamage2[0].style.color = getDamagePercentageColor(players[2].getDamage());
+            this.pStock2[0].innerHTML = "❤" + players[2].getStock(); var a = players[0].getDamage();
+            this.spaBar2.value = players[2].getSpecialAttackCounter();
+            var a = players[2].getDamage();
         }
         if (pid === 3) {
-            this.pDamage3[0].innerHTML = this.players[3].getDamage() + "%";
-            this.pDamage3[0].style.color = getDamagePercentageColor(this.players[3].getDamage());
-            this.pStock3[0].innerHTML = "❤" + this.players[3].getStock(); var a = this.players[0].getDamage();
-            this.spaBar3.value = this.players[3].getSpecialAttackCounter();
-            var a = this.players[3].getDamage();
+            this.pDamage3[0].innerHTML = players[3].getDamage() + "%";
+            this.pDamage3[0].style.color = getDamagePercentageColor(players[3].getDamage());
+            this.pStock3[0].innerHTML = "❤" + players[3].getStock(); var a = players[0].getDamage();
+            this.spaBar3.value = players[3].getSpecialAttackCounter();
+            var a = players[3].getDamage();
         }
 
     }

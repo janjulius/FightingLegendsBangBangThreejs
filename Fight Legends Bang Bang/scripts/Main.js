@@ -215,7 +215,7 @@ function EndGame() {
     }
     for (var j = 0; j < playersPlaying; j++) {
         players[j] = players[j].cid;
-        console.log(players[j]);
+        console.log("last picks" + players[j]);
     }
     gameInterface.ClearEndInterface();
 
@@ -225,6 +225,7 @@ function EndGame() {
     gamePaused = false;
     placesLeft = 4;
     playerWon = -1;
+    level.StopMusic();
 
     runCharSelect();
 }
@@ -325,7 +326,7 @@ function runGame() {
 
         //level randomizer
         // let randomLevel;
-        // randomLevel = Math.floor((Math.random() * 7) + 1);
+        // randomLevel = Math.floor((Math.random() * 8) + 1);
 
         // switch(randomLevel){
         //     case 1 :
@@ -348,6 +349,9 @@ function runGame() {
         //     break;
         //     case 7 : 
         //             level = new HyruleCastle();
+        //     break;
+        //     case 8:
+        //             level = new FlyingIsland();
         //     break;
         // }
 
@@ -419,6 +423,9 @@ function runGame() {
                     players[0].setStock(players[0].getStock() - 1);
                 }
             });
+        }
+        for(var i = 0; i < playersPlaying; i++){
+            gameInterface.UpdateGameInterface(i);
         }
     }
 }
