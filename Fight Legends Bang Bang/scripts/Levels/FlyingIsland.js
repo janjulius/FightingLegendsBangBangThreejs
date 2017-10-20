@@ -4,7 +4,7 @@ class FlyingIsland extends Level {
 
         this.name = "FlyingIsland";
         this.topLeft = {y: 200, z: 150 } ;
-        this.bottomRight = {y: -140, z: -150};
+        this.bottomRight = {y: -150, z: -150};
 
         //MUSIC
 
@@ -88,6 +88,34 @@ class FlyingIsland extends Level {
                 color: 0xffffff,
                 transparent: true,
                 map: downgrass,
+            }),
+            0,
+            1
+        )
+
+        var grassdouble = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/doubleGrass.png ')
+        grassdouble.wrapS = grassdouble.wrapT = THREE.RepeatWrapping;
+        grassdouble.repeat.set(4, 1);
+
+        var GrassD = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                map: grassdouble,
+            }),
+            0,
+            1
+        )
+
+        var grassdoubleside = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/CornerDoubleGrass.png ')
+        grassdoubleside.wrapS = grassdoubleside.wrapT = THREE.RepeatWrapping;
+        grassdoubleside.repeat.set(1, 1);
+
+        var GrassDS = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                map: grassdoubleside,
             }),
             0,
             1
@@ -1038,6 +1066,26 @@ class FlyingIsland extends Level {
         grassBlock.position.set(0, -35, 52.5);
         scene.add(grassBlock);
         grassBlock.name = "ground";
+
+        var doubleGrass = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 10, 20),
+            GrassD,
+            0
+        );
+        doubleGrass.receiveShadow = true;
+        doubleGrass.position.set(0, -72.5, 50);
+        scene.add(doubleGrass);
+        doubleGrass.name = "ground";
+
+        var doubleGrassSide = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 10, 5),
+            GrassDS,
+            0
+        );
+        doubleGrassSide.receiveShadow = true;
+        doubleGrassSide.position.set(0, -72.5, 62.5);
+        scene.add(doubleGrassSide);
+        doubleGrassSide.name = "ground";
 
         var grassBlockLeft = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
