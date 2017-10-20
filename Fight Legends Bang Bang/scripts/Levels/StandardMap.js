@@ -47,7 +47,7 @@ class StandardMap extends Level {
         groundTex.repeat.set(32, 1);
 
         
-        material = Physijs.createMaterial(
+        var groundTopMaterial = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
                 map: groundTex,
@@ -56,37 +56,39 @@ class StandardMap extends Level {
             1
         )
 
+        var ground2Tex = THREE.ImageUtils.loadTexture(' Textures/MarioLevel/ground.png ');
+        ground2Tex.wrapS = ground2Tex.wrapT = THREE.RepeatWrapping;
+        ground2Tex.repeat.set(32, 14);
+
+        
+        var groundMaterial = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: ground2Tex,
+            }),
+            0,
+            1
+        )
+
+        var bottomTop = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(15, 5, 100),
+            groundTopMaterial,
+            0
+        );
+        bottomTop.receiveShadow = true;
+        bottomTop.position.set(0, -2.5, 0);
+        scene.add(bottomTop);
+        bottomTop.name = "ground";
+
         var bottom = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 10, 100),
-            material,
+            new THREE.CubeGeometry(15, 51, 100),
+            groundMaterial,
             0
         );
         bottom.receiveShadow = true;
-        bottom.position.set(0, -5, 0);
+        bottom.position.set(0, -30, 0);
         scene.add(bottom);
         bottom.name = "ground";
-
-        var leftplatform = new THREE.Mesh(
-            new THREE.CubeGeometry(15, 1, 15),
-            new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
-            0
-        );
-        leftplatform.receiveShadow = true;
-        leftplatform.position.set(0, 15, -35);
-        scene.add(leftplatform);
-        leftplatform.name = "ground";
-        this.oneWayPlatforms.push(leftplatform);
-
-        var rightplatform = new THREE.Mesh(
-            new THREE.CubeGeometry(15, 1, 15),
-            new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
-            0
-        );
-        rightplatform.receiveShadow = true;
-        rightplatform.position.set(0, 15, 35);
-        scene.add(rightplatform);
-        rightplatform.name = "ground";
-        this.oneWayPlatforms.push(rightplatform);
 
         var upper = new THREE.Mesh(
             new THREE.CubeGeometry(15, 1, 30),
@@ -229,7 +231,7 @@ class StandardMap extends Level {
             0
         );
         questionmark.receiveShadow = true;
-        questionmark.position.set(0, 28, 31);
+        questionmark.position.set(0, 15, 40);
         questionmark.hit = false;
         scene.add(questionmark);
         questionmark.name = "ground";
@@ -240,7 +242,7 @@ class StandardMap extends Level {
             0
         );
         questionmark2.receiveShadow = true;
-        questionmark2.position.set(0, 28, 35);
+        questionmark2.position.set(0, 15, 44);
         scene.add(questionmark2);
         questionmark2.name = "ground";
 
@@ -249,12 +251,114 @@ class StandardMap extends Level {
             material,
             0
         );
-        
         questionmark3.receiveShadow = true;
-        questionmark3.position.set(0, 28, 39);
+        questionmark3.position.set(0, 30, 30);
+        questionmark3.hit = false;
         scene.add(questionmark3);
         questionmark3.name = "ground";
-        
+
+        var questionmark4 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(4, 4, 4),
+            material,
+            0
+        );
+        questionmark4.receiveShadow = true;
+        questionmark4.position.set(0, 30, 26);
+        scene.add(questionmark4);
+        questionmark4.name = "ground";
+
+        var questionmark5 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(4, 4, 4),
+            material,
+            0
+        );
+        questionmark5.receiveShadow = true;
+        questionmark5.position.set(0, 40, 8);
+        scene.add(questionmark5);
+        questionmark5.name = "ground";
+
+        var questionmark6 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(4, 4, 4),
+            material,
+            0
+        );
+        questionmark6.receiveShadow = true;
+        questionmark6.position.set(0, 40, 4);
+        scene.add(questionmark6);
+        questionmark6.name = "ground";
+
+        var questionmark7 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(4, 4, 4),
+            material,
+            0
+        );
+        questionmark7.receiveShadow = true;
+        questionmark7.position.set(0, 40, 0);
+        scene.add(questionmark7);
+        questionmark7.name = "ground";
+
+        var questionmark8 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(4, 4, 4),
+            material,
+            0
+        );
+        questionmark8.receiveShadow = true;
+        questionmark8.position.set(0, 40, -4);
+        scene.add(questionmark8);
+        questionmark8.name = "ground";
+
+        var questionmark9 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(4, 4, 4),
+            material,
+            0
+        );
+        questionmark9.receiveShadow = true;
+        questionmark9.position.set(0, 40, -8);
+        scene.add(questionmark9);
+        questionmark9.name = "ground";
+
+        var questionmark10 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(4, 4, 4),
+            material,
+            0
+        );
+        questionmark10.receiveShadow = true;
+        questionmark10.position.set(0, 30, -30);
+        questionmark10.hit = false;
+        scene.add(questionmark10);
+        questionmark10.name = "ground";
+
+        var questionmark11 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(4, 4, 4),
+            material,
+            0
+        );
+        questionmark11.receiveShadow = true;
+        questionmark11.position.set(0, 30, -26);
+        scene.add(questionmark11);
+        questionmark11.name = "ground";
+
+        var questionmark12 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(4, 4, 4),
+            material,
+            0
+        );
+        questionmark12.receiveShadow = true;
+        questionmark12.position.set(0, 15, -40);
+        questionmark12.hit = false;
+        scene.add(questionmark12);
+        questionmark12.name = "ground";
+
+        var questionmark13 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(4, 4, 4),
+            material,
+            0
+        );
+        questionmark13.receiveShadow = true;
+        questionmark13.position.set(0, 15, -44);
+        scene.add(questionmark13);
+        questionmark13.name = "ground";
+
     	material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
