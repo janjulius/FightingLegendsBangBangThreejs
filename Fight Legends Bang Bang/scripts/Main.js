@@ -17,7 +17,9 @@ var gameEnded = false;
 var gamePaused = false;
 var spawnOverheads = true;
 var blockingPossible = true;
+var previousWinner;
 var music = new Audio('Music/selectMusic.mp3');
+var thisGameWinnerAudio = new Audio('Music/this_games_winner_is.m4a');
 gameInterface = new Interface();
 
 'use strict';
@@ -186,6 +188,12 @@ function render() {
                     playerWon = j;
                     placesLeft = 0;
                     plr.isStunned = true;
+                    previousWinner = plr.cid;
+                    this.thisGameWinnerAudio.play();
+                    this.thisGameWinnerAudio.addEventListener('ended', function() {
+                        var winnerSound = new Audio("Music/Class" + previousWinner + ".m4a");
+                        winnerSound.play();
+                    });
                 }
             }
         }
@@ -201,8 +209,30 @@ function render() {
     renderer.clearDepth();
 }
 
+function EndGame() {
+    for (var i = scene.children.length - 1; i >= 0; i--) {
+        scene.remove(scene.children[i]);
+    }
+    for (var j = 0; j < playersPlaying; j++) {
+        players[j] = players[j].cid;
+        console.log("last picks" + players[j]);
+    }
+    gameInterface.ClearEndInterface();
+
+    gameEnded = false;
+    playersPlaying = 4;
+    charSelect = true;
+    gamePaused = false;
+    placesLeft = 4;
+    playerWon = -1;
+    level.StopMusic();
+
+    runCharSelect();
+}
+
 function runCharSelect() {
 
+    music = new Audio('Music/selectMusic.mp3');
     music.addEventListener('ended', function () {
         this.currentTime = 0;
         this.play();
@@ -260,58 +290,16 @@ function runCharSelect() {
                     c = 0x33cc33;
                     break;
             }
-            material = Physijs.createMaterial(
+            material = 
                 new THREE.MeshBasicMaterial({
-                    color: c
-                }),
-                0,
-                1
-            );
-            fische = new Physijs.BoxMesh(new THREE.BoxGeometry(0, 1, 1), material, 0);
+                    map:THREE.ImageUtils.loadTexture('sprites/p' + (i+1) + 'Hand.png'), transparent : true
+                });
+            fische = new Physijs.BoxMesh(new THREE.BoxGeometry(0, 2, 2), material, 0);
             playerFiches[i] = fische;
             scene.add(fische);
-            if (DEBUG_MODE) {
-                players[i] = 0;
-            }
+            console.log(players[i]);
+            players[i] = players[i] ? players[i] : 0;
         }
-
-        window.addEventListener('keydown', function (event) {
-            if (event.keyCode == 68) { //d
-                ray0 = new THREE.Raycaster(playerFiches[0].position, new THREE.Vector3(-1, 0, 0));
-                var intersects = ray0.intersectObjects(scene.children);
-                for (var i = 0; i < intersects.length; i++) {
-                    players[0] = intersects[i].object.myCharId;
-                    gameInterface.UpdateCharSelectInterface(0, players[0]);
-                }
-                playerFiches[0].position.z = playerFiches[0].position.z + 1;
-                //ray0.set(playerFiches[0].position, new THREE.Vector3(1,0,0));
-            } else if (event.keyCode == 70) { //f
-                ray0 = new THREE.Raycaster(playerFiches[1].position, new THREE.Vector3(-1, 0, 0));
-                var intersects = ray0.intersectObjects(scene.children);
-                for (var i = 0; i < intersects.length; i++) {
-                    players[1] = intersects[i].object.myCharId;
-                    gameInterface.UpdateCharSelectInterface(1, players[1]);
-                }
-                playerFiches[1].position.z = playerFiches[1].position.z + 1;
-                playerFiches[0].position.y = playerFiches[0].position.y + 1;
-            } else if (event.keyCode == 87) { //w
-                ray0 = new THREE.Raycaster(playerFiches[2].position, new THREE.Vector3(-1, 0, 0));
-                var intersects = ray0.intersectObjects(scene.children);
-                for (var i = 0; i < intersects.length; i++) {
-                    players[2] = intersects[i].object.myCharId;
-                    gameInterface.UpdateCharSelectInterface(2, players[2]);
-                }
-                playerFiches[2].position.z = playerFiches[2].position.z + 1;
-            } else if (event.keyCode == 83) { //s
-                ray0 = new THREE.Raycaster(playerFiches[3].position, new THREE.Vector3(-1, 0, 0));
-                var intersects = ray0.intersectObjects(scene.children);
-                for (var i = 0; i < intersects.length; i++) {
-                    players[3] = intersects[i].object.myCharId;
-                    gameInterface.UpdateCharSelectInterface(3, players[3]);
-                }
-                playerFiches[3].position.z = playerFiches[3].position.z + 1;
-            }
-        });
     }
 }
 
@@ -320,7 +308,6 @@ function getPlayers() {
 }
 
 function runGame() {
-
     this.music.pause();
     this.music.currentTime = 0;
 
@@ -331,17 +318,13 @@ function runGame() {
             scene.remove(scene.children[i]);
         }
 
-        for (var i = 0; i < 8; i++) {
-            charScreens[i].position.set(100, 100, 100);
-        }
-
         level = new FlyingIsland(); //temp level changer
 
 
         //level randomizer
         // let randomLevel;
-        // randomLevel = Math.floor((Math.random() * 7) + 1);
-        
+        // randomLevel = Math.floor((Math.random() * 8) + 1);
+
         // switch(randomLevel){
         //     case 1 :
         //             level = new Brawlhaven();
@@ -364,8 +347,11 @@ function runGame() {
         //     case 7 : 
         //             level = new HyruleCastle();
         //     break;
+        //     case 8:
+        //             level = new FlyingIsland();
+        //     break;
         // }
-        
+
 
 
         var bound = new THREE.BoxGeometry(1, level.topLeft.y + Math.abs(level.bottomRight.y), level.topLeft.z + Math.abs(level.bottomRight.z));
@@ -382,6 +368,8 @@ function runGame() {
             players[k].AddGrounded();
             players[k].geometry.name = k;
             players[k].geometry.isPlayer = true;
+            players[k].geometry.rotation.set(0, 0, 0);
+            players[k].geometry.__dirtyRotation = true;
             if (spawnOverheads) {
                 this.playerFloaterMaterial = THREE.ImageUtils.loadTexture(getPlayerIndicatorSprite(k));
                 this.playerFloater = new THREE.Mesh(new THREE.BoxGeometry(0.1, 5, 5),
@@ -432,6 +420,9 @@ function runGame() {
                     players[0].setStock(players[0].getStock() - 1);
                 }
             });
+        }
+        for(var i = 0; i < playersPlaying; i++){
+            gameInterface.UpdateGameInterface(i);
         }
     }
 }

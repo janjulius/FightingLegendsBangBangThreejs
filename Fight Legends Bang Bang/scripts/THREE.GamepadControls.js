@@ -105,7 +105,7 @@ THREE.GamepadControls = function () {
             if (!charSelect) {
                 for (var i = 0; i < players.length; i++) {
                     var p = players[i];
-                    if (this.gamePad[i] && p) {
+                    if (this.gamePad[i] && p instanceof Character) {
                         var g = this.gamePad[i];
                         p.direction.z = this.filter(-g.axes[0]);
                         p.direction.y = this.filter(-g.axes[1]);
@@ -131,6 +131,10 @@ THREE.GamepadControls = function () {
                                     var timeElapsed = clock.getDelta();
                                     scene.simulate(undefined, 1);
                                 }
+                            }
+                        } else {
+                            if (this.PressedButton(i, 9)) {
+                                p.pressedbuttonStart();
                             }
                         }
                     }
@@ -158,7 +162,7 @@ THREE.GamepadControls = function () {
                             }
                         }
                         if (i == 0) {
-                            if (pad.buttons[9].value == 1) {
+                            if (this.PressedButton(i, 9)) {
                                 playersPlaying = this.gamePad.length;
                                 charSelect = false;
                                 runGame();

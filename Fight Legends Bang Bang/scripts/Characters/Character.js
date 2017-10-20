@@ -78,6 +78,8 @@ class Character {
         this.TDamageDoneWithUlt = 0;
         this.TotalUltsUsed = 0;
 
+        this.readyForNextGame = false;
+
         console.log("created character");
     }
 
@@ -192,13 +194,15 @@ class Character {
     setDamage(d, dir, oid, type) {
         if (!this.blocking) {
 
-            this.TDamageTaken += d;
-            this.TLastPerson = oid;
-            if (type == 0)
-                players[oid].TDamageDone += d;
-            else if (type == 1)
-                players[oid].TDamageDoneWithUlt += d;
-            else if (type == 2) {
+            if (type == 0) {
+                players[oid].TDamageDone += d - this.damage;
+                this.TDamageTaken += d - this.damage;
+                this.TLastPerson = oid;
+            } else if (type == 1) {
+                players[oid].TDamageDoneWithUlt += d - this.damage;
+                this.TDamageTaken += d - this.damage;
+                this.TLastPerson = oid;
+            } else if (type == 2) {
                 players[oid].TDamageHealed += this.damage - d;
             }
 
@@ -260,19 +264,18 @@ class Character {
             this.respawnTimer = this.respawnDelay;
             this.isAlive = false;
             this.isStunned = true;
+
+            if (this.damage > this.THighestDamageSurvived)
+                this.THighestDamageSurvived = this.damage;
+
             this.setStock(this.stock - 1);
             if (this.stock == 0) {
                 this.Tplace = placesLeft;
                 placesLeft--;
             }
             this.specialExists = false;
-            this.maxGravityVelocity = 50;
-            this.gravityVelocity = 80;
             this.velt = 0;
             this.setSpecialAttackCounter(this.specialCounter / 2);
-
-            if (this.damage > this.THighestDamageSurvived)
-                this.THighestDamageSurvived = this.damage;
 
             this.TDeaths++;
             players[this.TLastPerson != -1 ? this.TLastPerson : this.id].TKills++;
@@ -297,7 +300,7 @@ class Character {
                 }
             }
         }
-        if (level.oneWayPlatforms.length > 0 && this.velt <= 0 && this.direction.y > -0.9) {
+        if (level.oneWayPlatforms.length > 0 && this.velt <= 0 && this.direction.y > -0.7) {
             var pos1 = new THREE.Vector3(0, this.geometry.position.y, this.geometry.position.z + 2.5);
             var ray1 = new THREE.Raycaster(pos1, new THREE.Vector3(0, -1, 0), 1.5, 2.8);
             var intersects1 = ray1.intersectObjects(level.oneWayPlatforms);
@@ -344,11 +347,10 @@ class Character {
     }
 
     pressedbuttonY() {
-        if (!this.isStunned)
-            this.specialAtk();
-
         if (this.specialReady())
             this.TotalUltsUsed++;
+        if (!this.isStunned)
+            this.specialAtk();
     }
 
     pressedbuttonRT() {
@@ -356,6 +358,21 @@ class Character {
             if (this.canBlock) {
                 this.block();
             }
+        }
+    }
+
+    pressedbuttonStart() {
+        if (!this.readyForNextGame) {
+            this.readyForNextGame = true;
+            gameInterface.UpdateEndScreen();
+            var allReady = true;
+            for (var i = 0; i < playersPlaying; i++) {
+                if (!players[i].readyForNextGame) {
+                    allReady = false;
+                }
+            }
+            if (allReady)
+                EndGame();
         }
     }
 
@@ -506,7 +523,7 @@ class Character {
             this.canBlock = true;
     }
 
-    UpdateChar(t) {}
+    UpdateChar(t) { }
 
     AddGrounded() {
         var _this = this;
