@@ -757,6 +757,15 @@ class StandardMap extends Level {
         scene.add(drHillE);
         drHillE.name = "ground";
 
+        material = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent : true,
+                map: THREE.ImageUtils.loadTexture(' Textures/MarioLevel/bush.png ' )
+            }),
+            0,
+            1
+        )
 
         while (questionmark.hit = false)
         {
