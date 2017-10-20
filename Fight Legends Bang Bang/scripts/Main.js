@@ -6,7 +6,9 @@ var gameInterface;
 var players = [];
 var playersPlaying = 4;
 var charSelect = true;
+var levelSelect = false;
 var charScreens = [];
+var levelScreens = [];
 var playerFiches = [];
 var playerBlockIcons = [];
 var controls = new THREE.GamepadControls();
@@ -20,6 +22,7 @@ var blockingPossible = true;
 var previousWinner;
 var music = new Audio('Music/selectMusic.mp3');
 var thisGameWinnerAudio = new Audio('Music/this_games_winner_is.m4a');
+var stages = [Brawlhaven, Deserto, FlyingIsland, HyruleCastle, Metalplant, PretPaleis, StandardMap, Thundergart, ZeldaMap]
 gameInterface = new Interface();
 
 'use strict';
@@ -88,6 +91,7 @@ window.addEventListener('keydown', function (event) {
         if (event.keyCode == 65) {
             console.log("test");
             charSelect = false;
+            //runLevelSelect();
             runGame();
         }
     }
@@ -190,7 +194,7 @@ function render() {
                     plr.isStunned = true;
                     previousWinner = plr.cid;
                     this.thisGameWinnerAudio.play();
-                    this.thisGameWinnerAudio.addEventListener('ended', function() {
+                    this.thisGameWinnerAudio.addEventListener('ended', function () {
                         var winnerSound = new Audio("Music/Class" + previousWinner + ".m4a");
                         winnerSound.play();
                     });
@@ -273,7 +277,6 @@ function runCharSelect() {
         camera.lookAt(charScreens[0].position);
         camera.position.set(40, 0, 0);
         camera.lookAt(new THREE.Vector3(0, 0, 0));
-
         for (var i = 0; i < playersPlaying; i++) {
             var c = 0xff0000;
             switch (i) {
@@ -290,9 +293,11 @@ function runCharSelect() {
                     c = 0x33cc33;
                     break;
             }
-            material = 
+
+            material =
                 new THREE.MeshBasicMaterial({
-                    map:THREE.ImageUtils.loadTexture('sprites/p' + (i+1) + 'Hand.png'), transparent : true
+                    map: THREE.ImageUtils.loadTexture('sprites/p' + (i + 1) + 'Hand.png'),
+                    transparent: true
                 });
             fische = new Physijs.BoxMesh(new THREE.BoxGeometry(0, 2, 2), material, 0);
             playerFiches[i] = fische;
@@ -301,6 +306,70 @@ function runCharSelect() {
             players[i] = players[i] ? players[i] : 0;
         }
     }
+}
+
+function runLevelSelect() {
+    if (levelSelect) {
+        gameInterface.ClearCharSelectInterface();
+        scene.remove(playerFiches[3]);
+        scene.remove(playerFiches[2]);
+        scene.remove(playerFiches[1]);
+        var material;
+        var baseZ = 0;
+        var baseY = -5;
+        var constZ = 0;
+        var constY = -5;
+        var amount = 8;
+        for (var i = 0; i < amount; i++) {
+            material = Physijs.createMaterial(
+                new THREE.MeshBasicMaterial({
+                    color: 0xffffff,
+                    map: THREE.ImageUtils.loadTexture(getStageImgByNameOrId(i)) //to be changed to level images
+                }),
+                0,
+                1
+            );
+            if (i % 4 == 0) {
+                baseY += 5;
+                baseZ = constZ;
+            }
+            baseZ += 5;
+            levelScreen = new Physijs.BoxMesh(new THREE.BoxGeometry(5, 5, 5), material, 0);
+            levelScreen.position.set(-3, baseY, baseZ);
+            levelScreens[i] = levelScreen;
+            levelScreens.castShadow = true;
+            levelScreens[i].myLevelId = i;
+            scene.add(levelScreen);
+
+        }
+        camera.lookAt(levelScreens[0].position);
+        camera.position.set(40, 0, 0);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        for (var i = 0; i < playersPlaying; i++) {
+            var c = 0xff0000;
+            switch (i) {
+                case 0:
+                    c = 0xff0000;
+                    break;
+                case 1:
+                    c = 0x0000ff;
+                    break;
+                case 2:
+                    c = 0xffff00;
+                    break;
+                case 3:
+                    c = 0x33cc33;
+                    break;
+            }
+
+            material =
+                new THREE.MeshBasicMaterial({
+                    map: THREE.ImageUtils.loadTexture('sprites/p' + (i + 1) + 'Hand.png'),
+                    transparent: true
+                });
+        }
+    }
+
 }
 
 function getPlayers() {
@@ -317,42 +386,9 @@ function runGame() {
         for (var i = scene.children.length - 1; i >= 0; i--) {
             scene.remove(scene.children[i]);
         }
-
-        level = new FlyingIsland(); //temp level changer
-
-
-        //level randomizer
-        // let randomLevel;
-        // randomLevel = Math.floor((Math.random() * 8) + 1);
-
-        // switch(randomLevel){
-        //     case 1 :
-        //             level = new Brawlhaven();
-        //     break;
-        //     case 2 :
-        //             level = new Thundergart();
-        //     break;
-        //     case 3 : 
-        //             level = new StandardMap();
-        //     break;
-        //     case 4 : 
-        //             level = new ZeldaMap();
-        //     break;
-        //     case 5 : 
-        //             level = new Deserto();
-        //     break;
-        //     case 6 : 
-        //             level = new Metalplant();
-        //     break;
-        //     case 7 : 
-        //             level = new HyruleCastle();
-        //     break;
-        //     case 8:
-        //             level = new FlyingIsland();
-        //     break;
-        // }
-
-
+        var r = Math.floor((Math.random() * stages.length) + 1)
+        console.log("level is " + r);
+        level = new stages[r]();
 
         var bound = new THREE.BoxGeometry(1, level.topLeft.y + Math.abs(level.bottomRight.y), level.topLeft.z + Math.abs(level.bottomRight.z));
         var object = new THREE.Mesh(bound, new THREE.MeshBasicMaterial(0xff0000));
@@ -421,7 +457,7 @@ function runGame() {
                 }
             });
         }
-        for(var i = 0; i < playersPlaying; i++){
+        for (var i = 0; i < playersPlaying; i++) {
             gameInterface.UpdateGameInterface(i);
         }
     }
