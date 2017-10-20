@@ -4,7 +4,7 @@ class FlyingIsland extends Level {
 
         this.name = "FlyingIsland";
         this.topLeft = {y: 200, z: 150 } ;
-        this.bottomRight = {y: -140, z: -150};
+        this.bottomRight = {y: -150, z: -150};
 
         //MUSIC
 
@@ -79,6 +79,62 @@ class FlyingIsland extends Level {
             1
         )
 
+        var downgrass = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/GrassDown.png ')
+        downgrass.wrapS = downgrass.wrapT = THREE.RepeatWrapping;
+        downgrass.repeat.set(2, 1);
+
+        var upsidedowngrass = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                map: downgrass,
+            }),
+            0,
+            1
+        )
+
+        var grassdouble = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/doubleGrass.png ')
+        grassdouble.wrapS = grassdouble.wrapT = THREE.RepeatWrapping;
+        grassdouble.repeat.set(4, 1);
+
+        var GrassD = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                map: grassdouble,
+            }),
+            0,
+            1
+        )
+
+        var grassdoubleside = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/CornerDoubleGrass.png ')
+        grassdoubleside.wrapS = grassdoubleside.wrapT = THREE.RepeatWrapping;
+        grassdoubleside.repeat.set(1, 1);
+
+        var GrassDS = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                map: grassdoubleside,
+            }),
+            0,
+            1
+        )
+        
+        var longgrass = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/GRASMAS.png ')
+        longgrass.wrapS = longgrass.wrapT = THREE.RepeatWrapping;
+        longgrass.repeat.set(0.6, 1);
+
+        var GrassL = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                map: longgrass,
+            }),
+            0,
+            1
+        )
+
         var Grasstile = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/Grass.png ')
         Grasstile.wrapS = Grasstile.wrapT = THREE.RepeatWrapping;
         Grasstile.repeat.set(1, 1);
@@ -93,15 +149,57 @@ class FlyingIsland extends Level {
             1
         )
 
+        var GrasstileLeft = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/GrassLeft.png ')
+        GrasstileLeft.wrapS = GrasstileLeft.wrapT = THREE.RepeatWrapping;
+        GrasstileLeft.repeat.set(1, 1);
+
+        var grasstileLeft = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                map: GrasstileLeft,
+            }),
+            0,
+            1
+        )
+        
+        var Grassvine = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/fine_af.png ')
+        Grassvine.wrapS = Grassvine.wrapT = THREE.RepeatWrapping;
+        Grassvine.repeat.set(1, 6);
+
+        var Vine = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                map: Grassvine,
+            }),
+            0,
+            1
+        )
+
         var grassleft = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/grassLeft.png ')
         grassleft.wrapS = grassleft.wrapT = THREE.RepeatWrapping;
-        grassleft.repeat.set(1, 3);
+        grassleft.repeat.set(1, 2);
 
         var grassLeft = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
                 transparent: true,
                 map: grassleft,
+            }),
+            0,
+            1
+        )
+
+        var grassleft2 = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/grassLeft.png ')
+        grassleft2.wrapS = grassleft2.wrapT = THREE.RepeatWrapping;
+        grassleft2.repeat.set(1, 3);
+
+        var grassLeft2 = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                map: grassleft2,
             }),
             0,
             1
@@ -177,6 +275,20 @@ class FlyingIsland extends Level {
             1
         )
 
+        var rightcornergrassdown = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/RightDownGrass.png ')
+        rightcornergrassdown.wrapS = rightcornergrassdown.wrapT = THREE.RepeatWrapping;
+        rightcornergrassdown.repeat.set(1, 1);
+
+        var RightCornerGrassDown = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                map: rightcornergrassdown,
+            }),
+            0,
+            1
+        )
+
         //DIRT
 
         var lightdirt = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/LightDirt.jpg ')
@@ -233,7 +345,7 @@ class FlyingIsland extends Level {
 
         var lightdirt5 = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/LightDirt.jpg ')
         lightdirt5.wrapS = lightdirt5.wrapT = THREE.RepeatWrapping;
-        lightdirt5.repeat.set(1, 5);
+        lightdirt5.repeat.set(1, 6);
 
         var lightDirt5 = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
@@ -259,7 +371,7 @@ class FlyingIsland extends Level {
 
         var lightdirt7 = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/LightDirt.jpg ')
         lightdirt7.wrapS = lightdirt7.wrapT = THREE.RepeatWrapping;
-        lightdirt7.repeat.set(8, 1);
+        lightdirt7.repeat.set(1, 4);
 
         var lightDirt7 = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
@@ -279,6 +391,32 @@ class FlyingIsland extends Level {
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
                 map: lightdirt8,
+            }),
+            0,
+            1
+        )
+
+        var lightdirt9 = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/LightDirt.jpg ')
+        lightdirt9.wrapS = lightdirt9.wrapT = THREE.RepeatWrapping;
+        lightdirt9.repeat.set(2, 1);
+
+        var lightDirt9 = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: lightdirt9,
+            }),
+            0,
+            1
+        )
+
+        var lightdirt10 = THREE.ImageUtils.loadTexture(' Textures/FlyingIsland/LightDirt.jpg ')
+        lightdirt10.wrapS = lightdirt10.wrapT = THREE.RepeatWrapping;
+        lightdirt10.repeat.set(8, 1);
+
+        var lightDirt10 = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: lightdirt10,
             }),
             0,
             1
@@ -520,15 +658,7 @@ class FlyingIsland extends Level {
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        var MainGrass = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(5, 5, 60),
-            Grass,
-            0
-        );
-        MainGrass.receiveShadow = true;
-        MainGrass.position.set(0, 4.95, 25);
-        scene.add(MainGrass);
-        MainGrass.name = "ground";
+        //DIRT
 
         var MainDirt = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 120),
@@ -581,13 +711,13 @@ class FlyingIsland extends Level {
         MainDirt5.name = "ground";
 
         var MainDirt6 = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(5, 25, 5),
+            new THREE.CubeGeometry(5, 30, 5),
             lightDirt5,
             0
         );
 
         MainDirt6.receiveShadow = true;
-        MainDirt6.position.set(0, -15, -62.5);
+        MainDirt6.position.set(0, -17.5, -62.5);
         scene.add(MainDirt6);
         MainDirt6.name = "ground";
 
@@ -604,7 +734,7 @@ class FlyingIsland extends Level {
 
         var MainDirt8 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 40),
-            lightDirt7,
+            lightDirt3,
             0
         );
 
@@ -623,6 +753,60 @@ class FlyingIsland extends Level {
         MainDirt9.position.set(0, -45, -35);
         scene.add(MainDirt9);
         MainDirt9.name = "ground";
+
+        var MainDirt10 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 20, 5),
+            lightDirt7,
+            0
+        );
+
+        MainDirt10.receiveShadow = true;
+        MainDirt10.position.set(0, -55, -62.5);
+        scene.add(MainDirt10);
+        MainDirt10.name = "ground";
+
+        var MainDirt11 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 10),
+            lightDirt9,
+            0
+        );
+
+        MainDirt11.receiveShadow = true;
+        MainDirt11.position.set(0, -40, 50);
+        scene.add(MainDirt11);
+        MainDirt11.name = "ground";
+
+        var MainDirt12 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 40),
+            lightDirt10,
+            0
+        );
+
+        MainDirt12.receiveShadow = true;
+        MainDirt12.position.set(0, -65, -45);
+        scene.add(MainDirt12);
+        MainDirt12.name = "ground";
+
+        var MainDirt13 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 25),
+            lightDirt4,
+            0
+        );
+        MainDirt13.receiveShadow = true;
+        MainDirt13.position.set(0, -60, -17.5);
+        scene.add(MainDirt13);
+        MainDirt13.name = "ground";
+
+        var MainDirt13 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 40),
+            lightDirt10,
+            0
+        );
+
+        MainDirt13.receiveShadow = true;
+        MainDirt13.position.set(0, -65, 10);
+        scene.add(MainDirt13);
+        MainDirt13.name = "ground";
 
         var MainMidDirt = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 110),
@@ -675,6 +859,8 @@ class FlyingIsland extends Level {
         scene.add(MainDarkDirt);
         MainDarkDirt.name = "ground";
 
+        //TREE
+
         var Trunk = new THREE.Mesh(
             new THREE.CubeGeometry(0, 25, 5),
             treeTrunk
@@ -690,6 +876,8 @@ class FlyingIsland extends Level {
         Leaves.receiveShadow = true;
         Leaves.position.set(0, 35, 40);
         scene.add(Leaves);
+
+        //HOUSE
 
         var silverBlock1 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 20, 10),
@@ -747,6 +935,28 @@ class FlyingIsland extends Level {
         darkSilverBlock.position.set(0, 17, -40);
         scene.add(darkSilverBlock);
 
+        //GRASS
+
+        var MainGrass = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 60),
+            Grass,
+            0
+        );
+        MainGrass.receiveShadow = true;
+        MainGrass.position.set(0, 4.95, 25);
+        scene.add(MainGrass);
+        MainGrass.name = "ground";
+
+        var upsideDownGrass = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 10),
+            upsidedowngrass,
+            0
+        );
+        upsideDownGrass.receiveShadow = true;
+        upsideDownGrass.position.set(0, -49.95, 45);
+        scene.add(upsideDownGrass);
+        upsideDownGrass.name = "ground";
+
         var leftGrass = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 10, 5),
             grassLeft,
@@ -756,6 +966,16 @@ class FlyingIsland extends Level {
         leftGrass.position.set(0, -2.5, 57.45);
         scene.add(leftGrass);
         leftGrass.name = "ground";
+
+        var leftGrass2 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 15, 5),
+            grassLeft2,
+            0
+        );
+        leftGrass2.receiveShadow = true;
+        leftGrass2.position.set(0, -60, 37.5);
+        scene.add(leftGrass2);
+        leftGrass2.name = "ground";
 
         var rightGrass = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 30, 5),
@@ -797,6 +1017,26 @@ class FlyingIsland extends Level {
         scene.add(LeftDownGrass);
         LeftDownGrass.name = "ground";
 
+        var LeftDownGrass2 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 5),
+            leftdowngrass,
+            0
+        );
+        LeftDownGrass2.receiveShadow = true;
+        LeftDownGrass2.position.set(0, -39.95, 57.45);
+        scene.add(LeftDownGrass2);
+        LeftDownGrass2.name = "ground";
+
+        var LeftDownGrass3 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 5),
+            leftdowngrass,
+            0
+        );
+        LeftDownGrass3.receiveShadow = true;
+        LeftDownGrass3.position.set(0, -49.95, 52.5);
+        scene.add(LeftDownGrass3);
+        LeftDownGrass3.name = "ground";
+
         var Rightcorner = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
             RightCornerGrass,
@@ -807,6 +1047,16 @@ class FlyingIsland extends Level {
         scene.add(Rightcorner);
         Rightcorner.name = "ground";
 
+        var RightDowncorner = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 5),
+            RightCornerGrassDown,
+            0
+        );
+        RightDowncorner.receiveShadow = true;
+        RightDowncorner.position.set(0, -30, -67.5);
+        scene.add(RightDowncorner);
+        RightDowncorner.name = "ground";
+
         var grassBlock = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
             grasstile,
@@ -816,6 +1066,46 @@ class FlyingIsland extends Level {
         grassBlock.position.set(0, -35, 52.5);
         scene.add(grassBlock);
         grassBlock.name = "ground";
+
+        var doubleGrass = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 10, 20),
+            GrassD,
+            0
+        );
+        doubleGrass.receiveShadow = true;
+        doubleGrass.position.set(0, -72.5, 50);
+        scene.add(doubleGrass);
+        doubleGrass.name = "ground";
+
+        var doubleGrassSide = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 10, 5),
+            GrassDS,
+            0
+        );
+        doubleGrassSide.receiveShadow = true;
+        doubleGrassSide.position.set(0, -72.5, 62.5);
+        scene.add(doubleGrassSide);
+        doubleGrassSide.name = "ground";
+
+        var grassBlockLeft = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 5),
+            grasstileLeft,
+            0
+        );
+        grassBlockLeft.receiveShadow = true;
+        grassBlockLeft.position.set(0, -45, 52.5);
+        scene.add(grassBlockLeft);
+        grassBlockLeft.name = "ground";
+
+        var LongGrass = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(5, 5, 20),
+            GrassL,
+            0
+        );
+        LongGrass.receiveShadow = true;
+        LongGrass.position.set(0, -45, -75);
+        scene.add(LongGrass);
+        LongGrass.name = "ground";
 
         var middleDirtWall = new THREE.Mesh(
             new THREE.CubeGeometry(0, 20, 40),
@@ -858,6 +1148,32 @@ class FlyingIsland extends Level {
         ChestRight2.receiveShadow = true;
         ChestRight2.position.set(0, 9, -50);
         scene.add(ChestRight2);
+
+        //VINE
+
+        var FineVine1 = new THREE.Mesh(
+            new THREE.CubeGeometry(0, 30, 5),
+            Vine
+        );
+        FineVine1.receiveShadow = true;
+        FineVine1.position.set(0, -62.5, -83);
+        scene.add(FineVine1);
+
+        var FineVine2 = new THREE.Mesh(
+            new THREE.CubeGeometry(0, 30, 5),
+            Vine
+        );
+        FineVine2.receiveShadow = true;
+        FineVine2.position.set(0, -62.5, -75);
+        scene.add(FineVine2);
+
+        var FineVine3 = new THREE.Mesh(
+            new THREE.CubeGeometry(0, 30, 5),
+            Vine
+        );
+        FineVine3.receiveShadow = true;
+        FineVine3.position.set(0, -62.5, -70);
+        scene.add(FineVine3);
 
 
 
