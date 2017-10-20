@@ -318,7 +318,7 @@ function runGame() {
             scene.remove(scene.children[i]);
         }
 
-        level = new Thundergart(); //temp level changer
+        level = new FlyingIsland(); //temp level changer
 
 
         //level randomizer
