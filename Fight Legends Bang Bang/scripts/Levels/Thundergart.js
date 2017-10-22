@@ -5,7 +5,9 @@ class Thundergart extends Level {
         this.name = "Thundergart";
         this.topLeft = {y: 200, z: 150 } ;
         this.bottomRight = {y: -70, z: -150};
-
+        
+        this.myAudio = new Audio('Music/Thundergart.mp3');
+        this.myAudio.volume = MUSIC_VOLUME;
         this.myAudio.addEventListener('ended', function() {
             this.currentTime = 0;
             this.play();

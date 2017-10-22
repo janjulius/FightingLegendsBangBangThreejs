@@ -6,6 +6,8 @@ class Brawlhaven extends Level {
         this.topLeft = {y: 100, z: 150 } ;
         this.bottomRight = {y: -75, z: -150};
 
+        this.myAudio = new Audio('Music/Brawlhaven.mp3');
+        this.myAudio.volume = MUSIC_VOLUME;
         this.myAudio.addEventListener('ended', function() {
             this.currentTime = 0;
             this.play();

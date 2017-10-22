@@ -6,11 +6,15 @@ class PretPaleis extends Level {
         this.topLeft = {y: 100, z: 80 } ;
         this.bottomRight = {y: -70, z: -80};
 
-        this.myAudio.addEventListener('ended', function() {
-            this.currentTime = 0;
-            this.play();
-        }, false);
-        this.myAudio.play();
+         //MUSIC
+
+         this.myAudio = new Audio('Music/Underground.mp3');
+         this.myAudio.volume = MUSIC_VOLUME;
+         this.myAudio.addEventListener('ended', function() {
+             this.currentTime = 0;
+             this.play();
+         }, false);
+         this.myAudio.play();
 
         var possibleSpawns = [{ y: 30, z: 40 }, { y: 30, z: -40 }, { y: 60, z: -0 }, { y: 10, z: -0 }]
 

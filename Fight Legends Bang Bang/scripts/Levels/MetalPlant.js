@@ -6,6 +6,8 @@ class Metalplant extends Level {
         this.topLeft = {y: 200, z: 180 } ;
         this.bottomRight = {y: -70, z: -180};
 
+        this.myAudio = new Audio('Music/Titan.mp3');
+        this.myAudio.volume = MUSIC_VOLUME;
         this.myAudio.addEventListener('ended', function() {
             this.currentTime = 0;
             this.play();
