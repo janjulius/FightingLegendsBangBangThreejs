@@ -8,6 +8,8 @@ class StandardMap extends Level {
         var material;
         var players = getPlayers();
 
+        this.myAudio = new Audio('Music/Mario.mp3');
+        this.myAudio.volume = MUSIC_VOLUME;
         this.myAudio.addEventListener('ended', function() {
             this.currentTime = 0;
             this.play();
