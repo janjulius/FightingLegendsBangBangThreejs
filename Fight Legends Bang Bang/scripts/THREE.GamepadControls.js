@@ -122,11 +122,11 @@ THREE.GamepadControls = function () {
                                 selectedLevel = intersects[j].object.myLevelId;
                             }
                         }
-                    }
-                    if (this.PressedButton(0, 9)) {
-                        charSelect = false;
-                        levelSelect = false;
-                        runGame();
+                        if(selectedLevel !== undefined){ //wacht totdat selectedlevel bestaat en dan start het spel!
+                            charSelect = false;
+                            levelSelect = false;
+                            runGame();
+                        }
                     }
                 } else {
 

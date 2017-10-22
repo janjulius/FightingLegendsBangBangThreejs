@@ -7,7 +7,7 @@ var players = [];
 var playersPlaying = 4;
 var charSelect = true;
 var levelSelect = false;
-var selectedLevel = 9;
+var selectedLevel;
 var charScreens = [];
 var levelScreens = [];
 var playerFiches = [];
@@ -387,6 +387,8 @@ function runGame() {
         for (var i = scene.children.length - 1; i >= 0; i--) {
             scene.remove(scene.children[i]);
         }
+
+        console.log("attempting to load level " + selectedLevel);
 
         if(selectedLevel == 9){
         var r = Math.floor((Math.random() * stages.length) + 1)
