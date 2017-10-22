@@ -7,6 +7,7 @@ var players = [];
 var playersPlaying = 4;
 var charSelect = true;
 var levelSelect = false;
+var selectedLevel = 9;
 var charScreens = [];
 var levelScreens = [];
 var playerFiches = [];
@@ -319,12 +320,12 @@ function runLevelSelect() {
         var baseY = -5;
         var constZ = 0;
         var constY = -5;
-        var amount = 8;
+        var amount = stages.length + 1;
         for (var i = 0; i < amount; i++) {
             material = Physijs.createMaterial(
                 new THREE.MeshBasicMaterial({
                     color: 0xffffff,
-                    map: THREE.ImageUtils.loadTexture(getStageImgByNameOrId(i)) //to be changed to level images
+                    map: THREE.ImageUtils.loadTexture(getStageImgByNameOrId(i))
                 }),
                 0,
                 1
@@ -386,11 +387,14 @@ function runGame() {
         for (var i = scene.children.length - 1; i >= 0; i--) {
             scene.remove(scene.children[i]);
         }
-        var r = Math.floor((Math.random() * stages.length) + 1)
-        console.log("level is " + r);
-        //level = new stages[r]();
 
-        level = new FlyingIsland();
+        if(selectedLevel == 9){
+        var r = Math.floor((Math.random() * stages.length) + 1)
+        
+        level = new stages[r]();
+        } else {
+            level = new stages[selectedLevel]();
+        }
 
         var bound = new THREE.BoxGeometry(1, level.topLeft.y + Math.abs(level.bottomRight.y), level.topLeft.z + Math.abs(level.bottomRight.z));
         var object = new THREE.Mesh(bound, new THREE.MeshBasicMaterial(0xff0000));

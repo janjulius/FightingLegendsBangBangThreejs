@@ -138,6 +138,8 @@ function getStageImgByNameOrId(a){
         case "ZeldaMap":
         case 8:
             return 'sprites/Levels/MenuSprites/ZeldaMap.png';
+            case 9:
+            return 'sprites/Levels/MenuSprites/Zz_Random.png';
     }
 
 }
