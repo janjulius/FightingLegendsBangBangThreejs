@@ -23,7 +23,7 @@ var blockingPossible = true;
 var previousWinner;
 var music = new Audio('Music/selectMusic.mp3');
 var thisGameWinnerAudio = new Audio('Music/this_games_winner_is.m4a');
-var stages = [Brawlhaven, Deserto, FlyingIsland, HyruleCastle, Metalplant, PretPaleis, StandardMap, Thundergart, ZeldaMap]
+var stages = [Brawlhaven, Deserto, FlyingIsland, HyruleCastle, Metalplant, PretPaleis, MarioLevel, Thundergart, ZeldaMap]
 gameInterface = new Interface();
 
 'use strict';

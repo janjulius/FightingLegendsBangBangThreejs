@@ -1,8 +1,8 @@
-class StandardMap extends Level {
+class MarioLevel extends Level {
     constructor() {
         super();
 
-        this.name = "StandardMap";
+        this.name = "MarioLevel";
         this.topLeft = {y: 200, z: 150 } ;
         this.bottomRight = {y: -70, z: -150};
         var material;
@@ -46,7 +46,7 @@ class StandardMap extends Level {
 
         var groundTex = THREE.ImageUtils.loadTexture(' Textures/MarioLevel/groundTop.png ');
         groundTex.wrapS = groundTex.wrapT = THREE.RepeatWrapping;
-        groundTex.repeat.set(32, 1);
+        groundTex.repeat.set(10, 1);
 
         
         var groundTopMaterial = Physijs.createMaterial(
@@ -60,7 +60,7 @@ class StandardMap extends Level {
 
         var ground2Tex = THREE.ImageUtils.loadTexture(' Textures/MarioLevel/ground.png ');
         ground2Tex.wrapS = ground2Tex.wrapT = THREE.RepeatWrapping;
-        ground2Tex.repeat.set(32, 14);
+        ground2Tex.repeat.set(10, 28);
 
         
         var groundMaterial = Physijs.createMaterial(
@@ -73,34 +73,45 @@ class StandardMap extends Level {
         )
 
         var bottomTop = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 5, 100),
+            new THREE.CubeGeometry(15, 5, 50),
             groundTopMaterial,
             0
         );
         bottomTop.receiveShadow = true;
-        bottomTop.position.set(0, -2.5, 0);
+        bottomTop.position.set(0, -2.5, 40);
         scene.add(bottomTop);
         bottomTop.name = "ground";
 
         var bottom = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(15, 51, 100),
+            new THREE.CubeGeometry(15, 200, 50),
             groundMaterial,
             0
         );
         bottom.receiveShadow = true;
-        bottom.position.set(0, -30, 0);
+        bottom.position.set(0, -105, 40);
         scene.add(bottom);
         bottom.name = "ground";
 
-        var upper = new THREE.Mesh(
-            new THREE.CubeGeometry(15, 1, 30),
-            new THREE.MeshBasicMaterial({ color: this.burlywoodbrown }),
+        
+        var bottomTop2 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(15, 5, 50),
+            groundTopMaterial,
             0
         );
-        upper.receiveShadow = true;
-        upper.position.set(0, 25, 0);
-        scene.add(upper);
-        upper.name = "ground";
+        bottomTop2.receiveShadow = true;
+        bottomTop2.position.set(0, -7.5, -25);
+        scene.add(bottomTop2);
+        bottomTop2.name = "ground";
+
+        var bottom2 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(15, 200, 50),
+            groundMaterial,
+            0
+        );
+        bottom2.receiveShadow = true;
+        bottom2.position.set(0, -110, -25);
+        scene.add(bottom2)
+        bottom2.name = "ground";
 
         material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
@@ -495,7 +506,7 @@ class StandardMap extends Level {
             0
         )
         tlHill.receiveShadow = true;
-        tlHill.position.set(-5, 20, -10);
+        tlHill.position.set(-5, 14, -10);
         scene.add(tlHill);
         tlHill.name = "ground";
 
@@ -505,7 +516,7 @@ class StandardMap extends Level {
             0
         )
         trHill.receiveShadow = true;
-        trHill.position.set(-5, 20, -14);
+        trHill.position.set(-5, 14, -14);
         scene.add(trHill);
         trHill.name = "ground";
 
@@ -515,7 +526,7 @@ class StandardMap extends Level {
             0
         )
         dlHill.receiveShadow = true;
-        dlHill.position.set(-5, 16, -10);
+        dlHill.position.set(-5, 10, -10);
         scene.add(dlHill);
         dlHill.name = "ground";
 
@@ -525,7 +536,7 @@ class StandardMap extends Level {
             0
         )
         drHill.receiveShadow = true;
-        drHill.position.set(-5, 16, -14);
+        drHill.position.set(-5, 10, -14);
         scene.add(drHill);
         drHill.name = "ground";
 
@@ -535,7 +546,7 @@ class StandardMap extends Level {
             0
         )
         dlHill2.receiveShadow = true;
-        dlHill2.position.set(-5, 12, -10.2);
+        dlHill2.position.set(-5, 6, -10.2);
         scene.add(dlHill2);
         dlHill2.name = "ground";
 
@@ -545,7 +556,7 @@ class StandardMap extends Level {
             0
         )
         dlHill3.receiveShadow = true;
-        dlHill3.position.set(-5, 8, -10.2);
+        dlHill3.position.set(-5, 2, -10.2);
         scene.add(dlHill3);
         dlHill3.name = "ground";
 
@@ -555,7 +566,7 @@ class StandardMap extends Level {
             0
         )
         tlHillC.receiveShadow = true;
-        tlHillC.position.set(-4, 10, -6.5);
+        tlHillC.position.set(-4, 4, -6.5);
         scene.add(tlHillC);
         tlHillC.name = "ground";
 
@@ -565,7 +576,7 @@ class StandardMap extends Level {
             0
         )
         trHillC.receiveShadow = true;
-        trHillC.position.set(-4, 10, -10.5);
+        trHillC.position.set(-4, 4, -10.5);
         scene.add(trHillC);
         trHillC.name = "ground";
 
@@ -575,7 +586,7 @@ class StandardMap extends Level {
             0
         )
         dlHillC.receiveShadow = true;
-        dlHillC.position.set(-4, 6, -6.5);
+        dlHillC.position.set(-4, 0, -6.5);
         scene.add(dlHillC);
         dlHillC.name = "ground";
 
@@ -585,7 +596,7 @@ class StandardMap extends Level {
             0
         )
         drHillC.receiveShadow = true;
-        drHillC.position.set(-4, 6, -10.5);
+        drHillC.position.set(-4, 0, -10.5);
         scene.add(drHillC);
         drHillC.name = "ground";
 
@@ -595,7 +606,7 @@ class StandardMap extends Level {
             0
         )
         drHillC2.receiveShadow = true;
-        drHillC2.position.set(-4, 2, -10.5);
+        drHillC2.position.set(-4, -4, -10.5);
         scene.add(drHillC2);
         drHillC2.name = "ground";
         
@@ -605,7 +616,7 @@ class StandardMap extends Level {
             0
         )
         tlHillD.receiveShadow = true;
-        tlHillD.position.set(-4, 6, -3);
+        tlHillD.position.set(-4, 0, -3);
         scene.add(tlHillD);
         tlHillD.name = "ground";
 
@@ -615,7 +626,7 @@ class StandardMap extends Level {
             0
         )
         trHillD.receiveShadow = true;
-        trHillD.position.set(-4, 6, -7);
+        trHillD.position.set(-4, 0, -7);
         scene.add(trHillD);
         trHillD.name = "ground";
 
@@ -625,7 +636,7 @@ class StandardMap extends Level {
             0
         )
         dlHillD.receiveShadow = true;
-        dlHillD.position.set(-4, 2, -3);
+        dlHillD.position.set(-4, -4, -3);
         scene.add(dlHillD);
         dlHillD.name = "ground";
 
@@ -635,7 +646,7 @@ class StandardMap extends Level {
             0
         )
         drHillD.receiveShadow = true;
-        drHillD.position.set(-4, 2, -7);
+        drHillD.position.set(-4, -4, -7);
         scene.add(drHillD);
         drHillD.name = "ground"; 
 
@@ -645,7 +656,7 @@ class StandardMap extends Level {
             0
         )
         tlHillB.receiveShadow = true;
-        tlHillB.position.set(-4.5, 14, -13);
+        tlHillB.position.set(-4.5, 8, -13);
         scene.add(tlHillB);
         tlHillB.name = "ground";
 
@@ -655,7 +666,7 @@ class StandardMap extends Level {
             0
         )
         trHillB.receiveShadow = true;
-        trHillB.position.set(-4.5, 14, -17);
+        trHillB.position.set(-4.5, 8, -17);
         scene.add(trHillB);
         trHillB.name = "ground";
 
@@ -665,7 +676,7 @@ class StandardMap extends Level {
             0
         )
         dlHillB.receiveShadow = true;
-        dlHillB.position.set(-4.5, 10, -13);
+        dlHillB.position.set(-4.5, 4, -13);
         scene.add(dlHillB);
         dlHillB.name = "ground";
 
@@ -675,7 +686,7 @@ class StandardMap extends Level {
             0
         )
         drHillB.receiveShadow = true;
-        drHillB.position.set(-4.5, 10, -17);
+        drHillB.position.set(-4.5, 4, -17);
         scene.add(drHillB);
         drHillB.name = "ground"; 
 
@@ -685,7 +696,7 @@ class StandardMap extends Level {
             0
         )
         dlHillB1.receiveShadow = true;
-        dlHillB1.position.set(-4.5, 6, -13);
+        dlHillB1.position.set(-4.5, 0, -13);
         scene.add(dlHillB1);
         dlHillB1.name = "ground";
 
@@ -695,7 +706,7 @@ class StandardMap extends Level {
             0
         )
         drHillB1.receiveShadow = true;
-        drHillB1.position.set(-4.5, 6, -17);
+        drHillB1.position.set(-4.5, 0, -17);
         scene.add(drHillB1);
         drHillB1.name = "ground"; 
 
@@ -705,7 +716,7 @@ class StandardMap extends Level {
             0
         )
         dlHillB2.receiveShadow = true;
-        dlHillB2.position.set(-4.5, 2, -13);
+        dlHillB2.position.set(-4.5, -4, -13);
         scene.add(dlHillB2);
         dlHillB2.name = "ground";
 
@@ -715,7 +726,7 @@ class StandardMap extends Level {
             0
         )
         drHillB2.receiveShadow = true;
-        drHillB2.position.set(-4.5, 2, -17);
+        drHillB2.position.set(-4.5, -4, -17);
         scene.add(drHillB2);
         drHillB2.name = "ground"; 
 
@@ -725,7 +736,7 @@ class StandardMap extends Level {
             0
         )
         tlHillE.receiveShadow = true;
-        tlHillE.position.set(-4, 7, -17);
+        tlHillE.position.set(-4, 1, -17);
         scene.add(tlHillE);
         tlHillE.name = "ground";
 
@@ -735,7 +746,7 @@ class StandardMap extends Level {
             0
         )
         trHillE.receiveShadow = true;
-        trHillE.position.set(-4, 7, -21);
+        trHillE.position.set(-4, 1, -21);
         scene.add(trHillE);
         trHillE.name = "ground";
 
@@ -745,7 +756,7 @@ class StandardMap extends Level {
             0
         )
         dlHillE.receiveShadow = true;
-        dlHillE.position.set(-4, 3, -17);
+        dlHillE.position.set(-4, -3, -17);
         scene.add(dlHillE);
         dlHillE.name = "ground";
 
@@ -755,7 +766,7 @@ class StandardMap extends Level {
             0
         )
         drHillE.receiveShadow = true;
-        drHillE.position.set(-4, 3, -21);
+        drHillE.position.set(-4, -3, -21);
         scene.add(drHillE);
         drHillE.name = "ground";
 
@@ -763,11 +774,91 @@ class StandardMap extends Level {
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
                 transparent : true,
-                map: THREE.ImageUtils.loadTexture(' Textures/MarioLevel/bush.png ' )
+                map: THREE.ImageUtils.loadTexture(' Textures/MarioLevel/cloud.png ' )
             }),
             0,
             1
         )
+
+        var cloud1 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(0.1, 4, 4),
+            material,
+            0
+        )
+        cloud1.receiveShadow = true;
+        cloud1.position.set(0, 25, 10);
+        scene.add(cloud1);
+        cloud1.name = "ground";
+
+        var cloud2 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(0.1, 4, 4),
+            material,
+            0
+        )
+        cloud2.receiveShadow = true;
+        cloud2.position.set(0, 25, 6);
+        scene.add(cloud2);
+        cloud2.name = "ground";
+
+        var cloud3 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(0.1, 4, 4),
+            material,
+            0
+        )
+        cloud3.receiveShadow = true;
+        cloud3.position.set(0, 25, 2);
+        scene.add(cloud3);
+        cloud3.name = "ground";
+
+        var cloud4 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(0.1, 4, 4),
+            material,
+            0
+        )
+        cloud4.receiveShadow = true;
+        cloud4.position.set(0, 25, -2);
+        scene.add(cloud4);
+        cloud4.name = "ground";
+
+        var cloud5 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(0.1, 4, 4),
+            material,
+            0
+        )
+        cloud5.receiveShadow = true;
+        cloud5.position.set(0, 25, -6);
+        scene.add(cloud5);
+        cloud5.name = "ground";
+
+        var cloud6 = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(0.1, 4, 4),
+            material,
+            0
+        )
+        cloud6.receiveShadow = true;
+        cloud6.position.set(0, 25, -10);
+        scene.add(cloud6);
+        cloud6.name = "ground";
+
+        material = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent : true,
+                map: THREE.ImageUtils.loadTexture(' Textures/MarioLevel/mario.png ' )
+            }),
+            0,
+            1
+        )
+
+        var marioSprite = new Physijs.BoxMesh(
+            new THREE.CubeGeometry(0,4,4),
+            material,
+            0
+        );
+        marioSprite.receiveShadow = true;
+        marioSprite.position.set(-4, 13, 19);
+        scene.add(marioSprite);
+        marioSprite.name = "ground";
 
         while (questionmark.hit = false)
         {

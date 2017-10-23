@@ -184,7 +184,7 @@ class Deserto extends Level {
             0
         );
         cylinder.receiveShadow = true;
-        cylinder.position.set(-40,12,70);
+        cylinder.position.set(-50,12,70);
         scene.add(cylinder);
         cylinder.name = "ground";
 
@@ -202,7 +202,7 @@ class Deserto extends Level {
             0
         );
         pillar.receiveShadow = true;
-        pillar.position.set(0, -100, 50);
+        pillar.position.set(-5, -100, 50);
         scene.add(pillar);
         pillar.name = "ground";
 
