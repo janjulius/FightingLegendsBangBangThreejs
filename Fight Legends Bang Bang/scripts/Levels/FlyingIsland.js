@@ -3,8 +3,8 @@ class FlyingIsland extends Level {
         super();
 
         this.name = "FlyingIsland";
-        this.topLeft = {y: 200, z: 150 } ;
-        this.bottomRight = {y: -150, z: -150};
+        this.topLeft = {y: 120, z: 150 } ;
+        this.bottomRight = {y: -120, z: -150};
 
         //MUSIC
 
@@ -18,7 +18,7 @@ class FlyingIsland extends Level {
 
         //SPAWNS
 
-        var possibleSpawns = [{ y: -30, z: 30 }, { y: -30, z: 30 }, { y: -30, z: 30 }, { y: -30, z: 30 }]
+        var possibleSpawns = [{ y: -30, z: 10 }, { y: -40, z: -75 }, { y: 10, z: 30 }, { y: 40, z: -45 }]
 
         function shuffle(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
