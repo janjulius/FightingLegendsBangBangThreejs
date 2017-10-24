@@ -80,6 +80,7 @@ class Character {
 
         this.readyForNextGame = false;
 
+
         console.log("created character");
     }
 
@@ -535,6 +536,14 @@ class Character {
                 _this.touchingWalls[1] = other_object.id;
             } else if (contact_normal.y == 1 && !other_object.isPlayer) {
                 _this.touchingWalls[2] = other_object.id;
+                if(other_object.isQuestionmark){
+                    if(!other_object.hit){
+                        other_object.hit = true;
+                        other_object.material = level.coinBlockDoneMaterial;
+                        level.playCoinSound();
+                        level.popCoin(other_object.position.x, other_object.position.y, other_object.position.z);
+                    }
+                }
             } else if (contact_normal.y == -1) {
                 _this.touchingWalls[3] = other_object.id;
             }

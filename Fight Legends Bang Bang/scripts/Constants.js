@@ -210,3 +210,22 @@ class Rect {
         return point.x < this.x && point.x > this.width && point.y < this.y && point.y > this.height;
     }
 }
+
+async function deleteAfter(object, dTime){
+    await sleep(dTime); 
+
+    scene.remove(object);
+}
+
+async function doEvery(task, time, amount){ //can only run global tasks maybe useful later
+    var _task = task;
+    if(amount != 1){
+        await sleep(time);
+        _task;
+        doEvery(_task, time, amount-1);
+    }
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }

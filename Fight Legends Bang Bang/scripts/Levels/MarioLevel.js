@@ -15,6 +15,15 @@ class MarioLevel extends Level {
             this.play();
         }, false);
         this.myAudio.play();
+        this.coinBlockDoneMaterial = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                map: THREE.ImageUtils.loadTexture(' Textures/MarioLevel/emptyQuestionmark.png ' )
+            }),
+            0,
+            1
+        )
+        this.coinSound = new Audio('Sounds/smb3_coin.wav');
 
         var possibleSpawns = [{ y: 20, z: 35 }, { y: 30, z: -8 }, { y: 30, z: 8 }, { y: 20, z: -35 }]
 
@@ -372,25 +381,22 @@ class MarioLevel extends Level {
         scene.add(questionmark13);
         questionmark13.name = "ground";
 
-    	material = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial({
-                color: 0xffffff,
-                transparent : true,
-                map: THREE.ImageUtils.loadTexture(' Textures/MarioLevel/coin.png ' )
-            }),
-            0,
-            1
-        )
-        var coin = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(0.1, 4, 4),
-            material,
-            0
-        )
-        coin.receiveShadow = true;
-        coin.position.set(0, 32, 39);
-        scene.add(coin);
-        coin.name = "ground";
-        
+        questionmark.isQuestionmark = true;
+        questionmark2.isQuestionmark = true;
+        questionmark3.isQuestionmark = true;
+        questionmark4.isQuestionmark = true;
+        questionmark5.isQuestionmark = true;
+        questionmark6.isQuestionmark = true;
+        questionmark7.isQuestionmark = true;
+        questionmark8.isQuestionmark = true;
+        questionmark9.isQuestionmark = true;
+        questionmark10.isQuestionmark = true;
+        questionmark11.isQuestionmark = true;
+        questionmark12.isQuestionmark = true;
+        questionmark13.isQuestionmark = true;
+/*
+    	
+        */
         material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
@@ -839,7 +845,7 @@ class MarioLevel extends Level {
         cloud6.position.set(0, 25, -10);
         scene.add(cloud6);
         cloud6.name = "ground";
-
+/*
         material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
@@ -859,7 +865,7 @@ class MarioLevel extends Level {
         marioSprite.position.set(-4, 13, 19);
         scene.add(marioSprite);
         marioSprite.name = "ground";
-
+*/
         while (questionmark.hit = false)
         {
          foreach (character in players)
@@ -880,5 +886,33 @@ class MarioLevel extends Level {
              }
          }
         }
+    }
+
+    playCoinSound(){
+        this.coinSound.pause();
+        this.coinSound.currentTime = 0;
+        this.coinSound.play();
+    }
+
+    popCoin(x, y, z){
+        var material = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent : true,
+                map: THREE.ImageUtils.loadTexture(' Textures/MarioLevel/coin.png ' )
+            }),
+            0,
+            1
+        )
+        var coin = new THREE.Mesh(
+            new THREE.CubeGeometry(0.1, 4, 4),
+            material,
+            0
+        )
+        coin.receiveShadow = true;
+        coin.position.set(x, y + 5, z);
+        scene.add(coin);
+        coin.name = "ground";
+        deleteAfter(coin, 200);
     }
 }
