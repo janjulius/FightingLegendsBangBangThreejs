@@ -33,6 +33,26 @@ class Rocky extends Character {
             new THREE.CubeGeometry(5, 5, 5),
             material
         );
+
+
+        var mtlLoader = new THREE.MTLLoader();
+        mtlLoader.load('mixamo_raccoon.mtl', function (materials) {
+        
+            materials.preload();
+        
+            materials.materials.default.map.magFilter = THREE.NearestFilter;
+            materials.materials.default.map.minFilter = THREE.LinearFilter;
+        
+            var objLoader = new THREE.OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.load('mixamo_raccoon.obj', function (object) {
+                
+                scene.add(object);
+                object.position = new Vector3(0,0,0);
+                console.log("MY OBJECT IS " + object);
+            });
+        
+        });
         this.geometry.castShadow = true;
         this.geometry.position.set(0, y, z);
         scene.add(this.geometry);
