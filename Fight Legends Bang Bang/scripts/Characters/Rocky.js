@@ -57,7 +57,7 @@ class Rocky extends Character {
                 console.log(Math.round(percentComplete, 2) + '% downloaded');
             }
         };
-        var onError = function (xhr) { };
+        var onError = function (xhr) { console.log(xhr); };
 
         THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
 
