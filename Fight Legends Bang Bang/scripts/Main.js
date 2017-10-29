@@ -302,7 +302,7 @@ function runCharSelect() {
                     map: THREE.ImageUtils.loadTexture('sprites/p' + (i + 1) + 'Hand.png'),
                     transparent: true
                 });
-            fische = new Physijs.BoxMesh(new THREE.BoxGeometry(0, 2, 2), material, 0);
+            fische = new Physijs.BoxMesh(new THREE.BoxGeometry(0.00001, 2, 2), material, 0);
             playerFiches[i] = fische;
             scene.add(fische);
             console.log(players[i]);
