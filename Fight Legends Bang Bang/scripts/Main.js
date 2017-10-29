@@ -55,7 +55,7 @@ function init() {
     physics_stats.domElement.style.top = '50px';
     physics_stats.domElement.style.zIndex = 100;
     container.appendChild(physics_stats.domElement);
-    
+
     camera = new THREE.PerspectiveCamera(
         35,
         window.innerWidth / window.innerHeight,
@@ -81,7 +81,7 @@ function init() {
     light.shadowDarkness = .7;
     scene.add(light);
 
-    
+
 
     if (charSelect) {
         runCharSelect();
@@ -143,7 +143,7 @@ function CalculateCameraPosition(bb) {
 
     var result = new THREE.Vector3(newPos, center.y - (multi / 2), center.x);
 
-    result.y = clamp(result.y, level.bottomRight.y + 80, level.topLeft.y - 80);
+    result.y = clamp(result.y, level.bottomRight.y + 80, level.topLeft.y - 80) - 10;
     result.z = clamp(result.z, level.bottomRight.z + 80, level.topLeft.z - 80);
 
     return result;
@@ -392,10 +392,10 @@ function runGame() {
 
         console.log("attempting to load level " + selectedLevel);
 
-        if(selectedLevel == 9){
-        var r = Math.floor((Math.random() * stages.length))
-        
-        level = new stages[r]();
+        if (selectedLevel == 9) {
+            var r = Math.floor((Math.random() * stages.length))
+
+            level = new stages[r]();
         } else {
             level = new stages[selectedLevel]();
         }

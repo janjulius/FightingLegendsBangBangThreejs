@@ -540,9 +540,6 @@ class Character {
         this.geometry.setAngularVelocity(new THREE.Vector3(0, 0, 0));
         this.geometry.setAngularFactor(new THREE.Vector3(0, 0, 0));
         this.geometry.setLinearFactor(new THREE.Vector3(0, 1, 1));
-        if (this.model && this.pivot) {
-            this.pivot.position.set(this.geometry.position.x, this.geometry.position.y, this.geometry.position.z);
-        }
     }
 
     UpdateChar(t) { }
