@@ -57,19 +57,16 @@ class Rocky extends Character {
         mtlLoader.setPath( 'Models/Raccoon/Raccoon/');
         mtlLoader.setBaseUrl('Models/Raccoon/Raccoon/');
 
-        mtlLoader.load('mixamo_raccoon.mtl', function (materials) {
+        mtlLoader.load('Models/Raccoon/Raccoon/mixamo_raccoon.mtl', function (materials) {
         console.log("HI");
             materials.preload();
         
-            materials.materials.default.map.magFilter = THREE.NearestFilter;
-            materials.materials.default.map.minFilter = THREE.LinearFilter;
-        
             var objLoader = new THREE.OBJLoader();
             objLoader.setMaterials(materials);
+            objLoader.setPath( 'Models/Raccoon/Raccoon/');
             objLoader.load('mixamo_raccoon.obj', function (object) {
                 
                 scene.add(object);
-                object.position = new Vector3(0,0,0);
                 console.log("MY OBJECT IS " + object);
             }, onProgress, onError);
         
