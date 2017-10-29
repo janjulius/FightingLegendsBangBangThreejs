@@ -34,10 +34,31 @@ class Rocky extends Character {
             material
         );
 
+        this.loadModel();
+        this.geometry.castShadow = true;
+        this.geometry.position.set(0, y, z);
+        scene.add(this.geometry);
+        console.log("created Rocky");
+    }
+ 
+    loadModel(){
+        console.log("loading model...");
+        var onProgress = function ( xhr ) {
+            if ( xhr.lengthComputable ) {
+                var percentComplete = xhr.loaded / xhr.total * 100;
+                console.log( Math.round(percentComplete, 2) + '% downloaded' );
+            }
+        };
+        var onError = function ( xhr ) { };
+
+        THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
         var mtlLoader = new THREE.MTLLoader();
+        mtlLoader.setPath( 'Models/Raccoon/Raccoon/');
+        mtlLoader.setBaseUrl('Models/Raccoon/Raccoon/');
+
         mtlLoader.load('mixamo_raccoon.mtl', function (materials) {
-        
+        console.log("HI");
             materials.preload();
         
             materials.materials.default.map.magFilter = THREE.NearestFilter;
@@ -50,15 +71,10 @@ class Rocky extends Character {
                 scene.add(object);
                 object.position = new Vector3(0,0,0);
                 console.log("MY OBJECT IS " + object);
-            });
+            }, onProgress, onError);
         
         });
-        this.geometry.castShadow = true;
-        this.geometry.position.set(0, y, z);
-        scene.add(this.geometry);
-        console.log("created Rocky");
     }
-
     specialAtk() {
         this.clawed[0] = false;
         this.clawed[1] = false;
