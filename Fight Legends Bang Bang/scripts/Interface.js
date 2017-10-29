@@ -20,10 +20,16 @@ class Interface {
             this.spaBar2.style.visibility = "visible";
             this.spaBar1.style.visibility = "visible";
             this.spaBar3.style.visibility = "visible";
-            this.spaBar0.value = this.players[0].getSpecialAttackCounter();
-            this.spaBar1.value = this.players[1].getSpecialAttackCounter();
-            this.spaBar2.value = this.players[2].getSpecialAttackCounter();
-            this.spaBar3.value = this.players[3].getSpecialAttackCounter();
+            if(playersPlaying > 1){
+                this.spaBar0.value = this.players[0].getSpecialAttackCounter();
+                this.spaBar1.value = this.players[1].getSpecialAttackCounter();
+                if(playersPlaying > 2){
+                    this.spaBar2.value = this.players[2].getSpecialAttackCounter();
+                    if(playersPlaying > 3){
+                        this.spaBar3.value = this.players[3].getSpecialAttackCounter();
+                    }
+                }
+            } 
         }
 
             var w = document.width;
@@ -410,8 +416,6 @@ class Interface {
             this.readyTexts[i].style.color = "red";
 
         }
-
-
         this.loadedEndScreenInterface = true;
     }
 
