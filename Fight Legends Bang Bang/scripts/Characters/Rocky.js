@@ -34,31 +34,44 @@ class Rocky extends Character {
             material
         );
 
-
-        var mtlLoader = new THREE.MTLLoader();
-        mtlLoader.load('mixamo_raccoon.mtl', function (materials) {
-        
-            materials.preload();
-        
-            materials.materials.default.map.magFilter = THREE.NearestFilter;
-            materials.materials.default.map.minFilter = THREE.LinearFilter;
-        
-            var objLoader = new THREE.OBJLoader();
-            objLoader.setMaterials(materials);
-            objLoader.load('mixamo_raccoon.obj', function (object) {
-                
-                scene.add(object);
-                object.position = new Vector3(0,0,0);
-                console.log("MY OBJECT IS " + object);
-            });
-        
-        });
+        this.loadModel();
         this.geometry.castShadow = true;
         this.geometry.position.set(0, y, z);
         scene.add(this.geometry);
         console.log("created Rocky");
     }
+ 
+    loadModel(){
+        console.log("loading model...");
+        var onProgress = function ( xhr ) {
+            if ( xhr.lengthComputable ) {
+                var percentComplete = xhr.loaded / xhr.total * 100;
+                console.log( Math.round(percentComplete, 2) + '% downloaded' );
+            }
+        };
+        var onError = function ( xhr ) { };
 
+        THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+
+        var mtlLoader = new THREE.MTLLoader();
+        mtlLoader.setPath( 'Models/Raccoon/Raccoon/');
+        mtlLoader.setBaseUrl('Models/Raccoon/Raccoon/');
+
+        mtlLoader.load('Models/Raccoon/Raccoon/mixamo_raccoon.mtl', function (materials) {
+        console.log("HI");
+            materials.preload();
+        
+            var objLoader = new THREE.OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.setPath( 'Models/Raccoon/Raccoon/');
+            objLoader.load('mixamo_raccoon.obj', function (object) {
+                
+                scene.add(object);
+                console.log("MY OBJECT IS " + object);
+            }, onProgress, onError);
+        
+        });
+    }
     specialAtk() {
         this.clawed[0] = false;
         this.clawed[1] = false;
