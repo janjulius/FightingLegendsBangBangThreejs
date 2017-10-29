@@ -6,6 +6,10 @@ class Character {
         this.specialAtkString = "base";
         this.damage = GAME_SETTINGS_HANDICAP;
 
+        this.model = undefined;
+        this.modelOfset = new THREE.Vector3(0, 0, 0);
+        this.LookDirection = -1
+
         this.direction = {
             y: 0,
             z: 0
@@ -422,6 +426,17 @@ class Character {
             };
         }
 
+        if (this.direction.z > 0.3) {
+            if (this.LookDirection == -1) {
+                this.model.rotation.y = deg2Rad(0);
+            }
+            this.LookDirection = 1;
+        } else if (this.direction.z < -0.3) {
+            if (this.LookDirection == 1) {
+                this.model.rotation.y = deg2Rad(180);
+            }
+            this.LookDirection = -1;
+        }
 
         if (this.velt > -this.maxGravityVelocity) {
             let extraVel = this.direction.y < 0 ? -this.direction.y * (this.gravityVelocity) : 0;
@@ -472,12 +487,7 @@ class Character {
             movespeed = 0;
         }
 
-        this.velocity = new THREE.Vector3(0, this.velt + this.knockBack.y, movespeed + this.knockBack.z);
 
-        this.geometry.setLinearVelocity(this.isStunned ? new THREE.Vector3(0, 0, 0) : this.velocity);
-        this.geometry.setAngularVelocity(new THREE.Vector3(0, 0, 0));
-        this.geometry.setAngularFactor(new THREE.Vector3(0, 0, 0));
-        this.geometry.setLinearFactor(new THREE.Vector3(0, 1, 1));
 
         if (this.attackRemoveTimer > 0) {
             this.attackRemoveTimer -= t;
@@ -522,6 +532,16 @@ class Character {
 
         if (this.blockCooldownTimer <= 0)
             this.canBlock = true;
+
+        this.velocity = new THREE.Vector3(0, this.velt + this.knockBack.y, movespeed + this.knockBack.z);
+
+        this.geometry.setLinearVelocity(this.isStunned ? new THREE.Vector3(0, 0, 0) : this.velocity);
+        this.geometry.setAngularVelocity(new THREE.Vector3(0, 0, 0));
+        this.geometry.setAngularFactor(new THREE.Vector3(0, 0, 0));
+        this.geometry.setLinearFactor(new THREE.Vector3(0, 1, 1));
+        if (this.model) {
+            this.model.position.set(this.geometry.position.x + this.modelOfset.x, this.geometry.position.y + this.modelOfset.y, this.geometry.position.z + this.modelOfset.z);
+        }
     }
 
     UpdateChar(t) { }
@@ -536,8 +556,8 @@ class Character {
                 _this.touchingWalls[1] = other_object.id;
             } else if (contact_normal.y == 1 && !other_object.isPlayer) {
                 _this.touchingWalls[2] = other_object.id;
-                if(other_object.isQuestionmark){
-                    if(!other_object.hit){
+                if (other_object.isQuestionmark) {
+                    if (!other_object.hit) {
                         other_object.hit = true;
                         other_object.material = level.coinBlockDoneMaterial;
                         level.playCoinSound();
