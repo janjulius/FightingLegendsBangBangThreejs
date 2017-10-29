@@ -11,6 +11,7 @@ class Rocky extends Character {
         this.clawDamage = 12;
         this.specialDamage = 17;
         this.ultRange = 400;
+        this.modelOfset = new THREE.Vector3(0, -2.5, -2.5);
         this.clawed = [];
         this.clawed[0] = false;
         this.clawed[1] = false;
@@ -40,36 +41,38 @@ class Rocky extends Character {
         scene.add(this.geometry);
         console.log("created Rocky");
     }
- 
-    loadModel(){
+
+    loadModel() {
         console.log("loading model...");
-        var onProgress = function ( xhr ) {
-            if ( xhr.lengthComputable ) {
+        var onProgress = function (xhr) {
+            if (xhr.lengthComputable) {
                 var percentComplete = xhr.loaded / xhr.total * 100;
-                console.log( Math.round(percentComplete, 2) + '% downloaded' );
+                console.log(Math.round(percentComplete, 2) + '% downloaded');
             }
         };
-        var onError = function ( xhr ) { };
+        var onError = function (xhr) { };
 
-        THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+        THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
 
         var mtlLoader = new THREE.MTLLoader();
-        mtlLoader.setPath( 'Models/Raccoon/Raccoon/');
+        mtlLoader.setPath('Models/Raccoon/Raccoon/');
         mtlLoader.setBaseUrl('Models/Raccoon/Raccoon/');
 
+        var _this = this;
         mtlLoader.load('Models/Raccoon/Raccoon/mixamo_raccoon.mtl', function (materials) {
-        console.log("HI");
+            console.log("HI");
             materials.preload();
-        
+
             var objLoader = new THREE.OBJLoader();
             objLoader.setMaterials(materials);
-            objLoader.setPath( 'Models/Raccoon/Raccoon/');
+            objLoader.setPath('Models/Raccoon/Raccoon/');
             objLoader.load('mixamo_raccoon.obj', function (object) {
-                
+                object.scale.set(0.06, 0.06, 0.06);
                 scene.add(object);
+                _this.model = object;
                 console.log("MY OBJECT IS " + object);
             }, onProgress, onError);
-        
+
         });
     }
     specialAtk() {

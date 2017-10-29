@@ -229,3 +229,5 @@ async function doEvery(task, time, amount){ //can only run global tasks maybe us
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  function deg2Rad(degree)   { return degree*(Math.PI/180); }
