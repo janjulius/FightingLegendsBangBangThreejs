@@ -42,12 +42,6 @@ class Willem extends Character {
         console.log("created Willem");
     }
 
-
-    idle() {
-        //idle image
-
-    }
-
     pressedbuttonY() {
         if (this.specialReady())
             this.TotalUltsUsed++;

@@ -68,7 +68,7 @@ class Rocky extends Character {
         var _this = this;
         var loader = new THREE.FBXLoader(manager);
 
-        loader.load('Models/Raccoon/Raccoon/idle.fbx', function (object) {
+        loader.load('Models/Raccoon/Raccoon/walking.fbx', function (object) {
 
             _this.anim.push(object);
 
@@ -90,6 +90,7 @@ class Rocky extends Character {
 
             if (_this.anim.length > 0) {
                 var action = object.mixer.clipAction(_this.anim[0].animations[0]);
+                console.log(action);
                 action.play();
             }
         }, onProgress, onError);
