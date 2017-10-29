@@ -44,6 +44,11 @@ class Rocky extends Character {
 
     loadModel() {
         console.log("loading model...");
+        var manager = new THREE.LoadingManager();
+        manager.onProgress = function( item, loaded, total ) {
+            console.log( item, loaded, total );
+        };
+
         var onProgress = function (xhr) {
             if (xhr.lengthComputable) {
                 var percentComplete = xhr.loaded / xhr.total * 100;
@@ -59,21 +64,39 @@ class Rocky extends Character {
         mtlLoader.setBaseUrl('Models/Raccoon/Raccoon/');
 
         var _this = this;
-        mtlLoader.load('Models/Raccoon/Raccoon/mixamo_raccoon.mtl', function (materials) {
-            console.log("HI");
-            materials.preload();
+        var loader = new THREE.FBXLoader( manager );
+        loader.load( 'Models/Raccoon/Raccoon/mixamo_raccoon.fbx', function( object ) {
+        
+            _this.model = object;
+            object.mixer = new THREE.AnimationMixer( object );
+            mixers.push( object.mixer );
+        
+            if (animation !== undefined)
+            {
+                var action = model.mixer.clipAction( animation.animations[ 0 ] );
+                action.play();
+            }
+        
+            scene.add( object );
+        }, onProgress, onError );
 
-            var objLoader = new THREE.OBJLoader();
-            objLoader.setMaterials(materials);
-            objLoader.setPath('Models/Raccoon/Raccoon/');
-            objLoader.load('mixamo_raccoon.obj', function (object) {
-                object.scale.set(0.06, 0.06, 0.06);
-                scene.add(object);
-                _this.model = object;
-                console.log("MY OBJECT IS " + object);
-            }, onProgress, onError);
+        console.log(this.model + "BTW");
 
-        });
+        // mtlLoader.load('Models/Raccoon/Raccoon/mixamo_raccoon.mtl', function (materials) {
+        //     console.log("HI");
+        //     materials.preload();
+
+        //     var objLoader = new THREE.OBJLoader();
+        //     objLoader.setMaterials(materials);
+        //     objLoader.setPath('Models/Raccoon/Raccoon/');
+        //     objLoader.load('mixamo_raccoon.obj', function (object) {
+        //         object.scale.set(0.06, 0.06, 0.06);
+        //         scene.add(object);
+        //         _this.model = object;
+        //         console.log("MY OBJECT IS " + object);
+        //     }, onProgress, onError);
+
+        // });
     }
     specialAtk() {
         this.clawed[0] = false;
