@@ -8,6 +8,7 @@ class Character {
 
         this.model = undefined;
         this.modelOfset = new THREE.Vector3(0, 0, 0);
+        this.pivot = new THREE.Object3D();
         this.LookDirection = -1
 
         this.direction = {
@@ -427,13 +428,13 @@ class Character {
         }
 
         if (this.direction.z > 0.3) {
-            if (this.LookDirection == -1) {
-                this.model.rotation.y = deg2Rad(0);
+            if (this.LookDirection == -1 && this.model) {
+                this.pivot.rotation.y = deg2Rad(0);
             }
             this.LookDirection = 1;
         } else if (this.direction.z < -0.3) {
-            if (this.LookDirection == 1) {
-                this.model.rotation.y = deg2Rad(180);
+            if (this.LookDirection == 1 && this.model) {
+                this.pivot.rotation.y = deg2Rad(180);
             }
             this.LookDirection = -1;
         }
@@ -539,8 +540,8 @@ class Character {
         this.geometry.setAngularVelocity(new THREE.Vector3(0, 0, 0));
         this.geometry.setAngularFactor(new THREE.Vector3(0, 0, 0));
         this.geometry.setLinearFactor(new THREE.Vector3(0, 1, 1));
-        if (this.model) {
-            this.model.position.set(this.geometry.position.x + this.modelOfset.x, this.geometry.position.y + this.modelOfset.y, this.geometry.position.z + this.modelOfset.z);
+        if (this.model && this.pivot) {
+            this.pivot.position.set(this.geometry.position.x, this.geometry.position.y, this.geometry.position.z);
         }
     }
 

@@ -139,7 +139,7 @@ function CalculateCameraPosition(bb) {
     var center = bb.GetCenter();
     var multi = Math.abs(bb.GetMagnitude() / 50);
     //console.log(multi);
-    newPos = clamp(150 + multi, 150, 400);
+    newPos = clamp(200 + multi, 200, 400);
 
     var result = new THREE.Vector3(newPos, center.y - (multi / 2), center.x);
 

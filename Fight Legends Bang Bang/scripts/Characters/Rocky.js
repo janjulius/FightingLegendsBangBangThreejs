@@ -30,6 +30,8 @@ class Rocky extends Character {
             0,
             0
         );
+        material.transparent = true;
+        material.opacity = 0.2;
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
             material
@@ -68,7 +70,9 @@ class Rocky extends Character {
             objLoader.setPath('Models/Raccoon/Raccoon/');
             objLoader.load('mixamo_raccoon.obj', function (object) {
                 object.scale.set(0.06, 0.06, 0.06);
-                scene.add(object);
+                _this.pivot.add(object);
+                object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
+                scene.add(_this.pivot);
                 _this.model = object;
                 console.log("MY OBJECT IS " + object);
             }, onProgress, onError);
