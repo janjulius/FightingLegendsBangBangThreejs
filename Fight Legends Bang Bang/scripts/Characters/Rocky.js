@@ -67,6 +67,18 @@ class Rocky extends Character {
 
         var _this = this;
         var loader = new THREE.FBXLoader(manager);
+
+        loader.load('Models/Raccoon/Raccoon/idle.fbx', function (object) {
+
+            _this.anim.push(object);
+
+            // if (model !== undefined)
+            // {
+            //     var action = model.mixer.clipAction( animation.animations[ 0 ] );
+            //     action.play();
+            // }
+        }, onProgress, onError);
+
         loader.load('Models/Raccoon/Raccoon/test_raccoon.fbx', function (object) {
             object.scale.set(0.06, 0.06, 0.06);
             _this.pivot.add(object);
@@ -76,11 +88,10 @@ class Rocky extends Character {
             object.mixer = new THREE.AnimationMixer(object);
             _this.mixers.push(object.mixer);
 
-            // if (animation !== undefined)
-            // {
-            //     var action = model.mixer.clipAction( animation.animations[ 0 ] );
-            //     action.play();
-            // }
+            if (_this.anim.length > 0) {
+                var action = object.mixer.clipAction(_this.anim[0].animations[0]);
+                action.play();
+            }
         }, onProgress, onError);
 
         console.log(this.model + "BTW");

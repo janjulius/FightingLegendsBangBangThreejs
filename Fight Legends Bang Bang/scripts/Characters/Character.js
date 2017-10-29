@@ -11,6 +11,7 @@ class Character {
         this.pivot = new THREE.Object3D();
         this.LookDirection = -1
         this.mixers = [];
+        this.anim = [];
 
         this.direction = {
             y: 0,
