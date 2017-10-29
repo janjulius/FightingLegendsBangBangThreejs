@@ -10,6 +10,7 @@ class Character {
         this.modelOfset = new THREE.Vector3(0, 0, 0);
         this.pivot = new THREE.Object3D();
         this.LookDirection = -1
+        this.mixers = [];
 
         this.direction = {
             y: 0,

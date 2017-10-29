@@ -47,8 +47,8 @@ class Rocky extends Character {
     loadModel() {
         console.log("loading model...");
         var manager = new THREE.LoadingManager();
-        manager.onProgress = function( item, loaded, total ) {
-            console.log( item, loaded, total );
+        manager.onProgress = function (item, loaded, total) {
+            console.log(item, loaded, total);
         };
 
         var onProgress = function (xhr) {
@@ -66,21 +66,22 @@ class Rocky extends Character {
         mtlLoader.setBaseUrl('Models/Raccoon/Raccoon/');
 
         var _this = this;
-        var loader = new THREE.FBXLoader( manager );
-        loader.load( 'Models/Raccoon/Raccoon/mixamo_raccoon.fbx', function( object ) {
-        
+        var loader = new THREE.FBXLoader(manager);
+        loader.load('Models/Raccoon/Raccoon/test_raccoon.fbx', function (object) {
+            object.scale.set(0.06, 0.06, 0.06);
+            _this.pivot.add(object);
+            _this.geometry.add(_this.pivot);
+            object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
             _this.model = object;
-            object.mixer = new THREE.AnimationMixer( object );
-            mixers.push( object.mixer );
-        
-            if (animation !== undefined)
-            {
-                var action = model.mixer.clipAction( animation.animations[ 0 ] );
-                action.play();
-            }
-        
-            scene.add( object );
-        }, onProgress, onError );
+            object.mixer = new THREE.AnimationMixer(object);
+            _this.mixers.push(object.mixer);
+
+            // if (animation !== undefined)
+            // {
+            //     var action = model.mixer.clipAction( animation.animations[ 0 ] );
+            //     action.play();
+            // }
+        }, onProgress, onError);
 
         console.log(this.model + "BTW");
 
