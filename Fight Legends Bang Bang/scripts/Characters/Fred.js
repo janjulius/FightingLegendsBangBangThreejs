@@ -3,10 +3,12 @@ class Fred extends Character {
     constructor(y, z) {
         super();
         this.name = "Fred";
+        this.size.width = 5;
+        this.size.height = 5;
         this.extraname = "der goblin";
         this.cid = 3;
         this.specialAtkString = "Hammer smash!";
-        this.modelOfset = new THREE.Vector3(0, -2.5, 0);
+        this.modelOfset = new THREE.Vector3(0, -this.size.height / 2, 0);
         this.hammerSmashDamage = 90;
         this.spcTimer = 0;
         this.specialExistTime = 0.2;
@@ -25,7 +27,7 @@ class Fred extends Character {
         material.transparent = true;
         material.opacity = 0.2;
         this.geometry = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(5, 5, 5),
+            new THREE.CubeGeometry(5, this.size.height, this.size.width),
             material
         );
         this.geometry.castShadow = true;
