@@ -399,6 +399,9 @@ function runGame() {
             scene.remove(scene.children[i]);
         }
 
+        var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+        scene.add( light );
+
         camera = new THREE.PerspectiveCamera(
             35,
             window.innerWidth / window.innerHeight,

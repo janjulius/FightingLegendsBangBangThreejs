@@ -33,7 +33,7 @@ class Willem extends Character {
         );
 
         this.material.transparent = true;
-        this.material.opacity = 0.2;
+        this.material.opacity = 0;
         this.specialAtkString = "Throw Snowball";
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
@@ -80,7 +80,7 @@ class Willem extends Character {
         var _this = this;
         var loader = new THREE.FBXLoader(manager);
 
-        loader.load('Models/Snowman/Snowman_0003.fbx', function (object) {
+        loader.load('Models/Snowman/snowman.fbx', function (object) {
             object.scale.set(0.4, 0.4, 0.4);
             _this.pivot.add(object);
             _this.geometry.add(_this.pivot);
