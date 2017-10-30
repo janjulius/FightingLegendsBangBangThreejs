@@ -56,7 +56,7 @@ class Kees extends Character {
         var loader = new THREE.FBXLoader(manager);
 
         loader.load('Models/kees/Idle.fbx', function (object) {
-            object.scale.set(1, 1, 1);
+            object.scale.set(0.05,0.05, 0.05);
             _this.pivot.add(object);
             _this.geometry.add(_this.pivot);
             object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
