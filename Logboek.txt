@@ -36,9 +36,29 @@ Donderdag 19 oktober
 Mario- en Terraria-level gemaakt. Characters hebben nu tracking variables. Character sprites voor ingame display transparant gemaakt. Het spel wordt nu stilgezet wanneer er een winnaar is en laat een interface zien met de einduitslag en stats per speler. Er kan nu gepauzeerd worden. Multiple bug fixes.
 
 Vrijdag 20 oktober
-Verder gewerkt aan de Mario en Terraria levels.
+Verder gewerkt aan de Mario en Terraria levels. Er is nu een level-select scherm. 
  
+Zaterdag 21 oktober
+Terraria map afgemaakt. Verder gewerkt aan level select scherm en andere levels.
 
+Zondag 22 oktober
+Level select scherm af. Alle levels hebben nu unieke muziek. 
+
+Maandag 23 oktober
+Mario level design afgemaakt, spawnpoints gewijzigd van Terraria level.
+
+Dinsdag 24 oktober
+Er komen nu coins uit de vraagtekenblokken in het Mario level.
+
+Woensdag 25 oktober
+Begonnen met implementeren van animatie inlaadsysteem, te beginnen met Rocky.
+
+Zondag 29 oktober
+Rocky's model ingeladen. Begonnen met inladen models Fred en Willem, multiple bug fixes in het laadsysteem.
+
+Maandag 30 oktober
+Textures toegevoegd aan levels. Aan interface gewerkt. Kees's ult gefixt. Verschillende characters meer en minder krachtig gemaakt voor een balanced gameplay. Game-weetjes toegevoegd in tekstvak onderin level select scherm. 
+Camera positie gefixt in level select scherm. Alle models voor de character ingeladen met animaties. Verdere bug fixes aan special abilities en ingame interface.
 
 
 
