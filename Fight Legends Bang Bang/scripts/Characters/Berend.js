@@ -10,8 +10,8 @@ class Berend extends Character {
         this.stBasicJump = this.jumpForce;
         this.ultSpecialIncrease = 0;
         this.ultBasicAttackDamage = 18;
-        this.ultBasicAttackRange = 15;
-        this.ultBasicAttackWidth = 5.8;
+        this.ultBasicAttackRange = 18;
+        this.ultBasicAttackWidth = 6.5;
         this.ultTakeDamageMultiplier = 2;
         this.ultJumpForce = 70;
         this.ultSpeed = 65;

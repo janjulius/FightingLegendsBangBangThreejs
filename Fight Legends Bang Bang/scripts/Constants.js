@@ -24,8 +24,12 @@ var TIPS = ["Willem is allergic to peanuts.",
 "Rocky has devoted all his free time (off Fighting Legends : bang bang) to chasing the love of a raccoon name Rodny.",
 "Rocky his ultimate makes him leap to the nearest target to kick their butt.",
 "Paardman is half human, half horse, but unlike an average centaur his bottom half is human and top half horse.",
-"Paardman plays Rock, paper or scissors and based on the result he throws an object."
-
+"Paardman plays Rock, paper or scissors and based on the result he throws an object.",
+"Once your special bar has been filled, you can press Y to use your ultimate ability!",
+"Flying Legends: bang bang does not own any of the music or sounds that can be heard during the game, except for the announcer",
+"All maps have been made by our own designers, the ideas have definitely not been stolen from other brawlers",
+"Emily only faked cancer once",
+"If you don't have three friends to play with, you can also play the game with one or two!"
 ];
 
 if (DEBUG_MODE) {
