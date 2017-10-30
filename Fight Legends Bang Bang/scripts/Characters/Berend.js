@@ -5,14 +5,18 @@ class Berend extends Character {
         this.name = "Berend";
         this.Speed = 4;
         this.cid = 7;
-        this.modelOfset = new THREE.Vector3(0, -2.5, 0);
         this.modelHeight = 14;
+        this.size.width = 7;
+        this.size.height = 9;
+        this.modelOfset = new THREE.Vector3(0, -this.size.height / 2, 0);
+        this.attackRange = 15;
+        this.attackWidth = 7.5;
         this.stBasicRange = this.attackRange;
         this.stBasicWidth = this.attackWidth;
         this.stBasicJump = this.jumpForce;
         this.ultSpecialIncrease = 0;
         this.ultBasicAttackDamage = 18;
-        this.ultBasicAttackRange = 18;
+        this.ultBasicAttackRange = 19;
         this.ultBasicAttackWidth = 6.5;
         this.ultTakeDamageMultiplier = 2;
         this.ultJumpForce = 70;
@@ -32,7 +36,7 @@ class Berend extends Character {
         material.opacity = 0.2;
         this.specialAtkString = "Assert dominance";
         this.geometry = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(5, 5, 5),
+            new THREE.CubeGeometry(5, this.size.height, this.size.width),
             material,
         );
         this.geometry.castShadow = true;
@@ -66,8 +70,8 @@ class Berend extends Character {
         var _this = this;
         var loader = new THREE.FBXLoader(manager);
 
-        loader.load('Models/Yeti/yeti.fbx', function (object) {
-            object.scale.set(0.008, 0.008, 0.008);
+        loader.load('Models/Yeti/idle.fbx', function (object) {
+            object.scale.set(0.006, 0.006, 0.006);
             _this.pivot.add(object);
             _this.geometry.add(_this.pivot);
             object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
@@ -75,12 +79,12 @@ class Berend extends Character {
             object.mixer = new THREE.AnimationMixer(object);
             mixers.push(object.mixer);
 
-                console.log(object);
-            // if (_this.anim.length > 0) {
-            //     var action = object.mixer.clipAction(_this.anim[0].animations[0]);
-            //     console.log(action);
-            //     //action.play();
-            // }
+            _this.idleAnim = object.mixer.clipAction(object.animations[0]);
+            _this.idleAnim.play();
+
+            loader.load('Models/Yeti/running.fbx', function (object) {
+                _this.runningAnim = _this.model.mixer.clipAction(object.animations[0]);
+            }, onProgress, onError);
         }, onProgress, onError);
     }
 

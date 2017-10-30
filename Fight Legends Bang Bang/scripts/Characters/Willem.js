@@ -3,19 +3,24 @@ class Willem extends Character {
     constructor(y, z) {
         super();
         this.name = "Willem";
+        this.size.width = 5;
+        this.size.height = 7;
         this.moveSpeed = 300;
         this.cid = 0;
         this.ultDir;
         this.target;
         this.ultDamage = 100;
         this.ballSpeed = 80;
-        this.modelOfset = new THREE.Vector3(0, -2.5, 0);
+        this.modelOfset = new THREE.Vector3(0, -this.size.height / 2, 0);
         this.beginSPecial = false;
         this.specialExists = false;
         this.hitplayer = [false, false, false, false];
         this.ultCharging = false;
         this.portrait = 'sprites/Characters/MenuSprites/willem.png';
         this.willemUltStartSound = new Audio('Sounds/Characters/Willem/Willem_ult_sound.wav');
+
+        this.UltAnimation = undefined;
+
         this.material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff
@@ -33,10 +38,10 @@ class Willem extends Character {
         );
 
         this.material.transparent = true;
-        this.material.opacity = 0;
+        this.material.opacity = 0.2;
         this.specialAtkString = "Throw Snowball";
         this.geometry = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(5, 5, 5),
+            new THREE.CubeGeometry(5, this.size.height, this.size.width),
             this.material
         );
 
@@ -95,29 +100,12 @@ class Willem extends Character {
             loader.load('Models/Snowman/Running.fbx', function (object) {
                 _this.runningAnim = _this.model.mixer.clipAction(object.animations[0]);
             }, onProgress, onError);
+            loader.load('Models/Snowman/Flip.fbx', function (object) {
+                _this.UltAnimation = _this.model.mixer.clipAction(object.animations[0]);
+                _this.UltAnimation.setLoop(THREE.LoopOnce, 1);
+            }, onProgress, onError);
 
         }, onProgress, onError);
-
-        //console.log(this.model);
-
-        // mtlLoader.load('Models/Raccoon/Raccoon/mixamo_raccoon.mtl', function (materials) {
-        //     console.log("HI");
-        //     materials.preload();
-
-        //     var objLoader = new THREE.OBJLoader();
-        //     objLoader.setMaterials(materials);
-        //     objLoader.setPath('Models/Raccoon/Raccoon/');
-        //     objLoader.load('mixamo_raccoon.obj', function (object) {
-        //         object.scale.set(0.06, 0.06, 0.06);
-        //         _this.pivot.add(object);
-        //         _this.geometry.add(_this.pivot);
-        //         object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
-        //         //scene.add(_this.pivot);
-        //         _this.model = object;
-        //         console.log("MY OBJECT IS " + object);
-        //     }, onProgress, onError);
-
-        // });
     }
 
     pressedbuttonY() {
@@ -129,10 +117,14 @@ class Willem extends Character {
 
     specialAtk() {
         if (this.specialExists && !this.ultCharging) {
+            this.UltAnimation.stop();
             this.EndSpecial();
         }
         if (this.specialReady() && !this.specialExists && !this.isStunned) {
             this.setSpecialAttackCounter(0);
+            this.runningAnim.stop();
+            this.idleAnim.stop();
+            this.UltAnimation.play();
             var dir = this.attackDirection.z == 0 ? -1 : this.attackDirection.z;
             this.ballVelocity = new THREE.Vector3(0, 0, dir * ((this.ballSpeed) + 1));
             this.willemUltStartSound.play();
@@ -148,14 +140,14 @@ class Willem extends Character {
         if (this.specialExists) {
             if (this.specialTimer > 0) {
                 this.specialTimer -= t;
-                if (this.specialTimer > 4.05 && this.specialTimer < 5) {
+                if (this.specialTimer > 4.45 && this.specialTimer < 5) {
                     this.velt = 0;
                     this.isStunned = true;
                     this.ultCharging = true;
                 }
-                if (this.specialTimer < 4 && this.beginSPecial) {
+                if (this.specialTimer < 4.4 && this.beginSPecial) {
                     var pos = this.geometry.position;
-                    this.specialObject.position.set(0, pos.y + (this.CheckSides("down") ? 5 : 0), pos.z);
+                    this.specialObject.position.set(0, pos.y + (this.CheckSides("down") ? this.size.height : 0), pos.z);
                     this.specialObject.__dirtyPosition = true;
                     this.isStunned = true;
                     this.velt = 0;
@@ -164,7 +156,7 @@ class Willem extends Character {
                     this.beginSPecial = false;
                 }
 
-                if (this.specialTimer < 4) {
+                if (this.specialTimer < 4.4) {
                     this.ultCharging = false;
                     if (this.ballVelocity.y > -70)
                         this.ballVelocity.y -= 80 * t;
