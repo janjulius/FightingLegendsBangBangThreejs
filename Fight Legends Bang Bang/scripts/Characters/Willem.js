@@ -96,7 +96,7 @@ class Willem extends Character {
             // }
         }, onProgress, onError);
 
-        console.log(this.model);
+        //console.log(this.model);
 
         // mtlLoader.load('Models/Raccoon/Raccoon/mixamo_raccoon.mtl', function (materials) {
         //     console.log("HI");

@@ -172,16 +172,16 @@ function onWindowResize() {
 
 function animate() {
     render_stats.update();
-    for (var i = 0; i < playersPlaying; i++) {
-        var p = players[i];
-        if (p instanceof Character) {
-            if (p.mixers.length > 0) {
-                for (var i = 0; i < p.mixers.length; i++) {
-                    p.mixers[i].update(clockAnim.getDelta());
-                }
-            }
-        }
-    }
+    // for (var i = 0; i < playersPlaying; i++) {
+    //     var p = players[i];
+    //     if (p instanceof Character) {
+    //         if (p.mixers.length > 0) {
+    //             for (var i = 0; i < p.mixers.length; i++) {
+    //                 p.mixers[i].update(clockAnim.getDelta());
+    //             }
+    //         }
+    //     }
+    // }
     requestAnimationFrame(animate);
     render();
 }
