@@ -12,6 +12,7 @@ class Interface {
         this.loadedEndScreenInterface = false;
         this.pausedInterface;
         this.pressStartInterface;
+        this.countDownInterface;
     }
 
     LoadGameInterface(p0, p1, p2, p3) {
@@ -477,6 +478,22 @@ class Interface {
         }
     }
 
+    DisplayCountDown(display){
+        this.countDownInterface = document.getElementById("countdown");
+        if(display){
+            this.countDownInterface.style.visibility = "visible";
+        }
+        if(!display){
+            this.countDownInterface.style.visibility = "hidden";
+        }
+    }
+
+    UpdateCountDown(a){
+        console.log("updating coountdown");
+        this.DisplayCountDown(true);
+        this.countDownInterface = document.getElementById("countdown");
+        this.countDownInterface.innerHTML = a;
+    }
 
     getPlayerColorsDark(id) {
         switch (id) {
