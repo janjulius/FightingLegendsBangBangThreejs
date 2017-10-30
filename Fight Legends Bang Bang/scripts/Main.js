@@ -158,9 +158,8 @@ function onWindowResize() {
 
 function animate() {
     render_stats.update();
-
+    var animDelta = clockAnim.getDelta();
     if (mixers.length > 0) {
-        var animDelta = clockAnim.getDelta();
         for (var i = 0; i < mixers.length; i++) {
             mixers[i].update(animDelta);
         }
