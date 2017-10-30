@@ -14,7 +14,7 @@ class HyruleCastle extends Level {
         }, false);
         this.myAudio.play();
 
-        var possibleSpawns = [{ y: 17.5, z: 40 }, { y: 25, z: 8 }, { y: 60, z: 8 }, { y: 17.5, z: -30 }]
+        var possibleSpawns = [{ y: 18.5, z: 40 }, { y: 26, z: 8 }, { y: 61, z: 8 }, { y: 18.5, z: -30 }]
 
         function shuffle(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
