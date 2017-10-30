@@ -30,71 +30,71 @@ class Fred extends Character {
         this.geometry.castShadow = true;
         this.geometry.position.set(0, y, z);
         scene.add(this.geometry);
-        this.loadModel();
+        //this.loadModel();
         console.log("created Fred");
     }
 
-    loadModel() {
-        console.log("loading model...");
-        var manager = new THREE.LoadingManager();
-        manager.onProgress = function (item, loaded, total) {
-            console.log(item, loaded, total);
-        };
+    // loadModel() {
+    //     console.log("loading model...");
+    //     var manager = new THREE.LoadingManager();
+    //     manager.onProgress = function (item, loaded, total) {
+    //         console.log(item, loaded, total);
+    //     };
 
-        var onProgress = function (xhr) {
-            if (xhr.lengthComputable) {
-                var percentComplete = xhr.loaded / xhr.total * 100;
-                console.log(Math.round(percentComplete, 2) + '% downloaded');
-            }
-        };
-        var onError = function (xhr) { console.log(xhr); };
+    //     var onProgress = function (xhr) {
+    //         if (xhr.lengthComputable) {
+    //             var percentComplete = xhr.loaded / xhr.total * 100;
+    //             console.log(Math.round(percentComplete, 2) + '% downloaded');
+    //         }
+    //     };
+    //     var onError = function (xhr) { console.log(xhr); };
 
-        THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
+    //     THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
 
-        var mtlLoader = new THREE.MTLLoader();
-        mtlLoader.setPath('Models/Raccoon/Raccoon/');
-        mtlLoader.setBaseUrl('Models/Raccoon/Raccoon/');
+    //     var mtlLoader = new THREE.MTLLoader();
+    //     mtlLoader.setPath('Models/Raccoon/Raccoon/');
+    //     mtlLoader.setBaseUrl('Models/Raccoon/Raccoon/');
 
-        var _this = this;
-        var loader = new THREE.FBXLoader(manager);
+    //     var _this = this;
+    //     var loader = new THREE.FBXLoader(manager);
 
-        loader.load('Models/Goblin/Goblin.fbx', function (object) {
-            object.scale.set(0.06, 0.06, 0.06);
-            _this.pivot.add(object);
-            _this.geometry.add(_this.pivot);
-            object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
-            _this.model = object;
-            object.mixer = new THREE.AnimationMixer(object);
-            _this.mixers.push(object.mixer);
+    //     loader.load('Models/Goblin/Goblin.fbx', function (object) {
+    //         object.scale.set(0.06, 0.06, 0.06);
+    //         _this.pivot.add(object);
+    //         _this.geometry.add(_this.pivot);
+    //         object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
+    //         _this.model = object;
+    //         object.mixer = new THREE.AnimationMixer(object);
+    //         _this.mixers.push(object.mixer);
 
-            if (_this.anim.length > 0) {
-                var action = object.mixer.clipAction(_this.anim[0].animations[0]);
-                console.log(action);
-                action.play();
-            }
-        }, onProgress, onError);
+    //         if (_this.anim.length > 0) {
+    //             var action = object.mixer.clipAction(_this.anim[0].animations[0]);
+    //             console.log(action);
+    //             action.play();
+    //         }
+    //     }, onProgress, onError);
 
-        console.log(this.model + "BTW");
+    //     console.log(this.model + "BTW");
 
-        // mtlLoader.load('Models/Raccoon/Raccoon/mixamo_raccoon.mtl', function (materials) {
-        //     console.log("HI");
-        //     materials.preload();
+    //     // mtlLoader.load('Models/Raccoon/Raccoon/mixamo_raccoon.mtl', function (materials) {
+    //     //     console.log("HI");
+    //     //     materials.preload();
 
-        //     var objLoader = new THREE.OBJLoader();
-        //     objLoader.setMaterials(materials);
-        //     objLoader.setPath('Models/Raccoon/Raccoon/');
-        //     objLoader.load('mixamo_raccoon.obj', function (object) {
-        //         object.scale.set(0.06, 0.06, 0.06);
-        //         _this.pivot.add(object);
-        //         _this.geometry.add(_this.pivot);
-        //         object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
-        //         //scene.add(_this.pivot);
-        //         _this.model = object;
-        //         console.log("MY OBJECT IS " + object);
-        //     }, onProgress, onError);
+    //     //     var objLoader = new THREE.OBJLoader();
+    //     //     objLoader.setMaterials(materials);
+    //     //     objLoader.setPath('Models/Raccoon/Raccoon/');
+    //     //     objLoader.load('mixamo_raccoon.obj', function (object) {
+    //     //         object.scale.set(0.06, 0.06, 0.06);
+    //     //         _this.pivot.add(object);
+    //     //         _this.geometry.add(_this.pivot);
+    //     //         object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
+    //     //         //scene.add(_this.pivot);
+    //     //         _this.model = object;
+    //     //         console.log("MY OBJECT IS " + object);
+    //     //     }, onProgress, onError);
 
-        // });
-    }
+    //     // });
+    // }
 
     specialAtk() {
         if (this.specialReady()) {

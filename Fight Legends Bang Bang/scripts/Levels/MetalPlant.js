@@ -53,13 +53,55 @@ class Metalplant extends Level {
             new THREE.MeshBasicMaterial({map : THREE.ImageUtils.loadTexture('Textures/Orange_sky/left.png'), side: THREE.DoubleSide} )
         ];
 
+        var rust1 = THREE.ImageUtils.loadTexture(' Textures/TitansEnd/rust.jpg ')
+        rust1.wrapS = rust1.wrapT = THREE.RepeatWrapping;
+        rust1.repeat.set(1, 1);
+
+        var RustTexture = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                map: rust1,
+            }),
+            0,
+            1
+        )
+
+        var rust2 = THREE.ImageUtils.loadTexture(' Textures/TitansEnd/rust2.jpg ')
+        rust2.wrapS = rust2.wrapT = THREE.RepeatWrapping;
+        rust2.repeat.set(1, 5);
+
+        var RustTexture2 = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                map: rust2,
+            }),
+            0,
+            1
+        )
+
+        var rope1 = THREE.ImageUtils.loadTexture(' Textures/TitansEnd/rope.jpg ')
+        rope1.wrapS = rope1.wrapT = THREE.RepeatWrapping;
+        rope1.repeat.set(1, 20);
+
+        var RopeTexture = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                map: rope1,
+            }),
+            0,
+            1
+        )
+
         var cubeMaterial = new THREE.MeshFaceMaterial( cubeMaterials);
         var cube = new THREE.Mesh (geometry, cubeMaterial);
         scene.add(cube);
 
         var middleBase = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 2.5, 25),
-            new THREE.MeshBasicMaterial({ color: this.rusty }),
+            RustTexture,
             0
         );
         middleBase.receiveShadow = true;
@@ -69,17 +111,17 @@ class Metalplant extends Level {
 
         var middlePillar = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 35, 2.5),
-            new THREE.MeshBasicMaterial({ color: this.rusty }),
+            RustTexture,
             0
         );
         middlePillar.receiveShadow = true;
-        middlePillar.position.set(0, 5, 5);
+        middlePillar.position.set(0, 4, 5);
         scene.add(middlePillar);
         middlePillar.name = "ground";
 
         var rightplatform = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 15, 25),
-            new THREE.MeshBasicMaterial({ color: this.rusty }),
+            RustTexture,
             0
         );
         rightplatform.receiveShadow = true;
@@ -89,7 +131,7 @@ class Metalplant extends Level {
 
         var leftplatform = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 15, 20),
-            new THREE.MeshBasicMaterial({ color: this.rusty }),
+            RustTexture,
             0
         );
         leftplatform.receiveShadow = true;
@@ -99,7 +141,7 @@ class Metalplant extends Level {
 
         var leftRope1 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(1, 150, 1),
-            new THREE.MeshBasicMaterial({ color: this.rope }),
+            RopeTexture,
             0
         );
         leftRope1.receiveShadow = true;
@@ -109,7 +151,7 @@ class Metalplant extends Level {
 
         var leftRope2 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(1, 150, 1),
-            new THREE.MeshBasicMaterial({ color: this.rope }),
+            RopeTexture,
             0
         );
         leftRope2.receiveShadow = true;
@@ -119,7 +161,7 @@ class Metalplant extends Level {
 
         var middleBrokenPillar = new Physijs.BoxMesh(
             new THREE.CubeGeometry(15, 140, 2.5),
-            new THREE.MeshBasicMaterial({ color: this.rustydark }),
+            RustTexture2,
             0
         );
         middleBrokenPillar.rotation.x = 10;
@@ -130,7 +172,7 @@ class Metalplant extends Level {
 
         var rightRope1 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(1, 50, 1),
-            new THREE.MeshBasicMaterial({ color: this.rope }),
+            RopeTexture,
             0
         );
         rightRope1.rotateX(-0.2);
@@ -141,7 +183,7 @@ class Metalplant extends Level {
 
         var rightRope2 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(1, 50, 1),
-            new THREE.MeshBasicMaterial({ color: this.rope }),
+            RopeTexture,
             0
         );
         rightRope2.rotateX(0.2);
@@ -152,7 +194,7 @@ class Metalplant extends Level {
 
         var rightplatformHigh = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 7.5),
-            new THREE.MeshBasicMaterial({ color: this.rusty }),
+            RustTexture,
             0
         );
         rightplatformHigh.receiveShadow = true;
@@ -162,7 +204,7 @@ class Metalplant extends Level {
 
         var rightRope3 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(1, 150, 1),
-            new THREE.MeshBasicMaterial({ color: this.rope }),
+            RopeTexture,
             0
         );
         rightRope3.receiveShadow = true;
@@ -172,7 +214,7 @@ class Metalplant extends Level {
 
         var rightRope4 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(1, 150, 1),
-            new THREE.MeshBasicMaterial({ color: this.rope }),
+            RopeTexture,
             0
         );
         rightRope4.receiveShadow = true;

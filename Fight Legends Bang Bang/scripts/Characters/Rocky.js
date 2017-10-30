@@ -91,7 +91,7 @@ class Rocky extends Character {
             if (_this.anim.length > 0) {
                 var action = object.mixer.clipAction(_this.anim[0].animations[0]);
                 console.log(action);
-                action.play();
+                //action.play();
             }
         }, onProgress, onError);
 

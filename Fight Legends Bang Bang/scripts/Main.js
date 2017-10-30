@@ -163,7 +163,9 @@ scene.addEventListener('update', function () {
         var boundingBox = CalculateTargetsBoundingBox();
         var np = CalculateCameraPosition(boundingBox);
         camera.position.lerp(placesLeft > 0 ? new THREE.Vector3(np.x, np.y, np.z) : new THREE.Vector3(50, players[playerWon].geometry.position.y, players[playerWon].geometry.position.z), timeElapsed);
-
+        camera.position.x = clamp(camera.position.x, placesLeft > 0 ? 200 : 0, 400);
+        camera.position.y = clamp(camera.position.y, -200, 200);
+        camera.position.z = clamp(camera.position.z, -200, 200);
         if (!gameEnded && !gamePaused)
             scene.simulate(undefined, 1); // run physics
     }
@@ -401,6 +403,16 @@ function runGame() {
             scene.remove(scene.children[i]);
         }
 
+        camera = new THREE.PerspectiveCamera(
+            35,
+            window.innerWidth / window.innerHeight,
+            1,
+            1000
+        );
+        camera.position.set(150, 0, 0);
+        camera.lookAt(scene.position);
+        scene.add(camera);
+
         console.log("attempting to load level " + selectedLevel);
 
         if (selectedLevel == 9) {
@@ -460,7 +472,6 @@ function runGame() {
 
         gameInterface.ClearCharSelectInterface();
         gameInterface.LoadGameInterface(players[0], players[1], players[2], players[3]);
-
         scene.simulate();
         physics_stats.update();
         requestAnimationFrame(animate);
