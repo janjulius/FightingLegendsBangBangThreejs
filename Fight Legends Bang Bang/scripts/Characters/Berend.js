@@ -5,7 +5,7 @@ class Berend extends Character {
         this.name = "Berend";
         this.Speed = 4;
         this.cid = 7;
-        this.modelHeight = 14;
+        this.modelHeight = 9;
         this.size.width = 7;
         this.size.height = 9;
         this.modelOfset = new THREE.Vector3(0, -this.size.height / 2, 0);

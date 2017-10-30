@@ -8,7 +8,7 @@ class Jens extends Character {
         this.size.height = 7;
         this.portrait = 'sprites/Characters/MenuSprites/jens.png';
         this.modelOfset = new THREE.Vector3(4, -this.size.height / 2, 0);
-        this.modelHeight = 14;
+        this.modelHeight = 8;
         this.finalUlt = false;
         this.ultDamage = 50;
         this.ultFinalDamage = 100;
