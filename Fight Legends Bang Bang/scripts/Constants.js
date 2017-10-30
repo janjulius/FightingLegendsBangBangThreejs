@@ -9,6 +9,25 @@ var INTERFACE_STOCK_TEXT_SIZE = "40px";
 var MUSIC_VOLUME = 0.1;
 var ANNOUNCER_VOLUME = 0.13;
 
+var TIPS = ["Willem is allergic to peanuts.",
+"Willem can cancel his ult by pressing the special button again.",
+"Jens is a pirate and also a panda.",
+"Jens his CANNONBALL will be fired at a random target (this can also be Jens himself).",
+"Berend is a yeti.",
+"After Berend Lets out his rage with a loud warcry he becomes a lot stronger for a few seconds.",
+"Kees is based on Leon Schubert.",
+"When Kees removes the bag from his head everyone that faces his way will be stunned in agony.",
+"When Boom Stronk was little, a mean woodcutter came and robbed him of his upper body.",
+"Boom Stronk is the only character with a multi-purpose ultimate, his ultimate can both deal damage aswell as heal him.",
+"Fred is german and does not understand nor speak english.",
+"Fred hates Kees because Kees stole bananas from the goblinreich.",
+"Rocky has devoted all his free time (off Fighting Legends : bang bang) to chasing the love of a raccoon name Rodny.",
+"Rocky his ultimate makes him leap to the nearest target to kick their butt.",
+"Paardman is half human, half horse, but unlike an average centaur his bottom half is human and top half horse.",
+"Paardman plays Rock, paper or scissors and based on the result he throws an object."
+
+];
+
 if (DEBUG_MODE) {
     console.log("DEBUG MODE IS ON, TO TURN OFF GO TO CONSTANTS FILE");
 }
