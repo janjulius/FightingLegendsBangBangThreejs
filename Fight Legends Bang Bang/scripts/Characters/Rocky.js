@@ -86,13 +86,13 @@ class Rocky extends Character {
             object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
             _this.model = object;
             object.mixer = new THREE.AnimationMixer(object);
-            _this.mixers.push(object.mixer);
+            mixers.push(object.mixer);
 
-            if (_this.anim.length > 0) {
-                var action = object.mixer.clipAction(_this.anim[0].animations[0]);
-                console.log(action);
-                //action.play();
-            }
+            // if (_this.anim.length > 0) {
+            //     var action = object.mixer.clipAction(_this.anim[0].animations[0]);
+            //     console.log(action);
+            //     //action.play();
+            // }
         }, onProgress, onError);
 
         console.log(this.model + "BTW");
@@ -159,7 +159,6 @@ class Rocky extends Character {
                     this.isStunned = true;
                     this.geometry.setLinearVelocity(new THREE.Vector3(0, 0, 0));
                     this.geometry.position.x = -10000;
-                    console.log(this.geometry.position);
                 }
                 if (this.specialTimer < 1) {
                     this.geometry.position.set(players[this.target].geometry.position.x, players[this.target].geometry.position.y,
