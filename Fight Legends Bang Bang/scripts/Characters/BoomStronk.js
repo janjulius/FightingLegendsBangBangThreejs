@@ -52,13 +52,13 @@ class BoomStronk extends Character {
                 if (this.specialHealing) {
                     this.isStunned = true;
                     if (this.specialTimer > 2) {
-                        this.setDamage(Math.floor(this.healval / 2), { y: 0, z: 0 }, this.id, 2);
+                        this.setDamage(Math.floor(this.healval / 5), { y: 0, z: 0 }, this.id, 2);
                         this.maxGravityVelocity = 50;
                         this.gravityVelocity = 80;
                     } if (this.specialTimer > 1 && this.specialTimer < 2) {
-                        this.setDamage(Math.floor(this.healval / 3), { y: 0, z: 0 }, this.id, 2);
+                        this.setDamage(Math.floor(this.healval / 5), { y: 0, z: 0 }, this.id, 2);
                     } if (this.specialTimer < 1) {
-                        this.setDamage(0, { y: 0, z: 0 }, this.id, 2);
+                        this.setDamage(Math.floor(this.healval / 5), { y: 0, z: 0 }, this.id, 2);
                         this.isStunned = false;
                     } if (this.specialTimer < 0.1) {
                         this.specialHealing = true;
