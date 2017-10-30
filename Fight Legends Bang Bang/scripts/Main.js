@@ -160,8 +160,9 @@ function animate() {
     render_stats.update();
 
     if (mixers.length > 0) {
+        var animDelta = clockAnim.getDelta();
         for (var i = 0; i < mixers.length; i++) {
-            mixers[i].update(clockAnim.getDelta());
+            mixers[i].update(animDelta);
         }
     }
 

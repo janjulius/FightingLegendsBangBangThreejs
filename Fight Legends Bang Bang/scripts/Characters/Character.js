@@ -10,8 +10,10 @@ class Character {
         this.modelOfset = new THREE.Vector3(0, 0, 0);
         this.pivot = new THREE.Object3D();
         this.LookDirection = 1;
-        this.mixers = [];
         this.anim = [];
+
+        this.idleAnim = undefined;
+        this.runningAnim = undefined;
 
         this.direction = {
             y: 0,
@@ -540,6 +542,19 @@ class Character {
 
         if (this.blockCooldownTimer <= 0)
             this.canBlock = true;
+
+
+
+        if(this.idleAnim && this.runningAnim){
+            if(movespeed != 0 && !this.runningAnim.isRunning()){
+                this.idleAnim.stop();
+                this.runningAnim.play();
+            }
+            if(movespeed == 0 && this.runningAnim.isRunning()){
+                this.idleAnim.play();
+                this.runningAnim.stop();
+            }
+        }
 
         this.velocity = new THREE.Vector3(0, this.velt + this.knockBack.y, movespeed + this.knockBack.z);
 
