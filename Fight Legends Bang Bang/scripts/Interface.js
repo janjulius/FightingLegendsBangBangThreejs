@@ -444,7 +444,7 @@ class Interface {
     DisplayDidYouKnow(display){
         this.didYouKnowInterface = document.getElementById("didYouKnow");
         if(display){
-            var r = Math.floor((Math.random() * TIPS.length) + 1)
+            var r = Math.floor((Math.random() * TIPS.length) - 1)
             this.didYouKnowInterface.innerHTML = "Did you know: " + TIPS[r];
             this.didYouKnowInterface.style.visibility = "visible";
         }

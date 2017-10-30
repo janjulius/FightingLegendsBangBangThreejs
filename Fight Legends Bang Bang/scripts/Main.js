@@ -158,10 +158,10 @@ function onWindowResize() {
 
 function animate() {
     render_stats.update();
-
+    var animDelta = clockAnim.getDelta();
     if (mixers.length > 0) {
         for (var i = 0; i < mixers.length; i++) {
-            mixers[i].update(clockAnim.getDelta());
+            mixers[i].update(animDelta);
         }
     }
 
@@ -244,8 +244,8 @@ function runCharSelect() {
         gameInterface.LoadCharSelectInterface();
         var material;
         var baseZ = 0;
-        var baseY = -10;
-        var constZ = -7.5;
+        var baseY = -8;
+        var constZ = -8;
         var constY = -5;
         var amount = 8;
         for (var i = 0; i < amount; i++) {
@@ -258,10 +258,10 @@ function runCharSelect() {
                 1
             );
             if (i % 4 == 0) {
-                baseY += 7.5;
+                baseY += 6;
                 baseZ = constZ;
             }
-            baseZ += 5;
+            baseZ += 5.5;
             charScreen = new Physijs.BoxMesh(new THREE.BoxGeometry(5, 5, 5), material, 0);
             charScreen.position.set(-3, baseY, baseZ);
             charScreens[i] = charScreen;
@@ -313,8 +313,8 @@ function runLevelSelect() {
         scene.add(playerFiches[0]);
         var material;
         var baseZ = 0;
-        var baseY = -5;
-        var constZ = 0;
+        var baseY = -10;
+        var constZ = -12.5;
         var constY = -5;
         var amount = stages.length + 1;
         for (var i = 0; i < amount; i++) {
@@ -327,10 +327,10 @@ function runLevelSelect() {
                 1
             );
             if (i % 4 == 0) {
-                baseY += 5;
+                baseY += 6;
                 baseZ = constZ;
             }
-            baseZ += 5;
+            baseZ += 5.5;
             levelScreen = new Physijs.BoxMesh(new THREE.BoxGeometry(5, 5, 5), material, 0);
             levelScreen.position.set(-3, baseY, baseZ);
             levelScreens[i] = levelScreen;
