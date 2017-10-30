@@ -254,8 +254,6 @@ function runCharSelect() {
 
         camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 1, 1000 );
         
-        //camera.lookAt(scene.position);
-        //camera.setZoom(10);
         scene.add(camera);
         camera.zoom = 40;
         camera.updateProjectionMatrix();
