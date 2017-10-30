@@ -80,7 +80,7 @@ class Willem extends Character {
         var _this = this;
         var loader = new THREE.FBXLoader(manager);
 
-        loader.load('Models/Snowman/snowman.fbx', function (object) {
+        loader.load('Models/Snowman/idle.fbx', function (object) {
             object.scale.set(0.4, 0.4, 0.4);
             _this.pivot.add(object);
             _this.geometry.add(_this.pivot);
@@ -89,11 +89,13 @@ class Willem extends Character {
             object.mixer = new THREE.AnimationMixer(object);
             mixers.push(object.mixer);
 
-            // if (_this.anim.length > 0) {
-            //     var action = object.mixer.clipAction(_this.anim[0].animations[0]);
-            //     console.log(action);
-            //     //action.play();
-            // }
+            _this.idleAnim = object.mixer.clipAction(object.animations[0]);
+            _this.idleAnim.play();
+
+            loader.load('Models/Snowman/Running.fbx', function (object) {
+                _this.runningAnim = _this.model.mixer.clipAction(object.animations[0]);
+            }, onProgress, onError);
+
         }, onProgress, onError);
 
         //console.log(this.model);

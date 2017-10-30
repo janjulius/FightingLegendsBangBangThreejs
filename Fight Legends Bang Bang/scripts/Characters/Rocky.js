@@ -11,7 +11,7 @@ class Rocky extends Character {
         this.clawDamage = 12;
         this.specialDamage = 17;
         this.ultRange = 400;
-        this.modelOfset = new THREE.Vector3(0, -2.5, -2.5);
+        this.modelOfset = new THREE.Vector3(0, -2.5, 0);
         this.clawed = [];
         this.clawed[0] = false;
         this.clawed[1] = false;
@@ -68,18 +68,8 @@ class Rocky extends Character {
         var _this = this;
         var loader = new THREE.FBXLoader(manager);
 
-        loader.load('Models/Raccoon/Raccoon/walking.fbx', function (object) {
 
-            _this.anim.push(object);
-
-            // if (model !== undefined)
-            // {
-            //     var action = model.mixer.clipAction( animation.animations[ 0 ] );
-            //     action.play();
-            // }
-        }, onProgress, onError);
-
-        loader.load('Models/Raccoon/Rocky_new/export_rocky.fbx', function (object) {
+        loader.load('Models/Raccoon/Raccoon/idle.fbx', function (object) {
             object.scale.set(0.06, 0.06, 0.06);
             _this.pivot.add(object);
             _this.geometry.add(_this.pivot);
@@ -88,11 +78,13 @@ class Rocky extends Character {
             object.mixer = new THREE.AnimationMixer(object);
             mixers.push(object.mixer);
 
-            // if (_this.anim.length > 0) {
-            //     var action = object.mixer.clipAction(_this.anim[0].animations[0]);
-            //     console.log(action);
-            //     //action.play();
-            // }
+            _this.idleAnim = object.mixer.clipAction(object.animations[0]);
+            _this.idleAnim.play();
+
+            loader.load('Models/Raccoon/Raccoon/running.fbx', function (object) {
+                _this.runningAnim = _this.model.mixer.clipAction(object.animations[0]);
+            }, onProgress, onError);
+
         }, onProgress, onError);
 
         console.log(this.model + "BTW");
