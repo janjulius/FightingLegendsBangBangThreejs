@@ -198,11 +198,8 @@ THREE.GamepadControls = function () {
                                 if (charSelect) {
                                     charSelect = false;
                                     levelSelect = true;
-<<<<<<< HEAD
                                     gameInterface.DisplayPressStart(false);
-=======
                                     selectedLevel = undefined;
->>>>>>> a9e5a175664f83db6bca86b688a77007e7c83f0e
                                     runLevelSelect();
                                 }
                                 break;
