@@ -66,8 +66,8 @@ class Berend extends Character {
         var _this = this;
         var loader = new THREE.FBXLoader(manager);
 
-        loader.load('Models/Yeti/yeti.fbx', function (object) {
-            object.scale.set(0.008, 0.008, 0.008);
+        loader.load('Models/Yeti/idle.fbx', function (object) {
+            object.scale.set(0.006, 0.006, 0.006);
             _this.pivot.add(object);
             _this.geometry.add(_this.pivot);
             object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
@@ -75,12 +75,12 @@ class Berend extends Character {
             object.mixer = new THREE.AnimationMixer(object);
             mixers.push(object.mixer);
 
-                console.log(object);
-            // if (_this.anim.length > 0) {
-            //     var action = object.mixer.clipAction(_this.anim[0].animations[0]);
-            //     console.log(action);
-            //     //action.play();
-            // }
+            _this.idleAnim = object.mixer.clipAction(object.animations[0]);
+            _this.idleAnim.play();
+
+            loader.load('Models/Yeti/running.fbx', function (object) {
+                _this.runningAnim = _this.model.mixer.clipAction(object.animations[0]);
+            }, onProgress, onError);
         }, onProgress, onError);
     }
 
