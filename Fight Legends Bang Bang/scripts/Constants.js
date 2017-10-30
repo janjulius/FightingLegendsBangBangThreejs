@@ -246,6 +246,23 @@ async function deleteAfter(object, dTime){
     scene.remove(object);
 }
 
+async function startGameCountDown(){
+    console.log("counting down");
+    gameInterface.UpdateCountDown("3");
+    await sleep(1000);
+    //play sound
+    gameInterface.UpdateCountDown("2");
+    await sleep(1000);
+    gameInterface.UpdateCountDown("1");
+    await sleep(1000);
+    gameInterface.UpdateCountDown("GO!");
+    await sleep(300);
+    gameInterface.DisplayCountDown(false);
+    gameStartUp = false;
+    var timeElapsed = clock.getDelta();
+    scene.simulate(undefined, 1); // run physics
+}
+
 async function doEvery(task, time, amount){ //can only run global tasks maybe useful later
     var _task = task;
     if(amount != 1){
