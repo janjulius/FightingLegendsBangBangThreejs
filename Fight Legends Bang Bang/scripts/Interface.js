@@ -339,7 +339,7 @@ class Interface {
             var actualDamageDone = document.createElement("li");
             ul.appendChild(actualDamageDone);
             actualDamageDone.className = "right";
-            actualDamageDone.innerHTML = this.players[i].TDamageDone;
+            actualDamageDone.innerHTML = Math.floor(this.players[i].TDamageDone);
 
             var damageTaken = document.createElement("li");
             ul.appendChild(damageTaken);
@@ -349,7 +349,7 @@ class Interface {
             var actualdamageTaken = document.createElement('li');
             ul.appendChild(actualdamageTaken);
             actualdamageTaken.className = "right";
-            actualdamageTaken.innerHTML = this.players[i].TDamageTaken;
+            actualdamageTaken.innerHTML = Math.floor(this.players[i].TDamageTaken);
 
             var damageDoneWUlt = document.createElement("li");
             ul.appendChild(damageDoneWUlt);
@@ -359,7 +359,7 @@ class Interface {
             var acutualDamageDoneWithUlt = document.createElement('li');
             ul.appendChild(acutualDamageDoneWithUlt);
             acutualDamageDoneWithUlt.className = "right";
-            acutualDamageDoneWithUlt.innerHTML = this.players[i].TDamageDoneWithUlt;
+            acutualDamageDoneWithUlt.innerHTML = Math.floor(this.players[i].TDamageDoneWithUlt);
 
             var damageBlocked = document.createElement("li");
             ul.appendChild(damageBlocked);
@@ -369,7 +369,7 @@ class Interface {
             var actualDamageBlocked = document.createElement('li');
             ul.appendChild(actualDamageBlocked);
             actualDamageBlocked.className = "right";
-            actualDamageBlocked.innerHTML = this.players[i].TDamageBlocked;
+            actualDamageBlocked.innerHTML = Math.floor(this.players[i].TDamageBlocked);
 
             var highestDamageSurvived = document.createElement("li");
             ul.appendChild(highestDamageSurvived);
@@ -379,7 +379,7 @@ class Interface {
             var actualhighestDamageSurvived = document.createElement('li');
             ul.appendChild(actualhighestDamageSurvived);
             actualhighestDamageSurvived.className = "right";
-            actualhighestDamageSurvived.innerHTML = this.players[i].THighestDamageSurvived;
+            actualhighestDamageSurvived.innerHTML = Math.floor(this.players[i].THighestDamageSurvived);
 
             var ultsUsed = document.createElement("li");
             ul.appendChild(ultsUsed);
@@ -389,7 +389,7 @@ class Interface {
             var actualUltsUsed = document.createElement('li');
             ul.appendChild(actualUltsUsed);
             actualUltsUsed.className = "right";
-            actualUltsUsed.innerHTML = this.players[i].TotalUltsUsed;
+            actualUltsUsed.innerHTML = Math.floor(this.players[i].TotalUltsUsed);
 
             var dmgHealed = document.createElement("li");
             ul.appendChild(dmgHealed);
@@ -399,7 +399,7 @@ class Interface {
             var actualDmgHealed = document.createElement('li');
             ul.appendChild(actualDmgHealed);
             actualDmgHealed.className = "right";
-            actualDmgHealed.innerHTML = this.players[i].TDamageHealed;
+            actualDmgHealed.innerHTML = Math.floor(this.players[i].TDamageHealed);
 
             var position = document.createElement('img');
             a.appendChild(position);
