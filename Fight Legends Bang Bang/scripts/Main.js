@@ -58,21 +58,6 @@ function init() {
     physics_stats.domElement.style.zIndex = 100;
     container.appendChild(physics_stats.domElement);
 
-    light = new THREE.DirectionalLight(0xFFFFFF);
-    light.position.set(20, 40, -15);
-    light.target.position.copy(scene.position);
-    light.castShadow = true;
-    light.shadowCameraLeft = -60;
-    light.shadowCameraTop = -60;
-    light.shadowCameraRight = 60;
-    light.shadowCameraBottom = 60;
-    light.shadowCameraNear = 20;
-    light.shadowCameraFar = 200;
-    light.shadowBias = -.0001
-    light.shadowMapWidth = light.shadowMapHeight = 2048;
-    light.shadowDarkness = .7;
-    scene.add(light);
-
 
 
     if (charSelect) {
@@ -131,7 +116,7 @@ function CalculateCameraPosition(bb) {
     var center = bb.GetCenter();
     var multi = Math.abs(bb.GetMagnitude() / 50);
     //console.log(multi);
-    newPos = clamp(200 + multi, 200, 400);
+    newPos = clamp(150 + multi, 200, 400);
 
     var result = new THREE.Vector3(newPos, center.y - (multi / 2), center.x);
 
@@ -154,7 +139,7 @@ scene.addEventListener('update', function () {
         var boundingBox = CalculateTargetsBoundingBox();
         var np = CalculateCameraPosition(boundingBox);
         camera.position.lerp(placesLeft > 0 ? new THREE.Vector3(np.x, np.y, np.z) : new THREE.Vector3(50, players[playerWon].geometry.position.y, players[playerWon].geometry.position.z), timeElapsed);
-        camera.position.x = clamp(camera.position.x, placesLeft > 0 ? 200 : 0, 400);
+        camera.position.x = clamp(camera.position.x, placesLeft > 0 ? 150 : 0, 400);
         camera.position.y = clamp(camera.position.y, -200, 200);
         camera.position.z = clamp(camera.position.z, -200, 200);
         if (!gameEnded && !gamePaused)
@@ -399,8 +384,13 @@ function runGame() {
             scene.remove(scene.children[i]);
         }
 
-        var light = new THREE.AmbientLight( 0x404040 ); // soft white light
-        scene.add( light );
+        light = new THREE.DirectionalLight(0xFFFFFF);
+        light.position.set(20, 40, -15);
+        light.target.position.copy(scene.position);
+        light.castShadow = false;
+        scene.add(light);
+        var alight = new THREE.AmbientLight( 0x404040 ); // soft white light
+        scene.add( alight );
 
         camera = new THREE.PerspectiveCamera(
             35,
