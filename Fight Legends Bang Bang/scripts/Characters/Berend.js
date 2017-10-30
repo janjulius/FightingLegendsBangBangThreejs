@@ -7,12 +7,14 @@ class Berend extends Character {
         this.cid = 7;
         this.stBasicRange = this.attackRange;
         this.stBasicWidth = this.attackWidth;
+        this.stBasicJump = this.jumpForce;
         this.ultSpecialIncrease = 0;
         this.ultBasicAttackDamage = 18;
         this.ultBasicAttackRange = 15;
         this.ultBasicAttackWidth = 5.8;
         this.ultTakeDamageMultiplier = 2;
-        this.ultSpeed = 80;
+        this.ultJumpForce = 70;
+        this.ultSpeed = 65;
         this.ultAttackDelay = 0.1;
         this.portrait = 'sprites/Characters/MenuSprites/berend.png';
         this.ultSound = new Audio('Sounds/Characters/Berend/Berend_ult_shout.wav');
@@ -54,6 +56,7 @@ class Berend extends Character {
                 this.takeDamageMultiplier = this.ultTakeDamageMultiplier;
                 this.attackWidth = this.ultBasicAttackWidth;
                 this.attackRange = this.ultBasicAttackRange;
+                this.jumpForce = this.ultJumpForce;
                 this.knockbackImmunity = true;
                 this.speed = this.ultSpeed;
                 this.attackDelay = this.ultAttackDelay;
@@ -64,6 +67,7 @@ class Berend extends Character {
                 this.basicAttackDamage = 10;
                 this.attackWidth = this.stBasicWidth;
                 this.attackRange = this.stBasicRange;
+                this.jumpForce = this.stBasicJump;
                 this.takeDamageMultiplier = 1;
                 this.knockbackImmunity = false;
                 this.speed = 40;
