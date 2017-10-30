@@ -29,6 +29,7 @@ class Character {
         this.speed = 40;
         this.attackRange = 12;
         this.attackWidth = 5.2;
+        this.jumpForce = 50;
         this.velocity = new THREE.Vector3(0, 0, 0);
         this.portrait;
         this.velt = 0;
@@ -472,7 +473,7 @@ class Character {
                     this.knockBack.z += 40;
                 if (this.CheckSides("left") && !this.CheckSides("down"))
                     this.knockBack.z -= 40;
-                this.velt = 50;
+                this.velt = this.jumpForce;
                 this.jumpsLeft--;
                 this._jump = true;
             }
