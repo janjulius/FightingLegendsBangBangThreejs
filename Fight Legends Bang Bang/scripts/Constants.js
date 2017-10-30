@@ -26,16 +26,16 @@ var TIPS = ["Willem is allergic to peanuts.",
 "Paardman is half human, half horse, but unlike an average centaur his bottom half is human and top half horse.",
 "Paardman plays Rock, paper or scissors and based on the result he throws an object.",
 "Once your special bar has been filled, you can press Y to use your ultimate ability!",
-"Flying Legends: bang bang does not own any of the music or sounds that can be heard during the game, except for the announcer",
-"All maps have been made by our own designers, the ideas have definitely not been stolen from other brawlers",
-"Emily only faked cancer once",
+"Flying Legends: bang bang does not own any of the music or sounds that can be heard during the game, except for the announcer.",
+"All maps have been made by our own designers, the ideas have definitely not been stolen from other brawlers.",
+"Emily only faked cancer once.",
 "If you don't have three friends to play with, you can also play the game with one or two!",
-"You lose some of your special bar when you die",
-"two plus two is four",
+"You lose some of your special bar when you die.",
+"two plus two is four, minus one, that's three. quick maths.",
 "You have an edge in battle if you make good use of your block ability!",
-"You can only block once every two seconds",
+"You can only block once every two seconds.",
 "When you block, you don't get any damage nor knockback from being hit, even if it's an ultimate!",
-"Each map has it's own unique soundtrack"
+"Each map has it's own unique soundtrack."
 ];
 
 if (DEBUG_MODE) {
