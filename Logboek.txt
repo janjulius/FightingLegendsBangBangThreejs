@@ -1,11 +1,49 @@
 Logboek Fighting Legends: Bang Bang
+
 Maandag 9 oktober
 Vandaag zijn we bezig geweest met physics en hebben we een begin gemaakt met de user interface. Ook hebben we ons verdiept in het inladen en maken van animaties.
+
 Dinsdag 10 oktober
 Characters bedacht en ontworpen. Sprites van de characters gemaakt voor de interface. De interface is nu een werkend onderdeel. Character classes toegevoegd in de code.
+
 Woensdag 11 oktober
 Interface af maar kan nog uitgebreider gemaakt worden. Extra characters gemaakt. Er kan nu met xbox-controllers gespeeld worden. Er is een begin gemaakt aan het character selection scherm. Begonnen aan levels en leveldesign.
+
 Donderdag 12 oktober
-4 werkende levels met spawnpoints gemaakt. 4 spelers kunnen nu elk hun gewenste karakter kiezen voor het begin van het spel met een controller of toetsenbord.De characters kunnen nu ook springen en double jumpen. Begonnen met het coderen van hit damage.
+4 werkende levels met spawnpoints gemaakt. 4 spelers kunnen nu elk hun gewenste karakter kiezen voor het begin van het spel met een controller of toetsenbord. De characters kunnen nu ook springen en double jumpen. Begonnen met het coderen van hit damage.
+
 Vrijdag 13 oktober
 Levelrandomizer toegevoegd en ervoor gezorgd dat elk level random spawnpoints heeft. Special ability bar toegevoegd. Er is nu knockback als je een andere speler raakt.
+
+Zaterdag 14 oktober
+De camera-positie verandert nu telkens zodanig dat alle levende spelers altijd in beeld zijn.
+
+Zondag 15 oktober
+Special abilities van characters toegevoegd (Fred, Rocky en Paardman). Maps hebben nu boundaries die ervoor zorgen dat wanneer een character buiten deze boundaries komt deze een leven verliest en respawnt. 
+Het is nu ook mogelijk om via walls omhoog te springen. Een paar muzieknummers voor het titlescreen, character selectiescreen en levels toegevoegd. Titelsong gemaakt.
+
+Maandag 16 oktober
+3 levels  toegevoegd. Special abilities van Willem en Boom Stronk geïmplementeerd. Meerdere bugfixes aan eerder gemaakte onderdelen zoals springen, knockback en special abilities. Een aantal characters maakt nu geluid wanneer ze hun special activeren.
+
+Dinsdag 17 oktober
+Er speelt nu een geluidje af wanneer een speler een andere speler raakt. Werkende specials gefixt en de specials van de overgebleven characters toegevoegd. Level boundaries gefixt. Standaard skybox gemaakt. 
+
+Woensdag 18 oktober
+Verder gewerkt aan leveldesign, verschillende textures en platforms toegevoegd. Jens en Boom stronk maken nu geluid bij hun special. In game staat nu boven elke speler een icoontje zodat ze weten welk character ze zijn. De announcer
+zegt nu de naam van de winnaar aan het eind van het spel. 
+
+Donderdag 19 oktober
+Mario- en Terraria-level gemaakt. Characters hebben nu tracking variables. Character sprites voor ingame display transparant gemaakt. Het spel wordt nu stilgezet wanneer er een winnaar is en laat een interface zien met de einduitslag en stats per speler. Er kan nu gepauzeerd worden. Multiple bug fixes.
+
+Vrijdag 20 oktober
+Verder gewerkt aan de Mario en Terraria levels.
+ 
+
+
+
+
+
+
+
+
+
