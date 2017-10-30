@@ -11,6 +11,7 @@ class BoomStronk extends Character {
         this.specialDamage = 50;
         this.specialHealing = false;
         this.portrait = 'sprites/Characters/MenuSprites/boom_stronk.png';
+        this.modelOfset = new THREE.Vector3(0, -2.5, 0);
 
         this.ultStartSound = new Audio('Sounds/Characters/Boom Stronk/Boom_stronk_ult_start.wav');
         this.ultEnd1Sound = new Audio('Sounds/Characters/Boom Stronk/Boom_stronk_ult_end_1.wav');
@@ -20,6 +21,10 @@ class BoomStronk extends Character {
             0
         );
 
+        
+        material.transparent = true;
+        material.opacity = 0.2;
+
         this.specialAtkString = "Take root";
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
@@ -28,9 +33,51 @@ class BoomStronk extends Character {
         this.geometry.castShadow = true;
         this.geometry.position.set(0, y, z);
         scene.add(this.geometry);
+        this.loadModel();
         console.log("created " + this.name);
     }
 
+    loadModel() {
+        console.log("loading model...");
+        var manager = new THREE.LoadingManager();
+        manager.onProgress = function (item, loaded, total) {
+            console.log(item, loaded, total);
+        };
+
+        var onProgress = function (xhr) {
+            if (xhr.lengthComputable) {
+                var percentComplete = xhr.loaded / xhr.total * 100;
+                console.log(Math.round(percentComplete, 2) + '% downloaded');
+            }
+        };
+        var onError = function (xhr) {
+            console.log(xhr);
+        };
+
+        THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
+
+        var mtlLoader = new THREE.MTLLoader();
+
+        var _this = this;
+        var loader = new THREE.FBXLoader(manager);
+
+        loader.load('Models/Boomstronk/Boomstronk.fbx', function (object) {
+            object.scale.set(1, 1, 1);
+            _this.pivot.add(object);
+            _this.geometry.add(_this.pivot);
+            object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
+            _this.model = object;
+            object.mixer = new THREE.AnimationMixer(object);
+            mixers.push(object.mixer);
+
+                console.log(object);
+            // if (_this.anim.length > 0) {
+            //     var action = object.mixer.clipAction(_this.anim[0].animations[0]);
+            //     console.log(action);
+            //     //action.play();
+            // }
+        }, onProgress, onError);
+    }
 
     specialAtk() {
         this.healval = this.getDamage();
