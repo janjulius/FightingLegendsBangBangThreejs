@@ -82,27 +82,6 @@ class Berend extends Character {
             //     //action.play();
             // }
         }, onProgress, onError);
-
-        //console.log(this.model);
-
-        // mtlLoader.load('Models/Raccoon/Raccoon/mixamo_raccoon.mtl', function (materials) {
-        //     console.log("HI");
-        //     materials.preload();
-
-        //     var objLoader = new THREE.OBJLoader();
-        //     objLoader.setMaterials(materials);
-        //     objLoader.setPath('Models/Raccoon/Raccoon/');
-        //     objLoader.load('mixamo_raccoon.obj', function (object) {
-        //         object.scale.set(0.06, 0.06, 0.06);
-        //         _this.pivot.add(object);
-        //         _this.geometry.add(_this.pivot);
-        //         object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
-        //         //scene.add(_this.pivot);
-        //         _this.model = object;
-        //         console.log("MY OBJECT IS " + object);
-        //     }, onProgress, onError);
-
-        // });
     }
 
 
