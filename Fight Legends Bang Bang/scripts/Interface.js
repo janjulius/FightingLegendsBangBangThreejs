@@ -10,6 +10,7 @@ class Interface {
         this.loadedGameInterface = false;
         this.loadedCharSelectInterface = false;
         this.loadedEndScreenInterface = false;
+        this.pressStartInterface;
     }
 
     LoadGameInterface(p0, p1, p2, p3) {
@@ -434,6 +435,27 @@ class Interface {
                 this.readyTexts[i].innerHTML = "Ready for next battle?";
                 this.readyTexts[i].style.color = "red";
             }
+        }
+    }
+
+    DisplayPressStart(display){
+        this.pressStartInterface = document.getElementById("pressStartToGo");
+        if(display){
+            this.pressStartInterface.style.visibility = "visible";
+        }
+        if(!display){
+            this.pressStartInterface.style.visibility = "hidden";
+        }
+    }
+
+    DisplayDidYouKnow(display){
+        this.didYouKnowInterface = document.getElementById("didYouKnow");
+        if(display){
+            this.didYouKnowInterface.style.innerHTML = "Did you know: ";
+            this.didYouKnowInterface.style.visibility = "visible";
+        }
+        if(!display){
+            this.didYouKnowInterface.style.visibility = "hidden";
         }
     }
 
