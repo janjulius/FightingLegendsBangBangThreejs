@@ -10,7 +10,9 @@ class Interface {
         this.loadedGameInterface = false;
         this.loadedCharSelectInterface = false;
         this.loadedEndScreenInterface = false;
+        this.pausedInterface;
         this.pressStartInterface;
+        this.countDownInterface;
     }
 
     LoadGameInterface(p0, p1, p2, p3) {
@@ -18,15 +20,15 @@ class Interface {
         if (this.loadedGameInterface) {
             this.mainInterface.style.visibility = "visible";
             if(playersPlaying > 1){
-                this.spaBar0.value = this.players[0].getSpecialAttackCounter();
-                this.spaBar1.value = this.players[1].getSpecialAttackCounter();
+                this.spaBar0.value = players[0].getSpecialAttackCounter();
+                this.spaBar1.value = players[1].getSpecialAttackCounter();
             this.spaBar0.style.visibility = "visible";
             this.spaBar1.style.visibility = "visible";
                 if(playersPlaying > 2){
-                    this.spaBar2.value = this.players[2].getSpecialAttackCounter();
+                    this.spaBar2.value = players[2].getSpecialAttackCounter();
             this.spaBar2.style.visibility = "visible";
                     if(playersPlaying > 3){
-                        this.spaBar3.value = this.players[3].getSpecialAttackCounter();
+                        this.spaBar3.value = players[3].getSpecialAttackCounter();
             this.spaBar3.style.visibility = "visible";
                     }
                 }
@@ -431,6 +433,15 @@ class Interface {
         }
     }
 
+    ShowGameInterface(display){
+        if(display){
+            this.LoadGameInterface();
+        }
+        if(!display){
+            this.ClearGameInterface();
+        }
+    }
+
     DisplayPressStart(display){
         this.pressStartInterface = document.getElementById("pressStartToGo");
         if(display){
@@ -453,6 +464,36 @@ class Interface {
         }
     }
 
+    DisplayPaused(display){
+        this.pausedInterface = document.getElementById("paused");
+        if(display){
+            this.ShowGameInterface(false);
+            this.DisplayDidYouKnow(true);
+            this.pausedInterface.style.visibility = "visible";
+        }
+        if(!display){
+            this.ShowGameInterface(true);
+            this.DisplayDidYouKnow(false);
+            this.pausedInterface.style.visibility = "hidden";
+        }
+    }
+
+    DisplayCountDown(display){
+        this.countDownInterface = document.getElementById("countdown");
+        if(display){
+            this.countDownInterface.style.visibility = "visible";
+        }
+        if(!display){
+            this.countDownInterface.style.visibility = "hidden";
+        }
+    }
+
+    UpdateCountDown(a){
+        console.log("updating coountdown");
+        this.DisplayCountDown(true);
+        this.countDownInterface = document.getElementById("countdown");
+        this.countDownInterface.innerHTML = a;
+    }
 
     getPlayerColorsDark(id) {
         switch (id) {

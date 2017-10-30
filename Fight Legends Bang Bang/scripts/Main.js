@@ -20,6 +20,7 @@ var mixers = [];
 var playerWon = -1;
 var gameEnded = false;
 var gamePaused = false;
+var gameStartUp = false;
 var spawnOverheads = true;
 var blockingPossible = true;
 var previousWinner;
@@ -142,7 +143,7 @@ scene.addEventListener('update', function () {
         camera.position.x = clamp(camera.position.x, placesLeft > 0 ? 150 : 0, 400);
         camera.position.y = clamp(camera.position.y, -200, 200);
         camera.position.z = clamp(camera.position.z, -200, 200);
-        if (!gameEnded && !gamePaused)
+        if (!gameEnded && !gamePaused && !gameStartUp)
             scene.simulate(undefined, 1); // run physics
     }
 });
@@ -216,6 +217,7 @@ function EndGame() {
     playersPlaying = 4;
     charSelect = true;
     gamePaused = false;
+    gameStartUp = false;
     placesLeft = 4;
     playerWon = -1;
     level.StopMusic();
@@ -378,7 +380,8 @@ function runGame() {
     this.music.currentTime = 0;
 
     if (!charSelect) {
-
+        gameStartUp = true;
+        startGameCountDown();
 
         for (var i = scene.children.length - 1; i >= 0; i--) {
             scene.remove(scene.children[i]);

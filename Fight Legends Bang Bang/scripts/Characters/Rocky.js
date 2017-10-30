@@ -3,6 +3,8 @@ class Rocky extends Character {
     constructor(y, z) {
         super();
         this.name = "Rocky";
+        this.size.width = 5;
+        this.size.height = 7;
         this.extraname = "the Raccoon";
         this.cid = 2;
         this.specialAtkString = "Shivering Leap";
@@ -11,7 +13,7 @@ class Rocky extends Character {
         this.clawDamage = 12;
         this.specialDamage = 17;
         this.ultRange = 400;
-        this.modelOfset = new THREE.Vector3(0, -2.5, 0);
+        this.modelOfset = new THREE.Vector3(0, -this.size.height / 2, 0);
         this.clawed = [];
         this.clawed[0] = false;
         this.clawed[1] = false;
@@ -31,9 +33,9 @@ class Rocky extends Character {
             0
         );
         material.transparent = true;
-        material.opacity = 0;
+        material.opacity = 0.2;
         this.geometry = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(5, 5, 5),
+            new THREE.CubeGeometry(5, this.size.height, this.size.width),
             material
         );
 
@@ -86,27 +88,6 @@ class Rocky extends Character {
             }, onProgress, onError);
 
         }, onProgress, onError);
-
-        console.log(this.model + "BTW");
-
-        // mtlLoader.load('Models/Raccoon/Raccoon/mixamo_raccoon.mtl', function (materials) {
-        //     console.log("HI");
-        //     materials.preload();
-
-        //     var objLoader = new THREE.OBJLoader();
-        //     objLoader.setMaterials(materials);
-        //     objLoader.setPath('Models/Raccoon/Raccoon/');
-        //     objLoader.load('mixamo_raccoon.obj', function (object) {
-        //         object.scale.set(0.06, 0.06, 0.06);
-        //         _this.pivot.add(object);
-        //         _this.geometry.add(_this.pivot);
-        //         object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
-        //         //scene.add(_this.pivot);
-        //         _this.model = object;
-        //         console.log("MY OBJECT IS " + object);
-        //     }, onProgress, onError);
-
-        // });
     }
     specialAtk() {
         this.clawed[0] = false;
@@ -154,7 +135,7 @@ class Rocky extends Character {
                 }
                 if (this.specialTimer < 1) {
                     this.geometry.position.set(players[this.target].geometry.position.x, players[this.target].geometry.position.y,
-                        players[this.target].geometry.position.z + -players[this.target].attackDirection.z * 5);
+                        players[this.target].geometry.position.z + -players[this.target].attackDirection.z * ((this.size.width / 2) + (players[this.target].size.width / 2)));
                     players[this.target].isStunned = true;
                     if (!this.clawed[0]) {
                         players[this.target].setDamage(players[this.target].getDamage() + this.clawDamage, {

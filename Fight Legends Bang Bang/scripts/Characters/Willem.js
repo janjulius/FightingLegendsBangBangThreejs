@@ -3,13 +3,15 @@ class Willem extends Character {
     constructor(y, z) {
         super();
         this.name = "Willem";
+        this.size.width = 5;
+        this.size.height = 7;
         this.moveSpeed = 300;
         this.cid = 0;
         this.ultDir;
         this.target;
         this.ultDamage = 100;
         this.ballSpeed = 80;
-        this.modelOfset = new THREE.Vector3(0, -2.5, 0);
+        this.modelOfset = new THREE.Vector3(0, -this.size.height / 2, 0);
         this.beginSPecial = false;
         this.specialExists = false;
         this.hitplayer = [false, false, false, false];
@@ -36,10 +38,10 @@ class Willem extends Character {
         );
 
         this.material.transparent = true;
-        this.material.opacity = 0;
+        this.material.opacity = 0.2;
         this.specialAtkString = "Throw Snowball";
         this.geometry = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(5, 5, 5),
+            new THREE.CubeGeometry(5, this.size.height, this.size.width),
             this.material
         );
 
@@ -100,7 +102,7 @@ class Willem extends Character {
             }, onProgress, onError);
             loader.load('Models/Snowman/Flip.fbx', function (object) {
                 _this.UltAnimation = _this.model.mixer.clipAction(object.animations[0]);
-                _this.UltAnimation.loop = false;
+                _this.UltAnimation.setLoop(THREE.LoopOnce, 1);
             }, onProgress, onError);
 
         }, onProgress, onError);
@@ -145,7 +147,7 @@ class Willem extends Character {
                 }
                 if (this.specialTimer < 4.4 && this.beginSPecial) {
                     var pos = this.geometry.position;
-                    this.specialObject.position.set(0, pos.y + (this.CheckSides("down") ? 5 : 0), pos.z);
+                    this.specialObject.position.set(0, pos.y + (this.CheckSides("down") ? this.size.height : 0), pos.z);
                     this.specialObject.__dirtyPosition = true;
                     this.isStunned = true;
                     this.velt = 0;

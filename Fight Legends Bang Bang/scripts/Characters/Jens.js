@@ -4,8 +4,10 @@ class Jens extends Character {
         super();
         this.name = "Jens";
         this.cid = 6;
+        this.size.width = 6;
+        this.size.height = 7;
         this.portrait = 'sprites/Characters/MenuSprites/jens.png';
-        this.modelOfset = new THREE.Vector3(4, -2.5, 0);
+        this.modelOfset = new THREE.Vector3(4, -this.size.height / 2, 0);
         this.modelHeight = 14;
         this.finalUlt = false;
         this.ultDamage = 50;
@@ -28,7 +30,7 @@ class Jens extends Character {
         material.opacity = 0.2;
         this.specialAtkString = "Cannon Barrage";
         this.geometry = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(5, 5, 5),
+            new THREE.CubeGeometry(5, this.size.height, this.size.width),
             material,
         );
         this.geometry.castShadow = true;
@@ -62,8 +64,8 @@ class Jens extends Character {
         var _this = this;
         var loader = new THREE.FBXLoader(manager);
 
-        loader.load('Models/Panda/Panda.fbx', function (object) {
-            object.scale.set(6, 6, 6);
+        loader.load('Models/Panda/Idle.fbx', function (object) {
+            object.scale.set(4, 4, 4);
             _this.pivot.add(object);
             _this.geometry.add(_this.pivot);
             object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
@@ -71,12 +73,13 @@ class Jens extends Character {
             object.mixer = new THREE.AnimationMixer(object);
             mixers.push(object.mixer);
 
-                console.log(object);
-            // if (_this.anim.length > 0) {
-            //     var action = object.mixer.clipAction(_this.anim[0].animations[0]);
-            //     console.log(action);
-            //     //action.play();
-            // }
+            _this.idleAnim = object.mixer.clipAction(object.animations[0]);
+            _this.idleAnim.play();
+            
+            loader.load('Models/Panda/Running.fbx', function (object) {
+                _this.runningAnim = _this.model.mixer.clipAction(object.animations[0]);
+            }, onProgress, onError);
+
         }, onProgress, onError);
     }
 
