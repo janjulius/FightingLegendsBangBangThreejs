@@ -436,7 +436,7 @@ function runGame() {
                         map: this.playerFloaterMaterial
                     }));
 
-                this.playerFloater.position.set(5.1, 7, 0);
+                this.playerFloater.position.set(5.1, players[k].modelHeight !== undefined ? players[k].modelHeight : 7, 0);
 
                 players[k].geometry.add(playerFloater);
             }

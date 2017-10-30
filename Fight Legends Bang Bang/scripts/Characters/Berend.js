@@ -5,6 +5,8 @@ class Berend extends Character {
         this.name = "Berend";
         this.Speed = 4;
         this.cid = 7;
+        this.modelOfset = new THREE.Vector3(0, -2.5, 0);
+        this.modelHeight = 14;
         this.stBasicRange = this.attackRange;
         this.stBasicWidth = this.attackWidth;
         this.stBasicJump = this.jumpForce;
@@ -26,6 +28,8 @@ class Berend extends Character {
             0
         );
 
+        material.transparent = true;
+        material.opacity = 0.2;
         this.specialAtkString = "Assert dominance";
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
@@ -34,7 +38,71 @@ class Berend extends Character {
         this.geometry.castShadow = true;
         this.geometry.position.set(0, y, z);
         scene.add(this.geometry);
+        this.loadModel();
         console.log("created " + this.name);
+    }
+
+    loadModel() {
+        console.log("loading model...");
+        var manager = new THREE.LoadingManager();
+        manager.onProgress = function (item, loaded, total) {
+            console.log(item, loaded, total);
+        };
+
+        var onProgress = function (xhr) {
+            if (xhr.lengthComputable) {
+                var percentComplete = xhr.loaded / xhr.total * 100;
+                console.log(Math.round(percentComplete, 2) + '% downloaded');
+            }
+        };
+        var onError = function (xhr) {
+            console.log(xhr);
+        };
+
+        THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
+
+        var mtlLoader = new THREE.MTLLoader();
+
+        var _this = this;
+        var loader = new THREE.FBXLoader(manager);
+
+        loader.load('Models/Yeti/yeti.fbx', function (object) {
+            object.scale.set(0.008, 0.008, 0.008);
+            _this.pivot.add(object);
+            _this.geometry.add(_this.pivot);
+            object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
+            _this.model = object;
+            object.mixer = new THREE.AnimationMixer(object);
+            mixers.push(object.mixer);
+
+                console.log(object);
+            // if (_this.anim.length > 0) {
+            //     var action = object.mixer.clipAction(_this.anim[0].animations[0]);
+            //     console.log(action);
+            //     //action.play();
+            // }
+        }, onProgress, onError);
+
+        //console.log(this.model);
+
+        // mtlLoader.load('Models/Raccoon/Raccoon/mixamo_raccoon.mtl', function (materials) {
+        //     console.log("HI");
+        //     materials.preload();
+
+        //     var objLoader = new THREE.OBJLoader();
+        //     objLoader.setMaterials(materials);
+        //     objLoader.setPath('Models/Raccoon/Raccoon/');
+        //     objLoader.load('mixamo_raccoon.obj', function (object) {
+        //         object.scale.set(0.06, 0.06, 0.06);
+        //         _this.pivot.add(object);
+        //         _this.geometry.add(_this.pivot);
+        //         object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
+        //         //scene.add(_this.pivot);
+        //         _this.model = object;
+        //         console.log("MY OBJECT IS " + object);
+        //     }, onProgress, onError);
+
+        // });
     }
 
 
