@@ -3,6 +3,8 @@ class BoomStronk extends Character {
     constructor(y, z) {
         super();
         this.name = "Boom Stronk";
+        this.size.width = 6;
+        this.size.height = 5;
         this.Speed = 12;
         this.cid = 5;
         this.hitSomeone = false;
@@ -11,7 +13,7 @@ class BoomStronk extends Character {
         this.specialDamage = 50;
         this.specialHealing = false;
         this.portrait = 'sprites/Characters/MenuSprites/boom_stronk.png';
-        this.modelOfset = new THREE.Vector3(0, -2.5, 0);
+        this.modelOfset = new THREE.Vector3(0, -this.size.height / 2, 0);
 
         this.ultStartSound = new Audio('Sounds/Characters/Boom Stronk/Boom_stronk_ult_start.wav');
         this.ultEnd1Sound = new Audio('Sounds/Characters/Boom Stronk/Boom_stronk_ult_end_1.wav');
@@ -27,7 +29,7 @@ class BoomStronk extends Character {
 
         this.specialAtkString = "Take root";
         this.geometry = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(5, 5, 5),
+            new THREE.CubeGeometry(5, this.size.height, this.size.width),
             material,
         );
         this.geometry.castShadow = true;
@@ -127,8 +129,8 @@ class BoomStronk extends Character {
                                     if (_this.id != _this.target) {
                                         _this.hitSomeone = true;
                                         players[_this.target].geometry.__dirtyPosition = true;
-                                        players[_this.target].geometry.position.set(players[_this.target].geometry.position.x, players[_this.target].geometry.position.y, players[_this.target].geometry.position.z + 5 * _this.GetSpcDirection(players[_this.target]));
-                                        players[_this.target].setDamage(players[_this.target].getDamage() + -_this.velt / 3, { y: 1, z: _this.GetSpcDirection(players[_this.target]) }, _this.id, 1);
+                                        players[_this.target].geometry.position.set(players[_this.target].geometry.position.x, players[_this.target].geometry.position.y, players[_this.target].geometry.position.z + ((_this.size.width / 2) + (players[_this.target].size.width / 2)) * _this.GetSpcDirection(players[_this.target]));
+                                        players[_this.target].setDamage(players[_this.target].getDamage() + -_this.velt / 2, { y: 1, z: _this.GetSpcDirection(players[_this.target]) }, _this.id, 1);
                                         _this.specialExists = false;
                                         _this.setSpecialAttackCounter(0);
                                     }
