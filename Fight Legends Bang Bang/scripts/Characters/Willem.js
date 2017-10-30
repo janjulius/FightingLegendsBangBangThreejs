@@ -9,6 +9,7 @@ class Willem extends Character {
         this.target;
         this.ultDamage = 100;
         this.ballSpeed = 80;
+        this.modelOfset = new THREE.Vector3(0, -2.5, 0);
         this.beginSPecial = false;
         this.specialExists = false;
         this.hitplayer = [false, false, false, false];
@@ -23,6 +24,16 @@ class Willem extends Character {
             0
         );
 
+        this.Ultmaterial = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff
+            }),
+            0,
+            0
+        );
+
+        this.material.transparent = true;
+        this.material.opacity = 0.2;
         this.specialAtkString = "Throw Snowball";
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
@@ -31,7 +42,7 @@ class Willem extends Character {
 
         this.specialObject = new Physijs.SphereMesh(
             new THREE.SphereGeometry(5, 16, 16),
-            this.material
+            this.Ultmaterial
         );
         this.specialObject.position.set(-10000, y, z);
         this.geometry.castShadow = true;
@@ -70,7 +81,7 @@ class Willem extends Character {
         var loader = new THREE.FBXLoader(manager);
 
         loader.load('Models/Snowman/Snowman_0003.fbx', function (object) {
-            object.scale.set(0.06, 0.06, 0.06);
+            object.scale.set(0.4, 0.4, 0.4);
             _this.pivot.add(object);
             _this.geometry.add(_this.pivot);
             object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
@@ -85,7 +96,7 @@ class Willem extends Character {
             // }
         }, onProgress, onError);
 
-        console.log(this.model + "BTW");
+        console.log(this.model);
 
         // mtlLoader.load('Models/Raccoon/Raccoon/mixamo_raccoon.mtl', function (materials) {
         //     console.log("HI");
