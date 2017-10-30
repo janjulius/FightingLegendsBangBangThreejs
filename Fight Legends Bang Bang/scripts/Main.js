@@ -16,6 +16,7 @@ var playerBlockIcons = [];
 var controls = new THREE.GamepadControls();
 var level;
 var placesLeft = 4;
+var mixers = [];
 var playerWon = -1;
 var gameEnded = false;
 var gamePaused = false;
@@ -172,16 +173,13 @@ function onWindowResize() {
 
 function animate() {
     render_stats.update();
-    // for (var i = 0; i < playersPlaying; i++) {
-    //     var p = players[i];
-    //     if (p instanceof Character) {
-    //         if (p.mixers.length > 0) {
-    //             for (var i = 0; i < p.mixers.length; i++) {
-    //                 p.mixers[i].update(clockAnim.getDelta());
-    //             }
-    //         }
-    //     }
-    // }
+
+    if (mixers.length > 0) {
+        for (var i = 0; i < mixers.length; i++) {
+            mixers[i].update(clockAnim.getDelta());
+        }
+    }
+
     requestAnimationFrame(animate);
     render();
 }
@@ -252,8 +250,8 @@ function runCharSelect() {
 
     if (charSelect) {
 
-        camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 1, 1000 );
-        
+        camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 1, 1000);
+
         scene.add(camera);
         camera.zoom = 40;
         camera.updateProjectionMatrix();

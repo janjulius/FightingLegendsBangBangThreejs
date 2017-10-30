@@ -86,13 +86,13 @@ class Rocky extends Character {
             object.position.set(_this.modelOfset.x, _this.modelOfset.y, _this.modelOfset.z);
             _this.model = object;
             object.mixer = new THREE.AnimationMixer(object);
-            _this.mixers.push(object.mixer);
+            mixers.push(object.mixer);
 
-            if (_this.anim.length > 0) {
-                var action = object.mixer.clipAction(_this.anim[0].animations[0]);
-                console.log(action);
-                //action.play();
-            }
+            // if (_this.anim.length > 0) {
+            //     var action = object.mixer.clipAction(_this.anim[0].animations[0]);
+            //     console.log(action);
+            //     //action.play();
+            // }
         }, onProgress, onError);
 
         console.log(this.model + "BTW");
