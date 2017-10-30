@@ -159,7 +159,6 @@ class Rocky extends Character {
                     this.isStunned = true;
                     this.geometry.setLinearVelocity(new THREE.Vector3(0, 0, 0));
                     this.geometry.position.x = -10000;
-                    console.log(this.geometry.position);
                 }
                 if (this.specialTimer < 1) {
                     this.geometry.position.set(players[this.target].geometry.position.x, players[this.target].geometry.position.y,
