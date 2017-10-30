@@ -16,6 +16,7 @@ var playerBlockIcons = [];
 var controls = new THREE.GamepadControls();
 var level;
 var placesLeft = 4;
+var mixers = [];
 var playerWon = -1;
 var gameEnded = false;
 var gamePaused = false;
@@ -56,16 +57,6 @@ function init() {
     physics_stats.domElement.style.top = '50px';
     physics_stats.domElement.style.zIndex = 100;
     container.appendChild(physics_stats.domElement);
-
-    camera = new THREE.PerspectiveCamera(
-        35,
-        window.innerWidth / window.innerHeight,
-        1,
-        1000
-    );
-    camera.position.set(60, 25, 0);
-    camera.lookAt(scene.position);
-    scene.add(camera);
 
     light = new THREE.DirectionalLight(0xFFFFFF);
     light.position.set(20, 40, -15);
@@ -182,16 +173,13 @@ function onWindowResize() {
 
 function animate() {
     render_stats.update();
-    for (var i = 0; i < playersPlaying; i++) {
-        var p = players[i];
-        if (p instanceof Character) {
-            if (p.mixers.length > 0) {
-                for (var i = 0; i < p.mixers.length; i++) {
-                    p.mixers[i].update(clockAnim.getDelta());
-                }
-            }
+
+    if (mixers.length > 0) {
+        for (var i = 0; i < mixers.length; i++) {
+            mixers[i].update(clockAnim.getDelta());
         }
     }
+
     requestAnimationFrame(animate);
     render();
 }
@@ -261,6 +249,13 @@ function runCharSelect() {
     music.play();
 
     if (charSelect) {
+
+        camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 1, 1000);
+
+        scene.add(camera);
+        camera.zoom = 40;
+        camera.updateProjectionMatrix();
+
         gameInterface.LoadCharSelectInterface();
         var material;
         var baseZ = 0;
@@ -327,9 +322,10 @@ function runCharSelect() {
 function runLevelSelect() {
     if (levelSelect) {
         gameInterface.ClearCharSelectInterface();
-        scene.remove(playerFiches[3]);
-        scene.remove(playerFiches[2]);
-        scene.remove(playerFiches[1]);
+        for (var i = scene.children.length - 1; i >= 0; i--) {
+            scene.remove(scene.children[i]);
+        }
+        scene.add(playerFiches[0]);
         var material;
         var baseZ = 0;
         var baseY = -5;
