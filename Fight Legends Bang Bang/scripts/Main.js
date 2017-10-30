@@ -416,7 +416,7 @@ function runGame() {
         console.log("attempting to load level " + selectedLevel);
 
         if (selectedLevel == 9) {
-            var r = Math.floor((Math.random() * stages.length))
+            var r = Math.floor((Math.random() * stages.length) + 1)
 
             level = new stages[r]();
         } else {
