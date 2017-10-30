@@ -314,7 +314,7 @@ function runCharSelect() {
             playerFiches[i] = fische;
             scene.add(fische);
             console.log(players[i]);
-            players[i] = players[i] ? players[i] : 0;
+            players[i] = players[i] ? players[i] : 3;
         }
     }
 }
