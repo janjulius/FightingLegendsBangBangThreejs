@@ -100,7 +100,7 @@ class Willem extends Character {
             }, onProgress, onError);
             loader.load('Models/Snowman/Flip.fbx', function (object) {
                 _this.UltAnimation = _this.model.mixer.clipAction(object.animations[0]);
-                _this.UltAnimation.loop = false;
+                _this.UltAnimation.setLoop(THREE.LoopOnce, 1);
             }, onProgress, onError);
 
         }, onProgress, onError);
