@@ -10,7 +10,7 @@ Woensdag 11 oktober
 Interface af maar kan nog uitgebreider gemaakt worden. Extra characters gemaakt. Er kan nu met xbox-controllers gespeeld worden. Er is een begin gemaakt aan het character selection scherm. Begonnen aan levels en leveldesign.
 
 Donderdag 12 oktober
-4 werkende levels met spawnpoints gemaakt. 4 spelers kunnen nu elk hun gewenste karakter kiezen voor het begin van het spel met een controller of toetsenbord. De characters kunnen nu ook springen en double jumpen. Begonnen met het coderen van hit damage.
+3 werkende levels met spawnpoints gemaakt (Brawlhaven, Thundergart en ZeldaMap). 4 spelers kunnen nu elk hun gewenste karakter kiezen voor het begin van het spel met een controller of toetsenbord. De characters kunnen nu ook springen en double jumpen. Begonnen met het coderen van hit damage.
 
 Vrijdag 13 oktober
 Levelrandomizer toegevoegd en ervoor gezorgd dat elk level random spawnpoints heeft. Special ability bar toegevoegd. Er is nu knockback als je een andere speler raakt.
@@ -23,7 +23,7 @@ Special abilities van characters toegevoegd (Fred, Rocky en Paardman). Maps hebb
 Het is nu ook mogelijk om via walls omhoog te springen. Een paar muzieknummers voor het titlescreen, character selectiescreen en levels toegevoegd. Titelsong gemaakt.
 
 Maandag 16 oktober
-3 levels  toegevoegd. Special abilities van Willem en Boom Stronk geïmplementeerd. Meerdere bugfixes aan eerder gemaakte onderdelen zoals springen, knockback en special abilities. Een aantal characters maakt nu geluid wanneer ze hun special activeren.
+3 levels toegevoegd (Deserto, Hyrule Castle en MetalPlant). Special abilities van Willem en Boom Stronk geïmplementeerd. Meerdere bugfixes aan eerder gemaakte onderdelen zoals springen, knockback en special abilities. Een aantal characters maakt nu geluid wanneer ze hun special activeren.
 
 Dinsdag 17 oktober
 Er speelt nu een geluidje af wanneer een speler een andere speler raakt. Werkende specials gefixt en de specials van de overgebleven characters toegevoegd. Level boundaries gefixt. Standaard skybox gemaakt. 
