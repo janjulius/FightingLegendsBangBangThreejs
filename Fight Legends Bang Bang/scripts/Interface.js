@@ -16,17 +16,17 @@ class Interface {
 
         if (this.loadedGameInterface) {
             this.mainInterface.style.visibility = "visible";
-            this.spaBar0.style.visibility = "visible";
-            this.spaBar2.style.visibility = "visible";
-            this.spaBar1.style.visibility = "visible";
-            this.spaBar3.style.visibility = "visible";
             if(playersPlaying > 1){
                 this.spaBar0.value = this.players[0].getSpecialAttackCounter();
                 this.spaBar1.value = this.players[1].getSpecialAttackCounter();
+            this.spaBar0.style.visibility = "visible";
+            this.spaBar1.style.visibility = "visible";
                 if(playersPlaying > 2){
                     this.spaBar2.value = this.players[2].getSpecialAttackCounter();
+            this.spaBar2.style.visibility = "visible";
                     if(playersPlaying > 3){
                         this.spaBar3.value = this.players[3].getSpecialAttackCounter();
+            this.spaBar3.style.visibility = "visible";
                     }
                 }
             } 

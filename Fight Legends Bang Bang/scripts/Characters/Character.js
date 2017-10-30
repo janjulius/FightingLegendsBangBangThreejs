@@ -27,6 +27,8 @@ class Character {
         this.igid = -1;
         this.stock = GAME_SETTINGS_STOCK_START;
         this.speed = 40;
+        this.attackRange = 12;
+        this.attackWidth = 5.2;
         this.velocity = new THREE.Vector3(0, 0, 0);
         this.portrait;
         this.velt = 0;
@@ -118,21 +120,22 @@ class Character {
                     continue;
 
                 var hit = false;
-                if (distanceBetweenVector3(this.geometry.position, otherPlayer.geometry.position) < 10) {
+                if (distanceBetweenVector3(this.geometry.position, otherPlayer.geometry.position) < this.attackRange) {
 
                     var randomSound;
                     randomSound = Math.floor((Math.random() * 7));
 
                     var ydist = Math.abs(otherPlayer.geometry.position.y - this.geometry.position.y);
                     var zdist = Math.abs(otherPlayer.geometry.position.z - this.geometry.position.z);
-                    var tol = 4.5;
-                    if (this.attackDirection.z == 1 && otherPlayer.geometry.position.z > this.geometry.position.z && ydist < tol && zdist > tol) {
+                    var tolMax = this.attackWidth;
+                    var tolMin = 4.5;
+                    if (this.attackDirection.z == 1 && otherPlayer.geometry.position.z > this.geometry.position.z && ydist < tolMax && zdist > tolMin) {
                         hit = true; //links
-                    } else if (this.attackDirection.z == -1 && otherPlayer.geometry.position.z < this.geometry.position.z && ydist < tol && zdist > tol) {
+                    } else if (this.attackDirection.z == -1 && otherPlayer.geometry.position.z < this.geometry.position.z && ydist < tolMax && zdist > tolMin) {
                         hit = true; //rechts
-                    } else if (this.attackDirection.y == 1 && otherPlayer.geometry.position.y > this.geometry.position.y && zdist < tol && ydist > tol) {
+                    } else if (this.attackDirection.y == 1 && otherPlayer.geometry.position.y > this.geometry.position.y && zdist < tolMax && ydist > tolMin) {
                         hit = true; //boven
-                    } else if (this.attackDirection.y == -1 && otherPlayer.geometry.position.y < this.geometry.position.y && zdist < tol && ydist > tol) {
+                    } else if (this.attackDirection.y == -1 && otherPlayer.geometry.position.y < this.geometry.position.y && zdist < tolMax && ydist > tolMin) {
                         hit = true; //onder
                     }
                 }
@@ -283,7 +286,8 @@ class Character {
             }
             this.specialExists = false;
             this.velt = 0;
-            this.setSpecialAttackCounter(this.specialCounter / 2);
+            if (this.specialCounter > 70)
+                this.setSpecialAttackCounter(this.specialCounter - (this.specialCounter / 3));
 
             this.TDeaths++;
             players[this.TLastPerson != -1 ? this.TLastPerson : this.id].TKills++;
@@ -544,7 +548,7 @@ class Character {
         this.geometry.setLinearFactor(new THREE.Vector3(0, 1, 1));
     }
 
-    UpdateChar(t) { }
+    UpdateChar(t) {}
 
     AddGrounded() {
         var _this = this;
