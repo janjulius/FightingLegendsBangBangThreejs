@@ -84,8 +84,10 @@ THREE.GamepadControls = function () {
         this.oldGamepad = new Array(4);
         for (var i = 0; i < a.length; i++) {
             this.oldGamepad[i] = new Array(17);
-            for (var j = 0; j < a[i].buttons.length; j++) {
-                this.oldGamepad[i][j] = a[i].buttons[j].value;
+            if (a[i] != null) {
+                for (var j = 0; j < a[i].buttons.length; j++) {
+                    this.oldGamepad[i][j] = a[i].buttons[j].value;
+                }
             }
         }
     }
@@ -122,7 +124,7 @@ THREE.GamepadControls = function () {
                                 selectedLevel = intersects[j].object.myLevelId;
                             }
                         }
-                        if(selectedLevel !== undefined){ //wacht totdat selectedlevel bestaat en dan start het spel!
+                        if (selectedLevel !== undefined) { //wacht totdat selectedlevel bestaat en dan start het spel!
                             charSelect = false;
                             levelSelect = false;
                             runGame();
@@ -195,6 +197,7 @@ THREE.GamepadControls = function () {
                                 if (charSelect) {
                                     charSelect = false;
                                     levelSelect = true;
+                                    selectedLevel = undefined;
                                     runLevelSelect();
                                 }
                                 break;

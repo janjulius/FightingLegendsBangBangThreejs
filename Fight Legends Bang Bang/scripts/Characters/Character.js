@@ -283,7 +283,8 @@ class Character {
             }
             this.specialExists = false;
             this.velt = 0;
-            this.setSpecialAttackCounter(this.specialCounter / 2);
+            if (this.specialCounter > 70)
+                this.setSpecialAttackCounter(this.specialCounter - (this.specialCounter / 3));
 
             this.TDeaths++;
             players[this.TLastPerson != -1 ? this.TLastPerson : this.id].TKills++;
@@ -544,7 +545,7 @@ class Character {
         this.geometry.setLinearFactor(new THREE.Vector3(0, 1, 1));
     }
 
-    UpdateChar(t) { }
+    UpdateChar(t) {}
 
     AddGrounded() {
         var _this = this;
