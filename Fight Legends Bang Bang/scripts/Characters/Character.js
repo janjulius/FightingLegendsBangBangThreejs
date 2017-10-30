@@ -9,6 +9,7 @@ class Character {
         this.model = undefined;
         this.modelOfset = new THREE.Vector3(0, 0, 0);
         this.pivot = new THREE.Object3D();
+        this.size = { height: 5, width: 5 };
         this.LookDirection = 1;
         this.anim = [];
 
@@ -112,8 +113,8 @@ class Character {
                 color: 0xffffff
             }));
             this.swingObject.position.set(this.geometry.position.x,
-                this.geometry.position.y + (this.attackDirection.y * 5),
-                this.geometry.position.z + (this.attackDirection.z * 5));
+                this.geometry.position.y + (this.attackDirection.y * this.size.height),
+                this.geometry.position.z + (this.attackDirection.z * this.size.width));
             scene.add(this.swingObject);
             ///
 
@@ -131,14 +132,14 @@ class Character {
                     var ydist = Math.abs(otherPlayer.geometry.position.y - this.geometry.position.y);
                     var zdist = Math.abs(otherPlayer.geometry.position.z - this.geometry.position.z);
                     var tolMax = this.attackWidth;
-                    var tolMin = 4.5;
-                    if (this.attackDirection.z == 1 && otherPlayer.geometry.position.z > this.geometry.position.z && ydist < tolMax && zdist > tolMin) {
+                    var tolMin = -2;
+                    if (this.attackDirection.z == 1 && otherPlayer.geometry.position.z > this.geometry.position.z && ydist < tolMax && zdist > 2) {
                         hit = true; //links
-                    } else if (this.attackDirection.z == -1 && otherPlayer.geometry.position.z < this.geometry.position.z && ydist < tolMax && zdist > tolMin) {
+                    } else if (this.attackDirection.z == -1 && otherPlayer.geometry.position.z < this.geometry.position.z && ydist < tolMax && zdist > 2) {
                         hit = true; //rechts
-                    } else if (this.attackDirection.y == 1 && otherPlayer.geometry.position.y > this.geometry.position.y && zdist < tolMax && ydist > tolMin) {
+                    } else if (this.attackDirection.y == 1 && otherPlayer.geometry.position.y > this.geometry.position.y && zdist < tolMax && ydist > 2) {
                         hit = true; //boven
-                    } else if (this.attackDirection.y == -1 && otherPlayer.geometry.position.y < this.geometry.position.y && zdist < tolMax && ydist > tolMin) {
+                    } else if (this.attackDirection.y == -1 && otherPlayer.geometry.position.y < this.geometry.position.y && zdist < tolMax && ydist > 2) {
                         hit = true; //onder
                     }
                 }
@@ -316,17 +317,17 @@ class Character {
             }
         }
         if (level.oneWayPlatforms.length > 0 && this.velt <= 0 && this.direction.y > -0.7) {
-            var pos1 = new THREE.Vector3(0, this.geometry.position.y, this.geometry.position.z + 2.5);
-            var ray1 = new THREE.Raycaster(pos1, new THREE.Vector3(0, -1, 0), 1.5, 2.8);
+            var pos1 = new THREE.Vector3(0, this.geometry.position.y, this.geometry.position.z + this.size.width / 2);
+            var ray1 = new THREE.Raycaster(pos1, new THREE.Vector3(0, -1, 0), 1.5, (this.size.height / 2) + 0.3);
             var intersects1 = ray1.intersectObjects(level.oneWayPlatforms);
-            var pos2 = new THREE.Vector3(0, this.geometry.position.y, this.geometry.position.z - 2.5);
-            var ray2 = new THREE.Raycaster(pos2, new THREE.Vector3(0, -1, 0), 1.5, 2.8);
+            var pos2 = new THREE.Vector3(0, this.geometry.position.y, this.geometry.position.z - this.size.width / 2);
+            var ray2 = new THREE.Raycaster(pos2, new THREE.Vector3(0, -1, 0), 1.5, (this.size.height / 2) + 0.3);
             var intersects2 = ray2.intersectObjects(level.oneWayPlatforms);
             if (intersects1[0] || intersects2[0]) {
                 this.touchingWalls[3] = 20;
                 this.jumpsLeft = this.totalJump;
                 var ypos = intersects1[0] ? intersects1[0].object.position.y : intersects2[0].object.position.y;
-                this.geometry.position.y = ypos + 3;
+                this.geometry.position.y = ypos + (this.size.height / 2) + 0.5;
                 this.geometry.__dirtyPosition = true;
                 if (this.knockBack.y < 0) {
                     this.knockBack.y = -this.knockBack.y * 0.8;
@@ -545,12 +546,12 @@ class Character {
 
 
 
-        if(this.idleAnim && this.runningAnim){
-            if(movespeed != 0 && !this.runningAnim.isRunning()){
+        if (this.idleAnim && this.runningAnim) {
+            if (movespeed != 0 && !this.runningAnim.isRunning()) {
                 this.idleAnim.stop();
                 this.runningAnim.play();
             }
-            if(movespeed == 0 && this.runningAnim.isRunning()){
+            if (movespeed == 0 && this.runningAnim.isRunning()) {
                 this.idleAnim.play();
                 this.runningAnim.stop();
             }
@@ -564,7 +565,7 @@ class Character {
         this.geometry.setLinearFactor(new THREE.Vector3(0, 1, 1));
     }
 
-    UpdateChar(t) {}
+    UpdateChar(t) { }
 
     AddGrounded() {
         var _this = this;

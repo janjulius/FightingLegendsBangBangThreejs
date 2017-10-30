@@ -5,14 +5,18 @@ class Berend extends Character {
         this.name = "Berend";
         this.Speed = 4;
         this.cid = 7;
-        this.modelOfset = new THREE.Vector3(0, -2.5, 0);
         this.modelHeight = 14;
+        this.size.width = 7;
+        this.size.height = 9;
+        this.modelOfset = new THREE.Vector3(0, -this.size.height / 2, 0);
+        this.attackRange = 15;
+        this.attackWidth = 7.5;
         this.stBasicRange = this.attackRange;
         this.stBasicWidth = this.attackWidth;
         this.stBasicJump = this.jumpForce;
         this.ultSpecialIncrease = 0;
         this.ultBasicAttackDamage = 18;
-        this.ultBasicAttackRange = 18;
+        this.ultBasicAttackRange = 19;
         this.ultBasicAttackWidth = 6.5;
         this.ultTakeDamageMultiplier = 2;
         this.ultJumpForce = 70;
@@ -32,7 +36,7 @@ class Berend extends Character {
         material.opacity = 0.2;
         this.specialAtkString = "Assert dominance";
         this.geometry = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(5, 5, 5),
+            new THREE.CubeGeometry(5, this.size.height, this.size.width),
             material,
         );
         this.geometry.castShadow = true;
