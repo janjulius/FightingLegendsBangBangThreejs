@@ -127,6 +127,7 @@ THREE.GamepadControls = function () {
                         if (selectedLevel !== undefined) { //wacht totdat selectedlevel bestaat en dan start het spel!
                             charSelect = false;
                             levelSelect = false;
+                            gameInterface.DisplayDidYouKnow(false);
                             runGame();
                         }
                     }
@@ -199,6 +200,7 @@ THREE.GamepadControls = function () {
                                     charSelect = false;
                                     levelSelect = true;
                                     gameInterface.DisplayPressStart(false);
+                                    gameInterface.DisplayDidYouKnow(true);
                                     selectedLevel = undefined;
                                     runLevelSelect();
                                 }
