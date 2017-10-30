@@ -10,6 +10,7 @@ class Interface {
         this.loadedGameInterface = false;
         this.loadedCharSelectInterface = false;
         this.loadedEndScreenInterface = false;
+        this.pausedInterface;
         this.pressStartInterface;
     }
 
@@ -18,15 +19,15 @@ class Interface {
         if (this.loadedGameInterface) {
             this.mainInterface.style.visibility = "visible";
             if(playersPlaying > 1){
-                this.spaBar0.value = this.players[0].getSpecialAttackCounter();
-                this.spaBar1.value = this.players[1].getSpecialAttackCounter();
+                this.spaBar0.value = players[0].getSpecialAttackCounter();
+                this.spaBar1.value = players[1].getSpecialAttackCounter();
             this.spaBar0.style.visibility = "visible";
             this.spaBar1.style.visibility = "visible";
                 if(playersPlaying > 2){
-                    this.spaBar2.value = this.players[2].getSpecialAttackCounter();
+                    this.spaBar2.value = players[2].getSpecialAttackCounter();
             this.spaBar2.style.visibility = "visible";
                     if(playersPlaying > 3){
-                        this.spaBar3.value = this.players[3].getSpecialAttackCounter();
+                        this.spaBar3.value = players[3].getSpecialAttackCounter();
             this.spaBar3.style.visibility = "visible";
                     }
                 }
@@ -431,6 +432,15 @@ class Interface {
         }
     }
 
+    ShowGameInterface(display){
+        if(display){
+            this.LoadGameInterface();
+        }
+        if(!display){
+            this.ClearGameInterface();
+        }
+    }
+
     DisplayPressStart(display){
         this.pressStartInterface = document.getElementById("pressStartToGo");
         if(display){
@@ -450,6 +460,20 @@ class Interface {
         }
         if(!display){
             this.didYouKnowInterface.style.visibility = "hidden";
+        }
+    }
+
+    DisplayPaused(display){
+        this.pausedInterface = document.getElementById("paused");
+        if(display){
+            this.ShowGameInterface(false);
+            this.DisplayDidYouKnow(true);
+            this.pausedInterface.style.visibility = "visible";
+        }
+        if(!display){
+            this.ShowGameInterface(true);
+            this.DisplayDidYouKnow(false);
+            this.pausedInterface.style.visibility = "hidden";
         }
     }
 

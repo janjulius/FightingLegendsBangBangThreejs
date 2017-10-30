@@ -62,7 +62,7 @@ class Jens extends Character {
         var _this = this;
         var loader = new THREE.FBXLoader(manager);
 
-        loader.load('Models/Panda/Panda.fbx', function (object) {
+        loader.load('Models/Panda/Idle.fbx', function (object) {
             object.scale.set(6, 6, 6);
             _this.pivot.add(object);
             _this.geometry.add(_this.pivot);
@@ -71,12 +71,13 @@ class Jens extends Character {
             object.mixer = new THREE.AnimationMixer(object);
             mixers.push(object.mixer);
 
-                console.log(object);
-            // if (_this.anim.length > 0) {
-            //     var action = object.mixer.clipAction(_this.anim[0].animations[0]);
-            //     console.log(action);
-            //     //action.play();
-            // }
+            _this.idleAnim = object.mixer.clipAction(object.animations[0]);
+            _this.idleAnim.play();
+            
+            loader.load('Models/Panda/Running.fbx', function (object) {
+                _this.runningAnim = _this.model.mixer.clipAction(object.animations[0]);
+            }, onProgress, onError);
+
         }, onProgress, onError);
     }
 

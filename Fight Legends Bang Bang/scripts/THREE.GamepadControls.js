@@ -157,7 +157,9 @@ THREE.GamepadControls = function () {
                             if (!gameEnded) {
                                 if (this.PressedButton(i, 9)) {
                                     gamePaused = !gamePaused;
+                                    gameInterface.DisplayPaused(true);
                                     if (!gamePaused) {
+                                        gameInterface.DisplayPaused(false);
                                         var timeElapsed = clock.getDelta();
                                         scene.simulate(undefined, 1);
                                     }
