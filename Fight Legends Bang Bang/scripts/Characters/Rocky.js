@@ -31,7 +31,7 @@ class Rocky extends Character {
             0
         );
         material.transparent = true;
-        material.opacity = 0.2;
+        material.opacity = 0;
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, 5, 5),
             material

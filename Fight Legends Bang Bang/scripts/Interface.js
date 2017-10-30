@@ -86,7 +86,7 @@ class Interface {
             }
 
 
-            if (p0 !== 0) { //interface specific for player 0
+            if (p0 instanceof Character) { //interface specific for player 0
                 this.pName0[0].innerHTML = p0.name;
                 this.pName0[0].style.textAlign = "center";
 
@@ -105,7 +105,7 @@ class Interface {
 
                 this.spaBar0.style.visibility = "visible";
             }
-            if (p1 !== 0) { //interface specific for player 1
+            if (p1 instanceof Character) { //interface specific for player 1
                 this.pName1[0].innerHTML = p1.name;
                 this.pName1[0].style.textAlign = "center";
 
@@ -122,7 +122,7 @@ class Interface {
                 this.pStock1[0].style.textAlign = "center";
                 this.spaBar1.style.visibility = "visible";
             }
-            if (p2 !== 0) { //interface specific for player 2
+            if (p2 instanceof Character) { //interface specific for player 2
                 this.pName2[0].innerHTML = p2.name;
                 this.pName2[0].style.textAlign = "center";
                 this.playerInterface[2].style.backgroundColor = getPlayerColors(2, 0.8);
@@ -136,7 +136,7 @@ class Interface {
                 this.pStock2[0].style.textAlign = "center";
                 this.spaBar2.style.visibility = "visible";
             }
-            if (p3 !== 0) { //interface speicific for player 3
+            if (p3 instanceof Character) { //interface speicific for player 3
                 this.pName3[0].innerHTML = p3.name;
                 this.pName3[0].style.textAlign = "center";
                 this.playerInterface[3].style.backgroundColor = getPlayerColors(3, 0.8);
@@ -149,13 +149,6 @@ class Interface {
                 this.pStock3[0].innerHTML = "❤" + p3.getStock();
                 this.pStock3[0].style.textAlign = "center";
                 this.spaBar3.style.visibility = "visible";
-            }
-
-            if (p0 !== 0) {
-                console.log("p0 is not undefined");
-            }
-            if (p3 === 0) {
-                console.log("p3 is undefined");
             }
             this.loadedGameInterface = true;
         

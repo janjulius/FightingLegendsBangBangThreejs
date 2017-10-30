@@ -9,7 +9,7 @@ class Character {
         this.model = undefined;
         this.modelOfset = new THREE.Vector3(0, 0, 0);
         this.pivot = new THREE.Object3D();
-        this.LookDirection = -1
+        this.LookDirection = 1;
         this.mixers = [];
         this.anim = [];
 
@@ -234,7 +234,7 @@ class Character {
             }
             gameInterface.UpdateGameInterface(this.id);
         } else {
-            this.TDamageBlocked += d;
+            this.TDamageBlocked += d - this.damage;
         }
     }
 
