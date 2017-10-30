@@ -244,8 +244,8 @@ function runCharSelect() {
         gameInterface.LoadCharSelectInterface();
         var material;
         var baseZ = 0;
-        var baseY = -5;
-        var constZ = 0;
+        var baseY = -10;
+        var constZ = -7.5;
         var constY = -5;
         var amount = 8;
         for (var i = 0; i < amount; i++) {
@@ -258,7 +258,7 @@ function runCharSelect() {
                 1
             );
             if (i % 4 == 0) {
-                baseY += 5;
+                baseY += 7.5;
                 baseZ = constZ;
             }
             baseZ += 5;
