@@ -29,7 +29,13 @@ var TIPS = ["Willem is allergic to peanuts.",
 "Flying Legends: bang bang does not own any of the music or sounds that can be heard during the game, except for the announcer",
 "All maps have been made by our own designers, the ideas have definitely not been stolen from other brawlers",
 "Emily only faked cancer once",
-"If you don't have three friends to play with, you can also play the game with one or two!"
+"If you don't have three friends to play with, you can also play the game with one or two!",
+"You lose some of your special bar when you die",
+"two plus two is four",
+"You have an edge in battle if you make good use of your block ability!",
+"You can only block once every two seconds",
+"When you block, you don't get any damage nor knockback from being hit, even if it's an ultimate!",
+"Each map has it's own unique soundtrack"
 ];
 
 if (DEBUG_MODE) {
