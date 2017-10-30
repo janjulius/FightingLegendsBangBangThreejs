@@ -186,6 +186,7 @@ THREE.GamepadControls = function () {
 
                                 selectSound.volume = ANNOUNCER_VOLUME;
                                 selectSound.play();
+                                gameInterface.DisplayPressStart(true);
                             }
 
                         }
@@ -195,6 +196,7 @@ THREE.GamepadControls = function () {
                                 if (charSelect) {
                                     charSelect = false;
                                     levelSelect = true;
+                                    gameInterface.DisplayPressStart(false);
                                     runLevelSelect();
                                 }
                                 break;
