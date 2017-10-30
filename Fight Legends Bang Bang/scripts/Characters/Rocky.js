@@ -79,7 +79,7 @@ class Rocky extends Character {
             // }
         }, onProgress, onError);
 
-        loader.load('Models/Raccoon/Raccoon/test_raccoon.fbx', function (object) {
+        loader.load('Models/Raccoon/Rocky_new/export_rocky.fbx', function (object) {
             object.scale.set(0.06, 0.06, 0.06);
             _this.pivot.add(object);
             _this.geometry.add(_this.pivot);
