@@ -3,17 +3,17 @@ class Deserto extends Level {
         super();
 
         this.name = "Deserto";
-        this.topLeft = {y: 200, z: 250 };
-        this.bottomRight = {y: -100, z: -250};
+        this.topLeft = {y: 100, z: 250 };
+        this.bottomRight = {y: -100, z: -150};
         var material;
-        this.myAudio = new Audio('Music/subspaceEmissary.mp3');
+        this.myAudio = new Audio('Music/subspaceEmissary.mp3');     
         this.myAudio.addEventListener('ended', function() {
             this.currentTime = 0;
             this.play();
         }, false);
         this.myAudio.play();
 
-        var possibleSpawns = [{ y: 20, z: 0 }, { y: 16, z: 60}, { y: 30, z: 20 }, { y: 20, z: -50 }, { y: 10, z: 150}];
+        var possibleSpawns = [{ y: -15, z: 0 }, { y: -35, z: 60 }, { y: -23, z: -50 }, { y: -23, z: 150 }];
 
         function shuffle(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
