@@ -776,11 +776,15 @@ class MarioLevel extends Level {
         scene.add(drHillE);
         drHillE.name = "ground";
 
-        material = Physijs.createMaterial(
+        var nonAutisticCloud = THREE.ImageUtils.loadTexture(' Textures/MarioLevel/cloud.png ')
+        nonAutisticCloud.wrapS = nonAutisticCloud.wrapT = THREE.RepeatWrapping;
+        nonAutisticCloud.repeat.set(1, 1);
+
+        var Cloudmaterial = Physijs.createMaterial(
             new THREE.MeshBasicMaterial({
                 color: 0xffffff,
-                transparent : true,
-                map: THREE.ImageUtils.loadTexture(' Textures/MarioLevel/cloud.png ' )
+                transparent: true,
+                map: nonAutisticCloud,
             }),
             0,
             1
@@ -788,7 +792,7 @@ class MarioLevel extends Level {
 
         var cloud1 = new Physijs.BoxMesh(
             new THREE.CubeGeometry(0.1, 4, 4),
-            material,
+            Cloudmaterial,
             0
         )
         cloud1.receiveShadow = true;
@@ -796,76 +800,6 @@ class MarioLevel extends Level {
         scene.add(cloud1);
         cloud1.name = "ground";
 
-        var cloud2 = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(0.1, 4, 4),
-            material,
-            0
-        )
-        cloud2.receiveShadow = true;
-        cloud2.position.set(0, 25, 6);
-        scene.add(cloud2);
-        cloud2.name = "ground";
-
-        var cloud3 = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(0.1, 4, 4),
-            material,
-            0
-        )
-        cloud3.receiveShadow = true;
-        cloud3.position.set(0, 25, 2);
-        scene.add(cloud3);
-        cloud3.name = "ground";
-
-        var cloud4 = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(0.1, 4, 4),
-            material,
-            0
-        )
-        cloud4.receiveShadow = true;
-        cloud4.position.set(0, 25, -2);
-        scene.add(cloud4);
-        cloud4.name = "ground";
-
-        var cloud5 = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(0.1, 4, 4),
-            material,
-            0
-        )
-        cloud5.receiveShadow = true;
-        cloud5.position.set(0, 25, -6);
-        scene.add(cloud5);
-        cloud5.name = "ground";
-
-        var cloud6 = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(0.1, 4, 4),
-            material,
-            0
-        )
-        cloud6.receiveShadow = true;
-        cloud6.position.set(0, 25, -10);
-        scene.add(cloud6);
-        cloud6.name = "ground";
-/*
-        material = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial({
-                color: 0xffffff,
-                transparent : true,
-                map: THREE.ImageUtils.loadTexture(' Textures/MarioLevel/mario.png ' )
-            }),
-            0,
-            1
-        )
-
-        var marioSprite = new Physijs.BoxMesh(
-            new THREE.CubeGeometry(0,4,4),
-            material,
-            0
-        );
-        marioSprite.receiveShadow = true;
-        marioSprite.position.set(-4, 13, 19);
-        scene.add(marioSprite);
-        marioSprite.name = "ground";
-*/
         while (questionmark.hit = false)
         {
          foreach (character in players)

@@ -9,6 +9,12 @@ var INTERFACE_STOCK_TEXT_SIZE = "40px";
 var MUSIC_VOLUME = 0.1;
 var ANNOUNCER_VOLUME = 0.13;
 
+var threetwoone = new Audio('Sounds/321.m4a');
+threetwoone.volume = 0.5;
+
+var goSound = new Audio('Sounds/GO.m4a');
+goSound.volume = 1;
+
 var TIPS = ["Willem is allergic to peanuts.",
 "Willem can cancel his ult by pressing the special button again.",
 "Jens is a pirate and also a panda.",
@@ -248,13 +254,14 @@ async function deleteAfter(object, dTime){
 
 async function startGameCountDown(){
     console.log("counting down");
+    threetwoone.play();
     gameInterface.UpdateCountDown("3");
     await sleep(1000);
-    //play sound
     gameInterface.UpdateCountDown("2");
-    await sleep(1000);
+    await sleep(1400);
     gameInterface.UpdateCountDown("1");
-    await sleep(1000);
+    await sleep(1200);
+    goSound.play();
     gameInterface.UpdateCountDown("GO!");
     await sleep(300);
     gameInterface.DisplayCountDown(false);

@@ -9,12 +9,18 @@ class Character {
         this.model = undefined;
         this.modelOfset = new THREE.Vector3(0, 0, 0);
         this.pivot = new THREE.Object3D();
-        this.size = { height: 5, width: 5 };
+        this.size = {
+            height: 5,
+            width: 5
+        };
         this.LookDirection = 1;
         this.anim = [];
 
         this.idleAnim = undefined;
         this.runningAnim = undefined;
+        this.punchAnim = undefined;
+        this.throwAnim = undefined;
+        this.stompAnim = undefined;
 
         this.direction = {
             y: 0,
@@ -414,41 +420,41 @@ class Character {
             this.knockBack.y = 0;
         }
 
-
-        if (this.direction.z > 0.5) {
-            this.attackDirection = {
-                y: 0,
-                z: 1
-            };
-        } else if (this.direction.z < -0.5) {
-            this.attackDirection = {
-                y: 0,
-                z: -1
-            };
-        } else if (this.direction.y > 0.5) {
-            this.attackDirection = {
-                y: 1,
-                z: 0
-            };
-        } else if (this.direction.y < -0.5) {
-            this.attackDirection = {
-                y: -1,
-                z: 0
-            };
-        }
-
-        if (this.direction.z > 0.3) {
-            if (this.LookDirection == -1 && this.model) {
-                this.pivot.rotation.y = deg2Rad(0);
+        if (!this.isStunned) {
+            if (this.direction.z > 0.5) {
+                this.attackDirection = {
+                    y: 0,
+                    z: 1
+                };
+            } else if (this.direction.z < -0.5) {
+                this.attackDirection = {
+                    y: 0,
+                    z: -1
+                };
+            } else if (this.direction.y > 0.5) {
+                this.attackDirection = {
+                    y: 1,
+                    z: 0
+                };
+            } else if (this.direction.y < -0.5) {
+                this.attackDirection = {
+                    y: -1,
+                    z: 0
+                };
             }
-            this.LookDirection = 1;
-        } else if (this.direction.z < -0.3) {
-            if (this.LookDirection == 1 && this.model) {
-                this.pivot.rotation.y = deg2Rad(180);
-            }
-            this.LookDirection = -1;
-        }
 
+            if (this.direction.z > 0.3) {
+                if (this.LookDirection == -1 && this.model) {
+                    this.pivot.rotation.y = deg2Rad(0);
+                }
+                this.LookDirection = 1;
+            } else if (this.direction.z < -0.3) {
+                if (this.LookDirection == 1 && this.model) {
+                    this.pivot.rotation.y = deg2Rad(180);
+                }
+                this.LookDirection = -1;
+            }
+        }
         if (this.velt > -this.maxGravityVelocity) {
             let extraVel = this.direction.y < 0 ? -this.direction.y * (this.gravityVelocity) : 0;
             this.velt -= (this.gravityVelocity + extraVel) * t;
@@ -504,6 +510,9 @@ class Character {
             this.attackRemoveTimer -= t;
             if (this.attackRemoveTimer < this.attackRemoveCooldown / 10) {
                 this.attackRemoveTimer = 0;
+                this.punchAnim.stop();
+                this.throwAnim.stop();
+                this.stompAnim.stop();
                 scene.remove(this.swingObject);
             }
         }
@@ -522,9 +531,23 @@ class Character {
         if (this.swingTimer > 0)
             this.swingTimer -= t;
 
-        if (this.chargeAttack)
+        if (this.chargeAttack) {
+            if (this.punchAnim) {
+                if (!this.punchAnim.isRunning() && !this.throwAnim.isRunning() && !this.stompAnim.isRunning()) {
+                    if (this.attackDirection.z != 0) {
+                        this.punchAnim.play();
+                    } else if (this.attackDirection.y == 1) {
+                        this.throwAnim.play();
+                    } else if (this.attackDirection.y == -1) {
+                        this.stompAnim.play();
+                    }
+                    this.idleAnim.stop();
+                    this.runningAnim.stop();
+                }
+            }
             if (this.swingTimer > 0 && this.swingTimer < this.swingCooldown - this.attackDelay)
                 this.normalAtk();
+        }
 
         if (this.blockTimer > 0) {
             playerBlockIcons[this.id].material.opacity = 1;
@@ -546,14 +569,16 @@ class Character {
 
 
 
-        if (this.idleAnim && this.runningAnim) {
-            if (movespeed != 0 && !this.runningAnim.isRunning()) {
-                this.idleAnim.stop();
-                this.runningAnim.play();
-            }
-            if (movespeed == 0 && this.runningAnim.isRunning()) {
-                this.idleAnim.play();
-                this.runningAnim.stop();
+        if (this.idleAnim && this.runningAnim && !this.isStunned && this.punchAnim) {
+            if (!this.punchAnim.isRunning() && !this.throwAnim.isRunning() && !this.stompAnim.isRunning()) {
+                if (movespeed != 0 && !this.runningAnim.isRunning()) {
+                    this.idleAnim.stop();
+                    this.runningAnim.play();
+                }
+                if (movespeed == 0 && this.runningAnim.isRunning()) {
+                    this.idleAnim.play();
+                    this.runningAnim.stop();
+                }
             }
         }
 
@@ -565,7 +590,7 @@ class Character {
         this.geometry.setLinearFactor(new THREE.Vector3(0, 1, 1));
     }
 
-    UpdateChar(t) { }
+    UpdateChar(t) {}
 
     AddGrounded() {
         var _this = this;

@@ -269,7 +269,8 @@ function runCharSelect() {
             charScreens[i] = charScreen;
             charScreens.castShadow = true;
             charScreens[i].myCharId = i;
-            scene.add(charScreen);
+            if (i != 1 && i != 4)
+                scene.add(charScreen);
 
         }
         camera.lookAt(charScreens[0].position);
@@ -392,8 +393,8 @@ function runGame() {
         light.target.position.copy(scene.position);
         light.castShadow = false;
         scene.add(light);
-        var alight = new THREE.AmbientLight( 0x404040 ); // soft white light
-        scene.add( alight );
+        var alight = new THREE.AmbientLight(0x404040); // soft white light
+        scene.add(alight);
 
         camera = new THREE.PerspectiveCamera(
             35,

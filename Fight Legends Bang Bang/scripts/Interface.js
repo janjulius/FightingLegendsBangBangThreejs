@@ -314,7 +314,7 @@ class Interface {
             var actualKills = document.createElement('li');
             ul.appendChild(actualKills);
             actualKills.className = "right";
-            actualKills.innerHTML = this.players[i].TKills;
+            actualKills.innerHTML = players[i].TKills;
 
             var deaths = document.createElement("li");
             ul.appendChild(deaths);
@@ -324,7 +324,7 @@ class Interface {
             var actualDeaths = document.createElement('li');
             ul.appendChild(actualDeaths);
             actualDeaths.className = "right";
-            actualDeaths.innerHTML = this.players[i].TDeaths;
+            actualDeaths.innerHTML = players[i].TDeaths;
 
             var damageDone = document.createElement("li");
             ul.appendChild(damageDone);
@@ -334,7 +334,7 @@ class Interface {
             var actualDamageDone = document.createElement("li");
             ul.appendChild(actualDamageDone);
             actualDamageDone.className = "right";
-            actualDamageDone.innerHTML = Math.floor(this.players[i].TDamageDone);
+            actualDamageDone.innerHTML = Math.floor(players[i].TDamageDone);
 
             var damageTaken = document.createElement("li");
             ul.appendChild(damageTaken);
@@ -344,7 +344,7 @@ class Interface {
             var actualdamageTaken = document.createElement('li');
             ul.appendChild(actualdamageTaken);
             actualdamageTaken.className = "right";
-            actualdamageTaken.innerHTML = Math.floor(this.players[i].TDamageTaken);
+            actualdamageTaken.innerHTML = Math.floor(players[i].TDamageTaken);
 
             var damageDoneWUlt = document.createElement("li");
             ul.appendChild(damageDoneWUlt);
@@ -354,7 +354,7 @@ class Interface {
             var acutualDamageDoneWithUlt = document.createElement('li');
             ul.appendChild(acutualDamageDoneWithUlt);
             acutualDamageDoneWithUlt.className = "right";
-            acutualDamageDoneWithUlt.innerHTML = Math.floor(this.players[i].TDamageDoneWithUlt);
+            acutualDamageDoneWithUlt.innerHTML = Math.floor(players[i].TDamageDoneWithUlt);
 
             var damageBlocked = document.createElement("li");
             ul.appendChild(damageBlocked);
@@ -364,7 +364,7 @@ class Interface {
             var actualDamageBlocked = document.createElement('li');
             ul.appendChild(actualDamageBlocked);
             actualDamageBlocked.className = "right";
-            actualDamageBlocked.innerHTML = Math.floor(this.players[i].TDamageBlocked);
+            actualDamageBlocked.innerHTML = Math.floor(players[i].TDamageBlocked);
 
             var highestDamageSurvived = document.createElement("li");
             ul.appendChild(highestDamageSurvived);
@@ -374,7 +374,7 @@ class Interface {
             var actualhighestDamageSurvived = document.createElement('li');
             ul.appendChild(actualhighestDamageSurvived);
             actualhighestDamageSurvived.className = "right";
-            actualhighestDamageSurvived.innerHTML = Math.floor(this.players[i].THighestDamageSurvived);
+            actualhighestDamageSurvived.innerHTML = Math.floor(players[i].THighestDamageSurvived);
 
             var ultsUsed = document.createElement("li");
             ul.appendChild(ultsUsed);
@@ -384,7 +384,7 @@ class Interface {
             var actualUltsUsed = document.createElement('li');
             ul.appendChild(actualUltsUsed);
             actualUltsUsed.className = "right";
-            actualUltsUsed.innerHTML = Math.floor(this.players[i].TotalUltsUsed);
+            actualUltsUsed.innerHTML = Math.floor(players[i].TotalUltsUsed);
 
             var dmgHealed = document.createElement("li");
             ul.appendChild(dmgHealed);
@@ -394,11 +394,11 @@ class Interface {
             var actualDmgHealed = document.createElement('li');
             ul.appendChild(actualDmgHealed);
             actualDmgHealed.className = "right";
-            actualDmgHealed.innerHTML = Math.floor(this.players[i].TDamageHealed);
+            actualDmgHealed.innerHTML = Math.floor(players[i].TDamageHealed);
 
             var position = document.createElement('img');
             a.appendChild(position);
-            position.src = this.getPlayerFinishImages(this.players[i].Tplace);
+            position.src = this.getPlayerFinishImages(players[i].Tplace);
             position.style.marginLeft = "auto";
             position.style.marginRight = "auto";
             position.style.display = "block";
