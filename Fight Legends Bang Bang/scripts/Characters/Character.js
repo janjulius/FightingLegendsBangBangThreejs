@@ -510,9 +510,11 @@ class Character {
             this.attackRemoveTimer -= t;
             if (this.attackRemoveTimer < this.attackRemoveCooldown / 10) {
                 this.attackRemoveTimer = 0;
-                this.punchAnim.stop();
-                this.throwAnim.stop();
-                this.stompAnim.stop();
+                if (this.punchAnim) {
+                    this.punchAnim.stop();
+                    this.throwAnim.stop();
+                    this.stompAnim.stop();
+                }
                 scene.remove(this.swingObject);
             }
         }
