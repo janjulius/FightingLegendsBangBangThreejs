@@ -38,7 +38,7 @@ class Willem extends Character {
         );
 
         this.material.transparent = true;
-        this.material.opacity = 0.2;
+        this.material.opacity = 0;
         this.specialAtkString = "Throw Snowball";
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, this.size.height, this.size.width),

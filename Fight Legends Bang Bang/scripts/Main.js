@@ -339,7 +339,8 @@ function runLevelSelect() {
             levelScreens[i] = levelScreen;
             levelScreens.castShadow = true;
             levelScreens[i].myLevelId = i;
-            scene.add(levelScreen);
+            if (i != 1)
+                scene.add(levelScreen);
 
         }
         camera.lookAt(levelScreens[0].position);

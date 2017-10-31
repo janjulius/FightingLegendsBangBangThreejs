@@ -25,7 +25,7 @@ class Fred extends Character {
             0
         );
         material.transparent = true;
-        material.opacity = 0.2;
+        material.opacity = 0;
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, this.size.height, this.size.width),
             material

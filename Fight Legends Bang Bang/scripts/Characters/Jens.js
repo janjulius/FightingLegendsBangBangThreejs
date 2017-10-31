@@ -27,7 +27,7 @@ class Jens extends Character {
         );
 
         material.transparent = true;
-        material.opacity = 0.2;
+        material.opacity = 0;
         this.specialAtkString = "Cannon Barrage";
         this.geometry = new Physijs.BoxMesh(
             new THREE.CubeGeometry(5, this.size.height, this.size.width),

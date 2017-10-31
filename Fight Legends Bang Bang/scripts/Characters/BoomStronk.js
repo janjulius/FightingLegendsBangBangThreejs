@@ -25,7 +25,7 @@ class BoomStronk extends Character {
 
         
         material.transparent = true;
-        material.opacity = 0.2;
+        material.opacity = 0;
 
         this.specialAtkString = "Take root";
         this.geometry = new Physijs.BoxMesh(
