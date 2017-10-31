@@ -85,6 +85,21 @@ class Berend extends Character {
             loader.load('Models/Yeti/running.fbx', function (object) {
                 _this.runningAnim = _this.model.mixer.clipAction(object.animations[0]);
             }, onProgress, onError);
+            loader.load('Models/Yeti/Punching.fbx', function (object) {
+                _this.punchAnim = _this.model.mixer.clipAction(object.animations[0]);
+                _this.punchAnim.setLoop(THREE.LoopOnce, 1);
+                _this.punchAnim.timeScale = 4;
+            }, onProgress, onError);
+            loader.load('Models/Yeti/Throw.fbx', function (object) {
+                _this.throwAnim = _this.model.mixer.clipAction(object.animations[0]);
+                _this.throwAnim.setLoop(THREE.LoopOnce, 1);
+                _this.throwAnim.timeScale = 4;
+            }, onProgress, onError);
+            loader.load('Models/Yeti/Stomp.fbx', function (object) {
+                _this.stompAnim = _this.model.mixer.clipAction(object.animations[0]);
+                _this.stompAnim.setLoop(THREE.LoopOnce, 1);
+                _this.stompAnim.timeScale = 4;
+            }, onProgress, onError);
         }, onProgress, onError);
     }
 
