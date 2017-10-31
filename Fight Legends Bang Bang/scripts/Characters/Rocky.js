@@ -86,7 +86,27 @@ class Rocky extends Character {
             loader.load('Models/Raccoon/Raccoon/running.fbx', function (object) {
                 _this.runningAnim = _this.model.mixer.clipAction(object.animations[0]);
             }, onProgress, onError);
-
+            loader.load('Models/Raccoon/Raccoon/slash1.fbx', function (object) {
+                _this.UltAnimation1 = _this.model.mixer.clipAction(object.animations[0]);
+                _this.UltAnimation1.setLoop(THREE.LoopOnce, 1);
+            }, onProgress, onError);
+            loader.load('Models/Raccoon/Raccoon/slash2.fbx', function (object) {
+                _this.UltAnimation2 = _this.model.mixer.clipAction(object.animations[0]);
+                _this.UltAnimation2.setLoop(THREE.LoopOnce, 1);
+            }, onProgress, onError);
+            loader.load('Models/Raccoon/Raccoon/punch.fbx', function (object) {
+                _this.punchAnim = _this.model.mixer.clipAction(object.animations[0]);
+                _this.punchAnim.setLoop(THREE.LoopOnce, 1);
+            }, onProgress, onError);
+            loader.load('Models/Raccoon/Raccoon/stomp.fbx', function (object) {
+                _this.stompAnim = _this.model.mixer.clipAction(object.animations[0]);
+                _this.stompAnim.setLoop(THREE.LoopOnce, 1);
+            }, onProgress, onError);
+            loader.load('Models/Raccoon/Raccoon/throw.fbx', function (object) {
+                _this.throwAnim = _this.model.mixer.clipAction(object.animations[0]);
+                _this.throwAnim.setLoop(THREE.LoopOnce, 1);
+            }, onProgress, onError);
+            
         }, onProgress, onError);
     }
     specialAtk() {
@@ -94,6 +114,8 @@ class Rocky extends Character {
         this.clawed[1] = false;
         this.clawed[2] = false;
         if (this.specialReady()) {
+            this.UltAnimation1.stop();
+            this.UltAnimation2.stop();
             this.setSpecialAttackCounter(0);
             this.target;
             for (var i = 0; i < playersPlaying; i++) {
@@ -144,6 +166,7 @@ class Rocky extends Character {
                         }, this.id, 1);
                         this.clawed[0] = true;
                         this.claw1HitAudio.play();
+                        this.UltAnimation1.play();
                     }
                     if (this.specialTimer < 0.625) {
                         if (!this.clawed[1]) {
@@ -153,6 +176,8 @@ class Rocky extends Character {
                             }, this.id, 1);
                             this.clawed[1] = true;
                             this.claw2HitAudio.play();
+            this.UltAnimation1.stop();
+            this.UltAnimation2.play();
                         }
                         if (this.specialTimer < 0.3) {
                             if (!this.clawed[2]) {
@@ -162,6 +187,9 @@ class Rocky extends Character {
                                 }, this.id, 1);
                                 this.clawed[2] = true;
                                 this.claw3HitAudio.play();
+            this.UltAnimation2.stop();
+            
+            this.UltAnimation1.play();
                             }
                         }
                     }

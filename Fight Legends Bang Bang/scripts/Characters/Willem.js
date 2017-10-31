@@ -104,6 +104,18 @@ class Willem extends Character {
                 _this.UltAnimation = _this.model.mixer.clipAction(object.animations[0]);
                 _this.UltAnimation.setLoop(THREE.LoopOnce, 1);
             }, onProgress, onError);
+            loader.load('Models/Snowman/Stomp.fbx', function (object) {
+                _this.stompAnim = _this.model.mixer.clipAction(object.animations[0]);
+                _this.stompAnim.setLoop(THREE.LoopOnce, 1);
+            }, onProgress, onError);
+            loader.load('Models/Snowman/Punch.fbx', function (object) {
+                _this.punchAnim = _this.model.mixer.clipAction(object.animations[0]);
+                _this.punchAnim.setLoop(THREE.LoopOnce, 1);
+            }, onProgress, onError);
+            loader.load('Models/Snowman/Throw.fbx', function (object) {
+                _this.throwAnim = _this.model.mixer.clipAction(object.animations[0]);
+                _this.throwAnim.setLoop(THREE.LoopOnce, 1);
+            }, onProgress, onError);
 
         }, onProgress, onError);
     }
