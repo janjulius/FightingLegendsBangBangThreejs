@@ -89,22 +89,27 @@ class Rocky extends Character {
             loader.load('Models/Raccoon/Raccoon/slash1.fbx', function (object) {
                 _this.UltAnimation1 = _this.model.mixer.clipAction(object.animations[0]);
                 _this.UltAnimation1.setLoop(THREE.LoopOnce, 1);
+                _this.UltAnimation1.timeScale = 3;
             }, onProgress, onError);
             loader.load('Models/Raccoon/Raccoon/slash2.fbx', function (object) {
                 _this.UltAnimation2 = _this.model.mixer.clipAction(object.animations[0]);
                 _this.UltAnimation2.setLoop(THREE.LoopOnce, 1);
+                _this.UltAnimation2.timeScale = 3;
             }, onProgress, onError);
             loader.load('Models/Raccoon/Raccoon/punch.fbx', function (object) {
                 _this.punchAnim = _this.model.mixer.clipAction(object.animations[0]);
                 _this.punchAnim.setLoop(THREE.LoopOnce, 1);
+                _this.punchAnim.timeScale = 3;
             }, onProgress, onError);
             loader.load('Models/Raccoon/Raccoon/stomp.fbx', function (object) {
                 _this.stompAnim = _this.model.mixer.clipAction(object.animations[0]);
                 _this.stompAnim.setLoop(THREE.LoopOnce, 1);
+                _this.stompAnim.timeScale = 3;
             }, onProgress, onError);
             loader.load('Models/Raccoon/Raccoon/throw.fbx', function (object) {
                 _this.throwAnim = _this.model.mixer.clipAction(object.animations[0]);
                 _this.throwAnim.setLoop(THREE.LoopOnce, 1);
+                _this.throwAnim.timeScale = 3;
             }, onProgress, onError);
             
         }, onProgress, onError);

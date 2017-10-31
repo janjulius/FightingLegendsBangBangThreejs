@@ -82,14 +82,17 @@ class Jens extends Character {
             loader.load('Models/Panda/Stomp.fbx', function (object) {
                 _this.stompAnim = _this.model.mixer.clipAction(object.animations[0]);
                 _this.stompAnim.setLoop(THREE.LoopOnce, 1);
+                _this.stompAnim.timeScale = 3;
             }, onProgress, onError);
             loader.load('Models/Panda/Punch.fbx', function (object) {
                 _this.punchAnim = _this.model.mixer.clipAction(object.animations[0]);
                 _this.punchAnim.setLoop(THREE.LoopOnce, 1);
+                _this.punchAnim.timeScale = 3;
             }, onProgress, onError);
             loader.load('Models/Panda/Throw.fbx', function (object) {
                 _this.throwAnim = _this.model.mixer.clipAction(object.animations[0]);
                 _this.throwAnim.setLoop(THREE.LoopOnce, 1);
+                _this.throwAnim.timeScale = 3;
             }, onProgress, onError);
 
         }, onProgress, onError);
